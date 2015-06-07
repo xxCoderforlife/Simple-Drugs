@@ -1,0 +1,14 @@
+Drugs:
+   Enabled:
+      wheat: true
+      sugar: true
+      melons: true
+      paper: true
+      milk: true
+      gunpowder: true
+      bone: true
+      smoke: true
+   Effect:
+      length: 10000
+   Console:
+      logs: true

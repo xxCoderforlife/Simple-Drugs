@@ -1,0 +1,40 @@
+name: Simple Drugs
+version: 2.3
+athours: [xxCoderforlife]
+main: me.Coderforlife.Drugs.Drugs
+Website: http://dev.bukkit.org/server-mods/simple-drugs/
+authors: [xxCoderforlife, XlegitXcrazymanX]
+
+commands:
+    drugs:
+        description: For Drugs yo
+        usage: /<command>
+        aliases: [d]
+    list:
+        description: Drugs Help
+    remove:
+        description: Remove all Drugs
+    
+        
+permissons:
+    drugs.wheat:
+        default: op
+    drugs.sugar:
+        default: op
+    drugs.paper:
+        default: op
+    drugs.milk:
+        default: op
+    drugs.melons:
+        default: op
+    drugs.gun:
+        default: op
+    drugs.mush:
+        default: op
+    drugs.bone:
+        default: op
+    drugs.remove:
+        default: true
+    drugs.smoke:
+        default: op
+    
