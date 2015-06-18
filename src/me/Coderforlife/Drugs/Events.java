@@ -17,7 +17,6 @@ public class Events
 {
   Logger logger = Logger.getLogger("Minecraft");
   private Drugs plugin;
-  final String perm = ChatColor.RED + "Sorry Bro you can't get Drugged up";
   
   public Events(Drugs plugin)
   {
@@ -79,7 +78,7 @@ public class Events
         this.logger.info(p.getName() + " Used Acid");
       }
     }
-    if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.milk")) && 
+   /* if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.milk")) && 
       (p.hasPermission("drugs.milk")) && 
       (e.getAction().equals(Action.RIGHT_CLICK_AIR)) && (p.getItemInHand().equals(new ItemStack(Material.MILK_BUCKET))))
     {
@@ -105,7 +104,7 @@ public class Events
       if (this.plugin.getConfig().getBoolean("Drugs.Console.logs")) {
         this.logger.info(p.getName() + " Used Excdodsy");
       }
-    }
+    }*/
     if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.gunpowder")) && 
       (p.hasPermission("drugs.gun")) && 
       (e.getAction().equals(Action.RIGHT_CLICK_AIR))&& (p.getItemInHand().equals(new ItemStack(Material.SULPHUR))))
