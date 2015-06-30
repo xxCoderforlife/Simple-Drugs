@@ -17,7 +17,7 @@ public class Drugs
     this.logger.info(pdffile.getName() + ChatColor.RED + 
       " Has Been Enabled." + "Version: " + pdffile.getVersion() + " Website: " + pdffile.getWebsite());
     getServer().getPluginManager().registerEvents(new Events(this), this);
-    getConfig().options().header("Config For Drugs Plugin By xxCoderforlife and XlegitXcrazymanX!!");
+    getConfig().options().header("Config For Drugs Plugin By xxCoderforlife");
     getConfig().options().copyDefaults(true);
     saveConfig();
     if (getConfig().getBoolean("Drugs.Enabled.update")) {

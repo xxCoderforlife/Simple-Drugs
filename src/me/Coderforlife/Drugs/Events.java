@@ -70,7 +70,6 @@ public class Events
     {
       p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
-      p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.sendMessage(ChatColor.AQUA + "You just hit Acid!");
       p.getItemInHand();
       p.setItemInHand(null);
@@ -128,7 +127,6 @@ public class Events
       p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
-      p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.sendMessage(ChatColor.AQUA + "Angel Dust!");
       p.getItemInHand();
       p.setItemInHand(null);

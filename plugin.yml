@@ -1,20 +1,21 @@
 name: Simple Drugs
-version: 2.4
+version: 2.5.1
 athours: [xxCoderforlife]
 main: me.Coderforlife.Drugs.Drugs
 Website: http://dev.bukkit.org/server-mods/simple-drugs/
-authors: [xxCoderforlife, XlegitXcrazymanX]
+authors: [xxCoderforlife]
 
 commands:
     drugs:
         description: For Drugs yo
         usage: /<command>
         aliases: [d]
-    list:
+    help:
         description: Drugs Help
     remove:
         description: Remove all Drugs
-    
+    changelog:
+        description: ChangeLog for SimpleDrugs
         
 permissons:
     drugs.wheat:
