@@ -38,6 +38,7 @@ public class Cmds
   
   public boolean onCommand(CommandSender sender, Command cmd, String Commandlabel, String[] args)
   {
+  	/* Command /drugs */
     cmd.getName().equalsIgnoreCase("drugs");
     if ((args.length == 0)){
     	if ((sender instanceof Player)){
@@ -50,7 +51,7 @@ public class Cmds
     	}
     		
     }
-    
+    /* Command /drugs remove */
     if ((args.length == 1) && 
       (args[0].equalsIgnoreCase("remove"))) {
       if ((sender instanceof Player))
@@ -98,6 +99,7 @@ public class Cmds
           Player player = (Player)sender;
           if (player.hasPermission("drugs.help"))
           {
+          	/*Command /drugs help*/
             sender.sendMessage(ChatColor.RED + "==============" + ChatColor.AQUA + "[Simple Drugs v2.5.2]"+ ChatColor.RED + "==============");
             sender.sendMessage(this.dash + ChatColor.GREEN + "Wheat " + ChatColor.WHITE + "(Weed)" + ChatColor.GRAY + 
             		" Effects: " + ChatColor.AQUA + "Speed Boost,Confusion");
@@ -119,7 +121,8 @@ public class Cmds
         {
         	sender.sendMessage("Console has been disabled for this command.");
         }
-       }
+       } 
+       /* Command /drugs changelog */
       if ((args.length == 1) && 
     	      (args[0].equalsIgnoreCase("changelog"))) {
     	  if ((sender instanceof Player)){
@@ -170,6 +173,7 @@ public class Cmds
     		  player.sendMessage(ChatColor.RED + "You Do Not Have Permission To Do That!");
     	  }
     	 }else{
+    	 	/* Console Command For /drugs changelog */
     	    	sender.sendMessage(ChatColor.GRAY + "==========["+ ChatColor.GOLD + "Simple Drugs ChangeLog"+ ChatColor.GRAY + "]==========");
     	    	sender.sendMessage(ChatColor.GRAY + "==========[" + ChatColor.GOLD + "v1.5" + ChatColor.GRAY + "]==========");
     	    	sender.sendMessage(dash1 + "Uploaded the Plugin to BukkitDev.");
@@ -213,7 +217,8 @@ public class Cmds
     	    	sender.sendMessage(dash1 + "Updated code on GitHub");
     	 }
       }
-     /* if ((args.length == 1) &&
+      /* Coming soon /drugs reload */
+      if ((args.length == 1) &&
     	      (args[0].equalsIgnoreCase("reload"))) {
     	  if ((sender instanceof Player)){
     	  Player player = (Player) sender;
