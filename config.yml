@@ -2,9 +2,7 @@ Drugs:
    Enabled:
       wheat: true
       sugar: true
-#     melons: true
       paper: true
-#     milk: true
       gunpowder: true
       bone: true
       smoke: true

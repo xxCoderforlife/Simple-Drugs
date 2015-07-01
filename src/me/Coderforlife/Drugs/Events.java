@@ -1,6 +1,7 @@
 package me.Coderforlife.Drugs;
 
 import java.util.logging.Logger;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
