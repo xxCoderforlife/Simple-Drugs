@@ -8,7 +8,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
@@ -44,10 +43,14 @@ public class Cmds
         	sender.sendMessage(ChatColor.RED + "Use the the sub commands listed below:");
         	sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED +"/" + ChatColor.WHITE + "drugs help");
         	sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED +"/" + ChatColor.WHITE + "drugs remove");
-        	sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED +"/" + ChatColor.WHITE + "drugs changelog");  
+        	sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED +"/" + ChatColor.WHITE + "drugs changelog");
+        	sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED +"/" + ChatColor.WHITE + "dreload");  
         	}else{
-    		sender.sendMessage("Console has been disabled for this command.");
-    	}
+            	sender.sendMessage(ChatColor.RED + "Use the the sub commands listed below:");
+            	sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED +"/" + ChatColor.WHITE + "drugs help");
+            	sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED +"/" + ChatColor.WHITE + "drugs remove");
+            	sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED +"/" + ChatColor.WHITE + "drugs changelog");
+            	sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED +"/" + ChatColor.WHITE + "dreload");  
     		
     }
     
@@ -166,6 +169,11 @@ public class Cmds
     	player.sendMessage(dash1 + "ADDED: Console Changelog command");
     	player.sendMessage(dash1 + "ADDED: Permission for Changelog command");
     	player.sendMessage(dash1 + "Updated code on GitHub");
+    	player.sendMessage(ChatColor.GRAY + "==========[" + ChatColor.GOLD + "v2.5.3" + ChatColor.GRAY + "]==========");
+    	player.sendMessage(dash1 + "ADDED: Reload Command '/dreload'");
+    	player.sendMessage(dash1 + "Cleaned Up and Udated Code");
+    	player.sendMessage(dash1 + "Updated code on GitHub");
+
     	}else{
     		  player.sendMessage(ChatColor.RED + "You Do Not Have Permission To Do That!");
     	  }
@@ -205,33 +213,21 @@ public class Cmds
     	    	sender.sendMessage(dash1 + "REMOVED: All Blindness effects for drugs.");
     	    	sender.sendMessage(dash1 + "Updated code on GitHub");
     	    	sender.sendMessage(ChatColor.GRAY + "==========[" + ChatColor.GOLD + "v2.5.2" + ChatColor.GRAY + "]==========");
-    	    	sender.sendMessage(dash1  + "ADDED: View effects with /drugs help");
-    	    	sender.sendMessage(dash1  + "ADDED: Plugin Metrics back in");
-    	    	sender.sendMessage(dash1  + "Fixed Version and Spelling Errors");
+    	    	sender.sendMessage(dash1 + "ADDED: View effects with /drugs help");
+    	    	sender.sendMessage(dash1 + "ADDED: Plugin Metrics back in");
+    	    	sender.sendMessage(dash1 + "Fixed Version and Spelling Errors");
     	    	sender.sendMessage(dash1 + "ADDED: Console Changelog command");
     	    	sender.sendMessage(dash1 + "ADDED: Permission for Changelog command");
     	    	sender.sendMessage(dash1 + "Updated code on GitHub");
-    	 }
-      }
-     /* if ((args.length == 1) &&
-    	      (args[0].equalsIgnoreCase("reload"))) {
-    	  if ((sender instanceof Player)){
-    	  Player player = (Player) sender;
-    	  if(player.hasPermission("drugs.reload")){
-    		  player.sendMessage(ChatColor.RED + "Reloading Config...");
-    		  config = YamlConfiguration.loadConfiguration(cfile);
-    		  player.sendMessage(ChatColor.RED + "Reloaded Config");
-    	}else{
-  		  player.sendMessage(ChatColor.RED + "You Do Not Have Permission To Do That!");
+    	    	sender.sendMessage(ChatColor.GRAY + "==========[" + ChatColor.GOLD + "v2.5.3" + ChatColor.GRAY + "]==========");
+    	    	sender.sendMessage(dash1 + "ADDED: Reload Command '/dreload'");
+    	    	sender.sendMessage(dash1 + "Cleaned Up and Udated Code");
+    	    	sender.sendMessage(dash1 + "Updated code on GitHub");
 
-    	}
-      }else{
-    	  
-      }
-    		  
-   }*/
+    	 }
+      } 
     }
-  
+   }
     return true;
   }
 

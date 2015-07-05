@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,8 +16,8 @@ import me.Coderforlife.Drugs.Metrics;
 public class Drugs
   extends JavaPlugin
 {
-	FileConfiguration config;
-	File cfile;
+	public FileConfiguration config;
+	public File cfile;
   Logger logger = Logger.getLogger("Minecraft");
   
   public void onEnable()
@@ -38,10 +41,19 @@ public class Drugs
     saveConfig();
   }
   
-  public void onDisable()
-  {
+  public void onDisable(){
     PluginDescriptionFile pdffile = getDescription();
     this.logger.info(pdffile.getName() + ChatColor.RED + 
       " Has Been Disabled!." + "Server Mod by: " + pdffile.getAuthors());
   }
-}
+  public boolean onCommand(CommandSender sender, Command cmd, String Commandlabel, String[] args){
+	  if(cmd.getName().equalsIgnoreCase("dreload")){
+		  Player player = (Player) sender;
+		  player.sendMessage(ChatColor.RED + "Reloading Config...");	
+		this.reloadConfig();
+		player.sendMessage(ChatColor.RED + "Reloaded Config.");
+	  }
+	return true;
+  }
+	
+  }

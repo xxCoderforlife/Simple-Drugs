@@ -78,33 +78,6 @@ public class Events
         this.logger.info(p.getName() + " Used Acid");
       }
     }
-   /* if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.milk")) && 
-      (p.hasPermission("drugs.milk")) && 
-      (e.getAction().equals(Action.RIGHT_CLICK_AIR)) && (p.getItemInHand().equals(new ItemStack(Material.MILK_BUCKET))))
-    {
-      p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
-      p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
-      p.sendMessage(ChatColor.AQUA + "Yummy Beer!!");
-      p.getItemInHand();
-      p.setItemInHand(null);
-      if (this.plugin.getConfig().getBoolean("Drugs.Console.logs")) {
-        this.logger.info(p.getName() + " Used Beer");
-      }
-    }
-    if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.melons")) && 
-      (p.hasPermission("drugs.melons")) && 
-      (e.getAction().equals(Action.RIGHT_CLICK_AIR))&& (p.getItemInHand().equals(new ItemStack(Material.MELON))))
-    {
-      p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
-      p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
-      p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
-      p.sendMessage(ChatColor.AQUA + "Ecstasy!!!");
-      p.getItemInHand();
-      p.setItemInHand(null);
-      if (this.plugin.getConfig().getBoolean("Drugs.Console.logs")) {
-        this.logger.info(p.getName() + " Used Excdodsy");
-      }
-    }*/
     if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.gunpowder")) && 
       (p.hasPermission("drugs.gun")) && 
       (e.getAction().equals(Action.RIGHT_CLICK_AIR))&& (p.getItemInHand().equals(new ItemStack(Material.SULPHUR))))
