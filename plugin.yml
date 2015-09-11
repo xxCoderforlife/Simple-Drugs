@@ -1,7 +1,7 @@
 name: Simple Drugs
-version: 2.5.4
+version: 2.5.6
 athours: [xxCoderforlife]
-main: me.Coderforlife.Drugs.Drugs
+main: me.Coderforlife.Drugs.Main
 commands:
     drugs:
         description: For Drugs yo
@@ -33,6 +33,9 @@ permissons:
         default: true
     drugs.remove:
         default: true
-    drugs.reload:
+    drugs.help:
+        default: true
+    drugs.main:
+        default: true
+    drugs.changelog:
         default: op
-    

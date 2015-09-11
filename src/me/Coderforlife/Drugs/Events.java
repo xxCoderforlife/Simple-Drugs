@@ -1,7 +1,6 @@
 package me.Coderforlife.Drugs;
 
 import java.util.logging.Logger;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -17,19 +16,19 @@ public class Events
   implements Listener
 {
   Logger logger = Logger.getLogger("Minecraft");
-  private Drugs plugin;
+  private Main plugin;
   
-  public Events(Drugs plugin)
+  public Events(Main plugin)
   {
     setPlugin(plugin);
   }
   
-  public Drugs getPlugin()
+  public Main getPlugin()
   {
     return this.plugin;
   }
   
-  public void setPlugin(Drugs plugin)
+  public void setPlugin(Main plugin)
   {
     this.plugin = plugin;
   }
@@ -52,8 +51,8 @@ public class Events
       }
     }
     if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.sugar")) && 
-      (p.hasPermission("drugs.sugar")) &&
-  	(e.getAction().equals(Action.RIGHT_CLICK_AIR)) && (p.getItemInHand().equals(new ItemStack(Material.SUGAR))))
+      (p.hasPermission("drugs.sugar")) && 
+      (e.getAction().equals(Action.RIGHT_CLICK_AIR)) && (p.getItemInHand().equals(new ItemStack(Material.SUGAR))))
     {
       p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
@@ -80,7 +79,7 @@ public class Events
     }
     if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.gunpowder")) && 
       (p.hasPermission("drugs.gun")) && 
-      (e.getAction().equals(Action.RIGHT_CLICK_AIR))&& (p.getItemInHand().equals(new ItemStack(Material.SULPHUR))))
+      (e.getAction().equals(Action.RIGHT_CLICK_AIR)) && (p.getItemInHand().equals(new ItemStack(Material.SULPHUR))))
     {
       p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
@@ -94,7 +93,7 @@ public class Events
       }
     }
     if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.bone")) && 
-      (p.hasPermission("drugs.bone")) &&      
+      (p.hasPermission("drugs.bone")) && 
       (e.getAction().equals(Action.RIGHT_CLICK_AIR)) && (p.getItemInHand().equals(new ItemStack(Material.BONE))))
     {
       p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
@@ -104,11 +103,12 @@ public class Events
       p.sendMessage(ChatColor.AQUA + "Angel Dust!");
       p.getItemInHand();
       p.setItemInHand(null);
-      if (this.plugin.getConfig().getBoolean("Drugs.Console.logs"))
+      if (this.plugin.getConfig().getBoolean("Drugs.Console.logs")) {
         this.logger.info(p.getName() + " Used Angel Dust");
       }
+    }
     if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.smoke")) && 
-      (p.hasPermission("drugs.smoke")) &&   
+      (p.hasPermission("drugs.smoke")) && 
       (e.getAction().equals(Action.RIGHT_CLICK_AIR)) && (p.getItemInHand().equals(new ItemStack(Material.TORCH))))
     {
       p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);

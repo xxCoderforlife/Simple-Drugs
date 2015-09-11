@@ -5,7 +5,6 @@ Drugs:
       paper: true
       gunpowder: true
       bone: true
-      smoke: true
    Effect:
       length: 10000
    Console:
