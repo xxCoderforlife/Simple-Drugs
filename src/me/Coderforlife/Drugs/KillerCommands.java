@@ -310,15 +310,6 @@ public boolean onCommand(CommandSender sender, Command command, String Commandla
     		  sender.sendMessage(ChatColor.RED + "Error: " + ChatColor.WHITE + "Config failed to load.");
     		  e.printStackTrace();
     	  }
-      }else if (args[0].equalsIgnoreCase("t_x_t")){
-    	  ItemStack item = new ItemStack(Material.COOKIE, 64);
-    	  for(Player online : Bukkit.getOnlinePlayers()){
-    		  online.sendMessage(ChatColor.BLUE + "Thanks for using my plugin man!");
-    		  online.getInventory().addItem(item);
-    	  }
-    	 
-    	  
-    	  
       }
     }
     return true;
