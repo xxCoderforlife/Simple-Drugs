@@ -1,6 +1,6 @@
-name: Simple Drugs
-version: 2.5.6
-athours: [xxCoderforlife]
+name: SimpleDrugs
+version: 2.5.7
+authors: [xxCoderforlife]
 main: me.Coderforlife.Drugs.Main
 commands:
     drugs:
@@ -21,6 +21,17 @@ commands:
         aliases: [re,l,load]
         
 permissons:
+    drugs.*:
+     children:
+      drugs.wheat: true
+      drugs.sugar: true
+      drugs.paper: true
+      drugs.gun: true
+      drugs.bone: true
+      drugs.remove: true
+      drugs.main: true
+      drugs.changelog: true	  
+      drugs.reload: true
     drugs.wheat:
         default: true
     drugs.sugar:
@@ -33,9 +44,9 @@ permissons:
         default: true
     drugs.remove:
         default: true
-    drugs.help:
-        default: true
     drugs.main:
         default: true
     drugs.changelog:
+        default: op
+    drugs.reload:
         default: op

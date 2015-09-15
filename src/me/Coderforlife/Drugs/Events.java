@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -22,7 +21,6 @@ public class Events
   {
     setPlugin(plugin);
   }
-  
   public Main getPlugin()
   {
     return this.plugin;
@@ -37,9 +35,10 @@ public class Events
   public void onRightClick(PlayerInteractEvent e)
   {
     Player p = e.getPlayer();
-    if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.wheat")) && 
+    if ((this.plugin.getConfig().getBoolean("Drugs.Toggle.wheat")) && 
       (p.hasPermission("drugs.wheat")) && 
-      (e.getAction().equals(Action.RIGHT_CLICK_AIR)) && (p.getItemInHand().getType() == Material.WHEAT))
+      (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) 
+      && (p.getItemInHand().getType() == Material.WHEAT))
     {
       p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
@@ -50,9 +49,10 @@ public class Events
         this.logger.info(p.getName() + " Used Weed");
       }
     }
-    if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.sugar")) && 
+    if ((this.plugin.getConfig().getBoolean("Drugs.Toggle.sugar")) && 
       (p.hasPermission("drugs.sugar")) && 
-      (e.getAction().equals(Action.RIGHT_CLICK_AIR)) && (p.getItemInHand().equals(new ItemStack(Material.SUGAR))))
+      (e.getAction() == Action.RIGHT_CLICK_AIR  || e.getAction() ==  Action.RIGHT_CLICK_BLOCK )
+      && (p.getItemInHand().getType() == Material.SUGAR))
     {
       p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
@@ -64,9 +64,10 @@ public class Events
         this.logger.info(p.getName() + " Used Cocaine");
       }
     }
-    if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.paper")) && 
+    if ((this.plugin.getConfig().getBoolean("Drugs.Toggle.paper")) && 
       (p.hasPermission("drugs.paper")) && 
-      (e.getAction().equals(Action.RIGHT_CLICK_AIR)) && (p.getItemInHand().equals(new ItemStack(Material.PAPER))))
+      (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)
+      && (p.getItemInHand().getType() == Material.PAPER))
     {
       p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
@@ -77,9 +78,10 @@ public class Events
         this.logger.info(p.getName() + " Used Acid");
       }
     }
-    if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.gunpowder")) && 
+    if ((this.plugin.getConfig().getBoolean("Drugs.Toggle.gunpowder")) && 
       (p.hasPermission("drugs.gun")) && 
-      (e.getAction().equals(Action.RIGHT_CLICK_AIR)) && (p.getItemInHand().equals(new ItemStack(Material.SULPHUR))))
+      (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() ==  Action.RIGHT_CLICK_BLOCK)
+      && (p.getItemInHand().getType() == Material.SULPHUR))
     {
       p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
@@ -92,9 +94,10 @@ public class Events
         this.logger.info(p.getName() + " Used PowPow");
       }
     }
-    if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.bone")) && 
+    if ((this.plugin.getConfig().getBoolean("Drugs.Toggle.bone")) && 
       (p.hasPermission("drugs.bone")) && 
-      (e.getAction().equals(Action.RIGHT_CLICK_AIR)) && (p.getItemInHand().equals(new ItemStack(Material.BONE))))
+      (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) 
+      && (p.getItemInHand().getType() == Material.BONE))
     {
       p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
@@ -107,9 +110,10 @@ public class Events
         this.logger.info(p.getName() + " Used Angel Dust");
       }
     }
-    if ((this.plugin.getConfig().getBoolean("Drugs.Enabled.smoke")) && 
+    if ((this.plugin.getConfig().getBoolean("Drugs.Toggle.smoke")) && 
       (p.hasPermission("drugs.smoke")) && 
-      (e.getAction().equals(Action.RIGHT_CLICK_AIR)) && (p.getItemInHand().equals(new ItemStack(Material.TORCH))))
+      (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() ==  Action.RIGHT_CLICK_BLOCK) 
+      && (p.getItemInHand().getType() == Material.TORCH))
     {
       p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
@@ -117,7 +121,7 @@ public class Events
       p.getItemInHand();
       p.setItemInHand(null);
       if (this.plugin.getConfig().getBoolean("Drugs.Console.logs")) {
-        this.logger.info(p.getName() + " Used Weed");
+        this.logger.info(p.getName() + " Just smoked.");
       }
     }
   }

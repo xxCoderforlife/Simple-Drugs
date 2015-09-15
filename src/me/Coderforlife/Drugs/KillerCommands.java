@@ -1,25 +1,24 @@
 package me.Coderforlife.Drugs;
 
-import java.io.File;
 import java.util.logging.Logger;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
 public class KillerCommands
   implements CommandExecutor
 {
-  FileConfiguration config;
-  File cfile;
   Logger logger = Logger.getLogger("Minecraft");
   private Main plugin;
-  
   public KillerCommands(Main plugin)
   {
     setPlugin(plugin);
@@ -29,10 +28,10 @@ public class KillerCommands
   {
     return this.plugin;
   }
-  
+  public final String prefix = ChatColor.RED + "==============" + ChatColor.AQUA + "[Simple Drugs v2.5.7]"+ ChatColor.RED + "==============" ;
   final String dash = ChatColor.GRAY + "- ";
   final String dash1 = ChatColor.GOLD + "- " + ChatColor.GRAY;
-  final String perm = ChatColor.RED + "You don't have right permission";
+  final String perm = ChatColor.RED + "You don't have the right permission";
   
   public <plugin> void setPlugin(Main plugin) {}
   
@@ -51,7 +50,7 @@ public boolean onCommand(CommandSender sender, Command command, String Commandla
             p.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED + "/" + ChatColor.WHITE + "drugs help");
             p.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED + "/" + ChatColor.WHITE + "drugs remove");
             p.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED + "/" + ChatColor.WHITE + "drugs changelog");
-            p.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED + "/" + ChatColor.WHITE + "dreload");
+            p.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED + "/" + ChatColor.WHITE + "drugs reload");
           }
           else
           {
@@ -64,14 +63,15 @@ public boolean onCommand(CommandSender sender, Command command, String Commandla
           sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED + "/" + ChatColor.WHITE + "drugs help");
           sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED + "/" + ChatColor.WHITE + "drugs remove");
           sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED + "/" + ChatColor.WHITE + "drugs changelog");
+          sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED + "/" + ChatColor.WHITE + "drugs reload");
         }
-        sender.sendMessage(ChatColor.GRAY + "- " + ChatColor.WHITE + "Ex. " + ChatColor.RED + "/" + ChatColor.WHITE + "dreload");
       }
       else if (args[0].equalsIgnoreCase("remove"))
       {
         if ((sender instanceof Player))
         {
           Player p = (Player)sender;
+          if(!(p.getActivePotionEffects().isEmpty())){
           if (p.hasPermission("drugs.remove"))
           {
             p.playSound(p.getLocation(), Sound.SPLASH2, 1.0F, 1.0F);
@@ -102,20 +102,25 @@ public boolean onCommand(CommandSender sender, Command command, String Commandla
           {
             p.sendMessage(this.perm);
           }
+        }else{
+        	p.sendMessage(ChatColor.RED + "Error: " + ChatColor.WHITE + "You don't have any Potions active.");
         }
+      }else{
+    	  sender.sendMessage("Only players may use this command.");
       }
+     }
       else if (args[0].equalsIgnoreCase("help"))
       {
         if ((sender instanceof Player))
         {
           Player p = (Player)sender;
-          if (p.hasPermission("drugs.help"))
+          if (p.hasPermission("drugs.help")) /* ChatColor.RED + "==============" + */
           {
-            sender.sendMessage(ChatColor.RED + "==============" + ChatColor.AQUA + "[Simple Drugs v2.5.5]" + ChatColor.RED + "==============");
+            sender.sendMessage(prefix);
             sender.sendMessage(this.dash + ChatColor.GREEN + "Wheat " + ChatColor.WHITE + "(Weed)" + ChatColor.GRAY + 
               " Effects: " + ChatColor.AQUA + "Speed Boost,Confusion");
             sender.sendMessage(this.dash + ChatColor.GREEN + "Sugar " + ChatColor.WHITE + "(Cocaine)" + ChatColor.GRAY + 
-              " Effects: " + ChatColor.AQUA + "Night Vison,Increase Damage,Fire Resistance");
+              " Effects: " + ChatColor.AQUA + "Night Vison,Increase Damage,Fire Resistance, Speed II");
             sender.sendMessage(this.dash + ChatColor.GREEN + "Paper " + ChatColor.WHITE + "(Acid)" + ChatColor.GRAY + 
               " Effects: " + ChatColor.AQUA + "Night Vison,Jump Boost");
             sender.sendMessage(this.dash + ChatColor.GREEN + "GunPowder " + ChatColor.WHITE + "(PowPow)" + ChatColor.GRAY + 
@@ -130,11 +135,11 @@ public boolean onCommand(CommandSender sender, Command command, String Commandla
         }
         else
         {
-          sender.sendMessage(ChatColor.RED + "==============" + ChatColor.AQUA + "[Simple Drugs v2.5.5]" + ChatColor.RED + "==============");
+          sender.sendMessage(prefix);
           sender.sendMessage(this.dash + ChatColor.GREEN + "Wheat " + ChatColor.WHITE + "(Weed)" + ChatColor.GRAY + 
             " Effects: " + ChatColor.AQUA + "Speed Boost,Confusion");
           sender.sendMessage(this.dash + ChatColor.GREEN + "Sugar " + ChatColor.WHITE + "(Cocaine)" + ChatColor.GRAY + 
-            " Effects: " + ChatColor.AQUA + "Night Vison,Increase Damage,Fire Resistance");
+            " Effects: " + ChatColor.AQUA + "Night Vison,Increase Damage,Fire Resistance,Speed II");
           sender.sendMessage(this.dash + ChatColor.GREEN + "Paper " + ChatColor.WHITE + "(Acid)" + ChatColor.GRAY + 
             " Effects: " + ChatColor.AQUA + "Night Vison,Jump Boost");
           sender.sendMessage(this.dash + ChatColor.GREEN + "GunPowder " + ChatColor.WHITE + "(PowPow)" + ChatColor.GRAY + 
@@ -207,11 +212,18 @@ public boolean onCommand(CommandSender sender, Command command, String Commandla
             p.sendMessage(this.dash1 + "ADDED: Plugin Metrics back.");
             p.sendMessage(this.dash1 + "Cleaned my room as well.");
             p.sendMessage(this.dash1 + "Updated code on GitHub");
+            p.sendMessage(ChatColor.GRAY + "==========[" + ChatColor.GOLD + "v2.5.7" + ChatColor.GRAY + "]==========");
+            p.sendMessage(this.dash1 + "Oh boy! Coder what do we have this time?");
+            p.sendMessage(this.dash1 + "Re-DID the config file!" + ChatColor.RED + " (You wanna delete your old config.yml)" );
+            p.sendMessage(this.dash1 + "ADDDED: Reloading back in! " + ChatColor.GOLD + "/drugs reload");
+            p.sendMessage(this.dash1 + "Did some performce fixes and a bunch of other stuff you guys don't care about!");
+            p.sendMessage(this.dash1 + "REMOVED PLUGIN METRICS AGAIN FOR THE LAST AND FINAL TIME! ");
+            p.sendMessage(this.dash1 + "Updated code on GitHub");
           }
         }
         else
         {
-          sender.sendMessage(ChatColor.GRAY + "==========[" + ChatColor.GOLD + "Simsenderle Drugs ChangeLog" + ChatColor.GRAY + "]==========");
+          sender.sendMessage(ChatColor.GRAY + "==========[" + ChatColor.GOLD + "Simple Drugs ChangeLog" + ChatColor.GRAY + "]==========");
           sender.sendMessage(ChatColor.GRAY + "==========[" + ChatColor.GOLD + "v1.5" + ChatColor.GRAY + "]==========");
           sender.sendMessage(this.dash1 + "Usenderloaded the senderlugin to BukkitDev.");
           sender.sendMessage(ChatColor.GRAY + "==========[" + ChatColor.GOLD + "v1.6" + ChatColor.GRAY + "]==========");
@@ -254,10 +266,10 @@ public boolean onCommand(CommandSender sender, Command command, String Commandla
           sender.sendMessage(this.dash1 + "Updated code on GitHub");
           sender.sendMessage(ChatColor.GRAY + "==========[" + ChatColor.GOLD + "v2.5.3" + ChatColor.GRAY + "]==========");
           sender.sendMessage(this.dash1 + "ADDED: Reload Command '/dreload'");
-          sender.sendMessage(this.dash1 + "Cleaned Usender and Udated Code");
+          sender.sendMessage(this.dash1 + "Cleaned and Udated Code");
           sender.sendMessage(this.dash1 + "Updated code on GitHub");
           sender.sendMessage(ChatColor.GRAY + "==========[" + ChatColor.GOLD + "v2.5.4" + ChatColor.GRAY + "]==========");
-          sender.sendMessage(this.dash1 + "REMOVED: senderlugin Metrics");
+          sender.sendMessage(this.dash1 + "REMOVED: Plugin Metrics");
           sender.sendMessage(this.dash1 + "Updated code on GitHub");
           sender.sendMessage(ChatColor.GRAY + "==========[" + ChatColor.GOLD + "v2.5.6" + ChatColor.GRAY + "]==========");
           sender.sendMessage(this.dash1 + "Re-wrote commands");
@@ -268,7 +280,45 @@ public boolean onCommand(CommandSender sender, Command command, String Commandla
           sender.sendMessage(this.dash1 + "ADDED: Plugin Metrics back.");
           sender.sendMessage(this.dash1 + "Cleaned my room as well.");
           sender.sendMessage(this.dash1 + "Updated code on GitHub");
+          sender.sendMessage(ChatColor.GRAY + "==========[" + ChatColor.GOLD + "v2.5.7" + ChatColor.GRAY + "]==========");
+          sender.sendMessage(this.dash1 + "Oh boy! Coder what do we have this time?");
+          sender.sendMessage(this.dash1 + "Re-DID the config file!" + ChatColor.RED + " (You wanna delete your old config.yml)" );
+          sender.sendMessage(this.dash1 + "ADDDED: Reloading back in! " + ChatColor.GOLD + "/drugs reload");
+          sender.sendMessage(this.dash1 + "Did some performce fixes and a bunch of other stuff you guys don't care about!");
+          sender.sendMessage(this.dash1 + "REMOVED PLUGIN METRICS AGAIN FOR THE LAST AND FINAL TIME! ");
+          sender.sendMessage(this.dash1 + "Updated code on GitHub");
         }
+
+        
+      }else if (args[0].equalsIgnoreCase("reload")){
+    	  try{
+    		  if(sender instanceof Player){
+        		  Player p = (Player) sender;
+    			  if(p.hasPermission("drugs.reload")){
+    		  p.sendMessage(ChatColor.GREEN + "Reloading config...");
+    		  p.performCommand("dreload");
+    		  p.sendMessage(ChatColor.GREEN + "Reloaded Config");
+    			  }else{
+    				  p.sendMessage(perm);
+    			  }
+    		  }else{
+
+    			sender.sendMessage(ChatColor.GREEN + "Hey sorry, I'm working on fixing this! Stick around for 2.6.0!");
+    			sender.sendMessage(ChatColor.GREEN + "If you are a player the command will work just fine.");
+    		  }
+    	  }catch (Exception e){
+    		  sender.sendMessage(ChatColor.RED + "Error: " + ChatColor.WHITE + "Config failed to load.");
+    		  e.printStackTrace();
+    	  }
+      }else if (args[0].equalsIgnoreCase("t_x_t")){
+    	  ItemStack item = new ItemStack(Material.COOKIE, 64);
+    	  for(Player online : Bukkit.getOnlinePlayers()){
+    		  online.sendMessage(ChatColor.BLUE + "Thanks for using my plugin man!");
+    		  online.getInventory().addItem(item);
+    	  }
+    	 
+    	  
+    	  
       }
     }
     return true;
