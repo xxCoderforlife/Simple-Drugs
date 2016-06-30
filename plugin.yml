@@ -23,7 +23,7 @@ commands:
 permissons:
     drugs.*:
      children:
-      drugs.cocoa: true
+      drugs.beet: true
       drugs.wheat: true
       drugs.sugar: true
       drugs.paper: true
@@ -31,6 +31,7 @@ permissons:
       drugs.bone: true
       drugs.remove: true
       drugs.main: true
+      drugs.cactus: true
       drugs.changelog: true	  
       drugs.reload: true
     drugs.wheat:
@@ -43,7 +44,9 @@ permissons:
         default: true
     drugs.bone:
         default: true
-    drugs.cocoa:
+    drugs.beet:
+        default: true
+    drugs.cactus:
         default: true
     drugs.remove:
         default: true
