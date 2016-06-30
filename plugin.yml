@@ -1,5 +1,5 @@
 name: SimpleDrugs
-version: 2.5.9
+version: 2.6.0
 authors: [xxCoderforlife]
 main: me.Coderforlife.Drugs.Main
 commands:
@@ -23,6 +23,7 @@ commands:
 permissons:
     drugs.*:
      children:
+      drugs.cocoa: true
       drugs.wheat: true
       drugs.sugar: true
       drugs.paper: true
@@ -42,11 +43,11 @@ permissons:
         default: true
     drugs.bone:
         default: true
+    drugs.cocoa:
+        default: true
     drugs.remove:
         default: true
     drugs.main:
         default: true
-    drugs.changelog:
-        default: op
     drugs.reload:
         default: op

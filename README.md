@@ -1,1 +1,1 @@
-Spigot Plugin, Simple Drugs
+Simple Drugs

@@ -3,13 +3,11 @@ package me.Coderforlife.Drugs;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Effect;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionEffect;
 
 public class KillerCommands
   implements CommandExecutor
@@ -25,16 +23,15 @@ public class KillerCommands
   {
     return this.plugin;
   }
-  public final String prefix = ChatColor.RED + "==============" + ChatColor.AQUA + "[Simple Drugs v2.5.9]"+ ChatColor.RED + "==============" ;
+  public final String prefix = ChatColor.RED + "==============" + ChatColor.AQUA + "[Simple Drugs v2.6.0]"+ ChatColor.RED + "==============" ;
   final String dash = ChatColor.GRAY + "- ";
-  final String prefix2 = ChatColor.WHITE + "[" + ChatColor.DARK_RED + "Drugs" + ChatColor.WHITE + "] " +ChatColor.RESET;
+  public final String prefix2 = ChatColor.WHITE + "[" + ChatColor.DARK_RED + "Drugs" + ChatColor.WHITE + "] " +ChatColor.RESET;
   final String dash1 = ChatColor.GOLD + "- " + ChatColor.GRAY;
   final String perm = ChatColor.RED + "You don't have the right permission";
   
   public <plugin> void setPlugin(Main plugin) {}
   
-  @SuppressWarnings("deprecation")
-public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args)
+  public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args)
   {
     if (command.getName().equalsIgnoreCase("drugs")) {
       if (args.length == 0)
@@ -70,29 +67,9 @@ public boolean onCommand(CommandSender sender, Command command, String Commandla
           if(!(p.getActivePotionEffects().isEmpty())){
           if (p.hasPermission("drugs.remove"))
           {
-            p.playSound(p.getLocation(), Sound.ENTITY_SPLASH_POTION_BREAK, 1.0F, 1.0F);
-            p.playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 1);
-            p.removePotionEffect(PotionEffectType.CONFUSION);
-            p.removePotionEffect(PotionEffectType.BLINDNESS);
-            p.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
-            p.removePotionEffect(PotionEffectType.FAST_DIGGING);
-            p.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
-            p.removePotionEffect(PotionEffectType.HARM);
-            p.removePotionEffect(PotionEffectType.HEAL);
-            p.removePotionEffect(PotionEffectType.HUNGER);
-            p.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
-            p.removePotionEffect(PotionEffectType.INVISIBILITY);
-            p.removePotionEffect(PotionEffectType.JUMP);
-            p.removePotionEffect(PotionEffectType.NIGHT_VISION);
-            p.removePotionEffect(PotionEffectType.POISON);
-            p.removePotionEffect(PotionEffectType.REGENERATION);
-            p.removePotionEffect(PotionEffectType.SLOW);
-            p.removePotionEffect(PotionEffectType.SLOW_DIGGING);
-            p.removePotionEffect(PotionEffectType.SPEED);
-            p.removePotionEffect(PotionEffectType.WATER_BREATHING);
-            p.removePotionEffect(PotionEffectType.WEAKNESS);
-            p.removePotionEffect(PotionEffectType.WITHER);
-            p.sendMessage( this.prefix2 + ChatColor.RED + " All drugs have been removed.");
+          for (PotionEffect effect : p.getActivePotionEffects())
+        	  p.removePotionEffect(effect.getType());
+            p.sendMessage( this.prefix2 + ChatColor.DARK_RED + "All drugs have been removed.");
           }
           else
           {
@@ -110,19 +87,19 @@ public boolean onCommand(CommandSender sender, Command command, String Commandla
         if ((sender instanceof Player))
         {
           Player p = (Player)sender;
-          if (p.hasPermission("drugs.help")) /* ChatColor.RED + "==============" + */
-          {
+          if (p.hasPermission("drugs.help")){
             sender.sendMessage(prefix);
-            sender.sendMessage(this.dash + ChatColor.GREEN + "Wheat " + ChatColor.WHITE + "(Weed)" + ChatColor.GRAY + 
-              " Effects: " + ChatColor.AQUA + "Hunger,Slowness");
-            sender.sendMessage(this.dash + ChatColor.GREEN + "Sugar " + ChatColor.WHITE + "(Cocaine)" + ChatColor.GRAY + 
-              " Effects: " + ChatColor.AQUA + "Night Vison,Increase Damage,Fire Resistance, Speed II");
-            sender.sendMessage(this.dash + ChatColor.GREEN + "Paper " + ChatColor.WHITE + "(Acid)" + ChatColor.GRAY + 
-              " Effects: " + ChatColor.AQUA + "Night Vison,Jump Boost");
-            sender.sendMessage(this.dash + ChatColor.GREEN + "GunPowder " + ChatColor.WHITE + "(PowPow)" + ChatColor.GRAY + 
-              " Effects: " + ChatColor.AQUA + "Jump Boost,Health Regeneration,Speed Boost,Confusion");
-            sender.sendMessage(this.dash + ChatColor.GREEN + "Bone " + ChatColor.WHITE + "(Angel Dust)" + ChatColor.GRAY + 
-              " Effects: " + ChatColor.AQUA + "Speed Boost,Confusion");
+            sender.sendMessage(this.dash + ChatColor.GREEN + "Wheat " + ChatColor.WHITE + "(Weed)");
+            sender.sendMessage(this.dash + ChatColor.GREEN + "Sugar " + ChatColor.WHITE + "(Cocaine)");
+            sender.sendMessage(this.dash + ChatColor.GREEN + "Paper " + ChatColor.WHITE + "(Acid)");
+            sender.sendMessage(this.dash + ChatColor.GREEN + "Beet " + ChatColor.WHITE + "(Heroin)");
+            sender.sendMessage(this.dash + ChatColor.GREEN + "Bone " + ChatColor.WHITE + "(Angel Dust)");
+            sender.sendMessage(this.dash + ChatColor.GREEN + "Cactus Dye " + ChatColor.WHITE + "(Hash)");
+            //sender.sendMessage(this.dash + ChatColor.GREEN + "Red and Brown Mushrooms " + ChatColor.WHITE + "(Shrooms)");
+            //sender.sendMessage(this.dash + ChatColor.GREEN + "Nether Wart " + ChatColor.WHITE + "(Ecstasy)");
+
+
+
           }
           else
           {
@@ -132,16 +109,12 @@ public boolean onCommand(CommandSender sender, Command command, String Commandla
         else
         {
           sender.sendMessage(prefix);
-          sender.sendMessage(this.dash + ChatColor.GREEN + "Wheat " + ChatColor.WHITE + "(Weed)" + ChatColor.GRAY + 
-            " Effects: " + ChatColor.AQUA + "Hunger,Slowness");
-          sender.sendMessage(this.dash + ChatColor.GREEN + "Sugar " + ChatColor.WHITE + "(Cocaine)" + ChatColor.GRAY + 
-            " Effects: " + ChatColor.AQUA + "Night Vison,Increase Damage,Fire Resistance,Speed II");
-          sender.sendMessage(this.dash + ChatColor.GREEN + "Paper " + ChatColor.WHITE + "(Acid)" + ChatColor.GRAY + 
-            " Effects: " + ChatColor.AQUA + "Night Vison,Jump Boost");
-          sender.sendMessage(this.dash + ChatColor.GREEN + "GunPowder " + ChatColor.WHITE + "(PowPow)" + ChatColor.GRAY + 
-            " Effects: " + ChatColor.AQUA + "Jump Boost,Health Regeneration,Speed Boost,Confusion");
-          sender.sendMessage(this.dash + ChatColor.GREEN + "Bone " + ChatColor.WHITE + "(Angel Dust)" + ChatColor.GRAY + 
-            " Effects: " + ChatColor.AQUA + "Speed Boost,Confusion");
+          sender.sendMessage(this.dash + ChatColor.GREEN + "Wheat " + ChatColor.WHITE + "(Weed)");
+          sender.sendMessage(this.dash + ChatColor.GREEN + "Sugar " + ChatColor.WHITE + "(Cocaine)");
+          sender.sendMessage(this.dash + ChatColor.GREEN + "Paper " + ChatColor.WHITE + "(Acid)");
+          sender.sendMessage(this.dash + ChatColor.GREEN + "Beet " + ChatColor.WHITE + "(Heroin)");
+          sender.sendMessage(this.dash + ChatColor.GREEN + "Bone " + ChatColor.WHITE + "(Angel Dust)");
+          sender.sendMessage(this.dash + ChatColor.GREEN + "Cactus Dye " + ChatColor.WHITE + "(Hash)");
         }
       }
         
@@ -151,14 +124,14 @@ public boolean onCommand(CommandSender sender, Command command, String Commandla
         		  Player p = (Player) sender;
     			  if(p.hasPermission("drugs.reload")){
     		  p.sendMessage(ChatColor.GREEN + "Reloading config...");
-    		  p.performCommand("dreload");
+    		  this.plugin.reloadConfig();
     		  p.sendMessage(ChatColor.GREEN + "Reloaded Config");
     			  }else{
     				  p.sendMessage(perm);
     			  }
     		  }else{
 
-    			sender.sendMessage(ChatColor.GREEN + "Hey sorry, I'm working on fixing this! Stick around for 2.6.0!");
+    			sender.sendMessage(ChatColor.GREEN + "Hey sorry, I'm working on fixing this! Stick around for 2.7.0!");
     			sender.sendMessage(ChatColor.GREEN + "If you are a player the command will work just fine.");
     		  }
     	  }catch (Exception e){
