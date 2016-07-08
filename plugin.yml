@@ -1,5 +1,5 @@
 name: SimpleDrugs
-version: 2.6.0
+version: 2.6.2
 authors: [xxCoderforlife]
 main: me.Coderforlife.Drugs.Main
 commands:
@@ -7,9 +7,6 @@ commands:
         description: For Drugs yo
         usage: /<command>
         aliases: [d]
-    help:
-        description: Drugs Help
-        aliases: [h]
     remove:
         description: Remove all Drugs
         aliases: [r]
@@ -23,7 +20,7 @@ commands:
 permissons:
     drugs.*:
      children:
-      drugs.beet: true
+      drugs.wart: true
       drugs.wheat: true
       drugs.sugar: true
       drugs.paper: true
@@ -31,7 +28,6 @@ permissons:
       drugs.bone: true
       drugs.remove: true
       drugs.main: true
-      drugs.cactus: true
       drugs.changelog: true	  
       drugs.reload: true
     drugs.wheat:
@@ -44,9 +40,7 @@ permissons:
         default: true
     drugs.bone:
         default: true
-    drugs.beet:
-        default: true
-    drugs.cactus:
+    drugs.wart:
         default: true
     drugs.remove:
         default: true

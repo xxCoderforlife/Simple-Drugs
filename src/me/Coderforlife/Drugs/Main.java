@@ -19,21 +19,6 @@ public class Main
   
   public void onEnable()
   {
-	 /** ItemStack meth = new ItemStack(Material.PRISMARINE_CRYSTALS,1);
-	  ItemMeta meta1 = meth.getItemMeta();
-	  meta1.setDisplayName(ChatColor.AQUA + "Meth");
-	  meta1.setLore(Arrays.asList(ChatColor.AQUA + "Meth is bad."));
-	  meth.setItemMeta(meta1);
-	  
-	  ShapedRecipe methR = new ShapedRecipe(meth);
-	  methR.shape(
-			   "AB#"
-			  ,"###"
-			  ,"###");
-	  methR.setIngredient('#', Material.AIR);
-	  methR.setIngredient('B', Material.GLASS_BOTTLE);
-	  methR.setIngredient('A', Material.ARROW);
-	  Bukkit.getServer().addRecipe(methR);**/
     getCommand("drugs").setExecutor(new KillerCommands(this));
     getServer().getPluginManager().registerEvents(new Events(this), this);
     getConfig().options().header("Simple Drugs Config.");
@@ -49,7 +34,7 @@ public class Main
 	   String beet = "Drugs.Toggle.beet";
 	   String cactus = "Drugs.Toggle.cactus";
 	   String announce = "Drugs.Toggle.announce";
-	  // String mushrooms = "Drugs.Toggle.mushrooms";
+	   String wart = "Drugs.Toggle.wart";
 	   //String nether = "Drugs.Toggle.nether";
 	   String effect = "Drugs.Effect.length";
 	   String console = "Drugs.Console.logs";
@@ -62,7 +47,7 @@ public class Main
 	   getConfig().addDefault(bone, true);
 	   getConfig().addDefault(beet, true);
 	   getConfig().addDefault(cactus, true);
-	  // getConfig().addDefault(nether, true);
+	   getConfig().addDefault(wart, true);
 	   //getConfig().addDefault(mushrooms, true);
 	   getConfig().addDefault(effect, 5220);
 	   getConfig().addDefault(console, true);

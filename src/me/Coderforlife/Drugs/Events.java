@@ -34,7 +34,8 @@ public class Events
     this.plugin = plugin;
   }
   
-  @EventHandler
+  @SuppressWarnings("deprecation")
+@EventHandler
   public void onRightClick(PlayerInteractEvent e)
   {
     Player p = e.getPlayer();
@@ -175,10 +176,10 @@ public class Events
   	      }
 
     }
-   /** if ((this.plugin.getConfig().getBoolean("Drugs.Toggle.meth")) && 
-    	      (p.hasPermission("drugs.meth")) && 
+    if ((this.plugin.getConfig().getBoolean("Drugs.Toggle.wart")) && 
+    	      (p.hasPermission("drugs.wart")) && 
     	      (e.getAction() == Action.RIGHT_CLICK_AIR  || e.getAction() ==  Action.RIGHT_CLICK_BLOCK )
-    	      && (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().matches(ChatColor.AQUA + "Meth")))
+    	      && (p.getInventory().getItemInMainHand().getTypeId() == 372))
 
     	    {
     	      p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
@@ -186,7 +187,7 @@ public class Events
     	      p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
     	      p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
 
-    	      p.sendMessage(prefix2 + ChatColor.DARK_RED + "You used Meth.");
+    	      p.sendMessage(prefix2 + ChatColor.DARK_RED + "You used Shrooms.");
     	      if (amount > 1) {
     	        	itemStack.setAmount(amount - 1);
     	        	p.getInventory().setItemInMainHand(itemStack);
@@ -198,28 +199,5 @@ public class Events
     	        this.logger.info(p.getName() + " Used Shrooms");
     	      }
     	    }
-    if ((this.plugin.getConfig().getBoolean("Drugs.Toggle.nether")) && 
-  	      (p.hasPermission("drugs.nether")) && 
-  	      (e.getAction() == Action.RIGHT_CLICK_AIR  || e.getAction() ==  Action.RIGHT_CLICK_BLOCK )
-  	      && (p.getInventory().getItemInMainHand().getType() == Material.NETHER_STAR))
-
-  	    {
-  	      p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
-  	      p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
-  	      p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
-  	      p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
-
-  	      p.sendMessage(prefix2 + ChatColor.DARK_RED + "You used Ecstasy.");
-  	      if (amount > 1) {
-  	        	itemStack.setAmount(amount - 1);
-  	        	p.getInventory().setItemInMainHand(itemStack);
-  	        }
-  	        if (amount == 1) {
-  	        	p.getInventory().setItemInMainHand(null);
-  	        	}
-  	      if (this.plugin.getConfig().getBoolean("Drugs.Console.logs")) {
-  	        this.logger.info(p.getName() + " Used Ecstasy");
-  	      }
-  	    }**/
   }
 }

@@ -23,7 +23,7 @@ public class KillerCommands
   {
     return this.plugin;
   }
-  public final String prefix = ChatColor.RED + "==============" + ChatColor.AQUA + "[Simple Drugs v2.6.0]"+ ChatColor.RED + "==============" ;
+  public final String prefix = ChatColor.RED + "==============" + ChatColor.AQUA + "[Simple Drugs v2.6.2]"+ ChatColor.RED + "==============" ;
   final String dash = ChatColor.GRAY + "- ";
   public final String prefix2 = ChatColor.WHITE + "[" + ChatColor.DARK_RED + "Drugs" + ChatColor.WHITE + "] " +ChatColor.RESET;
   final String dash1 = ChatColor.GOLD + "- " + ChatColor.GRAY;
@@ -95,6 +95,8 @@ public class KillerCommands
             sender.sendMessage(this.dash + ChatColor.GREEN + "Beet " + ChatColor.WHITE + "(Heroin)");
             sender.sendMessage(this.dash + ChatColor.GREEN + "Bone " + ChatColor.WHITE + "(Angel Dust)");
             sender.sendMessage(this.dash + ChatColor.GREEN + "Cactus Dye " + ChatColor.WHITE + "(Hash)");
+            sender.sendMessage(this.dash + ChatColor.GREEN + "Nether Wart " + ChatColor.WHITE + "(Shrooms)");
+
             //sender.sendMessage(this.dash + ChatColor.GREEN + "Red and Brown Mushrooms " + ChatColor.WHITE + "(Shrooms)");
             //sender.sendMessage(this.dash + ChatColor.GREEN + "Nether Wart " + ChatColor.WHITE + "(Ecstasy)");
 
