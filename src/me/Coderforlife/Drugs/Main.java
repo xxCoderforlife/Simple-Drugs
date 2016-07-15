@@ -38,6 +38,7 @@ public class Main
 	   //String nether = "Drugs.Toggle.nether";
 	   String effect = "Drugs.Effect.length";
 	   String console = "Drugs.Console.logs";
+	   String shift = "Drugs.Toggle.shift";
 	   /*String remove =  "Drugs.Effect.Clear";
 	   String sound = "Drugs.Effect.Sound";*/
 	   getConfig().addDefault(wheat, true);
@@ -52,6 +53,7 @@ public class Main
 	   getConfig().addDefault(effect, 5220);
 	   getConfig().addDefault(console, true);
 	   getConfig().addDefault(announce, true);
+	   getConfig().addDefault(shift, true);
 	  /* getConfig().addDefault(remove, true);
 	   * getConfig().addDefault(sound, true)*/
        getConfig().options().copyDefaults(true);
