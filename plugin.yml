@@ -1,5 +1,5 @@
 name: SimpleDrugs
-version: 2.6.2
+version: 2.6.4
 authors: [xxCoderforlife]
 main: me.Coderforlife.Drugs.Main
 commands:

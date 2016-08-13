@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -41,17 +42,37 @@ public class Events
     Player p = e.getPlayer();
     if(this.plugin.getConfig().getBoolean("Drugs.Toggle.shift")){
     if(p.isSneaking()){
+    	
     org.bukkit.inventory.ItemStack itemStack = p.getInventory().getItemInMainHand();
     int amount = itemStack.getAmount();
     if ((this.plugin.getConfig().getBoolean("Drugs.Toggle.wheat")) && 
       (p.hasPermission("drugs.wheat")) && 
       (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) 
       && (p.getInventory().getItemInMainHand().getType() == Material.WHEAT))    {
-      p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+    	for(String effectString : this.plugin.getConfig().getStringList("Drugs.Items.Weed.Effects")) {
+    	    PotionEffectType wtype = PotionEffectType.getByName(effectString.toUpperCase());
+    	 
+    	    //if type is null that means that the type could not be interpreted
+    	    if(wtype == null) {
+    	        System.err.println(effectString + " could not be interpreted into a correct PotionEffectType.");
+    	        continue;
+    	    }
+    	 
+    	    //if the player already has the potion effect, make sure to remove it at first
+    	    if(p.hasPotionEffect(wtype))
+    	        p.removePotionEffect(wtype);
+    	 
+    	    //create the effect
+    	    PotionEffect weffect = wtype.createEffect(20 * 30 /* duration in ticks */, 1 /* strength */);
+    	 
+    	    //apply effect to the player
+    	    p.addPotionEffect(weffect);
+    	}
+     /* p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
-      p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+      p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, this.plugin.getConfig().getInt("Drugs.Effect.length",1), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.LUCK, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
-
+*/
       p.sendMessage(prefix2 + ChatColor.DARK_RED + "You used marijuana.");
       if (this.plugin.getConfig().getBoolean("Drugs.Console.logs")) {
         this.logger.info(p.getName() + " Used Weed");
@@ -67,8 +88,16 @@ public class Events
     if ((this.plugin.getConfig().getBoolean("Drugs.Toggle.sugar")) && 
       (p.hasPermission("drugs.sugar")) && 
       (e.getAction() == Action.RIGHT_CLICK_AIR  || e.getAction() ==  Action.RIGHT_CLICK_BLOCK )
-      && (p.getInventory().getItemInMainHand().getType() == Material.SUGAR))
+      && (p.getInventory().getItemInMainHand().getItemMeta().hasItemFlag(ItemFlag.valueOf("coke"))))
     {
+
+        if (amount > 1) {
+          	itemStack.setAmount(amount - 1);
+          }
+          if (amount == 1) {
+          	p.getInventory().setItemInMainHand(null);
+          	}
+          
       p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
@@ -76,15 +105,8 @@ public class Events
       p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
       p.addPotionEffect(new PotionEffect(PotionEffectType.LUCK, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+        p.sendMessage(prefix2 + ChatColor.DARK_RED + "You used Coke.");
 
-      p.sendMessage(prefix2 + ChatColor.DARK_RED + "You used Coke.");
-      if (amount > 1) {
-        	itemStack.setAmount(amount - 1);
-        	p.getInventory().setItemInMainHand(itemStack);
-        }
-        if (amount == 1) {
-        	p.getInventory().setItemInMainHand(null);
-        	}
        
       if (this.plugin.getConfig().getBoolean("Drugs.Console.logs")) {
         this.logger.info(p.getName() + " Used Cocaine");
