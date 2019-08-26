@@ -1,5 +1,5 @@
 name: SimpleDrugs
-version: 2.6.4
+version: 2.6.5 (beta)
 authors: [xxCoderforlife]
 main: me.Coderforlife.Drugs.Main
 commands:
@@ -10,14 +10,11 @@ commands:
     remove:
         description: Remove all Drugs
         aliases: [r]
-    changelog:
-        description: ChangeLog for SimpleDrugs
-        aliases: [change,log,c]
-    dreload:
-        description: Reload for SimpleDrugs
-        aliases: [re,l,load]
         
-permissons:
+    reload:
+        description: Reloads the config
+        
+permissions:
     drugs.*:
      children:
       drugs.wart: true

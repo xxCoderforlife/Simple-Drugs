@@ -1,7 +1,6 @@
 package me.Coderforlife.Drugs;
 
 import java.util.logging.Logger;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,6 +13,7 @@ public class KillerCommands
 {
   Logger logger = Logger.getLogger("Minecraft");
   private Main plugin;
+  
   public KillerCommands(Main plugin)
   {
     setPlugin(plugin);
@@ -23,9 +23,10 @@ public class KillerCommands
   {
     return this.plugin;
   }
-  public final String prefix = ChatColor.RED + "==============" + ChatColor.AQUA + "[Simple Drugs v2.6.2]"+ ChatColor.RED + "==============" ;
+  
+  public final String prefix = ChatColor.RED + "==============" + ChatColor.AQUA + "[Simple Drugs v2.6.5 (beta)]" + ChatColor.RED + "==============";
   final String dash = ChatColor.GRAY + "- ";
-  public final String prefix2 = ChatColor.WHITE + "[" + ChatColor.DARK_RED + "Drugs" + ChatColor.WHITE + "] " +ChatColor.RESET;
+  public final String prefix2 = ChatColor.BLACK + "[" + ChatColor.DARK_RED + "SD" + ChatColor.BLACK + "] " + ChatColor.RESET;
   final String dash1 = ChatColor.GOLD + "- " + ChatColor.GRAY;
   final String perm = ChatColor.RED + "You don't have the right permission";
   
@@ -33,7 +34,8 @@ public class KillerCommands
   
   public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args)
   {
-    if (command.getName().equalsIgnoreCase("drugs")) {
+    if (command.getName().equalsIgnoreCase("drugs"))
+    {
       if (args.length == 0)
       {
         if ((sender instanceof Player))
@@ -64,44 +66,39 @@ public class KillerCommands
         if ((sender instanceof Player))
         {
           Player p = (Player)sender;
-          if(!(p.getActivePotionEffects().isEmpty())){
-          if (p.hasPermission("drugs.remove"))
+          if (!p.getActivePotionEffects().isEmpty())
           {
-          for (PotionEffect effect : p.getActivePotionEffects())
-        	  p.removePotionEffect(effect.getType());
-            p.sendMessage( this.prefix2 + ChatColor.DARK_RED + "All drugs have been removed.");
+            if (p.hasPermission("drugs.remove"))
+            {
+              for (PotionEffect effect : p.getActivePotionEffects()) {
+                p.removePotionEffect(effect.getType());
+              }
+              p.sendMessage(this.prefix2 + ChatColor.AQUA + "Sobered Up!");
+            }
+            else
+            {
+              p.sendMessage(this.perm);
+            }
           }
-          else
-          {
-            p.sendMessage(this.perm);
+          else {
+            p.sendMessage(ChatColor.MAGIC + "|||" + ChatColor.RESET + "you need drugs" + ChatColor.MAGIC + "|||");
           }
-        }else{
-        	p.sendMessage(this.prefix2 + ChatColor.WHITE + "You're not on any drugs.");
         }
-      }else{
-    	  sender.sendMessage("Only players may use this command.");
+        else
+        {
+          sender.sendMessage("Only players may use this command.");
+        }
       }
-     }
-      else if (args[0].equalsIgnoreCase("help"))
-      {
+      else if (args[0].equalsIgnoreCase("help")) {
         if ((sender instanceof Player))
         {
           Player p = (Player)sender;
-          if (p.hasPermission("drugs.help")){
-            sender.sendMessage(prefix);
+          if (p.hasPermission("drugs.help"))
+          {
+            sender.sendMessage(this.prefix);
             sender.sendMessage(this.dash + ChatColor.GREEN + "Wheat " + ChatColor.WHITE + "(Weed)");
             sender.sendMessage(this.dash + ChatColor.GREEN + "Sugar " + ChatColor.WHITE + "(Cocaine)");
             sender.sendMessage(this.dash + ChatColor.GREEN + "Paper " + ChatColor.WHITE + "(Acid)");
-            sender.sendMessage(this.dash + ChatColor.GREEN + "Beet " + ChatColor.WHITE + "(Heroin)");
-            sender.sendMessage(this.dash + ChatColor.GREEN + "Bone " + ChatColor.WHITE + "(Angel Dust)");
-            sender.sendMessage(this.dash + ChatColor.GREEN + "Cactus Dye " + ChatColor.WHITE + "(Hash)");
-            sender.sendMessage(this.dash + ChatColor.GREEN + "Nether Wart " + ChatColor.WHITE + "(Shrooms)");
-
-            //sender.sendMessage(this.dash + ChatColor.GREEN + "Red and Brown Mushrooms " + ChatColor.WHITE + "(Shrooms)");
-            //sender.sendMessage(this.dash + ChatColor.GREEN + "Nether Wart " + ChatColor.WHITE + "(Ecstasy)");
-
-
-
           }
           else
           {
@@ -110,39 +107,47 @@ public class KillerCommands
         }
         else
         {
-          sender.sendMessage(prefix);
+          sender.sendMessage(this.prefix);
           sender.sendMessage(this.dash + ChatColor.GREEN + "Wheat " + ChatColor.WHITE + "(Weed)");
           sender.sendMessage(this.dash + ChatColor.GREEN + "Sugar " + ChatColor.WHITE + "(Cocaine)");
           sender.sendMessage(this.dash + ChatColor.GREEN + "Paper " + ChatColor.WHITE + "(Acid)");
-          sender.sendMessage(this.dash + ChatColor.GREEN + "Beet " + ChatColor.WHITE + "(Heroin)");
-          sender.sendMessage(this.dash + ChatColor.GREEN + "Bone " + ChatColor.WHITE + "(Angel Dust)");
-          sender.sendMessage(this.dash + ChatColor.GREEN + "Cactus Dye " + ChatColor.WHITE + "(Hash)");
         }
-      }
-        
-      }else if (args[0].equalsIgnoreCase("reload")){
-    	  try{
-    		  if(sender instanceof Player){
+      }    else if (args[0].equalsIgnoreCase("reload")) {
+          try
+          {
+            if ((sender instanceof Player))
+            {
+              Player p = (Player)sender;
+              if (p.hasPermission("drugs.reload"))
+              {
+                p.sendMessage(ChatColor.GREEN + "Reloading config...");
+                this.plugin.reloadConfig();
+                p.sendMessage(ChatColor.GREEN + "Reloaded Config");
+              }
+              else
+              {
+                p.sendMessage(this.perm);
+              }
+            }
+            else
+            {
+             this.plugin.reloadConfig();
+            }
+          }
+          catch (Exception e)
+          {
+        	  if(sender instanceof Player) {
         		  Player p = (Player) sender;
-    			  if(p.hasPermission("drugs.reload")){
-    		  p.sendMessage(ChatColor.GREEN + "Reloading config...");
-    		  this.plugin.reloadConfig();
-    		  p.sendMessage(ChatColor.GREEN + "Reloaded Config");
-    			  }else{
-    				  p.sendMessage(perm);
-    			  }
-    		  }else{
-
-    			sender.sendMessage(ChatColor.GREEN + "Hey sorry, I'm working on fixing this! Stick around for 2.7.0!");
-    			sender.sendMessage(ChatColor.GREEN + "If you are a player the command will work just fine.");
-    		  }
-    	  }catch (Exception e){
-    		  sender.sendMessage(ChatColor.RED + "Error: " + ChatColor.WHITE + "Config failed to load.");
-    		  sender.sendMessage(ChatColor.GREEN + "If this keeps happening tell me on Spigot");
-    		  sender.sendMessage(ChatColor.GREEN + "DON'T FORGET TO BRING THIS ERROR!");
-    		  e.printStackTrace();
-    	  }
-      }
+        		  p.sendMessage(ChatColor.DARK_RED + "ERROR!");
+        		  p.sendMessage(ChatColor.BOLD + "Check the Console for the stack trace.");
+        	  }
+            sender.sendMessage(ChatColor.RED + "Error: " + ChatColor.WHITE + "Config failed to load.");
+            sender.sendMessage(ChatColor.GREEN + "If this keeps happening tell me on Spigot");
+            sender.sendMessage(ChatColor.GREEN + "DON'T FORGET TO BRING THIS ERROR!");
+            e.printStackTrace();
+          }
+        }
+    }
     return true;
   }
 }

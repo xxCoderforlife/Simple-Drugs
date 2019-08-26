@@ -1,124 +1,151 @@
 package me.Coderforlife.Drugs;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
+import net.md_5.bungee.api.ChatColor;
 
 public class Main
   extends JavaPlugin
 {
+
+	public static ItemStack wheatd = new ItemStack(Material.WHEAT);
+    public static ItemStack suagrd = new ItemStack(Material.SUGAR);
+	public static ItemStack paperd = new ItemStack(Material.PAPER);
+
+
+
+	
+	public static String weed = "Weed: Slowness, Hunger, Luck";
+	public static String coke = "Coke: Night Vison, Fire Res, Luck, Heal, FastDig, Glowing";
+	public static String acid = "Acid: Night Vison, Jump, Heal";
   Logger logger = Logger.getLogger("Minecraft");
- public final ItemStack stack = new ItemStack(Material.WHEAT, 1);
+  File f = new File(this.getDataFolder() + "/");
   
   public void onEnable()
   {
 
 	  
+	  //Adding in the Recipes for the Drugs
+	  WeedRec();
+	  CokeRec();
+	  AcidRec();
 	  
-    getCommand("drugs").setExecutor(new KillerCommands(this));
-    getConfig().options().header("Simple Drugs Config.");
-    if(Bukkit.getVersion().contains("1.8.8")){
-        getServer().getPluginManager().registerEvents(new OldEvents(this), this);
-        System.out.println("I suggest updating to the lastest verison");
-        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "version");
-
-    }else{
-        getServer().getPluginManager().registerEvents(new Events(this), this);
-        
-
-    }
-    
-    loadConfiguration();
-    Coke();
-  }
-  
-   public void loadConfiguration(){
-	   String CokeName = "Drugs.Items.Coke.Name";
-	   String WeedName = "Drugs.Items.Weed.Name";
-	   String wheat = "Drugs.Toggle.wheat";
-	   String suagr = "Drugs.Toggle.sugar";
-	   String paper = "Drugs.Toggle.paper";
-	   String gunp  = "Drugs.Toggle.gunpowder";
-	   String bone  = "Drugs.Toggle.bone";
-	   String beet = "Drugs.Toggle.beet";
-	   String cactus = "Drugs.Toggle.cactus";
-	//   String announce = "Drugs.Toggle.announce";
-	   String wart = "Drugs.Toggle.wart";
-	   //String nether = "Drugs.Toggle.nether";
-	   String effect = "Drugs.Effect.length";
-	   String console = "Drugs.Console.logs";
-	   String shift = "Drugs.Toggle.shift";
-	   /*String remove =  "Drugs.Effect.Clear";
-	   String sound = "Drugs.Effect.Sound";*/
-	   getConfig().addDefault(wheat, true);
-	   getConfig().addDefault(suagr, true);
-	   getConfig().addDefault(paper, true);
-	   getConfig().addDefault(gunp, true);
-	   getConfig().addDefault(bone, true);
-	   getConfig().addDefault(beet, true);
-	   getConfig().addDefault(cactus, true);
-	   getConfig().addDefault(wart, true);
-	   getConfig().addDefault(WeedName, "Weed");
-	   getConfig().createSection("Drugs.Items.Weed.Effects");
-	   getConfig().addDefault("Drugs.Items.Weed.Effects", "SLOW");
-	   //getConfig().addDefault(mushrooms, true);
-	   getConfig().addDefault(effect, 5220);
-	   getConfig().addDefault(console, true);
-	 //  getConfig().addDefault(announce, true);
-	   getConfig().addDefault(shift, true);
-	  /* getConfig().addDefault(remove, true);
-	   * getConfig().addDefault(sound, true)*/
-       getConfig().options().copyDefaults(true);
-       getConfig().addDefault(CokeName, "&4Coke");
-	   saveConfig();
-   }
-  public void onDisable()
-  {
-  }
-  
-  public void Coke(){
-	  ItemStack coke = new ItemStack(Material.SUGAR, 1);
-	  ItemMeta cokemeta = coke.getItemMeta();
-	  cokemeta.setDisplayName(getConfig().getString("Drugs.Items.Coke.Name").replaceAll("&", "§"));
-	  cokemeta.setLore(Arrays.asList("Luck" 
-			                       , "Healing" 
-			                       , "Fast Digging" 
-			                       , "Glowing" 
-			                       , "Fire Resistance" 
-			                       , "Increase Damage" 
-			                       , "Night Vison"));
-	  coke.setItemMeta(cokemeta);
-
+	  //Registering Commands and Events
+	    getCommand("drugs").setExecutor(new KillerCommands(this));
+	    getServer().getPluginManager().registerEvents(new Items(this), this);
 	  
-	  ShapedRecipe CokeR = new ShapedRecipe(coke);
-	   
-	  CokeR.shape(" a "
-			     ," a "
-			     ," a ");
-	   
-	  CokeR.setIngredient('a', Material.SUGAR);
-	  Bukkit.getServer().addRecipe(CokeR);
-  }
-  
-  public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args){
-	  if(command.getName().equalsIgnoreCase("dreload")){
-		  Player p = (Player) sender;
-		  if(p.hasPermission("drugs.reload")){
-		  reloadConfig();
-		  }
+	    //Checking and Creating a folder for the plugin
+	  if(!f.exists()) {
+		  f.mkdir();
+	  }else {
+		  System.out.println("Folder already exists.");
 	  }
-	return true;
 	  
+	 //Checking and loading in plugin config
+    getConfig().options().header("Simple Drugs Config.");
+    loadConfiguration();
   }
+  
+  
+  //What is inside the config
+  public void loadConfiguration()
+  {
+    String wheat = "Drugs.Toggle.wheat";
+    String suagr = "Drugs.Toggle.sugar";
+    String paper = "Drugs.Toggle.paper";
+    
+    String effect = "Drugs.Effect.length";
+
+    
+    getConfig().addDefault(wheat, Boolean.valueOf(true));
+    getConfig().addDefault(suagr, Boolean.valueOf(true));
+    getConfig().addDefault(paper, Boolean.valueOf(true));
+    
+    getConfig().addDefault(effect, Integer.valueOf(5220));
+    
+    getConfig().options().copyDefaults(true);
+    saveConfig();
+  }
+  //Weed Recipe
+  public void WeedRec() {
+	  ItemMeta meta = wheatd.getItemMeta();
+	  
+	  
+	  meta.setDisplayName(ChatColor.DARK_RED + "Weed");
+	  meta.setLore(Arrays.asList(weed));
+	  meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+	  meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+	  wheatd.setItemMeta(meta);
+	  
+	  NamespacedKey key = new NamespacedKey(this, "drug_weed");
+	  ShapedRecipe recipe = new ShapedRecipe(key, wheatd);
+	  
+	  recipe.shape(" W ",
+			       " W ",
+			       " W ");
+	  
+	  recipe.setIngredient('W', Material.WHEAT);
+	  
+	  Bukkit.addRecipe(recipe);
+  }
+  //Coke Recipe
+  public void CokeRec() {
+	  ItemMeta meta = suagrd.getItemMeta();
+	  
+	  meta.setLore(Arrays.asList(coke));
+	  meta.setDisplayName(ChatColor.GOLD + "Coke");
+	  meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+	  meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+	  suagrd.setItemMeta(meta);
+	  
+	  NamespacedKey key = new NamespacedKey(this,"drugs_coke");
+	  ShapedRecipe recipe = new ShapedRecipe(key, suagrd);
+	  
+	  recipe.shape(" S ",
+			       " S ",
+			       " S ");
+	  
+	  recipe.setIngredient('S', Material.SUGAR);
+	  
+	  Bukkit.addRecipe(recipe);
+	  }
+  //Acid Recipe
+  public void AcidRec() {
+	  ItemMeta meta = paperd.getItemMeta();
+
+	  meta.setLore(Arrays.asList(acid));
+	  meta.setDisplayName(ChatColor.BLUE + "Acid");
+	  meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+	  meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+	  paperd.setItemMeta(meta);
+	  
+	  NamespacedKey key = new NamespacedKey(this, "drugs_acid");
+	  ShapedRecipe recipe = new ShapedRecipe(key, paperd);
+	  
+	  recipe.shape(" P ",
+			       " P ",
+			       " P ");
+	  
+	  recipe.setIngredient('P', Material.PAPER);
+	  
+	  Bukkit.addRecipe(recipe);
+  }
+  
+
+
+//Nothing
+  public void onDisable() {}
+  
 }
