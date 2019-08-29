@@ -77,7 +77,7 @@ public class Items implements Listener{
         			          p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
         			          p.addPotionEffect(new PotionEffect(PotionEffectType.LUCK, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
         			          
-        			          p.sendMessage(prefix2 + ChatColor.DARK_RED + "You used marijuana.");
+        			          p.sendMessage(prefix2 + ChatColor.DARK_RED + "You used Marijuana.");
         			          if (amount > 1)
         			          {
         			            itemStack.setAmount(amount - 1);

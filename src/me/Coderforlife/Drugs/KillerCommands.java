@@ -11,26 +11,31 @@ import org.bukkit.potion.PotionEffect;
 public class KillerCommands
   implements CommandExecutor
 {
+	
+	private Main plugin;
+	
+	 public KillerCommands(Main plugin)
+	  {
+	    setPlugin(plugin);
+	  }
+	  
+	  public Main getPlugin()
+	  {
+	    return this.plugin;
+	  }
+	  
+	  public void setPlugin(Main plugin)
+	  {
+	    this.plugin = plugin;
+	  }
+	  
   Logger logger = Logger.getLogger("Minecraft");
-  private Main plugin;
-  
-  public KillerCommands(Main plugin)
-  {
-    setPlugin(plugin);
-  }
-  
-  public Main getPlugin()
-  {
-    return this.plugin;
-  }
-  
   public final String prefix = ChatColor.RED + "==============" + ChatColor.AQUA + "[Simple Drugs v2.6.5 (beta)]" + ChatColor.RED + "==============";
   final String dash = ChatColor.GRAY + "- ";
-  public final String prefix2 = ChatColor.BLACK + "[" + ChatColor.DARK_RED + "SD" + ChatColor.BLACK + "] " + ChatColor.RESET;
+  public final static String prefix2 = ChatColor.BLACK + "[" + ChatColor.DARK_RED + "SD" + ChatColor.BLACK + "] " + ChatColor.RESET;
   final String dash1 = ChatColor.GOLD + "- " + ChatColor.GRAY;
   final String perm = ChatColor.RED + "You don't have the right permission";
   
-  public <plugin> void setPlugin(Main plugin) {}
   
   public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args)
   {
@@ -73,7 +78,7 @@ public class KillerCommands
               for (PotionEffect effect : p.getActivePotionEffects()) {
                 p.removePotionEffect(effect.getType());
               }
-              p.sendMessage(this.prefix2 + ChatColor.AQUA + "Sobered Up!");
+              p.sendMessage(prefix2 + ChatColor.AQUA + "Sobered Up!");
             }
             else
             {

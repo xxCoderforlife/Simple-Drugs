@@ -28,7 +28,7 @@ public class Main
 
 	
 	public static String weed = "Weed: Slowness, Hunger, Luck";
-	public static String coke = "Coke: Night Vison, Fire Res, Luck, Heal, FastDig, Glowing";
+	public static String coke = "Coke: Night Vison, Fire Res, FastDig";
 	public static String acid = "Acid: Night Vison, Jump, Heal";
   Logger logger = Logger.getLogger("Minecraft");
   File f = new File(this.getDataFolder() + "/");
@@ -65,7 +65,6 @@ public class Main
     String wheat = "Drugs.Toggle.wheat";
     String suagr = "Drugs.Toggle.sugar";
     String paper = "Drugs.Toggle.paper";
-    
     String effect = "Drugs.Effect.length";
 
     
@@ -83,7 +82,7 @@ public class Main
 	  ItemMeta meta = wheatd.getItemMeta();
 	  
 	  
-	  meta.setDisplayName(ChatColor.DARK_RED + "Weed");
+	  meta.setDisplayName(ChatColor.GREEN+ "Weed");
 	  meta.setLore(Arrays.asList(weed));
 	  meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 	  meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
