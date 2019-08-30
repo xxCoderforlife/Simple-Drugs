@@ -30,7 +30,8 @@ public class KillerCommands
 	  }
 	  
   Logger logger = Logger.getLogger("Minecraft");
-  public final String prefix = ChatColor.RED + "==============" + ChatColor.AQUA + "[Simple Drugs v2.6.5 (beta)]" + ChatColor.RED + "==============";
+  public final String prefix = ChatColor.RED + "====" + ChatColor.BLACK + "[" + ChatColor.DARK_RED + "Simple Drugs v2.6.5 (beta)" + ChatColor.BLACK + "]" + ChatColor.RED + "====";
+  
   final String dash = ChatColor.GRAY + "- ";
   public final static String prefix2 = ChatColor.BLACK + "[" + ChatColor.DARK_RED + "SD" + ChatColor.BLACK + "] " + ChatColor.RESET;
   final String dash1 = ChatColor.GOLD + "- " + ChatColor.GRAY;

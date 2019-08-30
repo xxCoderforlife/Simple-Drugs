@@ -40,7 +40,7 @@ public class Items implements Listener{
 	        
 	        
 	       if(this.plugin.getConfig().getBoolean("Drugs.Toggle.sugar")) { 
-		      if(p.hasPermission("drugs.coke")) {
+		      if(p.hasPermission("drugs.sugar")) {
 		        	if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 		        		if(p.getInventory().getItemInMainHand().equals(Main.suagrd)) {
 		        			
@@ -68,7 +68,7 @@ public class Items implements Listener{
 		        }   
 	       }
 			  if(this.plugin.getConfig().getBoolean("Drugs.Toggle.wheat")) {
-				  if(p.hasPermission("drugs.weed")) {
+				  if(p.hasPermission("drugs.wheat")) {
 					  if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 						  if(p.getInventory().getItemInMainHand().equals(Main.wheatd)) {
 							  
@@ -93,7 +93,7 @@ public class Items implements Listener{
 				  }
 			  }
 			  if(this.plugin.getConfig().getBoolean("Drugs.Toggle.paper")) {
-				  if(p.hasPermission("drugs.acid")) {
+				  if(p.hasPermission("drugs.paper")) {
 					  if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 						  if(p.getInventory().getItemInMainHand().equals(Main.paperd)) {
 							  
