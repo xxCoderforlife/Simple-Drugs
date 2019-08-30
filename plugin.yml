@@ -1,11 +1,14 @@
 name: SimpleDrugs
-version: 2.6.5 (beta)
-authors: [xxCoderforlife]
+version: 2.6.6 (beta)
+author: xxCoderforlife
+prefix: SD
+website: https://www.spigotmc.org/resources/simple-drugs.9684/
+api-version: 1.14
 main: me.Coderforlife.Drugs.Main
 commands:
     drugs:
         description: For Drugs yo
-        usage: /<command>
+        usage: /drugs
         aliases: [d]
     remove:
         description: Remove all Drugs
@@ -13,31 +16,24 @@ commands:
         
     reload:
         description: Reloads the config
+    
+    reup:
+        description: Gives you more drugs
         
 permissions:
     drugs.*:
      children:
-      drugs.wart: true
       drugs.wheat: true
       drugs.sugar: true
       drugs.paper: true
-      drugs.gun: true
-      drugs.bone: true
       drugs.remove: true
-      drugs.main: true
-      drugs.changelog: true	  
+      drugs.main: true 
       drugs.reload: true
     drugs.wheat:
         default: true
     drugs.sugar:
         default: true
     drugs.paper:
-        default: true
-    drugs.gun:
-        default: true
-    drugs.bone:
-        default: true
-    drugs.wart:
         default: true
     drugs.remove:
         default: true
