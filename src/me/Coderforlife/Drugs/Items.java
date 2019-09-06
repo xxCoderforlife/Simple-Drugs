@@ -102,6 +102,31 @@ public class Items implements Listener{
 	        	                p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
 	        	                p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
 	        	                
+	        	                p.sendMessage(this.prefix2 + ChatColor.DARK_RED + "You used Shrooms.");
+	        	                if (amount > 1)
+	        	                {
+	        	                  itemStack.setAmount(amount - 1);
+	        	                  p.getInventory().setItemInMainHand(itemStack);
+	        	                }
+	        	                if (amount == 1) {
+	        	                  p.getInventory().getItemInMainHand().setAmount(0);
+	        	                
+	        	               }
+						  }else {
+							  //Do Nothing
+						  }
+					  }
+				  }
+			  }
+			  if(this.plugin.getConfig().getBoolean("Drugs.Toggle.brown_mushroom")) {
+				  if(p.hasPermission("drugs.brown_mushroom")) {
+					  if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+						  if(p.getInventory().getItemInMainHand().equals(Main.brown_mushroomd)) {
+							  
+							  p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+	        	                p.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+	        	                p.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+	        	                
 	        	                p.sendMessage(this.prefix2 + ChatColor.DARK_RED + "You used Acid.");
 	        	                if (amount > 1)
 	        	                {

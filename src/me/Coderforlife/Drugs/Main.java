@@ -23,6 +23,7 @@ public class Main
 	public static ItemStack wheatd = new ItemStack(Material.WHEAT);
     public static ItemStack suagrd = new ItemStack(Material.SUGAR);
 	public static ItemStack paperd = new ItemStack(Material.PAPER);
+	public static ItemStack brown_mushroomd = new ItemStack(Material.BROWN_MUSHROOM);
 
 
 
@@ -30,6 +31,7 @@ public class Main
 	public static String weed = "Weed: Slowness, Hunger, Luck";
 	public static String coke = "Coke: Night Vison, Fire Res, FastDig";
 	public static String acid = "Acid: Night Vison, Jump, Heal";
+	public static String shrooms = "Shrooms: Night Vison";
   Logger logger = Logger.getLogger("Minecraft");
   File f = new File(this.getDataFolder() + "/");
   
@@ -41,6 +43,7 @@ public class Main
 	  WeedRec();
 	  CokeRec();
 	  AcidRec();
+	  ShroomsRec();
 	  
 	  //Registering Commands and Events
 	    getCommand("drugs").setExecutor(new KillerCommands(this));
@@ -65,12 +68,14 @@ public class Main
     String wheat = "Drugs.Toggle.wheat";
     String suagr = "Drugs.Toggle.sugar";
     String paper = "Drugs.Toggle.paper";
+    String brown_mushroom = "Drugs.Toggle.brown_mushroom";
     String effect = "Drugs.Effect.length";
 
     
     getConfig().addDefault(wheat, Boolean.valueOf(true));
     getConfig().addDefault(suagr, Boolean.valueOf(true));
     getConfig().addDefault(paper, Boolean.valueOf(true));
+    getConfig().addDefault(brown_mushroom, Boolean.valueOf(true));
     
     getConfig().addDefault(effect, Integer.valueOf(5220));
     
@@ -138,6 +143,27 @@ public class Main
 			       " P ");
 	  
 	  recipe.setIngredient('P', Material.PAPER);
+	  
+	  Bukkit.addRecipe(recipe);
+  }
+  //Shrooms Recipe
+  public void ShroomsRec() {
+	  ItemMeta meta = paperd.getItemMeta();
+
+	  meta.setLore(Arrays.asList(shrooms));
+	  meta.setDisplayName(ChatColor.BLUE + "Shrooms");
+	  meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+	  meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+	  paperd.setItemMeta(meta);
+	  
+	  NamespacedKey key = new NamespacedKey(this, "drugs_shrooms");
+	  ShapedRecipe recipe = new ShapedRecipe(key, brown_mushroomd);
+	  
+	  recipe.shape(" B ",
+			       " B ",
+			       " B ");
+	  
+	  recipe.setIngredient('B', Material.BROWN_MUSHROOM);
 	  
 	  Bukkit.addRecipe(recipe);
   }
