@@ -23,13 +23,16 @@ public class Main
 	public static ItemStack wheatd = new ItemStack(Material.WHEAT);
     public static ItemStack suagrd = new ItemStack(Material.SUGAR);
 	public static ItemStack paperd = new ItemStack(Material.PAPER);
-
+	public static ItemStack sugarcaned = new ItemStack(Material.SUGARCANE);
+	public static ItemStack mushroomd = new ItemStack(Material.RED_MUSHROOM);
 
 
 	
 	public static String weed = "Weed: Slowness, Hunger, Luck";
 	public static String coke = "Coke: Night Vison, Fire Res, FastDig";
 	public static String acid = "Acid: Night Vison, Jump, Heal";
+	public static String sugarcane = "Special: Jump, Heal, Luck, FastDig";
+	public static String shrooms = "Shrooms: SPEEEEEEED";
   Logger logger = Logger.getLogger("Minecraft");
   File f = new File(this.getDataFolder() + "/");
   
@@ -41,6 +44,8 @@ public class Main
 	  WeedRec();
 	  CokeRec();
 	  AcidRec();
+	  sugarcaneRec();
+	  ShroomsRec();
 	  
 	  //Registering Commands and Events
 	    getCommand("drugs").setExecutor(new KillerCommands(this));
@@ -65,13 +70,16 @@ public class Main
     String wheat = "Drugs.Toggle.wheat";
     String suagr = "Drugs.Toggle.sugar";
     String paper = "Drugs.Toggle.paper";
+    String sugarcane = "Drugs.Toggle.sugarcane";
+	String red_mushroom = "Drugs.Toggle.red_mushroom";
     String effect = "Drugs.Effect.length";
 
     
     getConfig().addDefault(wheat, Boolean.valueOf(true));
     getConfig().addDefault(suagr, Boolean.valueOf(true));
     getConfig().addDefault(paper, Boolean.valueOf(true));
-    
+	 getConfig().addDefault(sugarcane, Boolean.valueOf(true));
+    getConfig().addDefault(red_mushroom, Boolean.valueOf(true)); 
     getConfig().addDefault(effect, Integer.valueOf(5220));
     
     getConfig().options().copyDefaults(true);
@@ -141,9 +149,48 @@ public class Main
 	  
 	  Bukkit.addRecipe(recipe);
   }
-  
+  public void SugarcaneRec() {
+	  ItemMeta meta = sugarcaned.getItemMeta();
 
+	  meta.setLore(Arrays.asList(special));
+	  meta.setDisplayName(ChatColor.BLUE + "Special Sauce");
+	  meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+	  meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+	  paperd.setItemMeta(meta);
+	  
+	  NamespacedKey key = new NamespacedKey(this, "drugs_sugarcane");
+	  ShapedRecipe recipe = new ShapedRecipe(key, sugarcaned);
+	  
+	  recipe.shape(" SU ",
+			       " SU ",
+			       " SU ");
+	  
+	  recipe.setIngredient('SU', Material.SUGARCANE);
+	  
+	  Bukkit.addRecipe(recipe);
+	  
+  }
+public void ShroomsRec() {
+	  ItemMeta meta = mushroomd.getItemMeta();
 
+	  meta.setLore(Arrays.asList(shrooms));
+	  meta.setDisplayName(ChatColor.RED + "Shrooms");
+	  meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+	  meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+	  paperd.setItemMeta(meta);
+	  
+	  NamespacedKey key = new NamespacedKey(this, "drugs_red_mushroom");
+	  ShapedRecipe recipe = new ShapedRecipe(key, mushroomd);
+	  
+	  recipe.shape(" R ",
+			       " R ",
+			       " R ");
+	  
+	  recipe.setIngredient('R', Material.RED_MUSHROOM);
+	  
+	  Bukkit.addRecipe(recipe);
+	  
+  }
 //Nothing
   public void onDisable() {}
   

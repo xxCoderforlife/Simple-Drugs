@@ -119,6 +119,58 @@ public class Items implements Listener{
 				  }
 			  }
 	  }
-	  
+	  if(this.plugin.getConfig().getBoolean("Drugs.Toggle.sugarcane")) {
+		  if(p.hasPermission("drugs.sugarcane")) {
+			  if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+				  if(p.getInventory().getItemInMainHand().equals(Main.sugarcaned)) {
+					  
+					  p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+			          p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+			          p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+			          p.addPotionEffect(new PotionEffect(PotionEffectType.LUCK, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+			          p.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+			          
+			          p.sendMessage(prefix2 + ChatColor.DARK_RED + "You used Nicks Special Sauce.");
+			          if (amount > 1)
+			          {
+			            itemStack.setAmount(amount - 1);
+			            p.getInventory().setItemInMainHand(itemStack);
+			          }
+			          if (amount == 1) {
+			            p.getInventory().getItemInMainHand().setAmount(0);
+			          }
+				  }else {
+					  //Do nothing
+				  }
+			  }
+		  }
+	  }
+	  if(this.plugin.getConfig().getBoolean("Drugs.Toggle.mushroom) {
+		  if(p.hasPermission("drugs.mushroom")) {
+			  if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+				  if(p.getInventory().getItemInMainHand().equals(Main.mushroomd)) {
+					  
+					  p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+			          p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+			          p.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+			          p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+			          p.addPotionEffect(new PotionEffect(PotionEffectType.POISON, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+			          p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, this.plugin.getConfig().getInt("Drugs.Effect.length"), 1), true);
+			          
+			          p.sendMessage(prefix2 + ChatColor.DARK_RED + "You used Shrooms.");
+			          if (amount > 1)
+			          {
+			            itemStack.setAmount(amount - 1);
+			            p.getInventory().setItemInMainHand(itemStack);
+			          }
+			          if (amount == 1) {
+			            p.getInventory().getItemInMainHand().setAmount(0);
+			          }
+				  }else {
+					  //Do nothing
+				  }
+			  }
+		  }
+	  }
 
 }
