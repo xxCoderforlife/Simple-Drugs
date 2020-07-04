@@ -1,9 +1,9 @@
 name: SimpleDrugs
-version: 2.6.6 (beta)
+version: 2.6.7 (beta)
 author: xxCoderforlife
 prefix: SD
-website: https://www.spigotmc.org/resources/simple-drugs.9684/
 api-version: 1.14
+website: https://www.spigotmc.org/resources/simple-drugs.9684/
 main: me.Coderforlife.Drugs.Main
 commands:
     drugs:
@@ -13,22 +13,39 @@ commands:
     remove:
         description: Remove all Drugs
         aliases: [r]
-        
     reload:
         description: Reloads the config
-    
-    reup:
-        description: Gives you more drugs
+    howto:
+        description: Shows how to craft drugs
+        usage: /drugs howto
+    weed:
+        description: Crafting recipe for weed
+        usage: /drugs weed
+    coke:
+        description: Crafting recipe for coke
+        usage: /drugs coke
+    acid:
+        description: Crafting recipe for acid
+        usage: /drugs acid
         
 permissions:
     drugs.*:
      children:
+      drugs.howto.weed: true
+      drugs.howto.coke: true
+      drugs.howto.acid: true
       drugs.wheat: true
       drugs.sugar: true
       drugs.paper: true
       drugs.remove: true
       drugs.main: true 
       drugs.reload: true
+    drugs.howto.weed:
+        default: true
+    drugs.howto.coke:
+        default: true
+    drugs.howto.acid:
+        default: true
     drugs.wheat:
         default: true
     drugs.sugar:
