@@ -1,8 +1,7 @@
 name: SimpleDrugs
-version: 2.6.7 (beta)
+version: 1.8.8
 author: xxCoderforlife
 prefix: SD
-api-version: 1.14
 website: https://www.spigotmc.org/resources/simple-drugs.9684/
 main: me.Coderforlife.Drugs.Main
 commands:
