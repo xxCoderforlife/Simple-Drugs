@@ -11,23 +11,19 @@ import org.bukkit.potion.PotionEffect;
 public class KillerCommands implements CommandExecutor {
    private Main plugin;
    Logger logger = Logger.getLogger("Minecraft");
-   public final String prefix;
-   public final String crafting;
-   final String dash;
-   final String dash2;
-   public static final String prefix2;
-   final String perm;
+   public final String prefix = ChatColor.RED + "====" + ChatColor.BLACK + "[" + ChatColor.DARK_RED + "Simple Drugs v2.6.7 (beta)" + ChatColor.BLACK + "]" + ChatColor.RED + "====";
+   public final String crafting = ChatColor.RED + "====" + ChatColor.BLACK + "[" + ChatColor.DARK_RED + "How-To" + ChatColor.BLACK + "]" + ChatColor.RED + "====";
+
+   final String dash = ChatColor.GRAY + "- " + ChatColor.RESET;
+   final String dash2 = ChatColor.BLACK + " - " + ChatColor.RESET;
+   public static final String prefix2 = ChatColor.BLACK + "[" + ChatColor.DARK_RED + "SD" + ChatColor.BLACK + "] " + ChatColor.RESET;
+   final String perm = prefix2 + ChatColor.RED + "You don't have the right permission";
+
 
    static {
-      prefix2 = ChatColor.BLACK + "[" + ChatColor.DARK_RED + "SD" + ChatColor.BLACK + "] " + ChatColor.RESET;
    }
 
    public KillerCommands(Main plugin) {
-      this.prefix = ChatColor.RED + "====" + ChatColor.BLACK + "[" + ChatColor.DARK_RED + "Simple Drugs v2.6.7 (beta)" + ChatColor.BLACK + "]" + ChatColor.RED + "====";
-      this.crafting = ChatColor.RED + "====" + ChatColor.BLACK + "[" + ChatColor.DARK_RED + "How-To" + ChatColor.BLACK + "]" + ChatColor.RED + "====";
-      this.dash = ChatColor.GRAY + "- " + ChatColor.RESET;
-      this.dash2 = ChatColor.BLACK + " - " + ChatColor.RESET;
-      this.perm = prefix2 + ChatColor.RED + "You don't have the right permission";
       this.setPlugin(plugin);
    }
 
@@ -69,7 +65,6 @@ public class KillerCommands implements CommandExecutor {
                   if (p.hasPermission("drugs.remove")) {
                 	  for (PotionEffect effect : p.getActivePotionEffects()) {
                           p.removePotionEffect(effect.getType());
-                          break;
                         }
                 	  
                      p.sendMessage(prefix2 + ChatColor.AQUA + "Sobered Up!");
@@ -116,7 +111,7 @@ public class KillerCommands implements CommandExecutor {
                } else {
                   this.plugin.reloadConfig();
                }
-            } catch (Exception var8) {
+            } catch (Exception e) {
                if (sender instanceof Player) {
                   sender.sendMessage(ChatColor.DARK_RED + "ERROR!");
                   sender.sendMessage(ChatColor.BOLD + "Check the Console for the stack trace.");
@@ -125,7 +120,7 @@ public class KillerCommands implements CommandExecutor {
                sender.sendMessage(ChatColor.RED + "Error: " + ChatColor.WHITE + " Config failed to load.");
                sender.sendMessage(ChatColor.GREEN + "If this keeps happening tell me on Spigot");
                sender.sendMessage(ChatColor.GREEN + "DON'T FORGET TO BRING THIS ERROR!");
-               var8.printStackTrace();
+               e.printStackTrace();
                System.out.println(ChatColor.DARK_RED + "this is the end of the error. Have a Nice Day :)");
             }
          } else if (args[0].equalsIgnoreCase("howto")) {
