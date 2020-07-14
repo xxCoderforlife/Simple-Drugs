@@ -23,9 +23,9 @@ public class Main extends JavaPlugin {
    public static String weedcom = "";
    public static String cokecom = "";
    public static String acidcom = "";
-   public static String combinedweed = "Combine 3 of these to make the WaterBuk";
-   public static String coke = "Coke: Night Vison, Fire Res, FastDig";
-   public static String acid = "Acid: Night Vison, Jump, Heal";
+   public static String combinedweed = "Combine 3 of these to make the WaterBukkit";
+   public static String coke = "Combine 3 of these to make the LavaBukkit";
+   public static String acid = "Combine 3 of these to make the FishBukkit";
    Logger logger = Logger.getLogger("Minecraft");
    File f = new File(this.getDataFolder() + "/");
 
@@ -80,7 +80,7 @@ public class Main extends JavaPlugin {
 
    public void WeedRec() {
       ItemMeta meta = wheatd.getItemMeta();
-      meta.setDisplayName(org.bukkit.ChatColor.GREEN + "Combined Weed");
+      meta.setDisplayName(org.bukkit.ChatColor.GREEN + "WaterBukkit Ing.");
       meta.setLore(Arrays.asList(combinedweed));
       meta.addEnchant(Enchantment.DAMAGE_ALL, CraftingCheck.valuekey2, true);
       meta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS});
@@ -97,7 +97,7 @@ public class Main extends JavaPlugin {
    public void CokeRec() {
       ItemMeta meta = suagrd.getItemMeta();
       meta.setLore(Arrays.asList(coke));
-      meta.setDisplayName(org.bukkit.ChatColor.GOLD + "Coke");
+      meta.setDisplayName(org.bukkit.ChatColor.GOLD + "LavaBukkit Ing.");
       meta.addEnchant(Enchantment.DAMAGE_ALL, CraftingCheck.valuekey, true);
       meta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS});
       suagrd.setItemMeta(meta);
@@ -115,13 +115,16 @@ public class Main extends JavaPlugin {
    public void AcidRec() {
       ItemMeta meta = paperd.getItemMeta();
       meta.setLore(Arrays.asList(acid));
-      meta.setDisplayName(org.bukkit.ChatColor.AQUA + "Acid");
-      meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+      meta.setDisplayName(org.bukkit.ChatColor.AQUA + "FishBukkit Ing.");
+      meta.addEnchant(Enchantment.DAMAGE_ALL, CraftingCheck.valuekey3, true);
       meta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS});
       paperd.setItemMeta(meta);
       NamespacedKey key = new NamespacedKey(this, "drugs_acid");
       ShapedRecipe recipe = new ShapedRecipe(key, paperd);
-      recipe.shape(new String[]{" P ", " P ", " P "});
+      recipe.shape(new String[]{
+    		    " P "
+    		  , " P "
+    		  , " P "});
       recipe.setIngredient('P', Material.PAPER);
       Bukkit.addRecipe(recipe);
    }

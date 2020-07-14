@@ -38,7 +38,8 @@ public class Items implements Listener {
       if (this.plugin.getConfig().getBoolean("Drugs.Coke.Enable") 
     		  && p.hasPermission("drugs.sugar") 
     		  && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) 
-    		  && p.getInventory().getItemInMainHand().equals(Main.suagrd)) {
+    		  && p.getInventory().getItemInMainHand().getEnchantments().containsKey(Enchantment.DAMAGE_ALL)
+    		  && p.getInventory().getItemInMainHand().getEnchantments().containsValue(CraftingCheck.RealCokeKey)) {
     	  if(p.getInventory().getItemInMainHand().getAmount() < 1) {
     		  //ItemStack hand = p.getInventory().getItemInMainHand().clone();
     	  }else {
@@ -58,7 +59,8 @@ public class Items implements Listener {
       if (this.plugin.getConfig().getBoolean("Drugs.Weed.Enable") 
     		  && p.hasPermission("drugs.wheat") 
     		  && (e.getAction() 
-    				  == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) && p.getInventory().getItemInMainHand().getEnchantments().containsKey(Enchantment.DAMAGE_ALL) 
+    				  == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) 
+    		  && p.getInventory().getItemInMainHand().getEnchantments().containsKey(Enchantment.DAMAGE_ALL) 
     		  && p.getInventory().getItemInMainHand().getEnchantments().containsValue(CraftingCheck.RealWeedKey)) {
          p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, this.plugin.getConfig().getInt("Drugs.Weed.EffectLength"), 1), true);
          p.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, this.plugin.getConfig().getInt("Drugs.Weed.EffectLength"), 1), true);
@@ -75,7 +77,10 @@ public class Items implements Listener {
          }
       }
 
-      if (this.plugin.getConfig().getBoolean("Drugs.Acid.Enable") && p.hasPermission("drugs.paper") && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) && p.getInventory().getItemInMainHand().equals(Main.paperd)) {
+      if (this.plugin.getConfig().getBoolean("Drugs.Acid.Enable") && p.hasPermission("drugs.paper") 
+    		  && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) 
+    		  && p.getInventory().getItemInMainHand().getEnchantments().containsKey(Enchantment.DAMAGE_ALL)
+    		  && p.getInventory().getItemInMainHand().getEnchantments().containsValue(CraftingCheck.RealAcidKey)) {
          p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, this.plugin.getConfig().getInt("Drugs.Acid.EffectLength"), 1), true);
          p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, this.plugin.getConfig().getInt("Drugs.Acid.EffectLength"), 1), true);
          p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, this.plugin.getConfig().getInt("Drugs.Acid.EffectLength"), 1), true);
