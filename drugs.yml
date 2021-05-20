@@ -1,0 +1,11 @@
+#Simple-Drugs Config
+Core:
+ Drugs:
+  Weed:
+   perm: 'weed'
+   amountneededtocraft: 3
+   item: WHEAT
+   name: '&4Fruit'
+   givenamount: 2
+   effects:
+    - 'sharpness:1'
