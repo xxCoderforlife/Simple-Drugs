@@ -1,134 +1,54 @@
 package me.Coderforlife.Drugs;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.logging.Logger;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.meta.ItemMeta;
+import java.io.IOException;
+
+import org.bukkit.ChatColor;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-   public static ItemStack RawCoke = new ItemStack(Material.SUGAR_CANE);
-   public static ItemStack wheatd = new ItemStack(Material.WHEAT);
-   public static ItemStack suagrd = new ItemStack(Material.SUGAR);
-   public static ItemStack paperd = new ItemStack(Material.PAPER);
-   public static ItemStack WeedBuk = new ItemStack(Material.WATER_BUCKET);
-   public static String weedcom = "";
-   public static String cokecom = "";
-   public static String acidcom = "";
-   public static String combinedweed = "Combine 3 of these to make the WaterBukkit";
-   public static String coke = "Combine 3 of these to make the LavaBukkit";
-   public static String acid = "Combine 3 of these to make the FishBukkit";
-   Logger logger = Logger.getLogger("Minecraft");
-   File f = new File(this.getDataFolder() + "/");
-
-   static {
-   }
-
+	public static String prefix = ChatColor.WHITE + "[" 
+	+ ChatColor.DARK_RED + "SD" + ChatColor.WHITE + "] ";
+	
+   //
+   public File drugsConfigFile;
+   public FileConfiguration drugsConfig;
+   //
+   
+   @Override
    public void onEnable() {
-	   //Loading in the custom recipes
-	  this.WeedRec();
-      this.CokeRec();
-      this.AcidRec();
+	   createCustomConfig();
       //Loading in all the Commands and Listeners
       this.getCommand("drugs").setExecutor(new KillerCommands(this));
       this.getServer().getPluginManager().registerEvents(new Items(this), this);
-      this.getServer().getPluginManager().registerEvents(new CraftingCheck(this), this);
-     //Creating a DIR for the config.yml
-      if (!this.f.exists()) {
-         this.f.mkdir();// Creates the Folder
-      } else {
-         System.out.println("Folder already exists.");
-      }
-
-      this.getConfig().options().header("Simple Drugs Config.");
-      this.loadConfiguration();
-   }
-
-   public void loadConfiguration() {
-      String wheat = "Drugs.Weed.Enable";
-      String suagr = "Drugs.Coke.Enable";
-      String paper = "Drugs.Acid.Enable";
-      String effectCoke = "Drugs.Coke.EffectLength";
-      String effectWeed = "Drugs.Weed.EffectLength";
-      String effectAcid = "Drugs.Acid.EffectLength";
-      String cTimeWeed = "Drugs.Weed.CookingTime";
-      String cTimeCoke = "Drugs.Coke.CookingTime";
-      String cTimeAcid = "Drugs.Acid.CookingTime";
       
-      //Add Defaults to the Config
-      this.getConfig().addDefault(wheat, true);
-      this.getConfig().addDefault(suagr, true);
-      this.getConfig().addDefault(paper, true);
-      this.getConfig().addDefault(cTimeAcid, 140);
-      this.getConfig().addDefault(cTimeCoke, 140);
-      this.getConfig().addDefault(cTimeWeed, 140);
-      this.getConfig().addDefault(effectWeed, 5220);
-      this.getConfig().addDefault(effectCoke, 5220);
-      this.getConfig().addDefault(effectAcid, 5220);
-      this.getConfig().options().copyDefaults(true);
-      this.saveConfig();
    }
    
-
-   public void WeedRec() {
-      ItemMeta meta = wheatd.getItemMeta();
-      meta.setDisplayName(org.bukkit.ChatColor.GREEN + "WaterBukkit Ing.");
-      meta.setLore(Arrays.asList(combinedweed));
-      meta.addEnchant(Enchantment.DAMAGE_ALL, CraftingCheck.valuekey2, true);
-      meta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS});
-      wheatd.setItemMeta(meta);
-      NamespacedKey key = new NamespacedKey(this, "drug_weed");
-      ShapedRecipe recipe = new ShapedRecipe(key, wheatd);
-      recipe.shape(new String[]
-    		  {       " W ",
-    				  " W ",
-    				  " W "});
-      recipe.setIngredient('W', Material.WHEAT);
-      Bukkit.addRecipe(recipe);
+   public FileConfiguration getCustomConfig() {
+       return drugsConfig;
    }
-   public void CokeRec() {
-      ItemMeta meta = suagrd.getItemMeta();
-      meta.setLore(Arrays.asList(coke));
-      meta.setDisplayName(org.bukkit.ChatColor.GOLD + "LavaBukkit Ing.");
-      meta.addEnchant(Enchantment.DAMAGE_ALL, CraftingCheck.valuekey, true);
-      meta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS});
-      suagrd.setItemMeta(meta);
-      NamespacedKey key = new NamespacedKey(this, "drugs_coke");
-      ShapedRecipe recipe = new ShapedRecipe(key, suagrd);
-      recipe.shape(new String[]
-    		  {         
-    				    " S "
-    				  , " S "
-    				  , " S "
-    	});
-      recipe.setIngredient('S', Material.SUGAR);
-      Bukkit.addRecipe(recipe);
+   
+   private void createCustomConfig() {
+	   drugsConfigFile = new File(getDataFolder(), "drugs.yml");
+	   if(!drugsConfigFile.exists()) {
+		   drugsConfigFile.getParentFile().mkdir();
+		   saveResource("drugs.yml", true);
+	   }
+	   
+	   drugsConfig = new YamlConfiguration();
+	   try {
+		   drugsConfig.load(drugsConfigFile);
+	   }catch (IOException | InvalidConfigurationException e) {
+		   e.printStackTrace();
+	   }
    }
-   public void AcidRec() {
-      ItemMeta meta = paperd.getItemMeta();
-      meta.setLore(Arrays.asList(acid));
-      meta.setDisplayName(org.bukkit.ChatColor.AQUA + "FishBukkit Ing.");
-      meta.addEnchant(Enchantment.DAMAGE_ALL, CraftingCheck.valuekey3, true);
-      meta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS});
-      paperd.setItemMeta(meta);
-      NamespacedKey key = new NamespacedKey(this, "drugs_acid");
-      ShapedRecipe recipe = new ShapedRecipe(key, paperd);
-      recipe.shape(new String[]{
-    		    " P "
-    		  , " P "
-    		  , " P "});
-      recipe.setIngredient('P', Material.PAPER);
-      Bukkit.addRecipe(recipe);
-   }
-  
+   
+   
+   @Override
    public void onDisable() {
    }
 }
