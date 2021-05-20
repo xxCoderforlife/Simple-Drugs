@@ -1,3 +1,4 @@
+//This is used versions on 2.6.8 and below.
 package me.Coderforlife.Drugs;
 
 import java.util.Arrays;
