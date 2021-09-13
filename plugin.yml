@@ -1,12 +1,30 @@
-name: SimpleDrugs-dev-build41
-version: 2.6.9+dev-build41
+name: SimpleDrugs-dev-build105
+version: 2.7+dev-build105
 author: xxCoderforlife
 prefix: SD
-api-version: 1.16
+api-version: 1.17
 website: https://www.spigotmc.org/resources/simple-drugs.9684/
 main: me.Coderforlife.Drugs.Main
 commands:
-    drugs:
-        description: For Drugs yo
-        usage: /<command> [args]
-        aliases: [d]
+ drugs:
+  description: For Drugs yo
+  usage: /<command> [args]
+  aliases: [d]
+permissions:
+  drugs.main:
+   description: Used for '/drugs' comamnd.
+   default: true
+  drugs.soberup:
+   description: Used for '/drugs soberup' command.
+   default: true
+  drugs.help:
+   description: Used for '/drugs help' command.
+  drugs.use.weed:
+   description: To use Weed
+   default: true
+  drugs.use.coke:
+   description: To use Coke
+   default: true
+  drugs.use.heroin:
+   description: To use Heroin
+   default: true
