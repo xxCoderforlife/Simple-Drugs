@@ -6,6 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -19,6 +21,8 @@ public class Main extends JavaPlugin {
 		//Weed
 		ItemStack weed1 = new ItemStack(Material.WHEAT);
 		ItemMeta weedMeta = weed1.getItemMeta();
+		weedMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		weedMeta.addItemFlags(new ItemFlag[] {ItemFlag.HIDE_ENCHANTS});
 		weedMeta.setDisplayName(ChatColor.DARK_GREEN + ""
 				+ ChatColor.BOLD + "WEED");
 		ArrayList<String> weedLore = new ArrayList<String>();
@@ -53,6 +57,8 @@ public class Main extends JavaPlugin {
 		//COKE
 		ItemStack coke = new ItemStack(Material.SUGAR);
 		ItemMeta cokeMeta = coke.getItemMeta();
+		cokeMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		cokeMeta.addItemFlags(new ItemFlag[] {ItemFlag.HIDE_ENCHANTS});
 		cokeMeta.setDisplayName(ChatColor.AQUA +
 		"" + ChatColor.BOLD + "COKE");
 		
@@ -85,6 +91,8 @@ public class Main extends JavaPlugin {
 		//HEROIN
 		ItemStack heroin = new ItemStack(Material.WITHER_ROSE);
 		ItemMeta heroinMeta = heroin.getItemMeta();
+		heroinMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		heroinMeta.addItemFlags(new ItemFlag[] {ItemFlag.HIDE_ENCHANTS});
 		heroinMeta.setDisplayName(ChatColor.BLACK + "" +
 		ChatColor.MAGIC + "HEROINHEROIN");
 		ArrayList<String> heroinLore = new ArrayList<String>();
@@ -110,6 +118,40 @@ public class Main extends JavaPlugin {
 		heroin1.setIngredient('R', Material.RED_MUSHROOM);
 		heroin1.setIngredient('W', Material.WOODEN_SWORD);
 		Bukkit.addRecipe(heroin1);
+		//END OF HEROIN
+		
+		//PERCOCET
+		ItemStack percocet = new ItemStack(Material.PUMPKIN_SEEDS);
+		ItemMeta percocetMeta = heroin.getItemMeta();
+		percocetMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		percocetMeta.addItemFlags(new ItemFlag[] {ItemFlag.HIDE_ENCHANTS});
+		percocetMeta.setDisplayName(ChatColor.WHITE + "" +
+		ChatColor.BOLD + "PERCOCET");
+		ArrayList<String> percocetLore = new ArrayList<String>();
+		percocetLore.add(ChatColor.GRAY + "" + 
+		ChatColor.ITALIC + "Right-Click to get " +
+				ChatColor.DARK_RED + "" + 
+		ChatColor.BOLD + "LIT!!");
+		percocetLore.add(ChatColor.GREEN + "" + 
+		ChatColor.BOLD + "Effects:");
+		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "CONFUSION");
+		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "SLOW");
+		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "LUCK");
+		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "GLOWING");
+		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "NIGHT VISION");
+		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + ChatColor.BOLD + "THIS HITS DIFFERENT");
+		percocetLore.add(ChatColor.GRAY + "" + 
+				ChatColor.UNDERLINE + "More Effects coming soon.");
+		
+		percocetMeta.setLore(percocetLore);
+		percocet.setItemMeta(percocetMeta);
+		ShapedRecipe percocet1 = new ShapedRecipe(new NamespacedKey(this, "drugs_percocet-melon/seeds"), new ItemStack(percocet));
+		percocet1.shape("AAA","MDM","AAA");
+		percocet1.setIngredient('M', Material.MILK_BUCKET);
+		percocet1.setIngredient('A', Material.ARROW);
+		percocet1.setIngredient('D', Material.WHITE_DYE);
+		Bukkit.addRecipe(percocet1);
+		//END OF PERCOCET
 		
 	}
 	

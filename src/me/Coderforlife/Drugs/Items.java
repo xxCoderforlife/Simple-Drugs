@@ -112,6 +112,28 @@ public class Items implements Listener {
 				  e1.printStackTrace();
 			  }
 		  }
+		  if(p.hasPermission("drugs.use.percocet")) {
+			  try {
+				  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatColor.WHITE + "" + 
+			  ChatColor.BOLD + "PERCOCET")) {			
+					  p.addPotionEffect(PotionEffectType.SLOW.createEffect(10*60*1, 1));
+					  p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(45*60*1, 1));
+					  p.addPotionEffect(PotionEffectType.GLOWING.createEffect(45*60*1, 1));
+					  p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(45*60*1, 1));
+					  p.addPotionEffect(PotionEffectType.LUCK.createEffect(45*60*1, 1));
+					  p.getInventory().getItemInMainHand().getAmount();
+					  p.getInventory().getItemInMainHand().setAmount(0);
+					  if(p.getInventory().getItemInMainHand().getType() == null) {return;}
+					  if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
+					  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
+
+				  }
+		  }catch(Exception e1) {
+			  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");
+			  Bukkit.getLogger().severe(prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
+			  e1.printStackTrace();
+		  }
+		  }
 	  }
    }
   

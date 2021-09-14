@@ -1,5 +1,5 @@
-name: SimpleDrugs-dev-build105
-version: 2.7+dev-build105
+name: SimpleDrugs-dev-build123
+version: 2.7+dev-build123
 author: xxCoderforlife
 prefix: SD
 api-version: 1.17
@@ -28,3 +28,6 @@ permissions:
   drugs.use.heroin:
    description: To use Heroin
    default: true
+  drugs.use.percocet:
+    description: To use Percocet
+    default: true
