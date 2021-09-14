@@ -1,5 +1,5 @@
-name: SimpleDrugs-dev-build123
-version: 2.7+dev-build123
+name: SimpleDrugs-dev-build129
+version: 2.7+dev-build129
 author: xxCoderforlife
 prefix: SD
 api-version: 1.17
@@ -19,6 +19,7 @@ permissions:
    default: true
   drugs.help:
    description: Used for '/drugs help' command.
+   default: true
   drugs.use.weed:
    description: To use Weed
    default: true
@@ -30,4 +31,7 @@ permissions:
    default: true
   drugs.use.percocet:
     description: To use Percocet
+    default: true
+  drugs.use.acid:
+    description: To use Acid
     default: true

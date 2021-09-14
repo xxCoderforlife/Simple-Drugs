@@ -139,7 +139,7 @@ public class Main extends JavaPlugin {
 		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "LUCK");
 		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "GLOWING");
 		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "NIGHT VISION");
-		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + ChatColor.BOLD + "THIS HITS DIFFERENT");
+		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.DARK_PURPLE + ChatColor.BOLD + "THIS HITS DIFFERENT");
 		percocetLore.add(ChatColor.GRAY + "" + 
 				ChatColor.UNDERLINE + "More Effects coming soon.");
 		
@@ -152,6 +152,38 @@ public class Main extends JavaPlugin {
 		percocet1.setIngredient('D', Material.WHITE_DYE);
 		Bukkit.addRecipe(percocet1);
 		//END OF PERCOCET
+		
+		//ACID				
+		 ItemStack acid = new ItemStack(Material.PAPER);
+		 ItemMeta acidMeta = acid.getItemMeta();
+		 acidMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+			acidMeta.addItemFlags(new ItemFlag[] {ItemFlag.HIDE_ENCHANTS});
+			acidMeta.setDisplayName(ChatColor.AQUA + "" +
+			ChatColor.BOLD + "ACID");
+			ArrayList<String> acidLore = new ArrayList<String>();
+			acidLore.add(ChatColor.GRAY + "" + 
+			ChatColor.ITALIC + "Right-Click to get " +
+						ChatColor.DARK_RED + "" + 
+			ChatColor.BOLD + "LIT!!");
+			acidLore.add(ChatColor.GREEN + "" + 
+			ChatColor.BOLD + "Effects:");
+			acidLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "CONFUSION");
+			acidLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "GLOWING");
+			acidLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "HEALTH BOOST");
+			acidLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "SLOW FALLING");
+			acidLore.add(ChatColor.GRAY + "- " + ChatColor.DARK_PURPLE + ChatColor.BOLD + "THIS HITS DIFFERENT");
+			acidLore.add(ChatColor.GRAY + "" + 
+					   ChatColor.UNDERLINE + "More Effects coming soon.");
+				
+			acidMeta.setLore(acidLore);
+			acid.setItemMeta(acidMeta);
+			ShapedRecipe acid1 = new ShapedRecipe(new NamespacedKey(this, "drugs_acid-paper"), new ItemStack(acid));
+			acid1.shape("SPS","PWP","SPS");
+			acid1.setIngredient('P', Material.PAPER);
+			acid1.setIngredient('W', Material.WATER_BUCKET);
+			acid1.setIngredient('S', Material.SPIDER_EYE);
+			Bukkit.addRecipe(acid1);
+			//END OF ACID
 		
 	}
 	
