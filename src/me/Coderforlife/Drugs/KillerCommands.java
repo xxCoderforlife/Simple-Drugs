@@ -9,13 +9,16 @@ import org.bukkit.potion.PotionEffect;
 
 public class KillerCommands implements CommandExecutor {
 	
-	
+	Drugs D =  new Drugs(this);
+		
    private Main plugin;
    public KillerCommands(Main plugin) {
       this.setPlugin(plugin);
    }
 
-   public Main getPlugin() {
+
+
+public Main getPlugin() {
       return this.plugin;
    }
 
@@ -64,9 +67,13 @@ public class KillerCommands implements CommandExecutor {
 								}
 					   }else {
 						   p.sendMessage(prefix + ChatColor.RED + "You don't have permission to use that command.");
+						 
+						   
 						   p.sendMessage(prefix +ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.soberup");
 					   }
 				   }
+			   }else {
+				   p.sendMessage("Don't do that");
 			   }
 		   }else {
 			   p.sendMessage(prefix + ChatColor.RED + "You don't have permission to use that command.");
