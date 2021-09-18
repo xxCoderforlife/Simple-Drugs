@@ -216,7 +216,7 @@ public class Items implements Listener {
 					p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(20*60*5, 1));
 					int oldAmt = p.getInventory().getItemInMainHand().getAmount();
 					p.getInventory().getItemInMainHand().setAmount(oldAmt - 1);
-					p.setCooldown(drugs.acid.getType(), 5/*sec*/*20/*ticks*/);
+					p.setCooldown(drugs.molly.getType(), 5/*sec*/*20/*ticks*/);
 					if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
 					if(p.getInventory().getItemInMainHand().getType() == null) {return;}
 					if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
