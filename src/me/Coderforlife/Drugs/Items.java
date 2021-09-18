@@ -41,23 +41,23 @@ public class Items implements Listener {
 	  Player p = (Player) e.getPlayer();
 	  Action pa = e.getAction();
 	  if(pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
-		  if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
-		  if(p.getInventory().getItemInMainHand().getType() == null) {return;}
-		  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
+		ItemStack hand = p.getInventory().getItemInMainHand();
+		if(hand.getItemMeta() == null) {return;}
+		if(hand.getType() == null) {return;}
+		if(hand.getItemMeta().getDisplayName() == null) {return;}
+		if(p.hasCooldown(hand.getType())) {return;}
 
 		  //WEED
 		  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "" 
   + ChatColor.BOLD + "WEED")) {	
 			  if(p.hasPermission("drugs.use.weed")) {
 				  try {
-					if(p.hasCooldown(drugs.weed1.getType()))
-						return;
+					int amount = hand.getAmount();
 					p.addPotionEffect(PotionEffectType.SLOW.createEffect(20*60*1, 1));
 					p.addPotionEffect(PotionEffectType.SLOW_DIGGING.createEffect(20*60*1, 1));
 					p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(20*60*1, 1));
-					p.addPotionEffect(PotionEffectType.LUCK.createEffect(20*60*1, 1));    
-					int oldAmt = p.getInventory().getItemInMainHand().getAmount();
-					p.getInventory().getItemInMainHand().setAmount(oldAmt - 1);
+					p.addPotionEffect(PotionEffectType.LUCK.createEffect(20*60*1, 1));
+					p.getInventory().getItemInMainHand().setAmount(amount - 1);
 					p.setCooldown(drugs.weed1.getType(), 5/*sec*/*20/*ticks*/);
 					if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
 					if(p.getInventory().getItemInMainHand().getType() == null) {return;}
@@ -80,16 +80,14 @@ public class Items implements Listener {
 				  + ChatColor.BOLD + "COKE")) {
 			  if(p.hasPermission("drugs.use.coke")) {
 				  try {
-					if(p.hasCooldown(drugs.coke.getType()))
-						return;
+					int amount = hand.getAmount();
 					p.addPotionEffect(PotionEffectType.SPEED.createEffect(20*60*1, 1));
 					p.addPotionEffect(PotionEffectType.FAST_DIGGING.createEffect(20*60*1, 1));
 					p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20*60*2, 1));
 					p.addPotionEffect(PotionEffectType.INCREASE_DAMAGE.createEffect(20*60*2, 2));
 					p.addPotionEffect(PotionEffectType.DAMAGE_RESISTANCE.createEffect(20*60*2, 2));
 					p.addPotionEffect(PotionEffectType.HEALTH_BOOST.createEffect(20*60*2, 1));
-					int oldAmt = p.getInventory().getItemInMainHand().getAmount();
-					p.getInventory().getItemInMainHand().setAmount(oldAmt - 1);
+					p.getInventory().getItemInMainHand().setAmount(amount - 1);
 					p.setCooldown(drugs.coke.getType(), 5/*sec*/*20/*ticks*/);
 					if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
 					if(p.getInventory().getItemInMainHand().getType() == null) {return;}
@@ -111,15 +109,13 @@ public class Items implements Listener {
 	  ChatColor.MAGIC + "HEROINHEROIN")) {
 			  if(p.hasPermission("drugs.use.heroin")) {
 				  try {
-					if(p.hasCooldown(drugs.heroin.getType()))
-						return;
+					int amount = hand.getAmount();
 					p.addPotionEffect(PotionEffectType.SLOW.createEffect(20*60*1, 1));
 					p.addPotionEffect(PotionEffectType.WEAKNESS.createEffect(20*60*1, 1));
 					p.addPotionEffect(PotionEffectType.POISON.createEffect(20*60*1, 1));
 					p.addPotionEffect(PotionEffectType.BAD_OMEN.createEffect(20*60*1, 1));
 					p.addPotionEffect(PotionEffectType.UNLUCK.createEffect(20*60*1, 1));
-					int oldAmt = p.getInventory().getItemInMainHand().getAmount();
-					p.getInventory().getItemInMainHand().setAmount(oldAmt - 1);
+					p.getInventory().getItemInMainHand().setAmount(amount - 1);
 					if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
 					if(p.getInventory().getItemInMainHand().getType() == null) {return;}
 					if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
@@ -140,15 +136,13 @@ public class Items implements Listener {
 			  try {
 				  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatColor.WHITE + "" + 
 			  ChatColor.BOLD + "PERCOCET")) {
-				  	if(p.hasCooldown(drugs.percocet.getType()))
-						return;
+					int amount = hand.getAmount();
 					p.addPotionEffect(PotionEffectType.SLOW.createEffect(20*60*1, 1));
 					p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
 					p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20*60*1, 1));
 					p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(20*60*1, 1));
 					p.addPotionEffect(PotionEffectType.LUCK.createEffect(20*60*1, 1));
-					int oldAmt = p.getInventory().getItemInMainHand().getAmount();
-					p.getInventory().getItemInMainHand().setAmount(oldAmt - 1);
+					p.getInventory().getItemInMainHand().setAmount(amount - 1);
 					p.setCooldown(drugs.percocet.getType(), 5/*sec*/*20/*ticks*/);
 					if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
 					if(p.getInventory().getItemInMainHand().getType() == null) {return;}
@@ -171,18 +165,13 @@ public class Items implements Listener {
 	  ChatColor.BOLD + "ACID")) {
 			  if(p.hasPermission("drugs.use.acid")) {
 				  try {
-					  ItemStack hand = p.getInventory().getItemInMainHand();
-					  int amount = hand.getAmount();
-					if(p.hasCooldown(drugs.acid.getType()))
-						return;
-					p.getInventory().getItemInMainHand().setAmount(0);
+					int amount = hand.getAmount();
 					p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
 					p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20*60*5, 3));
 					p.addPotionEffect(PotionEffectType.HEALTH_BOOST.createEffect(20*60*2, 2)); 
 					p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(20*60*5, 2));
 					p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
-					int oldAmt = p.getInventory().getItemInMainHand().getAmount();
-					p.getInventory().getItemInMainHand().setAmount(oldAmt - 1);
+					p.getInventory().getItemInMainHand().setAmount(amount - 1);
 					p.setCooldown(drugs.acid.getType(), 5/*sec*/*20/*ticks*/);
 					if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
 					if(p.getInventory().getItemInMainHand().getType() == null) {return;}
@@ -204,19 +193,14 @@ public class Items implements Listener {
 	  ChatColor.BOLD + "MOLLY")) {
 			  if(p.hasPermission("drugs.use.molly")) {
 				  try {
-					  ItemStack hand = p.getInventory().getItemInMainHand();
-					  int amount = hand.getAmount();
-					if(p.hasCooldown(drugs.molly.getType()))
-						return;
-					p.getInventory().getItemInMainHand().setAmount(0);
+					int amount = hand.getAmount();
+					p.setCooldown(drugs.molly.getType(), 5/*sec*/*20/*ticks*/);
 					p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
 					p.addPotionEffect(PotionEffectType.FAST_DIGGING.createEffect(20*60*5, 1));
 					p.addPotionEffect(PotionEffectType.SPEED.createEffect(20*60*5, 1));
 					p.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(20*60*5, 1));
 					p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(20*60*5, 1));
-					int oldAmt = p.getInventory().getItemInMainHand().getAmount();
-					p.getInventory().getItemInMainHand().setAmount(oldAmt - 1);
-					p.setCooldown(drugs.molly.getType(), 5/*sec*/*20/*ticks*/);
+					p.getInventory().getItemInMainHand().setAmount(amount - 1);
 					if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
 					if(p.getInventory().getItemInMainHand().getType() == null) {return;}
 					if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
