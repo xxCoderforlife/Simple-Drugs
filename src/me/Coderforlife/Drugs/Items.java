@@ -22,9 +22,11 @@ public class Items implements Listener {
 	public static String stack = ChatColor.RED + "" + ChatColor.BOLD + "Do Not Use It In A Stack.";
 
    private Main plugin;
+   private Drugs drugs;
 
    public Items(Main plugin) {
       this.setPlugin(plugin);
+	  this.drugs = new Drugs(this.getPlugin());
    }
 
    public Main getPlugin() {
@@ -48,21 +50,18 @@ public class Items implements Listener {
   + ChatColor.BOLD + "WEED")) {	
 			  if(p.hasPermission("drugs.use.weed")) {
 				  try {
-
-							  if(p.getInventory().getItemInMainHand().getAmount() > 1) {
-								  p.sendMessage(prefix + stack);
-							  }else {
-								  p.addPotionEffect(PotionEffectType.SLOW.createEffect(20*60*1, 1));
-								  p.addPotionEffect(PotionEffectType.SLOW_DIGGING.createEffect(20*60*1, 1));
-								  p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(20*60*1, 1));
-								  p.addPotionEffect(PotionEffectType.LUCK.createEffect(20*60*1, 1));    
-								  p.getInventory().getItemInMainHand().getAmount();
-								  p.getInventory().getItemInMainHand().setAmount(0);
-								  if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
-								  if(p.getInventory().getItemInMainHand().getType() == null) {return;}
-								  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
-
-						  }
+					if(p.hasCooldown(drugs.weed1.getType()))
+						return;
+					p.addPotionEffect(PotionEffectType.SLOW.createEffect(20*60*1, 1));
+					p.addPotionEffect(PotionEffectType.SLOW_DIGGING.createEffect(20*60*1, 1));
+					p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(20*60*1, 1));
+					p.addPotionEffect(PotionEffectType.LUCK.createEffect(20*60*1, 1));    
+					int oldAmt = p.getInventory().getItemInMainHand().getAmount();
+					p.getInventory().getItemInMainHand().setAmount(oldAmt - 1);
+					p.setCooldown(drugs.weed1.getType(), 5/*sec*/*20/*ticks*/);
+					if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
+					if(p.getInventory().getItemInMainHand().getType() == null) {return;}
+					if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
 				  }catch (Exception e1) {
 					  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");
 					  Bukkit.getLogger().severe(prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
@@ -81,21 +80,20 @@ public class Items implements Listener {
 				  + ChatColor.BOLD + "COKE")) {
 			  if(p.hasPermission("drugs.use.coke")) {
 				  try {
-					  if(p.getInventory().getItemInMainHand().getAmount() > 1) {
-						  p.sendMessage(prefix + stack);
-					  }else {
-						  p.addPotionEffect(PotionEffectType.SPEED.createEffect(20*60*1, 1));
-						  p.addPotionEffect(PotionEffectType.FAST_DIGGING.createEffect(20*60*1, 1));
-						  p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20*60*2, 1));
-						  p.addPotionEffect(PotionEffectType.INCREASE_DAMAGE.createEffect(20*60*2, 2));
-						  p.addPotionEffect(PotionEffectType.DAMAGE_RESISTANCE.createEffect(20*60*2, 2));
-						  p.addPotionEffect(PotionEffectType.HEALTH_BOOST.createEffect(20*60*2, 1));
-						  p.getInventory().getItemInMainHand().getAmount();
-						  p.getInventory().getItemInMainHand().setAmount(0);
-						  if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
-						  if(p.getInventory().getItemInMainHand().getType() == null) {return;}
-						  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
-					  }					 				  
+					if(p.hasCooldown(drugs.coke.getType()))
+						return;
+					p.addPotionEffect(PotionEffectType.SPEED.createEffect(20*60*1, 1));
+					p.addPotionEffect(PotionEffectType.FAST_DIGGING.createEffect(20*60*1, 1));
+					p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20*60*2, 1));
+					p.addPotionEffect(PotionEffectType.INCREASE_DAMAGE.createEffect(20*60*2, 2));
+					p.addPotionEffect(PotionEffectType.DAMAGE_RESISTANCE.createEffect(20*60*2, 2));
+					p.addPotionEffect(PotionEffectType.HEALTH_BOOST.createEffect(20*60*2, 1));
+					int oldAmt = p.getInventory().getItemInMainHand().getAmount();
+					p.getInventory().getItemInMainHand().setAmount(oldAmt - 1);
+					p.setCooldown(drugs.coke.getType(), 5/*sec*/*20/*ticks*/);
+					if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
+					if(p.getInventory().getItemInMainHand().getType() == null) {return;}
+					if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
 				  }catch(Exception e1) {
 					  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");
 					  Bukkit.getLogger().severe(prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
@@ -113,20 +111,18 @@ public class Items implements Listener {
 	  ChatColor.MAGIC + "HEROINHEROIN")) {
 			  if(p.hasPermission("drugs.use.heroin")) {
 				  try {
-							  if(p.getInventory().getItemInMainHand().getAmount() > 1) {
-								  p.sendMessage(prefix + stack);
-							  }else {
-								  p.addPotionEffect(PotionEffectType.SLOW.createEffect(20*60*1, 1));
-								  p.addPotionEffect(PotionEffectType.WEAKNESS.createEffect(20*60*1, 1));
-								  p.addPotionEffect(PotionEffectType.POISON.createEffect(20*60*1, 1));
-								  p.addPotionEffect(PotionEffectType.BAD_OMEN.createEffect(20*60*1, 1));
-								  p.addPotionEffect(PotionEffectType.UNLUCK.createEffect(20*60*1, 1));
-								  p.getInventory().getItemInMainHand().getAmount();
-								  p.getInventory().getItemInMainHand().setAmount(0);
-								  if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
-								  if(p.getInventory().getItemInMainHand().getType() == null) {return;}
-								  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
-							  }
+					if(p.hasCooldown(drugs.heroin.getType()))
+						return;
+					p.addPotionEffect(PotionEffectType.SLOW.createEffect(20*60*1, 1));
+					p.addPotionEffect(PotionEffectType.WEAKNESS.createEffect(20*60*1, 1));
+					p.addPotionEffect(PotionEffectType.POISON.createEffect(20*60*1, 1));
+					p.addPotionEffect(PotionEffectType.BAD_OMEN.createEffect(20*60*1, 1));
+					p.addPotionEffect(PotionEffectType.UNLUCK.createEffect(20*60*1, 1));
+					int oldAmt = p.getInventory().getItemInMainHand().getAmount();
+					p.getInventory().getItemInMainHand().setAmount(oldAmt - 1);
+					if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
+					if(p.getInventory().getItemInMainHand().getType() == null) {return;}
+					if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
 				  }catch(Exception e1) {
 					  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");
 					  Bukkit.getLogger().severe(prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
@@ -144,20 +140,19 @@ public class Items implements Listener {
 			  try {
 				  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatColor.WHITE + "" + 
 			  ChatColor.BOLD + "PERCOCET")) {
-					  if(p.getInventory().getItemInMainHand().getAmount() > 1) {
-						  p.sendMessage(prefix + stack);
-					  }else {
-						  p.addPotionEffect(PotionEffectType.SLOW.createEffect(20*60*1, 1));
-						  p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
-						  p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20*60*1, 1));
-						  p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(20*60*1, 1));
-						  p.addPotionEffect(PotionEffectType.LUCK.createEffect(20*60*1, 1));
-						  p.getInventory().getItemInMainHand().getAmount();
-						  p.getInventory().getItemInMainHand().setAmount(0);
-						  if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
-						  if(p.getInventory().getItemInMainHand().getType() == null) {return;}
-						  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
-					  }
+				  	if(p.hasCooldown(drugs.percocet.getType()))
+						return;
+					p.addPotionEffect(PotionEffectType.SLOW.createEffect(20*60*1, 1));
+					p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
+					p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20*60*1, 1));
+					p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(20*60*1, 1));
+					p.addPotionEffect(PotionEffectType.LUCK.createEffect(20*60*1, 1));
+					int oldAmt = p.getInventory().getItemInMainHand().getAmount();
+					p.getInventory().getItemInMainHand().setAmount(oldAmt - 1);
+					p.setCooldown(drugs.percocet.getType(), 5/*sec*/*20/*ticks*/);
+					if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
+					if(p.getInventory().getItemInMainHand().getType() == null) {return;}
+					if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
 				  }
 		  }catch(Exception e1) {
 			  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");
@@ -178,19 +173,20 @@ public class Items implements Listener {
 				  try {
 					  ItemStack hand = p.getInventory().getItemInMainHand();
 					  int amount = hand.getAmount();
-						  if(amount > 1) {
-							  p.sendMessage(prefix + stack);
-						  }else {
-							  p.getInventory().getItemInMainHand().setAmount(0);
-							  p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
-							  p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20*60*5, 3));
-							  p.addPotionEffect(PotionEffectType.HEALTH_BOOST.createEffect(20*60*2, 2)); 
-							  p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(20*60*5, 2));
-							  p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
-							  if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
-							  if(p.getInventory().getItemInMainHand().getType() == null) {return;}
-							  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
-						  }
+					if(p.hasCooldown(drugs.acid.getType()))
+						return;
+					p.getInventory().getItemInMainHand().setAmount(0);
+					p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
+					p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20*60*5, 3));
+					p.addPotionEffect(PotionEffectType.HEALTH_BOOST.createEffect(20*60*2, 2)); 
+					p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(20*60*5, 2));
+					p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
+					int oldAmt = p.getInventory().getItemInMainHand().getAmount();
+					p.getInventory().getItemInMainHand().setAmount(oldAmt - 1);
+					p.setCooldown(drugs.acid.getType(), 5/*sec*/*20/*ticks*/);
+					if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
+					if(p.getInventory().getItemInMainHand().getType() == null) {return;}
+					if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
 			  }catch(Exception e1) {
 				  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");
 				  Bukkit.getLogger().severe(prefix + ChatColor.GREEN + "Send this Error to xxCoderforlife on https://Spigotmc.org");
@@ -210,19 +206,20 @@ public class Items implements Listener {
 				  try {
 					  ItemStack hand = p.getInventory().getItemInMainHand();
 					  int amount = hand.getAmount();
-						  if(amount > 1) {
-							  p.sendMessage(prefix + stack);
-						  }else {
-							  p.getInventory().getItemInMainHand().setAmount(0);
-							  p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
-							  p.addPotionEffect(PotionEffectType.FAST_DIGGING.createEffect(20*60*5, 1));
-							  p.addPotionEffect(PotionEffectType.SPEED.createEffect(20*60*5, 1));
-							  p.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(20*60*5, 1));
-							  p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(20*60*5, 1));
-							  if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
-							  if(p.getInventory().getItemInMainHand().getType() == null) {return;}
-							  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
-						  }
+					if(p.hasCooldown(drugs.molly.getType()))
+						return;
+					p.getInventory().getItemInMainHand().setAmount(0);
+					p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
+					p.addPotionEffect(PotionEffectType.FAST_DIGGING.createEffect(20*60*5, 1));
+					p.addPotionEffect(PotionEffectType.SPEED.createEffect(20*60*5, 1));
+					p.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(20*60*5, 1));
+					p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(20*60*5, 1));
+					int oldAmt = p.getInventory().getItemInMainHand().getAmount();
+					p.getInventory().getItemInMainHand().setAmount(oldAmt - 1);
+					p.setCooldown(drugs.acid.getType(), 5/*sec*/*20/*ticks*/);
+					if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
+					if(p.getInventory().getItemInMainHand().getType() == null) {return;}
+					if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
 			  }catch(Exception e1) {
 				  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");
 				  Bukkit.getLogger().severe(prefix + ChatColor.GREEN + "Send this Error to xxCoderforlife on https://Spigotmc.org");

@@ -19,6 +19,7 @@ public class Drugs {
 	public ItemStack acid = new ItemStack(Material.PAPER);
 	public ItemStack coke = new ItemStack(Material.SUGAR);
 	public ItemStack heroin = new ItemStack(Material.WITHER_ROSE);
+	public ItemStack molly = new ItemStack(Material.IRON_NUGGET);
 
 
 
@@ -205,7 +206,6 @@ public class Drugs {
 	}
 	
 	public void MollyRecipe() {
-		ItemStack molly = new ItemStack(Material.IRON_NUGGET);
 		ItemMeta MollyMeta = molly.getItemMeta();
 		MollyMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		MollyMeta.addItemFlags(new ItemFlag[] {ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES});
