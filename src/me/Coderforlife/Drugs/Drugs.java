@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
+
 public class Drugs {
 	
 	public ItemStack weed1 = new ItemStack(Material.WHEAT);
@@ -45,8 +46,7 @@ public class Drugs {
 		ItemMeta weedMeta = weed1.getItemMeta();
 		weedMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		weedMeta.addItemFlags(new ItemFlag[] {ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES});
-		weedMeta.setDisplayName(ChatColor.DARK_GREEN + ""
-				+ ChatColor.BOLD + "WEED");
+		weedMeta.setDisplayName(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "WEED");
 		ArrayList<String> weedLore = new ArrayList<String>();
 		weedLore.add(ChatColor.GRAY + "" + 
 				ChatColor.ITALIC + "Right-Click to get " + 
@@ -63,7 +63,7 @@ public class Drugs {
 			  "" +ChatColor.BOLD + "Duration: " 
 				+ ChatColor.GOLD + "45 Seconds");
 		weedLore.add(ChatColor.GRAY + "" + 
-				ChatColor.UNDERLINE + "More Effects coming soon.");
+				ChatColor.UNDERLINE + "Custom Effects Coming Soon.");
 		weedMeta.setLore(weedLore);
 		weed1.setItemMeta(weedMeta);
 		ShapedRecipe weed = new ShapedRecipe(
@@ -96,7 +96,7 @@ public class Drugs {
 		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "NIGHT VISION");
 		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.DARK_PURPLE + ChatColor.BOLD + "THIS HITS DIFFERENT");
 		percocetLore.add(ChatColor.GRAY + "" + 
-				ChatColor.UNDERLINE + "More Effects coming soon.");
+				ChatColor.UNDERLINE + "Custom Effects Coming Soon.");
 		
 		percocetMeta.setLore(percocetLore);
 		percocet.setItemMeta(percocetMeta);
@@ -127,7 +127,7 @@ public class Drugs {
 			acidLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "SLOW FALLING");
 			acidLore.add(ChatColor.GRAY + "- " + ChatColor.DARK_PURPLE + ChatColor.BOLD + "THIS HITS DIFFERENT");
 			acidLore.add(ChatColor.GRAY + "" + 
-					   ChatColor.UNDERLINE + "More Effects coming soon.");
+					   ChatColor.UNDERLINE + "Custom Effects Coming Soon.");
 				
 			acidMeta.setLore(acidLore);
 			acid.setItemMeta(acidMeta);
@@ -162,7 +162,7 @@ public class Drugs {
 				 + ChatColor.BOLD + "Duration: " +
 				ChatColor.GOLD + "45 Seconds");
 		cokeLore.add(ChatColor.GRAY + "" + 
-				ChatColor.UNDERLINE + "More Effects coming soon.");
+				ChatColor.UNDERLINE + "Custom Effects Coming Soon.");
 		cokeMeta.setLore(cokeLore);
 		coke.setItemMeta(cokeMeta);
 		ShapedRecipe coke1 = new ShapedRecipe(new NamespacedKey (this.plugin, "drugs_coke_sugar"), new ItemStack(coke));
@@ -192,7 +192,7 @@ public class Drugs {
 		heroinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "POISON");
 		heroinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "BAD OMEN");
 		heroinLore.add(ChatColor.GRAY + "" + 
-				ChatColor.UNDERLINE + "More Effects coming soon.");
+				ChatColor.UNDERLINE + "Custom Effects Coming Soon.");
 		
 		heroinMeta.setLore(heroinLore);
 		heroin.setItemMeta(heroinMeta);
@@ -224,7 +224,7 @@ public class Drugs {
 		MollyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "FIRE RESISTANCE");
 		MollyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "NIGHT VISION");
 		MollyLore.add(ChatColor.GRAY + "" + 
-				ChatColor.UNDERLINE + "More Effects coming soon.");
+				ChatColor.UNDERLINE + "Custom Effects Coming Soon.");
 		
 		MollyMeta.setLore(MollyLore);
 		molly.setItemMeta(MollyMeta);
@@ -234,5 +234,36 @@ public class Drugs {
 		molly1.setIngredient('W', Material.WATER_BUCKET);
 		molly1.setIngredient('G', Material.GUNPOWDER);
 		Bukkit.addRecipe(molly1);
+	}
+	
+	public void CiggyRecipe() {
+		ItemStack ciggy = new ItemStack(Material.REDSTONE_TORCH);
+		ItemMeta CiggyMeta = ciggy.getItemMeta();
+		CiggyMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		CiggyMeta.addItemFlags(new ItemFlag[] {ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES});
+		CiggyMeta.setDisplayName(ChatColor.GOLD + "" +
+		ChatColor.BOLD + "CIGGY");
+		ArrayList<String> CiggyLore = new ArrayList<String>();
+		CiggyLore.add(ChatColor.GRAY + "" + 
+		ChatColor.ITALIC + "Right-Click to get " +
+				ChatColor.DARK_RED + "" + 
+		ChatColor.BOLD + "LIT!!");
+		CiggyLore.add(ChatColor.GREEN + "" + 
+		ChatColor.BOLD + "Effects:");
+		CiggyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "SATURATION");
+		CiggyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "DAMAGE RESISTANCE");
+		CiggyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "SLOW DIGGING");
+		CiggyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "INVISIBILITY");
+		CiggyLore.add(ChatColor.GRAY + "" + 
+				ChatColor.UNDERLINE + "Custom Effects Coming Soon.");
+		
+		CiggyMeta.setLore(CiggyLore);
+		ciggy.setItemMeta(CiggyMeta);
+		ShapedRecipe ciggy1 = new ShapedRecipe(new NamespacedKey(this.plugin, "drugs_ciggy/REDSTONETORCH"), new ItemStack(ciggy));
+		ciggy1.shape(" G ","PSP","PPP");
+		ciggy1.setIngredient('S', Material.STICK);
+		ciggy1.setIngredient('P', Material.PAPER);
+		ciggy1.setIngredient('G', Material.GUNPOWDER);
+		Bukkit.addRecipe(ciggy1);
 	}
 }

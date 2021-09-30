@@ -1,15 +1,28 @@
-name: SimpleDrugs-dev-build133
-version: 2.7+dev-build133
+name: SimpleDrugs-dev-build145
+version: 2.7+dev-build145
 author: xxCoderforlife
 prefix: SD
-api-version: 1.17
+load: POSTWORLD
+api-version: 1.13
 website: https://www.spigotmc.org/resources/simple-drugs.9684/
 main: me.Coderforlife.Drugs.Main
+
+#COMMANDS
 commands:
  drugs:
-  description: For Drugs yo
-  usage: /<command> [args]
+  permission: drugs.main
+  description: Root Command For Simple-Drugs.
+  usage: /[d|drugs] [soberup|help]
   aliases: [d]
+ soberup:
+  permission: drugs.soberup
+  description: Used to remove potion effects.
+  usage: /[d|drugs] soberup
+ help:
+  permission: drugs.help
+  description: Main Help Menu for Simple-Drugs
+  usage: /[d|drugs] help
+#PERMISSIONS
 permissions:
   drugs.main:
    description: Used for '/drugs' comamnd.
@@ -37,4 +50,7 @@ permissions:
     default: true
   drugs.use.molly:
     description: To use Molly
+    default: true
+  drugs.use.ciggy:
+    description: To Use Ciggy
     default: true
