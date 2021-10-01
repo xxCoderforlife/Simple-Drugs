@@ -39,7 +39,6 @@ public class Molly implements Listener {
 	 public void RightClickEvent(PlayerInteractEvent ev) {
 		 Player p = ev.getPlayer();
 		 Action pa = ev.getAction();
-		 
 		 if(pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
 			 if(p.getInventory().getItemInMainHand().hasItemMeta()) {
 				  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatColor.DARK_AQUA + "" + 
@@ -75,9 +74,6 @@ public class Molly implements Listener {
 							  }
 		 
 			 }
-		 }else {
-			  p.sendMessage(prefix + ChatColor.RED + "You don't have permission to use that drug.");
-			  p.sendMessage(prefix +ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.use.molly");
-		  }
+		 }
 	 }
 }
