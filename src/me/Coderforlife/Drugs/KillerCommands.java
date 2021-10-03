@@ -25,13 +25,14 @@ public Main getPlugin() {
    public void setPlugin(Main plugin) {
       this.plugin = plugin;
    }
+   
 	public static String dash = ChatColor.DARK_GRAY + "" + ChatColor.BOLD +"- ";
-
 	public static String header = ChatColor.DARK_RED + "" + ChatColor.BOLD + "==========" + 
 	ChatColor.WHITE + "" + ChatColor.BOLD + "[SIMPLE-DRUGS]" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "==========";
-   public static String prefix = ChatColor.GRAY + "" + ChatColor.BOLD + "[" 
+    public static String prefix = ChatColor.GRAY + "" + ChatColor.BOLD + "[" 
                                  + ChatColor.DARK_RED + "" + ChatColor.BOLD + "SD"
                                  + ChatColor.GRAY + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
+    
    public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args) {
 	   if(sender instanceof Player) {
 		   Player p = (Player) sender;
@@ -67,9 +68,7 @@ public Main getPlugin() {
 											ChatColor.RED + "You need some drugs.");
 								}
 					   }else {
-						   p.sendMessage(prefix + ChatColor.RED + "You don't have permission to use that command.");
-						 
-						   
+						   p.sendMessage(prefix + ChatColor.RED + "You don't have permission to use that command.");						 				   
 						   p.sendMessage(prefix +ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.soberup");
 					   }
 				   }else if(args[0].equalsIgnoreCase("list")) {

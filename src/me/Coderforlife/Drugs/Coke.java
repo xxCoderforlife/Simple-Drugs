@@ -55,9 +55,6 @@ public class Coke implements Listener{
 									  p.addPotionEffect(PotionEffectType.HEALTH_BOOST.createEffect(20*60*2, 1));
 									  p.getInventory().getItemInMainHand().getAmount();
 									  p.getInventory().getItemInMainHand().setAmount(0);
-									  if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
-									  if(p.getInventory().getItemInMainHand().getType() == null) {return;}
-									  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
 								  }					 				  
 							  }catch(Exception e1) {
 								  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");

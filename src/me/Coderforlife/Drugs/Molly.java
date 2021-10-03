@@ -56,9 +56,6 @@ public class Molly implements Listener {
 												  p.addPotionEffect(PotionEffectType.SPEED.createEffect(20*60*5, 1));
 												  p.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(20*60*5, 1));
 												  p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(20*60*5, 1));
-												  if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
-												  if(p.getInventory().getItemInMainHand().getType() == null) {return;}
-												  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
 											  }
 								  }catch(Exception e1) {
 									  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");

@@ -58,9 +58,7 @@ public class Acid implements Listener{
 													  p.addPotionEffect(PotionEffectType.HEALTH_BOOST.createEffect(20*60*2, 2)); 
 													  p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(20*60*5, 2));
 													  p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
-													  if(p.getInventory().getItemInMainHand().getItemMeta() == null) {return;}
-													  if(p.getInventory().getItemInMainHand().getType() == null) {return;}
-													  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == null) {return;}
+
 												  }
 									  }catch(Exception e1) {
 										  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");
