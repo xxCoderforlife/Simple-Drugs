@@ -1,5 +1,5 @@
-name: SimpleDrugs-dev-build147
-version: 2.7+dev-build147
+name: SimpleDrugs-dev-build150
+version: 2.7+dev-build150
 author: xxCoderforlife
 prefix: SD
 load: POSTWORLD
@@ -12,20 +12,15 @@ commands:
  drugs:
   permission: drugs.main
   description: Root Command For Simple-Drugs.
-  usage: /[d|drugs] [soberup|help]
+  usage: /[d|drugs] [soberup|help|list]
   aliases: [d]
- soberup:
-  permission: drugs.soberup
-  description: Used to remove potion effects.
-  usage: /[d|drugs] soberup
- help:
-  permission: drugs.help
-  description: Main Help Menu for Simple-Drugs
-  usage: /[d|drugs] help
 #PERMISSIONS
 permissions:
   drugs.main:
    description: Used for '/drugs' comamnd.
+   default: true
+  drugs.list:
+   description: Used for '/drugs list' command.
    default: true
   drugs.soberup:
    description: Used for '/drugs soberup' command.

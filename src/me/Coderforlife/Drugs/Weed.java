@@ -10,6 +10,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffectType;
 
 public class Weed implements Listener{
+	
+	
 
 	public static String prefix = ChatColor.GRAY +
 			""
