@@ -12,6 +12,10 @@ import org.bukkit.potion.PotionEffectType;
 
 public class Percocet implements Listener {
 
+	public String PercocetName = ChatColor.WHITE + "" + 
+			  ChatColor.BOLD + "PERCOCET";
+	
+	
 	public static String prefix = ChatColor.GRAY +
 			""
 			+ ChatColor.BOLD + "[" + ChatColor.DARK_RED + "" +
@@ -20,6 +24,10 @@ public class Percocet implements Listener {
 			ChatColor.BOLD + "] " + ChatColor.RESET;
 	
 	public static String stack = ChatColor.RED + "" + ChatColor.BOLD + "Do Not Use It In A Stack.";
+	
+	public Percocet() {
+		return;
+	}
 	
 	private Main plugin;
 
@@ -44,8 +52,7 @@ public class Percocet implements Listener {
 				 if(p.getInventory().getItemInMainHand().hasItemMeta()) {
 					 if(p.hasPermission("drugs.use.percocet")) {
 						  try {
-							  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatColor.WHITE + "" + 
-						  ChatColor.BOLD + "PERCOCET")) {
+							  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(PercocetName)) {
 								  if(p.getInventory().getItemInMainHand().getAmount() > 1) {
 									  p.sendMessage(prefix + stack);
 								  }else {

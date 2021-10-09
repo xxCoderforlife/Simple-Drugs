@@ -13,6 +13,9 @@ import org.bukkit.potion.PotionEffectType;
 
 public class Acid implements Listener{
 
+	public String AcidName = ChatColor.AQUA + "" + 
+			  ChatColor.BOLD + "ACID";
+	
 	public static String prefix = ChatColor.GRAY +
 			""
 			+ ChatColor.BOLD + "[" + ChatColor.DARK_RED + "" +
@@ -21,6 +24,10 @@ public class Acid implements Listener{
 			ChatColor.BOLD + "] " + ChatColor.RESET;
 	
 	public static String stack = ChatColor.RED + "" + ChatColor.BOLD + "Do Not Use It In A Stack.";
+	
+	public Acid() {
+		return;
+	}
 	
 	private Main plugin;
 
@@ -43,8 +50,7 @@ public class Acid implements Listener{
 			 
 			 if(pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
 				 if(p.getInventory().getItemInMainHand().hasItemMeta()) {
-					  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "" + 
-							  ChatColor.BOLD + "ACID")) {
+					  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(AcidName)) {
 						  if(p.hasPermission("drugs.use.acid")) {
 										  try {
 											  ItemStack hand = p.getInventory().getItemInMainHand();

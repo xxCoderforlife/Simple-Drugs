@@ -11,6 +11,9 @@ import org.bukkit.potion.PotionEffectType;
 
 public class Coke implements Listener{
 
+	public String CokeName = ChatColor.AQUA +""
+			  + ChatColor.BOLD + "COKE";
+	
 	public static String prefix = ChatColor.GRAY +
 			""
 			+ ChatColor.BOLD + "[" + ChatColor.DARK_RED + "" +
@@ -19,6 +22,10 @@ public class Coke implements Listener{
 			ChatColor.BOLD + "] " + ChatColor.RESET;
 	
 	public static String stack = ChatColor.RED + "" + ChatColor.BOLD + "Do Not Use It In A Stack.";
+	
+	public Coke() {
+		return;
+	}
 	
 	private Main plugin;
 
@@ -40,8 +47,7 @@ public class Coke implements Listener{
 			 Action pa = ev.getAction();
 			 if(pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
 				 if(p.getInventory().getItemInMainHand().hasItemMeta()) {
-					  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatColor.AQUA +""
-							  + ChatColor.BOLD + "COKE")) {
+					  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(CokeName)) {
 						  if(p.hasPermission("drugs.use.coke")) {
 							  try {
 								  if(p.getInventory().getItemInMainHand().getAmount() > 1) {

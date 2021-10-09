@@ -1,5 +1,5 @@
-name: SimpleDrugs-dev-build150
-version: 2.7+dev-build150
+name: Simple-Drugs
+version: 2.7+dev-build168
 author: xxCoderforlife
 prefix: SD
 load: POSTWORLD
@@ -19,6 +19,15 @@ permissions:
   drugs.main:
    description: Used for '/drugs' comamnd.
    default: true
+  drugs.use.bagofdrugs:
+   description: Permission to use the Bag Of Drugs
+   default: true
+  drugs.reload:
+   description: Used for '/drugs reload' command.
+   default: false
+  drugs.command.bagofdrug:
+   description: Used for '/drugs bagofdrugs' command.
+   defualt: true
   drugs.list:
    description: Used for '/drugs list' command.
    default: true

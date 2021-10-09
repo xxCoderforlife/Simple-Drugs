@@ -11,6 +11,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class Ciggy implements Listener{
 
+	public String CiggyName = ChatColor.GOLD +""
+			  + ChatColor.BOLD + "CIGGY";
 
 	public static String prefix = ChatColor.GRAY +
 			""
@@ -20,6 +22,10 @@ public class Ciggy implements Listener{
 			ChatColor.BOLD + "] " + ChatColor.RESET;
 	
 	public static String stack = ChatColor.RED + "" + ChatColor.BOLD + "Do Not Use It In A Stack.";
+	
+	public Ciggy() {
+		return;
+	}
 	
 	private Main plugin;
 
@@ -42,8 +48,7 @@ public class Ciggy implements Listener{
 			 Action pa = ev.getAction();
 			 if(pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
 				 if(p.getInventory().getItemInMainHand().hasItemMeta()) {
-					  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD +""
-							  + ChatColor.BOLD + "CIGGY")) {
+					  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(CiggyName)) {
 						  if(p.hasPermission("drugs.use.ciggy")) {
 							  try {
 								  if(p.getInventory().getItemInMainHand().getAmount() > 1) {

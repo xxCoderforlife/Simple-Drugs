@@ -1,0 +1,6 @@
+Core:
+ Drugs:
+  BagOfDrugs:
+   CanMove: false
+   CanDrop: false
+   GiveOnJoin: true

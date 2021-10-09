@@ -11,6 +11,9 @@ import org.bukkit.potion.PotionEffectType;
 
 public class Heroin implements Listener{
 
+	public String HeroinName = ChatColor.BLACK + "" + 
+			  ChatColor.MAGIC + "HEROINHEROIN";
+	
 	public static String prefix = ChatColor.GRAY +
 			""
 			+ ChatColor.BOLD + "[" + ChatColor.DARK_RED + "" +
@@ -19,6 +22,10 @@ public class Heroin implements Listener{
 			ChatColor.BOLD + "] " + ChatColor.RESET;
 	
 	public static String stack = ChatColor.RED + "" + ChatColor.BOLD + "Do Not Use It In A Stack.";
+	
+	public Heroin() {
+		return;
+	}
 	
 	private Main plugin;
 
@@ -41,8 +48,7 @@ public class Heroin implements Listener{
 			 
 			 if(pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
 				 if(p.getInventory().getItemInMainHand().hasItemMeta()) {
-					  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatColor.BLACK + "" + 
-							  ChatColor.MAGIC + "HEROINHEROIN")) {
+					  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(HeroinName)) {
 						  if(p.hasPermission("drugs.use.heroin")) {
 										  try {
 													  if(p.getInventory().getItemInMainHand().getAmount() > 1) {

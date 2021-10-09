@@ -11,7 +11,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class Weed implements Listener{
 	
-	
+	public  String WeedName = ChatColor.DARK_GREEN + 
+			  "" +ChatColor.BOLD + "WEED";
 
 	public static String prefix = ChatColor.GRAY +
 			""
@@ -21,6 +22,10 @@ public class Weed implements Listener{
 			ChatColor.BOLD + "] " + ChatColor.RESET;
 	
 	public static String stack = ChatColor.RED + "" + ChatColor.BOLD + "Do Not Use It In A Stack.";
+	
+	public Weed() {
+		return;
+	}
 	
 	private Main plugin;
 
@@ -43,8 +48,7 @@ public class Weed implements Listener{
 		 
 		 if(pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
 			 if(p.getInventory().getItemInMainHand().hasItemMeta()) {
-			  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + 
-					  "" +ChatColor.BOLD + "WEED")) {
+			  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(WeedName)) {
 				  if(p.hasPermission("drugs.use.weed")) {
 					  try {
 
