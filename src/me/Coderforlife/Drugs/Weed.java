@@ -14,14 +14,7 @@ public class Weed implements Listener{
 	public  String WeedName = ChatColor.DARK_GREEN + 
 			  "" +ChatColor.BOLD + "WEED";
 
-	public static String prefix = ChatColor.GRAY +
-			""
-			+ ChatColor.BOLD + "[" + ChatColor.DARK_RED + "" +
-			ChatColor.BOLD + "SD" + 
-			ChatColor.GRAY + "" +
-			ChatColor.BOLD + "] " + ChatColor.RESET;
 	
-	public static String stack = ChatColor.RED + "" + ChatColor.BOLD + "Do Not Use It In A Stack.";
 	
 	public Weed() {
 		return;
@@ -53,7 +46,7 @@ public class Weed implements Listener{
 					  try {
 
 					 if(p.getInventory().getItemInMainHand().getAmount() > 1) {
-					  p.sendMessage(prefix + stack);
+					  p.sendMessage(Main.prefix + Main.stack);
 								  }else {
 									  p.addPotionEffect(PotionEffectType.SLOW.createEffect(20*60*1, 1));
 									  p.addPotionEffect(PotionEffectType.SLOW_DIGGING.createEffect(20*60*1, 1));
@@ -64,13 +57,13 @@ public class Weed implements Listener{
 
 							  }
 					  }catch (Exception e1) {
-						  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");
-						  Bukkit.getLogger().severe(prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
+						  p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Error in the Console");
+						  Bukkit.getLogger().severe(Main.prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
 						  e1.printStackTrace();
 						  
 					  }
 				  }else {
-					  p.sendMessage(prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.DARK_GREEN + 
+					  p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.DARK_GREEN + 
 							  "" + ChatColor.BOLD + "WEED");
 				  }
 				  //END OF WEED

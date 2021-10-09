@@ -14,14 +14,7 @@ public class Ciggy implements Listener{
 	public String CiggyName = ChatColor.GOLD +""
 			  + ChatColor.BOLD + "CIGGY";
 
-	public static String prefix = ChatColor.GRAY +
-			""
-			+ ChatColor.BOLD + "[" + ChatColor.DARK_RED + "" +
-			ChatColor.BOLD + "SD" + 
-			ChatColor.GRAY + "" +
-			ChatColor.BOLD + "] " + ChatColor.RESET;
-	
-	public static String stack = ChatColor.RED + "" + ChatColor.BOLD + "Do Not Use It In A Stack.";
+
 	
 	public Ciggy() {
 		return;
@@ -52,7 +45,7 @@ public class Ciggy implements Listener{
 						  if(p.hasPermission("drugs.use.ciggy")) {
 							  try {
 								  if(p.getInventory().getItemInMainHand().getAmount() > 1) {
-									  p.sendMessage(prefix + stack);
+									  p.sendMessage(Main.prefix + Main.stack);
 								  }else {
 									  p.addPotionEffect(PotionEffectType.SLOW_DIGGING.createEffect(20*60*1, 1));
 									  p.addPotionEffect(PotionEffectType.JUMP.createEffect(20*60*3, 1));
@@ -64,12 +57,12 @@ public class Ciggy implements Listener{
 		
 								  }					 				  
 							  }catch(Exception e1) {
-								  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");
-								  Bukkit.getLogger().severe(prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
+								  p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Error in the Console");
+								  Bukkit.getLogger().severe(Main.prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
 								  e1.printStackTrace();
 							  }
 						  }else {
-							  p.sendMessage(prefix + ChatColor.DARK_RED + "You can't use" + ChatColor.GOLD
+							  p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use" + ChatColor.GOLD
 									  + "" + ChatColor.BOLD + " CIGGY");
 						  }
 					  }

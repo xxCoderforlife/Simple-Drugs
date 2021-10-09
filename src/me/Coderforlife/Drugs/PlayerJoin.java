@@ -24,13 +24,14 @@ public class PlayerJoin implements Listener{
     
     private ItemStack HELLO(ItemStack is) {
    List<String> name = new ArrayList<String>();
-   name.add("");
-   name.add(ChatColor.RED + "A bag full of Drugs :)");
+   name.add(ChatColor.DARK_GRAY + "---------------------");
+   name.add(ChatColor.RED + "A Bag Full Of Drugs :)");
+   name.add("Enjoy.");
    name.add(ChatColor.ITALIC + "Simple-Drugs®");
    ItemMeta im = is.getItemMeta();
    im.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
    im.addItemFlags(new ItemFlag[] {ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES});
-   im.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "Bag Of Drugs");
+   im.setDisplayName(BagOfDrugs.bagName);
    im.setLore(name);
    is.setItemMeta(im);
    return is;

@@ -21,6 +21,12 @@ public class KillerCommands implements CommandExecutor {
 
    PlayerJoin pj = new PlayerJoin();
    Weed weed = new Weed();
+   Coke coke = new Coke();
+   Acid acid = new Acid();
+   Heroin heroin = new Heroin();
+   Molly molly = new Molly();
+   Percocet percocet = new Percocet();
+   Ciggy ciggy = new Ciggy();
 
 public Main getPlugin() {
       return this.plugin;
@@ -33,9 +39,7 @@ public Main getPlugin() {
 	public static String dash = ChatColor.DARK_GRAY + "" + ChatColor.BOLD +"- ";
 	public static String header = ChatColor.DARK_RED + "" + ChatColor.BOLD + "==========" + 
 	ChatColor.WHITE + "" + ChatColor.BOLD + "[SIMPLE-DRUGS]" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "==========";
-    public static String prefix = ChatColor.GRAY + "" + ChatColor.BOLD + "[" 
-                                 + ChatColor.DARK_RED + "" + ChatColor.BOLD + "SD"
-                                 + ChatColor.GRAY + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
+
     
    public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args) {
 	   if(sender instanceof Player) {
@@ -45,21 +49,30 @@ public Main getPlugin() {
 				p.sendMessage(header);
 				p.sendMessage(ChatColor.ITALIC + "Use these following commands.");
 				p.sendMessage(ChatColor.DARK_GRAY + "- " 
-			     + ChatColor.WHITE + "/drugs help");
+			     + ChatColor.WHITE + "/drugs help"
+			     + ChatColor.GRAY + "|" + ChatColor.ITALIC + " Basic How-to");
 				p.sendMessage(ChatColor.DARK_GRAY + "- " 
-				 + ChatColor.WHITE + "/drugs soberup");
+				 + ChatColor.WHITE + "/drugs soberup"
+				 + ChatColor.GRAY + "|" + ChatColor.ITALIC + " Remove all effects.");
 				p.sendMessage(ChatColor.DARK_GRAY + "- " 
-					     + ChatColor.WHITE + "/drugs list");
+					     + ChatColor.WHITE + "/drugs list"
+					     + ChatColor.GRAY + "|" + ChatColor.ITALIC + " A list of all the drugs.");
+				p.sendMessage(ChatColor.DARK_GRAY + "- " 
+					     + ChatColor.WHITE + "/drugs bagofdrugs"+ 
+						ChatColor.GRAY + "|" + ChatColor.ITALIC + " Be given The Bag Of Drugs.");
+				p.sendMessage(ChatColor.DARK_GRAY + "- " 
+					     + ChatColor.WHITE + "/drugs reload"
+					     + ChatColor.GRAY + "|" + ChatColor.ITALIC + " Reload the config.");
 			   } else if(args.length == 1){
 				   if(args[0].equalsIgnoreCase("help")) {
 					   if(p.hasPermission("drugs.help")) {
 						   p.sendMessage(header);
-						   p.sendMessage(prefix + "Craft the drugs and Right-Click with in your hand.");
-						   p.sendMessage(prefix + "Find out how to craft on the Wiki.");
+						   p.sendMessage(Main.prefix + "Craft the drugs and Right-Click with in your hand.");
+						   p.sendMessage(Main.prefix + "Find out how to craft on the Wiki.");
 						   p.sendMessage("https://github.com/xxCoderforlife/Simple-Drugs/wiki/FAQs-&-How-To#how-to-craft-and-use-drugs");
 					   } else {
-						   p.sendMessage(prefix + ChatColor.RED + "You don't have permission to use that command.");
-						   p.sendMessage(prefix +ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.help");
+						   p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
+						   p.sendMessage(Main.prefix +ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.help");
 					   }
 				   } else if(args[0].equalsIgnoreCase("soberup")){
 					   if(p.hasPermission("drugs.soberup")) {
@@ -69,38 +82,41 @@ public Main getPlugin() {
 								  }
 								} else {
 									p.sendMessage(header);
-									p.sendMessage(prefix + 
+									p.sendMessage(Main.prefix + 
 											ChatColor.RED + "You need some drugs.");
 								}
 					   } else {
-						   p.sendMessage(prefix + ChatColor.RED + "You don't have permission to use that command.");						 				   
-						   p.sendMessage(prefix +ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.soberup");
+						   p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");						 				   
+						   p.sendMessage(Main.prefix +ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.soberup");
 					   }
 				   } else if(args[0].equalsIgnoreCase("list")) {
 						   if(p.hasPermission("drugs.list")) {
 							   p.sendMessage(header);
 							   p.sendMessage(dash + weed.WeedName);
-							   p.sendMessage(dash + ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "MOLLY");
-							   p.sendMessage(dash + ChatColor.AQUA + "" + ChatColor.BOLD + "COKE");
-							   p.sendMessage(dash + ChatColor.WHITE + "" + ChatColor.BOLD + "HEROIN");
-							   p.sendMessage(dash + ChatColor.WHITE + "" + ChatColor.BOLD + "PERCOCET");
-							   p.sendMessage(dash + ChatColor.GOLD + "" + ChatColor.BOLD + "CIGGY");
-							   p.sendMessage(dash + ChatColor.AQUA + "" + ChatColor.BOLD + "ACID");
+							   p.sendMessage(dash + molly.MollyName);
+							   p.sendMessage(dash + coke.CokeName);
+							   p.sendMessage(dash + heroin.HeroinName);
+							   p.sendMessage(dash + percocet.PercocetName);
+							   p.sendMessage(dash + ciggy.CiggyName);
+							   p.sendMessage(dash + acid.AcidName);
 							   
 							   } else {
-								   p.sendMessage(prefix + ChatColor.RED + "You don't have permission to use that command.");						 				   
-								   p.sendMessage(prefix +ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.list");
+								   p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");						 				   
+								   p.sendMessage(Main.prefix +ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.list");
 							   }
 					   
 				   } else if (args[0].equalsIgnoreCase("bagofdrugs")) {
 					   if(p.hasPermission("drugs.command.bagofdrugs")) {
+						   p.sendMessage(Main.prefix + ChatColor.GRAY + "You've Been Given The Bag Of Drugs");
 					   p.getInventory().addItem(pj.bag);
 					   }else {
-						   
+						   p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");						 				   
+						   p.sendMessage(Main.prefix +ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.command.bagofdrugs");
 					   }
 				   }else if (args[0].equalsIgnoreCase("reload")) {
 					   if(p.hasPermission("drugs.reload")) {
-					   p.sendMessage("Reloading Config...");
+						   p.sendMessage(header);
+					   p.sendMessage(Main.prefix + "Reloading Config...");
 					   try {
 						plugin.drugsConfig.load(plugin.drugsConfigFile);
 						plugin.reloadConfig();
@@ -113,17 +129,18 @@ public Main getPlugin() {
 					} catch (InvalidConfigurationException e) {
 						e.printStackTrace();
 					}
-					   p.sendMessage("Reloaded Config.");
+					   p.sendMessage(Main.prefix  + "Reloaded Config.");
 					   }else {
-						   
+						   p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");						 				   
+						   p.sendMessage(Main.prefix +ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.reload");
 					   }
 				   }
 			   } else {
-				   p.sendMessage("Don't do that");
+				   p.sendMessage(ChatColor.ITALIC + "incorrect usage of args.");
 			   }
 		   } else {
-			   p.sendMessage(prefix + ChatColor.RED + "You don't have permission to use that command.");
-			   p.sendMessage(prefix +ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.main");
+			   p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
+			   p.sendMessage(Main.prefix +ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.main");
 		   }
 	   }
       return true;

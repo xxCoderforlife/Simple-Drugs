@@ -15,14 +15,6 @@ public class Molly implements Listener {
 	public String MollyName = ChatColor.DARK_AQUA + "" + 
 			  ChatColor.BOLD + "MOLLY";
 	
-	public static String prefix = ChatColor.GRAY +
-			""
-			+ ChatColor.BOLD + "[" + ChatColor.DARK_RED + "" +
-			ChatColor.BOLD + "SD" + 
-			ChatColor.GRAY + "" +
-			ChatColor.BOLD + "] " + ChatColor.RESET;
-	
-	public static String stack = ChatColor.RED + "" + ChatColor.BOLD + "Do Not Use It In A Stack.";
 	
 	public Molly() {
 		return;
@@ -55,7 +47,7 @@ public class Molly implements Listener {
 										  ItemStack hand = p.getInventory().getItemInMainHand();
 										  int amount = hand.getAmount();
 											  if(amount > 1) {
-												  p.sendMessage(prefix + stack);
+												  p.sendMessage(Main.prefix + Main.stack);
 											  }else {
 												  p.getInventory().getItemInMainHand().setAmount(0);
 												  p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
@@ -65,12 +57,12 @@ public class Molly implements Listener {
 												  p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(20*60*5, 1));
 											  }
 								  }catch(Exception e1) {
-									  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");
-									  Bukkit.getLogger().severe(prefix + ChatColor.GREEN + "Send this Error to xxCoderforlife on https://Spigotmc.org");
+									  p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Error in the Console");
+									  Bukkit.getLogger().severe(Main.prefix + ChatColor.GREEN + "Send this Error to xxCoderforlife on https://Spigotmc.org");
 									  e1.printStackTrace();
 								  }		  
 							  }else {
-								  p.sendMessage(prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.DARK_AQUA + 
+								  p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.DARK_AQUA + 
 										  "" + ChatColor.BOLD + "MOLLY"); 
 								  
 							  }

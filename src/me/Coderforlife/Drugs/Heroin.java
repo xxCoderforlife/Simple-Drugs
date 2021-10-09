@@ -14,14 +14,6 @@ public class Heroin implements Listener{
 	public String HeroinName = ChatColor.BLACK + "" + 
 			  ChatColor.MAGIC + "HEROINHEROIN";
 	
-	public static String prefix = ChatColor.GRAY +
-			""
-			+ ChatColor.BOLD + "[" + ChatColor.DARK_RED + "" +
-			ChatColor.BOLD + "SD" + 
-			ChatColor.GRAY + "" +
-			ChatColor.BOLD + "] " + ChatColor.RESET;
-	
-	public static String stack = ChatColor.RED + "" + ChatColor.BOLD + "Do Not Use It In A Stack.";
 	
 	public Heroin() {
 		return;
@@ -52,7 +44,7 @@ public class Heroin implements Listener{
 						  if(p.hasPermission("drugs.use.heroin")) {
 										  try {
 													  if(p.getInventory().getItemInMainHand().getAmount() > 1) {
-														  p.sendMessage(prefix + stack);
+														  p.sendMessage(Main.prefix + Main.stack);
 													  }else {
 														  p.addPotionEffect(PotionEffectType.SLOW.createEffect(20*60*1, 1));
 														  p.addPotionEffect(PotionEffectType.WEAKNESS.createEffect(20*60*1, 1));
@@ -63,12 +55,12 @@ public class Heroin implements Listener{
 														  p.getInventory().getItemInMainHand().setAmount(0);
 													  }
 										  }catch(Exception e1) {
-											  p.sendMessage(prefix + ChatColor.DARK_RED + "Error in the Console");
-											  Bukkit.getLogger().severe(prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
+											  p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Error in the Console");
+											  Bukkit.getLogger().severe(Main.prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
 											  e1.printStackTrace();
 										  }
 					  }else {
-						  p.sendMessage(prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.BLACK 
+						  p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.BLACK 
 								  + "" + ChatColor.MAGIC + "HEROINHEROIN" );
 					  }
 				 }

@@ -1,6 +1,14 @@
+#Simple-Drugs v2.7-DEV Created by xxCoderforlife
+#If you need help find me on Discord or Spigot.
+#Spigot: https://www.spigotmc.org/resources/simple-drugs-with-gui.9684/
+#Discord: https://discord.com/invite/jnmKj7Z
 Core:
  Drugs:
   BagOfDrugs:
+   #If the player can move the bag in their Inventory
    CanMove: false
+   #If the player can drop the bag
    CanDrop: false
+   #Is the bag given on player join
+   #If you set this to false use /drugs bagofdrugs to get it
    GiveOnJoin: true

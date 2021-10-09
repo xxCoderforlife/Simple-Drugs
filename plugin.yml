@@ -1,5 +1,5 @@
-name: Simple-Drugs
-version: 2.7+dev-build168
+name: Simple-Drugs-DEV
+version: 2.7+dev-build170
 author: xxCoderforlife
 prefix: SD
 load: POSTWORLD
@@ -12,7 +12,7 @@ commands:
  drugs:
   permission: drugs.main
   description: Root Command For Simple-Drugs.
-  usage: /[d|drugs] [soberup|help|list]
+  usage: /[d|drugs] [soberup|help|list|bagofdrugs|reload]
   aliases: [d]
 #PERMISSIONS
 permissions:

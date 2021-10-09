@@ -19,6 +19,15 @@ public class Main extends JavaPlugin {
     		ChatColor.WHITE + "" + ChatColor.BOLD + "============";
 	Logger log = Logger.getLogger("Minecraft");
 	
+	public static String prefix = ChatColor.GRAY +
+			""
+			+ ChatColor.BOLD + "[" + ChatColor.DARK_RED + "" +
+			ChatColor.BOLD + "SD" + 
+			ChatColor.GRAY + "" +
+			ChatColor.BOLD + "] " + ChatColor.RESET;
+	public static String stack = ChatColor.RED + "" + ChatColor.BOLD + "Do Not Use It In A Stack.";
+
+	
 	public File drugsConfigFile;
 	public FileConfiguration drugsConfig;
 	@Override
