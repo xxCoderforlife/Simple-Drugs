@@ -9,67 +9,65 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffectType;
 
-public class Weed implements Listener{
-	
-	public  String WeedName = ChatColor.DARK_GREEN + 
-			  "" +ChatColor.BOLD + "WEED";
+public class Weed implements Listener {
 
-	
-	
+	public String WeedName = ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "WEED";
+
 	public Weed() {
 		return;
 	}
-	
+
 	private Main plugin;
 
-	   public Weed(Main plugin) {
-	      this.setPlugin(plugin);
-	   }
+	public Weed(Main plugin) {
+		this.setPlugin(plugin);
+	}
 
-	   public Main getPlugin() {
-	      return this.plugin;
-	   }
+	public Main getPlugin() {
+		return this.plugin;
+	}
 
-	   public void setPlugin(Main plugin) {
-	      this.plugin = plugin;
-	   }
-	   
-	 @EventHandler
-	 public void onRightClick(PlayerInteractEvent ev) {
-		 Player p = ev.getPlayer();
-		 Action pa = ev.getAction();
-		 
-		 if(pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
-			 if(p.getInventory().getItemInMainHand().hasItemMeta()) {
-			  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(WeedName)) {
-				  if(p.hasPermission("drugs.use.weed")) {
-					  try {
+	public void setPlugin(Main plugin) {
+		this.plugin = plugin;
+	}
 
-					 if(p.getInventory().getItemInMainHand().getAmount() > 1) {
-					  p.sendMessage(Main.prefix + Main.stack);
-								  }else {
-									  p.addPotionEffect(PotionEffectType.SLOW.createEffect(20*60*1, 1));
-									  p.addPotionEffect(PotionEffectType.SLOW_DIGGING.createEffect(20*60*1, 1));
-									  p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(20*60*1, 1));
-									  p.addPotionEffect(PotionEffectType.LUCK.createEffect(20*60*1, 1));    
-									  p.getInventory().getItemInMainHand().getAmount();
-									  p.getInventory().getItemInMainHand().setAmount(0);
+	@EventHandler
+	public void onRightClick(PlayerInteractEvent ev) {
+		Player p = ev.getPlayer();
+		Action pa = ev.getAction();
 
-							  }
-					  }catch (Exception e1) {
-						  p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Error in the Console");
-						  Bukkit.getLogger().severe(Main.prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
-						  e1.printStackTrace();
-						  
-					  }
-				  }else {
-					  p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.DARK_GREEN + 
-							  "" + ChatColor.BOLD + "WEED");
-				  }
-				  //END OF WEED
-			  }
+		if (pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
+			if (p.getInventory().getItemInMainHand().hasItemMeta()) {
+				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(WeedName)) {
+					if (p.hasPermission("drugs.use.weed")) {
+						try {
+
+							if (p.getInventory().getItemInMainHand().getAmount() > 1) {
+								p.sendMessage(Main.prefix + Main.stack);
+							} else {
+								p.addPotionEffect(PotionEffectType.SLOW.createEffect(20 * 60 * 1, 1));
+								p.addPotionEffect(PotionEffectType.SLOW_DIGGING.createEffect(20 * 60 * 1, 1));
+								p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(20 * 60 * 1, 1));
+								p.addPotionEffect(PotionEffectType.LUCK.createEffect(20 * 60 * 1, 1));
+								p.getInventory().getItemInMainHand().getAmount();
+								p.getInventory().getItemInMainHand().setAmount(0);
+
+							}
+						} catch (Exception e1) {
+							p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Error in the Console");
+							Bukkit.getLogger()
+									.severe(Main.prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
+							e1.printStackTrace();
+
+						}
+					} else {
+						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.DARK_GREEN + ""
+								+ ChatColor.BOLD + "WEED");
+					}
+					// END OF WEED
+				}
 			}
-		 }
-		 
-	 }
+		}
+
+	}
 }

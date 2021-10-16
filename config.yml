@@ -12,3 +12,7 @@ Core:
    #Is the bag given on player join
    #If you set this to false use /drugs bagofdrugs to get it
    GiveOnJoin: true
+   #If the Bag is dropped on death or not.
+   DropOnDeath: false
+   #If the player Keeps the Bag when they Respawn
+   GiveOnRespawn: true

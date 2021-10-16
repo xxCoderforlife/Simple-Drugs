@@ -9,64 +9,62 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffectType;
 
-
 public class Percocet implements Listener {
 
-	public String PercocetName = ChatColor.WHITE + "" + 
-			  ChatColor.BOLD + "PERCOCET";
-	
+	public String PercocetName = ChatColor.WHITE + "" + ChatColor.BOLD + "PERCOCET";
 
 	public Percocet() {
 		return;
 	}
-	
+
 	private Main plugin;
 
-	   public Percocet(Main plugin) {
-	      this.setPlugin(plugin);
-	   }
+	public Percocet(Main plugin) {
+		this.setPlugin(plugin);
+	}
 
-	   public Main getPlugin() {
-	      return this.plugin;
-	   }
+	public Main getPlugin() {
+		return this.plugin;
+	}
 
-	   public void setPlugin(Main plugin) {
-	      this.plugin = plugin;
-	   }
-	   
-		 @EventHandler
-		 public void RightClickEvent(PlayerInteractEvent ev) {
-			 Player p = ev.getPlayer();
-			 Action pa = ev.getAction();
-			 
-			 if(pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
-				 if(p.getInventory().getItemInMainHand().hasItemMeta()) {
-					 if(p.hasPermission("drugs.use.percocet")) {
-						  try {
-							  if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(PercocetName)) {
-								  if(p.getInventory().getItemInMainHand().getAmount() > 1) {
-									  p.sendMessage(Main.prefix + Main.stack);
-								  }else {
-									  p.addPotionEffect(PotionEffectType.SLOW.createEffect(20*60*1, 1));
-									  p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
-									  p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20*60*1, 1));
-									  p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(20*60*1, 1));
-									  p.addPotionEffect(PotionEffectType.LUCK.createEffect(20*60*1, 1));
-									  p.getInventory().getItemInMainHand().getAmount();
-									  p.getInventory().getItemInMainHand().setAmount(0);
-								  }
-							  }
-					  }catch(Exception e1) {
-						  p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Error in the Console");
-						  Bukkit.getLogger().severe(Main.prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
-						  e1.printStackTrace();
-					  }
-						  		  
-					}else {
-						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.WHITE 
-								+ "" + ChatColor.BOLD +  "PERCOCET");
+	public void setPlugin(Main plugin) {
+		this.plugin = plugin;
+	}
+
+	@EventHandler
+	public void RightClickEvent(PlayerInteractEvent ev) {
+		Player p = ev.getPlayer();
+		Action pa = ev.getAction();
+
+		if (pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
+			if (p.getInventory().getItemInMainHand().hasItemMeta()) {
+				if (p.hasPermission("drugs.use.percocet")) {
+					try {
+						if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(PercocetName)) {
+							if (p.getInventory().getItemInMainHand().getAmount() > 1) {
+								p.sendMessage(Main.prefix + Main.stack);
+							} else {
+								p.addPotionEffect(PotionEffectType.SLOW.createEffect(20 * 60 * 1, 1));
+								p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
+								p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20 * 60 * 1, 1));
+								p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(20 * 60 * 1, 1));
+								p.addPotionEffect(PotionEffectType.LUCK.createEffect(20 * 60 * 1, 1));
+								p.getInventory().getItemInMainHand().getAmount();
+								p.getInventory().getItemInMainHand().setAmount(0);
+							}
+						}
+					} catch (Exception e1) {
+						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Error in the Console");
+						Bukkit.getLogger()
+								.severe(Main.prefix + "Send this Error to xxCoderforlife on https://Spigotmc.org");
+						e1.printStackTrace();
 					}
-				 }
-			 }
-		 }
+
+				} else {
+					p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.WHITE + ""
+							+ ChatColor.BOLD + "PERCOCET");
+				}
+			}
+		}
+	}
 }

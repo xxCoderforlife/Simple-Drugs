@@ -15,56 +15,55 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class PlayerJoin implements Listener{
+public class PlayerJoin implements Listener {
 
 	public static String Core = "Core.Drugs.BagOfDrugs";
 	private Main plugin;
 
-    public ItemStack bag = (HELLO(new ItemStack(Material.NETHER_STAR, (byte) 1)));
-    
-    private ItemStack HELLO(ItemStack is) {
-   List<String> name = new ArrayList<String>();
-   name.add(ChatColor.DARK_GRAY + "---------------------");
-   name.add(ChatColor.RED + "A Bag Full Of Drugs :)");
-   name.add("Enjoy.");
-   name.add(ChatColor.ITALIC + "Simple-Drugs®");
-   ItemMeta im = is.getItemMeta();
-   im.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-   im.addItemFlags(new ItemFlag[] {ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES});
-   im.setDisplayName(BagOfDrugs.bagName);
-   im.setLore(name);
-   is.setItemMeta(im);
-   return is;
-   }
-    
-	   public PlayerJoin(Main plugin) {
-	      this.setPlugin(plugin);
-	   }
+	public ItemStack bag = (HELLO(new ItemStack(Material.NETHER_STAR, (byte) 1)));
 
-	    public PlayerJoin() {
-	    	return;
+	private ItemStack HELLO(ItemStack is) {
+		List<String> name = new ArrayList<String>();
+		name.add(ChatColor.DARK_GRAY + "---------------------");
+		name.add(ChatColor.RED + "A Bag Full Of Drugs :)");
+		name.add("Enjoy.");
+		name.add(ChatColor.ITALIC + "Simple-Drugs®");
+		ItemMeta im = is.getItemMeta();
+		im.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		im.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
+		im.setDisplayName(BagOfDrugs.bagName);
+		im.setLore(name);
+		is.setItemMeta(im);
+		return is;
+	}
+
+	public PlayerJoin(Main plugin) {
+		this.setPlugin(plugin);
+	}
+
+	public PlayerJoin() {
+		return;
 	}
 
 	public Main getPlugin() {
-	      return this.plugin;
-	   }
+		return this.plugin;
+	}
 
-	   public void setPlugin(Main plugin) {
-	      this.plugin = plugin;
-	   }
-	   
-	   
-	   @EventHandler
-	   public void onPlayerJoin(PlayerJoinEvent ev) {
-		   Player p = (Player) ev.getPlayer();
-		   if(plugin.drugsConfig.getBoolean(Core + ".GiveOnJoin") == true) {
-			   if(!p.getInventory().contains(bag)) {
-				   p.getInventory().addItem(bag);
+	public void setPlugin(Main plugin) {
+		this.plugin = plugin;
+	}
 
-				 }
-		   }else {
-			   return;
-		   }
+	@EventHandler
+	public void onPlayerJoin(PlayerJoinEvent ev) {
+		Player p = (Player) ev.getPlayer();
+		if (plugin.drugsConfig.getBoolean(Core + ".GiveOnJoin") == true) {
+			if (!p.getInventory().contains(bag)) {
+				p.getInventory().addItem(bag);
 
-	   }	   
+			}
+		} else {
+			return;
+		}
+
+	}
 }
