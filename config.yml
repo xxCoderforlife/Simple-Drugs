@@ -6,7 +6,7 @@ Core:
  Drugs:
   BagOfDrugs:
    #If the player can move the bag in their Inventory
-   CanMove: false
+   CanMove: true
    #If the player can drop the bag
    CanDrop: false
    #Is the bag given on player join

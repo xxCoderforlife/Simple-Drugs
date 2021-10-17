@@ -63,17 +63,9 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		try {
-			drugsConfig.save(drugsConfigFile);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
-	public FileConfiguration getCustomConfig() {
-		return drugsConfig;
-	}
+
 
 	private void createCustomConfig() {
 		drugsConfigFile = new File(getDataFolder(), "config.yml");
@@ -86,25 +78,28 @@ public class Main extends JavaPlugin {
 		drugsConfig = new YamlConfiguration();
 		try {
 			drugsConfig.load(drugsConfigFile);
-			drugsConfig.addDefault("", "#Simple-Drugs v2.7-DEV Created by xxCoderforlife");
-			drugsConfig.addDefault("", "#If you need help find me on Discord or Spigot.");
-			drugsConfig.addDefault("", "#Spigot: https://www.spigotmc.org/resources/simple-drugs-with-gui.9684/");
-			drugsConfig.addDefault("", "#Discord: https://discord.com/invite/jnmKj7Z");
-			drugsConfig.addDefault("", "#If the player can move the bag in their Inventory");
+			drugsConfig.set("#", "Spigot: https://www.spigotmc.org/resources/simple-drugs-with-gui.9684/");
+			drugsConfig.set("#", "Discord: https://discord.com/invite/jnmKj7Z");
+			drugsConfig.set("#", "If the player can move the bag in their Inventory");
 			drugsConfig.addDefault("Core.Drugs.BagOfDrugs.CanMove", true);
-			drugsConfig.addDefault("", "#If the player can drop the bag");
-			drugsConfig.addDefault("Core.Drugs.BagOfDrugs.CanDrop",true);
-			drugsConfig.addDefault("", "#Is the bag given on player join");
-			drugsConfig.addDefault("", "#If you set this to false use /drugs bagofdrugs to get it");
+			drugsConfig.set("#", "If the player can drop the bag");
+			drugsConfig.addDefault("Core.Drugs.BagOfDrugs.CanDrop", true);
+			drugsConfig.set("#", "Is the bag given on player join");
+			drugsConfig.set("#", "If you set this to false use /drugs bagofdrugs to get it");
 			drugsConfig.addDefault("Core.Drugs.BagOfDrugs.GiveOnJoin", true);
-			drugsConfig.addDefault("", "#If the Bag is dropped on death or not");
+			drugsConfig.set("#", "If the Bag is dropped on death or not");
 			drugsConfig.addDefault("Core.Drugs.BagOfDrugs.DropOnDeath", true);
-			drugsConfig.addDefault("", "#If the player keeps the bag on respawn");
+			drugsConfig.set("#", "If the player keeps the bag on respawn");
 			drugsConfig.addDefault("Core.Drugs.BagOfDrugs.GiveOnRespawn", true);
 		} catch (IOException | InvalidConfigurationException e) {
 			e.printStackTrace();
 
 		}
 	}
+	
+	public FileConfiguration getCustomConfig() {
+		return drugsConfig;
+	}
+	
 
 }
