@@ -2,6 +2,7 @@ package me.Coderforlife.Drugs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -43,11 +44,11 @@ public class Ciggy implements Listener {
 							if (p.getInventory().getItemInMainHand().getAmount() > 1) {
 								p.sendMessage(Main.prefix + Main.stack);
 							} else {
-								p.addPotionEffect(PotionEffectType.SLOW_DIGGING.createEffect(20 * 60 * 1, 1));
-								p.addPotionEffect(PotionEffectType.JUMP.createEffect(20 * 60 * 3, 1));
-								p.addPotionEffect(PotionEffectType.SATURATION.createEffect(20 * 60 * 2, 1));
-								p.addPotionEffect(PotionEffectType.DAMAGE_RESISTANCE.createEffect(20 * 60 * 2, 1));
-								p.addPotionEffect(PotionEffectType.INVISIBILITY.createEffect(300, 1));
+								p.addPotionEffect(PotionEffectType.SLOW_DIGGING.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Ciggy.Time.SLOW_DIGGING"), 1));
+								p.addPotionEffect(PotionEffectType.JUMP.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Ciggy.Time.JUMP"), 1));
+								p.addPotionEffect(PotionEffectType.SATURATION.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Ciggy.Time.SATURATION"), 1));
+								p.addPotionEffect(PotionEffectType.DAMAGE_RESISTANCE.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Ciggy.Time.DAMAGE_RESISTANCE"), 1));
+								p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
 								p.getInventory().getItemInMainHand().getAmount();
 								p.getInventory().getItemInMainHand().setAmount(0);
 

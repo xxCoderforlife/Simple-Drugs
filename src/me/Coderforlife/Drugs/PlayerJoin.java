@@ -17,7 +17,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class PlayerJoin implements Listener {
 
-	public static String Core = "Core.Drugs.BagOfDrugs";
+	
 	private Main plugin;
 
 	public ItemStack bag = (HELLO(new ItemStack(Material.NETHER_STAR, (byte) 1)));
@@ -56,7 +56,7 @@ public class PlayerJoin implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent ev) {
 		Player p = (Player) ev.getPlayer();
-		if (plugin.drugsConfig.getBoolean(Core + ".GiveOnJoin") == true) {
+		if (plugin.drugsConfig.getBoolean(Main.bagofdrugs + ".GiveOnJoin") == true) {
 			if (!p.getInventory().contains(bag)) {
 				p.getInventory().addItem(bag);
 

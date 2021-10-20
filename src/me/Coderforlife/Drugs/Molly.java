@@ -2,6 +2,7 @@ package me.Coderforlife.Drugs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -47,11 +48,12 @@ public class Molly implements Listener {
 								p.sendMessage(Main.prefix + Main.stack);
 							} else {
 								p.getInventory().getItemInMainHand().setAmount(0);
-								p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
-								p.addPotionEffect(PotionEffectType.FAST_DIGGING.createEffect(20 * 60 * 5, 1));
-								p.addPotionEffect(PotionEffectType.SPEED.createEffect(20 * 60 * 5, 1));
-								p.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(20 * 60 * 5, 1));
-								p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(20 * 60 * 5, 1));
+								p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Molly.Time.CONFUSION"), 1));
+								p.addPotionEffect(PotionEffectType.FAST_DIGGING.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Molly.Time.FAST_DIGGING"), 3));
+								p.addPotionEffect(PotionEffectType.SPEED.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Molly.Time.SPEED"), 1));
+								p.addPotionEffect(PotionEffectType.FIRE_RESISTANCE.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Molly.Time.FIRE_RESISTANCE"), 2));
+								p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Molly.Time.NIGHT_VISION"), 1));
+								p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
 							}
 						} catch (Exception e1) {
 							p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Error in the Console");

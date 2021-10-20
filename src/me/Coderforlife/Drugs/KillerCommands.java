@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -75,6 +76,7 @@ public class KillerCommands implements CommandExecutor {
 						if (p.hasPermission("drugs.soberup")) {
 							if (!p.getActivePotionEffects().isEmpty()) {
 								for (PotionEffect effect : p.getActivePotionEffects()) {
+									p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 10, 29);
 									p.removePotionEffect(effect.getType());
 								}
 							} else {

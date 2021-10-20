@@ -2,6 +2,7 @@ package me.Coderforlife.Drugs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,6 +17,7 @@ public class Heroin implements Listener {
 	public Heroin() {
 		return;
 	}
+	Drugs D = new Drugs();
 
 	private Main plugin;
 
@@ -38,17 +40,17 @@ public class Heroin implements Listener {
 
 		if (pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
 			if (p.getInventory().getItemInMainHand().hasItemMeta()) {
-				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(HeroinName)) {
+				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(D.Heroin.getItemMeta().getDisplayName())) {
 					if (p.hasPermission("drugs.use.heroin")) {
 						try {
 							if (p.getInventory().getItemInMainHand().getAmount() > 1) {
 								p.sendMessage(Main.prefix + Main.stack);
 							} else {
-								p.addPotionEffect(PotionEffectType.SLOW.createEffect(20 * 60 * 1, 1));
-								p.addPotionEffect(PotionEffectType.WEAKNESS.createEffect(20 * 60 * 1, 1));
-								p.addPotionEffect(PotionEffectType.POISON.createEffect(20 * 60 * 1, 1));
-								p.addPotionEffect(PotionEffectType.BAD_OMEN.createEffect(20 * 60 * 1, 1));
-								p.addPotionEffect(PotionEffectType.UNLUCK.createEffect(20 * 60 * 1, 1));
+								p.addPotionEffect(PotionEffectType.SLOW.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Heroin.Time.SLOW"), 1));
+								p.addPotionEffect(PotionEffectType.WEAKNESS.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Heroin.Time.WEAKNESS"), 1));
+								p.addPotionEffect(PotionEffectType.POISON.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Heroin.Time.POISON"), 1));
+								p.addPotionEffect(PotionEffectType.UNLUCK.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Heroin.Time.UNLUCK"), 1));
+								p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
 								p.getInventory().getItemInMainHand().getAmount();
 								p.getInventory().getItemInMainHand().setAmount(0);
 							}

@@ -1,5 +1,5 @@
 name: Simple-Drugs-DEV
-version: 2.7-dev+build178
+version: 2.7-dev+build192
 author: xxCoderforlife
 prefix: SD
 load: POSTWORLD
@@ -57,4 +57,28 @@ permissions:
     default: true
   drugs.use.ciggy:
     description: To Use Ciggy
+    default: true
+  drugs.use.alcohol:
+    description: To Use Alcohol
+    default: true
+  drugs.use.dmt:
+    description: To Use DMT
+    default: true
+  drugs.use.flakka:
+    description: To Use Flakka
+    default: true
+  drugs.use.ketamine:
+    description: To Use Ketamine
+    default: true
+  drugs.use.meth:
+    description: To Use Meth
+    default: true
+  drugs.use.pcp:
+    description: To Use PCP
+    default: true
+  drugs.use.salvia:
+    description: To Use Salvia
+    default: true
+  drugs.use.shrooms:
+    description: To Use Shrooms
     default: true

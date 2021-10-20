@@ -2,6 +2,7 @@ package me.Coderforlife.Drugs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -44,11 +45,11 @@ public class Percocet implements Listener {
 							if (p.getInventory().getItemInMainHand().getAmount() > 1) {
 								p.sendMessage(Main.prefix + Main.stack);
 							} else {
-								p.addPotionEffect(PotionEffectType.SLOW.createEffect(20 * 60 * 1, 1));
-								p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
-								p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20 * 60 * 1, 1));
-								p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(20 * 60 * 1, 1));
-								p.addPotionEffect(PotionEffectType.LUCK.createEffect(20 * 60 * 1, 1));
+								p.addPotionEffect(PotionEffectType.SLOW.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Percocet.Time.SLOW"), 1));
+								p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Percocet.Time.CONFUSION"), 1));
+								p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Percocet.Time.NIGHT_VISION"), 1));
+								p.addPotionEffect(PotionEffectType.LUCK.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Percocet.Time.LUCK"), 1));
+								p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
 								p.getInventory().getItemInMainHand().getAmount();
 								p.getInventory().getItemInMainHand().setAmount(0);
 							}

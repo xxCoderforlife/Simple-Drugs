@@ -49,10 +49,10 @@ public class Acid implements Listener {
 								p.sendMessage(Main.prefix + Main.stack);
 							} else {
 								p.getInventory().getItemInMainHand().setAmount(0);
-								p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(200, 1));
-								p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20 * 60 * 5, 3));
-								p.addPotionEffect(PotionEffectType.HEALTH_BOOST.createEffect(20 * 60 * 2, 2));
-								p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(20 * 60 * 5, 2));
+								p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Acid.Time.CONFUSION"), 1));
+								p.addPotionEffect(PotionEffectType.HEALTH_BOOST.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Acid.Time.HEALTH_BOOST"), 2));
+								p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Acid.Time.NIGHT_VISION"), 2));
+								p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Acid.Time.SLOW_FALLING"), 2));
 								p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
 
 							}

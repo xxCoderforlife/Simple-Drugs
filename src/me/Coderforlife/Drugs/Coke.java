@@ -2,6 +2,7 @@ package me.Coderforlife.Drugs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -43,12 +44,12 @@ public class Coke implements Listener {
 							if (p.getInventory().getItemInMainHand().getAmount() > 1) {
 								p.sendMessage(Main.prefix + Main.stack);
 							} else {
-								p.addPotionEffect(PotionEffectType.SPEED.createEffect(20 * 60 * 1, 1));
-								p.addPotionEffect(PotionEffectType.FAST_DIGGING.createEffect(20 * 60 * 1, 1));
-								p.addPotionEffect(PotionEffectType.GLOWING.createEffect(20 * 60 * 2, 1));
-								p.addPotionEffect(PotionEffectType.INCREASE_DAMAGE.createEffect(20 * 60 * 2, 2));
-								p.addPotionEffect(PotionEffectType.DAMAGE_RESISTANCE.createEffect(20 * 60 * 2, 2));
-								p.addPotionEffect(PotionEffectType.HEALTH_BOOST.createEffect(20 * 60 * 2, 1));
+								p.addPotionEffect(PotionEffectType.SPEED.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Coke.Time.SPEED"), 1));
+								p.addPotionEffect(PotionEffectType.FAST_DIGGING.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Coke.Time.FAST_DIGGING"), 1));
+								p.addPotionEffect(PotionEffectType.INCREASE_DAMAGE.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Coke.Time.INCREASE_DAMAGE"), 2));
+								p.addPotionEffect(PotionEffectType.DAMAGE_RESISTANCE.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Coke.Time.DAMAGE_RESISTANCE"), 2));
+								p.addPotionEffect(PotionEffectType.HEALTH_BOOST.createEffect(plugin.drugsConfig.getInt("HEALTH_BOOST"), 1));
+								p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
 								p.getInventory().getItemInMainHand().getAmount();
 								p.getInventory().getItemInMainHand().setAmount(0);
 							}

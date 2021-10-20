@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.md_5.bungee.api.ChatColor;
 
 public class Main extends JavaPlugin {
+	public static String bagofdrugs = "Core.Drugs.BagOfDrugs";
 	Drugs D = new Drugs(this);
 	public String header1 = ChatColor.WHITE + "" + ChatColor.BOLD + "============" + ChatColor.DARK_RED + ""
 			+ ChatColor.BOLD + "[Simple-Drugs]" + ChatColor.WHITE + "" + ChatColor.BOLD + "============";
@@ -51,6 +52,15 @@ public class Main extends JavaPlugin {
 			this.getServer().getPluginManager().registerEvents(new Percocet(this), this);
 			this.getServer().getPluginManager().registerEvents(new Coke(this), this);
 			this.getServer().getPluginManager().registerEvents(new Ciggy(this), this);
+			this.getServer().getPluginManager().registerEvents(new Alcohol(this), this);
+			this.getServer().getPluginManager().registerEvents(new Flakka(this), this);
+			this.getServer().getPluginManager().registerEvents(new Meth(this), this);
+			this.getServer().getPluginManager().registerEvents(new Ketamine(this), this);
+			this.getServer().getPluginManager().registerEvents(new PCP(this), this);
+			this.getServer().getPluginManager().registerEvents(new DMT(this), this);
+			this.getServer().getPluginManager().registerEvents(new Shrooms(this), this);
+			this.getServer().getPluginManager().registerEvents(new Salvia(this), this);
+
 			this.getCommand("drugs").setExecutor(new KillerCommands(this));
 
 		} catch (Exception e) {
@@ -91,6 +101,91 @@ public class Main extends JavaPlugin {
 			drugsConfig.addDefault("Core.Drugs.BagOfDrugs.DropOnDeath", true);
 			drugsConfig.set("#", "If the player keeps the bag on respawn");
 			drugsConfig.addDefault("Core.Drugs.BagOfDrugs.GiveOnRespawn", true);
+			//Acid Time
+			drugsConfig.addDefault("Core.Drugs.Acid.Time.CONFUSION" , 200);
+			drugsConfig.addDefault("Core.Drugs.Acid.Time.HEALTH_BOOST" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Acid.Time.NIGHT_VISION" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Acid.Time.SLOW_FALLING" , 2400);
+			//Ciggy Time
+			drugsConfig.addDefault("Core.Drugs.Ciggy.Time.SLOW_DIGGING" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Ciggy.Time.JUMP" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Ciggy.Time.SATURATION" ,2400);
+			drugsConfig.addDefault("Core.Drugs.Ciggy.Time.DAMAGE_RESISTANCE" , 2400);
+			//Coke Time
+			drugsConfig.addDefault("Core.Drugs.Coke.Time.INCREASE_DAMAGE" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Coke.Time.SPEED" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Coke.Time.FAST_DIGGING" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Coke.Time.DAMAGE_RESISTANCE" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Coke.Time.HEALTH_BOOST" , 2400);
+			//Heroin Time
+			drugsConfig.addDefault("Core.Drugs.Heroin.Time.SLOW" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Heroin.Time.WEAKNESS" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Heroin.Time.POISON" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Heroin.Time.UNLUCK" , 2400);
+			//Molly Time
+			drugsConfig.addDefault("Core.Drugs.Molly.Time.CONFUSION" , 200);
+			drugsConfig.addDefault("Core.Drugs.Molly.Time.FAST_DIGGING" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Molly.Time.SPEED" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Molly.Time.FIRE_RESISTANCE" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Molly.Time.NIGHT_VISION" , 2400);
+			//Percocet Time
+			drugsConfig.addDefault("Core.Drugs.Percocet.Time.SLOW" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Percocet.Time.CONFUSION" , 200);
+			drugsConfig.addDefault("Core.Drugs.Percocet.Time.NIGHT_VISION" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Percocet.Time.LUCK" , 2400);
+			//Weed Time
+			drugsConfig.addDefault("Core.Drugs.Weed.Time.SLOW" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Weed.Time.SLOW_DIGGING" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Weed.Time.SLOW_FALLING" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Weed.Time.LUCK" , 2400);
+			//Meth Time
+			drugsConfig.addDefault("Core.Drugs.Meth.Time.ABSORPTION" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Meth.Time.SLOWNESS" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Meth.Time.WEAKNESS" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Meth.Time.LEVITATION" , 2400);
+			//Ketamine Time
+			drugsConfig.addDefault("Core.Drugs.Ketamine.Time.NIGHT_VISION" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Ketamine.Time.SPEED" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Ketamine.Time.FAST_DIGGING" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Ketamine.Time.CONFUSION" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Ketamine.Time.SLOW_FALLING" , 2400);
+			//DMT Time
+			drugsConfig.addDefault("Core.Drugs.DMT.Time.DAMAGE_RESISTANCE" , 2400);
+			drugsConfig.addDefault("Core.Drugs.DMT.Time.SLOW_FALLING" , 2400);
+			drugsConfig.addDefault("Core.Drugs.DMT.Time.SLOWNESS" , 2400);
+			drugsConfig.addDefault("Core.Drugs.DMT.Time.GLOWING" , 2400);
+
+			//Alcohol Time
+			drugsConfig.addDefault("Core.Drugs.Alcohol.Time.SPEED" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Alcohol.Time.NIGHT_VISION" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Alcohol.Time.HUNGER" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Alcohol.Time.CONFUSION" , 2400);
+
+			//PCP Time
+			drugsConfig.addDefault("Core.Drugs.PCP.Time.DAMAGE_RESISTANCE" , 2400);
+			drugsConfig.addDefault("Core.Drugs.PCP.Time.BAD_OMEN" , 2400);
+			drugsConfig.addDefault("Core.Drugs.PCP.Time.CONFUSION" , 2400);
+
+			//Shrooms Time
+			drugsConfig.addDefault("Core.Drugs.Shrooms.Time.LUCK" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Shrooms.Time.NIGHT_VISION" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Shrooms.Time.CONFUSION" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Shrooms.Time.GLOWING" , 2400);
+			//Salvia Time
+			drugsConfig.addDefault("Core.Drugs.Salvia.Time.NIGHT_VISION" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Salvia.Time.REGENERATION" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Salvia.Time.WEAKNESS" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Salvia.Time.GLOWING" , 2400);
+
+			//Flakka Time
+			drugsConfig.addDefault("Core.Drugs.Flakka.Time.SPEED" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Flakka.Time.DAMAGE_RESISTANCE" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Flakka.Time.UNLUCK" , 2400);
+			drugsConfig.addDefault("Core.Drugs.Flakka.Time.DOLPHINS_GRACE" , 2400);
+
+
+
+
 		} catch (IOException | InvalidConfigurationException e) {
 			e.printStackTrace();
 
