@@ -12,7 +12,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class Weed implements Listener {
 
-	public String WeedName = ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "WEED";
+	
+	Drugs D = new Drugs();
 
 	public Weed() {
 		return;
@@ -39,21 +40,38 @@ public class Weed implements Listener {
 
 		if (pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
 			if (p.getInventory().getItemInMainHand().hasItemMeta()) {
-				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(WeedName)) {
+				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(D.WeedStack.getItemMeta().getDisplayName())) {
 					if (p.hasPermission("drugs.use.weed")) {
 						try {
 
 							if (p.getInventory().getItemInMainHand().getAmount() > 1) {
 								p.sendMessage(Main.prefix + Main.stack);
 							} else {
-								p.addPotionEffect(PotionEffectType.SLOW.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Weed.Time.SLOW"), 1));
-								p.addPotionEffect(PotionEffectType.SLOW_DIGGING.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Weed.Time.SLOW_DIGGING"), 1));
-								p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Weed.Time.SLOW_FALLING"), 1));
-								p.addPotionEffect(PotionEffectType.LUCK.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Weed.Time.LUCK"), 1));
-								p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
-								p.getInventory().getItemInMainHand().getAmount();
-								p.getInventory().getItemInMainHand().setAmount(0);
-
+								for (@SuppressWarnings("unused")
+								String enchant : plugin.getCustomConfig().getConfigurationSection("Drugs.Weed")
+										.getKeys(false)) {
+									String slow = "Drugs.Weed.SLOW";
+									String slowdig = "Drugs.Weed.SLOW_DIGGING";
+									String slowfall = "Drugs.Weed.SLOW_FALLING";
+									String luck = "Drugs.Weed.LUCK";
+									int slowTime = plugin.getCustomConfig().getInt(slow + ".Time");
+									int slowLvl = plugin.getCustomConfig().getInt(slow + ".Level");
+									int slowdigTime = plugin.getCustomConfig().getInt(slowdig + ".Time");
+									int slowdigLvl = plugin.getCustomConfig().getInt(slowdig + ".Level");
+									int slowfallTime = plugin.getCustomConfig().getInt(slowfall + ".Time");
+									int slowfallLvl = plugin.getCustomConfig().getInt(slowfall + ".Level");
+									int luckTime = plugin.getCustomConfig().getInt(luck + ".Time");
+									int luckLvl = plugin.getCustomConfig().getInt(luck + ".Level");
+									p.addPotionEffect(PotionEffectType.SLOW.createEffect(slowTime * 20, slowLvl - 1));
+									p.addPotionEffect(PotionEffectType.SLOW_DIGGING.createEffect(slowdigTime * 20,
+											slowdigLvl - 1));
+									p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(slowfallTime * 20,
+											slowfallLvl - 1));
+									p.addPotionEffect(PotionEffectType.LUCK.createEffect(luckTime * 20, luckLvl - 1));
+									p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
+									p.getInventory().getItemInMainHand().getAmount();
+									p.getInventory().getItemInMainHand().setAmount(0);
+								}
 							}
 						} catch (Exception e1) {
 							p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Error in the Console");
@@ -63,10 +81,8 @@ public class Weed implements Listener {
 
 						}
 					} else {
-						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.DARK_GREEN + ""
-								+ ChatColor.BOLD + "WEED");
+						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + D.WeedStack.getItemMeta().getDisplayName());
 					}
-					// END OF WEED
 				}
 			}
 		}

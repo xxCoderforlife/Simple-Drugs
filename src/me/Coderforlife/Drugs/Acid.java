@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class Acid implements Listener {
 
-	public String AcidName = ChatColor.AQUA + "" + ChatColor.BOLD + "ACID";
+	Drugs D = new Drugs();
 
 	public Acid() {
 		return;
@@ -40,7 +40,8 @@ public class Acid implements Listener {
 
 		if (pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
 			if (p.getInventory().getItemInMainHand().hasItemMeta()) {
-				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(AcidName)) {
+				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
+						.equals(D.Acid.getItemMeta().getDisplayName())) {
 					if (p.hasPermission("drugs.use.acid")) {
 						try {
 							ItemStack hand = p.getInventory().getItemInMainHand();
@@ -48,12 +49,33 @@ public class Acid implements Listener {
 							if (amount > 1) {
 								p.sendMessage(Main.prefix + Main.stack);
 							} else {
-								p.getInventory().getItemInMainHand().setAmount(0);
-								p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Acid.Time.CONFUSION"), 1));
-								p.addPotionEffect(PotionEffectType.HEALTH_BOOST.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Acid.Time.HEALTH_BOOST"), 2));
-								p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Acid.Time.NIGHT_VISION"), 2));
-								p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Acid.Time.SLOW_FALLING"), 2));
-								p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
+								for (@SuppressWarnings("unused")
+								String enchant : plugin.getCustomConfig().getConfigurationSection("Drugs.Acid")
+										.getKeys(false)) {
+									String confusion = "Drugs.Acid.CONFUSION";
+									String healthboost = "Drugs.Acid.HEALTH_BOOST";
+									String nightvision = "Drugs.Acid.NIGHT_VISION";
+									String slowfalling = "Drugs.Acid.SLOW_FALLING";
+									int conTime = plugin.getCustomConfig().getInt(confusion + ".Time");
+									int conLvl = plugin.getCustomConfig().getInt(confusion + ".Level");
+									int healthTime = plugin.getCustomConfig().getInt(healthboost + ".Time");
+									int healthLvl = plugin.getCustomConfig().getInt(healthboost + ".Level");
+									int nightTime = plugin.getCustomConfig().getInt(nightvision + ".Time");
+									int nightLvl = plugin.getCustomConfig().getInt(nightvision + ".Level");
+									int fallingTime = plugin.getCustomConfig().getInt(slowfalling + ".Time");
+									int fallingLvl = plugin.getCustomConfig().getInt(slowfalling + ".Level");
+									p.getInventory().getItemInMainHand().setAmount(0);
+									p.addPotionEffect(
+											PotionEffectType.CONFUSION.createEffect(conTime * 20, conLvl - 1));
+									p.addPotionEffect(
+											PotionEffectType.HEALTH_BOOST.createEffect(healthTime * 20, healthLvl - 1));
+									p.addPotionEffect(
+											PotionEffectType.NIGHT_VISION.createEffect(nightTime * 20, nightLvl - 1));
+									p.addPotionEffect(PotionEffectType.SLOW_FALLING.createEffect(fallingTime * 20,
+											fallingLvl - 1));
+									p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
+
+								}
 
 							}
 						} catch (Exception e1) {
@@ -63,8 +85,7 @@ public class Acid implements Listener {
 							e1.printStackTrace();
 						}
 					} else {
-						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.AQUA + ""
-								+ ChatColor.BOLD + "ACID");
+						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + D.Acid.getItemMeta().getDisplayName());
 					}
 				}
 			}

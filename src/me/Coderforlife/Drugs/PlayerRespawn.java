@@ -26,8 +26,8 @@ public class PlayerRespawn implements Listener {
 	@EventHandler
 	public void onPlayerRespawn(PlayerRespawnEvent ev) {
 
-		Player p = (Player) ev.getPlayer();
-		if (plugin.drugsConfig.getBoolean(Main.bagofdrugs + ".GiveOnRespawn") == true) {
+		Player p = ev.getPlayer();
+		if (plugin.drugsConfig.getBoolean(Main.bagofdrugs + ".GiveOnRespawn")) {
 			if (!p.getInventory().contains(pj.bag)) {
 				p.getInventory().addItem(pj.bag);
 

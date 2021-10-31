@@ -10,17 +10,17 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffectType;
 
-public class Ciggy implements Listener {
+public class Tussin implements Listener {
 
 	Drugs D = new Drugs();
 
-	public Ciggy() {
+	public Tussin() {
 		return;
 	}
 
 	private Main plugin;
 
-	public Ciggy(Main plugin) {
+	public Tussin(Main plugin) {
 		this.setPlugin(plugin);
 	}
 
@@ -39,34 +39,34 @@ public class Ciggy implements Listener {
 		if (pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
 			if (p.getInventory().getItemInMainHand().hasItemMeta()) {
 				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
-						.equals(D.Ciggy.getItemMeta().getDisplayName())) {
-					if (p.hasPermission("drugs.use.ciggy")) {
+						.equals(D.Tussin.getItemMeta().getDisplayName())) {
+					if (p.hasPermission("drugs.use.tussin")) {
 						try {
 							if (p.getInventory().getItemInMainHand().getAmount() > 1) {
 								p.sendMessage(Main.prefix + Main.stack);
 							} else {
 								for (@SuppressWarnings("unused")
-								String enchant : plugin.getCustomConfig().getConfigurationSection("Drugs.Ciggy")
+								String enchant : plugin.getCustomConfig().getConfigurationSection("Drugs.Tussin")
 										.getKeys(false)) {
-									String slowdigging = "Drugs.Ciggy.SLOW_DIGGING";
-									String jump = "Drugs.Ciggy.JUMP";
-									String saturation = "Drugs.Ciggy.SATURATION";
-									String damageres = "Drugs.Ciggy.DAMAGE_RESISTANCE";
-									int slowTime = plugin.getCustomConfig().getInt(slowdigging + ".Time");
-									int slowLvl = plugin.getCustomConfig().getInt(slowdigging + ".Level");
-									int jumpTime = plugin.getCustomConfig().getInt(jump + ".Time");
-									int jumpLvl = plugin.getCustomConfig().getInt(jump + ".Level");
-									int satTime = plugin.getCustomConfig().getInt(saturation + ".Time");
-									int satLvl = plugin.getCustomConfig().getInt(saturation + ".Level");
-									int damageTime = plugin.getCustomConfig().getInt(damageres + ".Time");
-									int damageLvl = plugin.getCustomConfig().getInt(damageres + ".Level");
+									String increasedam = "Drugs.Tussin.INCREASE_DAMAGE";
+									String heal = "Drugs.Tussin.REGENERATION";
+									String confusion = "Drugs.Tussin.CONFUSION";
+									String jumping = "Drugs.Tussin.JUMP";
+									int jumpTime = plugin.getCustomConfig().getInt(jumping + ".Time");
+									int jumpLvl = plugin.getCustomConfig().getInt(jumping + ".Level");
+									int increasedamTime = plugin.getCustomConfig().getInt(increasedam + ".Time");
+									int increasedamLvl = plugin.getCustomConfig().getInt(increasedam + ".Level");
+									int conTime = plugin.getCustomConfig().getInt(confusion + ".Time");
+									int conLvl = plugin.getCustomConfig().getInt(confusion + ".Level");
+									int healTime = plugin.getCustomConfig().getInt(heal + ".Time");
+									int healLvl = plugin.getCustomConfig().getInt(heal + ".Level");
+
+									p.addPotionEffect(PotionEffectType.INCREASE_DAMAGE
+											.createEffect(increasedamTime * 20, increasedamLvl - 1));
+									p.addPotionEffect(PotionEffectType.REGENERATION.createEffect(healTime * 20, healLvl - 1));
 									p.addPotionEffect(
-											PotionEffectType.SLOW_DIGGING.createEffect(slowTime * 20, slowLvl - 1));
+											PotionEffectType.CONFUSION.createEffect(conTime * 20, conLvl - 1));
 									p.addPotionEffect(PotionEffectType.JUMP.createEffect(jumpTime * 20, jumpLvl - 1));
-									p.addPotionEffect(
-											PotionEffectType.SATURATION.createEffect(satTime * 20, satLvl - 1));
-									p.addPotionEffect(PotionEffectType.DAMAGE_RESISTANCE.createEffect(damageTime * 20,
-											damageLvl - 1));
 									p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
 									p.getInventory().getItemInMainHand().getAmount();
 									p.getInventory().getItemInMainHand().setAmount(0);
@@ -79,8 +79,7 @@ public class Ciggy implements Listener {
 							e1.printStackTrace();
 						}
 					} else {
-						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use" + ChatColor.GOLD + ""
-								+ ChatColor.BOLD + " CIGGY");
+						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + D.Tussin.getItemMeta().getDisplayName());
 					}
 				}
 			}

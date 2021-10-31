@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class Percocet implements Listener {
 
-	public String PercocetName = ChatColor.WHITE + "" + ChatColor.BOLD + "PERCOCET";
+	Drugs D = new Drugs();
 
 	public Percocet() {
 		return;
@@ -41,17 +41,36 @@ public class Percocet implements Listener {
 			if (p.getInventory().getItemInMainHand().hasItemMeta()) {
 				if (p.hasPermission("drugs.use.percocet")) {
 					try {
-						if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(PercocetName)) {
+						if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
+								.equals(D.Percocet.getItemMeta().getDisplayName())) {
 							if (p.getInventory().getItemInMainHand().getAmount() > 1) {
 								p.sendMessage(Main.prefix + Main.stack);
 							} else {
-								p.addPotionEffect(PotionEffectType.SLOW.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Percocet.Time.SLOW"), 1));
-								p.addPotionEffect(PotionEffectType.CONFUSION.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Percocet.Time.CONFUSION"), 1));
-								p.addPotionEffect(PotionEffectType.NIGHT_VISION.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Percocet.Time.NIGHT_VISION"), 1));
-								p.addPotionEffect(PotionEffectType.LUCK.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Percocet.Time.LUCK"), 1));
-								p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
-								p.getInventory().getItemInMainHand().getAmount();
-								p.getInventory().getItemInMainHand().setAmount(0);
+								for (@SuppressWarnings("unused")
+								String enchant : plugin.getCustomConfig().getConfigurationSection("Drugs.Percocet")
+										.getKeys(false)) {
+									String slow = "Drugs.Percocet.SLOW";
+									String confusion = "Drugs.Percocet.CONFUSION";
+									String nightvision = "Drugs.Percocet.NIGHT_VISION";
+									String luck = "Drugs.Percocet.LUCK";
+									int slowTime = plugin.getCustomConfig().getInt(slow + ".Time");
+									int slowLvl = plugin.getCustomConfig().getInt(slow + ".Level");
+									int conTime = plugin.getCustomConfig().getInt(confusion + ".Time");
+									int conLvl = plugin.getCustomConfig().getInt(confusion + ".Level");
+									int nightTime = plugin.getCustomConfig().getInt(nightvision + ".Time");
+									int nightLvl = plugin.getCustomConfig().getInt(nightvision + ".Level");
+									int luckTime = plugin.getCustomConfig().getInt(luck + ".Time");
+									int luckLvl = plugin.getCustomConfig().getInt(luck + ".Level");
+									p.addPotionEffect(PotionEffectType.SLOW.createEffect(slowTime * 20, slowLvl - 1));
+									p.addPotionEffect(
+											PotionEffectType.CONFUSION.createEffect(conTime * 20, conLvl - 1));
+									p.addPotionEffect(
+											PotionEffectType.NIGHT_VISION.createEffect(nightTime * 20, nightLvl - 1));
+									p.addPotionEffect(PotionEffectType.LUCK.createEffect(luckTime * 20, luckLvl - 1));
+									p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
+									p.getInventory().getItemInMainHand().getAmount();
+									p.getInventory().getItemInMainHand().setAmount(0);
+								}
 							}
 						}
 					} catch (Exception e1) {
@@ -62,8 +81,7 @@ public class Percocet implements Listener {
 					}
 
 				} else {
-					p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.WHITE + ""
-							+ ChatColor.BOLD + "PERCOCET");
+					p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + D.Percocet.getItemMeta().getDisplayName());
 				}
 			}
 		}

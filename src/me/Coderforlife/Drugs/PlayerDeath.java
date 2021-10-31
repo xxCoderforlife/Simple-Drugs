@@ -29,8 +29,8 @@ public class PlayerDeath implements Listener {
 
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent ev) {
-		Player p = (Player) ev.getEntity();
-		if (plugin.drugsConfig.getBoolean(Main.bagofdrugs + ".DropOnDeath") == false) {
+		Player p = ev.getEntity();
+		if (!plugin.drugsConfig.getBoolean(Main.bagofdrugs + ".DropOnDeath")) {
 			if (ev.getDrops().contains(pj.bag)) {
 				if (p instanceof Player) {
 					ev.getDrops().remove(pj.bag);

@@ -1,110 +1,285 @@
+#========================[SIMPLE-DRUGS CONFIG]============================#
 #Simple-Drugs v2.7-DEV Created by xxCoderforlife
 #If you need help find me on Discord or Spigot.
 #Spigot: https://www.spigotmc.org/resources/simple-drugs-with-gui.9684/
 #Discord: https://discord.com/invite/jnmKj7Z
-Core:
- Drugs:
-  Acid:
-   Time:
-    CONFUSION: 200
-    HEALTH_BOOST: 2400
-    NIGHT_VISION: 2400
-    SLOW_FALLING: 2400
-  Ciggy:
-   Time:
-    SLOW_DIGGING: 2400
-    JUMP: 2400
-    SATURATION: 2400
-    DAMAGE_RESISTANCE: 2400
-  Weed:
-   Time:
-    SLOW_DIGGING: 2400
-    SLOW: 2400
-    SLOW_FALLING: 2400
-    LUCK: 2400
-  Coke:
-   Time:
-    SPEED: 2400
-    FASY_DIGGING: 2400
-    INCREASE_DAMAGE: 2400
-    DAMAGE_RESISTANCE: 2400
-    HEALTH_BOOST: 2400
-  Heroin:
-   Time:
-    SLOW: 2400
-    WEAKNESS: 2400
-    POISON: 2400
-    UNLUCK: 2400
-  Percocet:
-   Time:
-    SLOW: 2400
-    CONFUSION: 200
-    NIGHT_VISION: 2400
-    LUCK: 2400
-  Molly:
-   Time:
-    CONFUSION: 200
-    FAST_DIGGING: 2400
-    SPEED: 2400
-    FIRE_RESISTANCE: 2400
-    NIGHT_VISION: 2400
-  Shrooms:
-   Time:
-    LUCK: 2400
-    NIGHT_VISION: 2400
-    CONFUSION: 200
-    GLOWING: 2400
-  Salvia:
-   Time:
-    NIGHT_VISION: 2400
-    REGENERATION: 2400
-    WEAKNESS: 2400
-    GLOWING: 2400
-  PCP:
-   Time:
-    DAMAGE_RESISTANCE: 2400
-    BAD_OMEN: 2400
-    CONFUSION: 200
-  DMT:
-   Time:
-    DAMAGE_RESISTANCE: 2400
-    SLOW_FALLING: 2400
-    SLOWNESS: 2400
-    GLOWING: 2400
-  Alcohol:
-   Time:
-    SPEED: 2400
-    NIGHT_VISION: 2400
-    HUNGER: 2400
-    CONFUSION: 200
-  Flakka:
-   Time:
-    SPEED: 2400
-    DAMAGE_RESISTANCE: 2400
-    UNLUCK: 2400
-    DOLPHINS_GRACE: 2400
-  Meth:
-   Time:
-    ABSORPTION: 2400
-    SLOWNESS: 2400
-    WEAKNESS: 2400
-    LEVITATION: 2400
-  Ketamine:
-   Time:
-    NIGHT_VISION: 2400
-    SPEED: 2400
-    FAST_DIGGING: 2400
-    CONFUSION: 200
-    SLOW_FALLING: 2400
-  BagOfDrugs:
+#When you disable crafting you'll need to restart your server so it unloads the recipes.
+#Or Disable Crafting before you start the server
+#               WIKI LINK: 
+#    https://xxcoderforlife.gitbook.io/simpledrugswiki/
+#=========================================================================#
+Drugs:
+#Sends the player a plugin message on Join
+ JoinMessage: true
+ BagOfDrugs:
    #If the player can move the bag in their Inventory
-   CanMove: true
+  CanMove: false
    #If the player can drop the bag
-   CanDrop: false
+  CanDrop: false
    #Is the bag given on player join
    #If you set this to false use /drugs bagofdrugs to get it
-   GiveOnJoin: true
+  GiveOnJoin: true
    #If the Bag is dropped on death or not.
-   DropOnDeath: false
+  DropOnDeath: false
    #If the player Keeps the Bag when they Respawn
-   GiveOnRespawn: true
+  GiveOnRespawn: true
+ Acid:
+  DisableCrafting: false
+  CONFUSION:
+   #Time Set in Seconds
+   Time: 90
+   Level: 2
+  HEALTH_BOOST:
+   Time: 90
+   Level: 9
+  NIGHT_VISION:
+   Time: 90
+   Level: 1
+  SLOW_FALLING:
+   Time: 90
+   Level: 2
+ Alcohol:
+  DisableCrafting: false
+  SPEED:
+   Time: 90
+   Level: 2
+  NIGHT_VISION:
+   Time: 90
+   Level: 2
+  HUNGER:
+   Time: 90
+   Level: 2
+  CONFUSION:
+   Time: 90
+   Level: 1
+ Ciggy:
+  DisableCrafting: false
+  SLOW_DIGGING:
+   Time: 90
+   Level: 2
+  JUMP:
+   Time: 90
+   Level: 1
+  SATURATION:
+   Time: 90
+   Level: 1
+  DAMAGE_RESISTANCE:
+   Time: 90
+   Level: 1
+ Coke:
+  DisableCrafting: false
+  SPEED:
+   Time: 90
+   Level: 1
+  FAST_DIGGING:
+   Time: 90
+   Level: 1
+  INCREASE_DAMAGE:
+   Time: 90
+   Level: 1
+  HEALTH_BOOST:
+   Time: 90
+   Level: 1
+  DAMAGE_RESISTANCE:
+   Time: 90
+   Level: 1
+ DMT:
+  DisableCrafting: false
+  SLOW_FALLING:
+   Time: 90
+   Level: 1
+  SLOW:
+   Time: 90
+   Level: 1
+  GLOWING:
+   Time: 90
+   Level: 1
+  DAMAGE_RESISTANCE:
+   Time: 90
+   Level: 1
+ Flakka:
+  DisableCrafting: false
+  SPEED:
+   Time: 90
+   Level: 1
+  UNLUCK: 
+   Time: 90
+   Level: 1
+  DOLPHINS_GRACE:
+   Time: 90
+   Level: 1
+  DAMAGE_RESISTANCE:
+   Time: 90
+   Level: 1
+ Heroin:
+  DisableCrafting: false
+  SLOW:
+   Time: 90
+   Level: 1
+  WEAKNESS:
+   Time: 90
+   Level: 1
+  POISON:
+   Time: 90
+   Level: 1
+  UNLUCK:
+   Time: 90
+   Level: 1
+ Ketamine:
+  DisableCrafting: false
+  SLOW_FALLING:
+   Time: 90
+   Level: 1
+  SPEED:
+   Time: 90
+   Level: 1
+  NIGHT_VISION:
+   Time: 90
+   Level: 1
+  FAST_DIGGING:
+   Time: 90
+   Level: 1
+  CONFUSION:
+   Time: 90
+   Level: 1
+ Meth:
+  DisableCrafting: false
+  ABSORPTION:
+   Time: 90
+   Level: 1
+  DAMAGE_RESISTANCE:
+   Time: 90
+   Level: 1
+  FIRE_RESISTANCE:
+   Time: 90
+   Level: 1
+  LEVITATION:
+   Time: 90
+   Level: 1
+ Molly:
+  DisableCrafting: false
+  CONFUSION:
+   Time: 90
+   Level: 1
+  FAST_DIGGING:
+   Time: 90
+   Level: 1
+  SPEED:
+   Time: 90
+   Level: 1
+  FIRE_RESISTANCE:
+   Time: 90
+   Level: 1
+  NIGHT_VISION:
+   Time: 90
+   Level: 1
+ Oxy:
+  DisableCrafting: false
+  ABSORPTION:
+    Time: 90
+    Level: 1
+  DAMAGE_RESISTANCE:
+   Time: 90
+   Level: 1
+  CONFUSION:
+   Time: 90
+   Level: 1
+  GLOWING:
+   Time: 90
+   Level: 1
+ PCP:
+  DisableCrafting: false
+  CONFUSION:
+   Time: 90
+   Level: 1
+  BAD_OMEN:
+   Time: 90
+   Level: 1
+  DAMAGE_RESISTANCE:
+   Time: 90
+   Level: 1
+ Percocet:
+  DisableCrafting: false
+  SLOW:
+   Time: 90
+   Level: 1
+  CONFUSION:
+   Time: 90
+   Level: 1
+  NIGHT_VISION:
+   Time: 90
+   Level: 1
+  LUCK:
+   Time: 90
+   Level: 1
+ Salvia:
+  DisableCrafting: false
+  REGENERATION:
+   Time: 90
+   Level: 1
+  WEAKNESS:
+   Time: 90
+   Level: 1
+  GLOWING:
+   Time: 90
+   Level: 1
+  NIGHT_VISION:
+   Time: 90
+   Level: 1
+ Shrooms:
+  DisableCrafting: false
+  LUCK:
+   Time: 90
+   Level: 1
+  NIGHT_VISION:
+   Time: 90
+   Level: 1
+  CONFUSION: 
+   Time: 90
+   Level: 1
+  GLOWING:
+   Time: 90
+   Level: 1
+ Tussin:
+  DisableCrafting: false
+  INCREASE_DAMAGE:
+   Time: 90
+   Level: 1
+  REGENERATION:
+   Time: 90
+   Level: 1
+  CONFUSION:
+   Time: 90
+   Level: 1
+  JUMP:
+   Time: 90
+   Level: 1
+ Weed:
+  DisableCrafting: false
+  SLOW:
+   Time: 90
+   Level: 1
+  SLOW_DIGGING:
+   Time: 90
+   Level: 1
+  SLOW_FALLING:
+   Time: 90
+   Level: 1
+  LUCK:
+   Time: 90
+   Level: 1
+ Xannx:
+  DisableCrafting: false
+  SLOW:
+   Time: 90
+   Level: 1
+  SLOW_DIGGING:
+   Time: 90
+   Level: 1
+  SLOW_FALLING:
+   Time: 90
+   Level: 1
+  BLINDNESS:
+   Time: 90
+   Level: 1
+#Yeah that's the end of the Config :)

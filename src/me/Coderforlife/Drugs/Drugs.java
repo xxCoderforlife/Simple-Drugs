@@ -1,6 +1,7 @@
 package me.Coderforlife.Drugs;
 
 import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -21,13 +22,16 @@ public class Drugs {
 	public ItemStack Molly = (molly(new ItemStack(Material.IRON_NUGGET)));
 	public ItemStack Ciggy = (ciggy(new ItemStack(Material.REDSTONE_TORCH)));
 	public ItemStack Shrooms = (shrooms(new ItemStack(Material.BROWN_MUSHROOM)));
-	public ItemStack Salvia  = (salvia(new ItemStack(Material.DRIED_KELP)));
+	public ItemStack Salvia = (salvia(new ItemStack(Material.DRIED_KELP)));
 	public ItemStack PCP = (pcp(new ItemStack(Material.SUNFLOWER)));
 	public ItemStack DMT = (dmt(new ItemStack(Material.GLOWSTONE_DUST)));
 	public ItemStack Alcohol = (alcohol(new ItemStack(Material.WATER_BUCKET)));
 	public ItemStack Flakka = (flakka(new ItemStack(Material.QUARTZ)));
 	public ItemStack Meth = (meth(new ItemStack(Material.PRISMARINE_SHARD)));
 	public ItemStack Ketamine = (ketamine(new ItemStack(Material.POWDER_SNOW_BUCKET)));
+	public ItemStack Oxy = (oxy(new ItemStack(Material.WHITE_DYE)));
+	public ItemStack Tussin = (tussin(new ItemStack(Material.PURPLE_CANDLE)));
+	public ItemStack Xannx = (xannx(new ItemStack(Material.GREEN_CANDLE)));
 
 	private Main plugin;
 
@@ -52,7 +56,7 @@ public class Drugs {
 		weedMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		weedMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		weedMeta.setDisplayName(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "WEED");
-		ArrayList<String> weedLore = new ArrayList<String>();
+		ArrayList<String> weedLore = new ArrayList<>();
 		weedLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		weedLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slowness");
 		weedLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Luck");
@@ -69,7 +73,7 @@ public class Drugs {
 		percocetMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		percocetMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		percocetMeta.setDisplayName(ChatColor.WHITE + "" + ChatColor.BOLD + "PERCOCET");
-		ArrayList<String> percocetLore = new ArrayList<String>();
+		ArrayList<String> percocetLore = new ArrayList<>();
 		percocetLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Confusion");
 		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slow");
@@ -87,7 +91,7 @@ public class Drugs {
 		acidMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		acidMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		acidMeta.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "ACID");
-		ArrayList<String> acidLore = new ArrayList<String>();
+		ArrayList<String> acidLore = new ArrayList<>();
 		acidLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		acidLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Confusion");
 		acidLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Night Vision");
@@ -105,7 +109,7 @@ public class Drugs {
 		heroinMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		heroinMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		heroinMeta.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "HEROIN");
-		ArrayList<String> heroinLore = new ArrayList<String>();
+		ArrayList<String> heroinLore = new ArrayList<>();
 		heroinLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		heroinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Weakness");
 		heroinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slowness");
@@ -124,7 +128,7 @@ public class Drugs {
 		cokeMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		cokeMeta.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "COKE");
 
-		ArrayList<String> cokeLore = new ArrayList<String>();
+		ArrayList<String> cokeLore = new ArrayList<>();
 		cokeLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		cokeLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Increase");
 		cokeLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Fast Digging");
@@ -141,7 +145,7 @@ public class Drugs {
 		CiggyMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		CiggyMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		CiggyMeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "CIGGY");
-		ArrayList<String> CiggyLore = new ArrayList<String>();
+		ArrayList<String> CiggyLore = new ArrayList<>();
 		CiggyLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		CiggyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Saturation");
 		CiggyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Resistance");
@@ -159,7 +163,7 @@ public class Drugs {
 		MollyMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		MollyMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		MollyMeta.setDisplayName(ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "MOLLY");
-		ArrayList<String> MollyLore = new ArrayList<String>();
+		ArrayList<String> MollyLore = new ArrayList<>();
 		MollyLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		MollyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Confusion");
 		MollyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Speed");
@@ -172,13 +176,13 @@ public class Drugs {
 		is.setItemMeta(MollyMeta);
 		return is;
 	}
-	
+
 	private ItemStack shrooms(ItemStack is) {
 		ItemMeta shroomsMeta = is.getItemMeta();
 		shroomsMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		shroomsMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		shroomsMeta.setDisplayName(ChatColor.GRAY + "" + ChatColor.BOLD + "SHROOMS");
-		ArrayList<String> shroomsLore = new ArrayList<String>();
+		ArrayList<String> shroomsLore = new ArrayList<>();
 		shroomsLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		shroomsLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Luck");
 		shroomsLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Night Vision");
@@ -190,13 +194,13 @@ public class Drugs {
 		is.setItemMeta(shroomsMeta);
 		return is;
 	}
-	
+
 	private ItemStack salvia(ItemStack is) {
 		ItemMeta salviaMeta = is.getItemMeta();
 		salviaMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		salviaMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		salviaMeta.setDisplayName(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "SALVIA");
-		ArrayList<String> salviaLore = new ArrayList<String>();
+		ArrayList<String> salviaLore = new ArrayList<>();
 		salviaLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		salviaLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Night Vision");
 		salviaLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Regeneration");
@@ -208,13 +212,13 @@ public class Drugs {
 		is.setItemMeta(salviaMeta);
 		return is;
 	}
-	
+
 	private ItemStack pcp(ItemStack is) {
 		ItemMeta pcpMeta = is.getItemMeta();
 		pcpMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		pcpMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		pcpMeta.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "PCP");
-		ArrayList<String> pcpLore = new ArrayList<String>();
+		ArrayList<String> pcpLore = new ArrayList<>();
 		pcpLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		pcpLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Resistance");
 		pcpLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Bad Omen");
@@ -224,13 +228,13 @@ public class Drugs {
 		is.setItemMeta(pcpMeta);
 		return is;
 	}
-	
+
 	private ItemStack dmt(ItemStack is) {
 		ItemMeta dmtMeta = is.getItemMeta();
 		dmtMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		dmtMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		dmtMeta.setDisplayName(ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "DMT");
-		ArrayList<String> dmtLore = new ArrayList<String>();
+		ArrayList<String> dmtLore = new ArrayList<>();
 		dmtLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		dmtLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Resistance");
 		dmtLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slow Falling");
@@ -241,13 +245,13 @@ public class Drugs {
 		is.setItemMeta(dmtMeta);
 		return is;
 	}
-	
+
 	private ItemStack alcohol(ItemStack is) {
 		ItemMeta alcoholMeta = is.getItemMeta();
 		alcoholMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		alcoholMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		alcoholMeta.setDisplayName(ChatColor.GOLD+ "" + ChatColor.BOLD + "ALCOHOL");
-		ArrayList<String> alcoholLore = new ArrayList<String>();
+		alcoholMeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "ALCOHOL");
+		ArrayList<String> alcoholLore = new ArrayList<>();
 		alcoholLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		alcoholLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Speed");
 		alcoholLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Night Vison");
@@ -258,13 +262,13 @@ public class Drugs {
 		is.setItemMeta(alcoholMeta);
 		return is;
 	}
-	
+
 	private ItemStack flakka(ItemStack is) {
 		ItemMeta flakkaMeta = is.getItemMeta();
 		flakkaMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		flakkaMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		flakkaMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "FLAKKA");
-		ArrayList<String> flakkaLore = new ArrayList<String>();
+		ArrayList<String> flakkaLore = new ArrayList<>();
 		flakkaLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		flakkaLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Speed");
 		flakkaLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Resistance");
@@ -276,30 +280,30 @@ public class Drugs {
 		is.setItemMeta(flakkaMeta);
 		return is;
 	}
-	
+
 	private ItemStack meth(ItemStack is) {
 		ItemMeta methMeta = is.getItemMeta();
 		methMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		methMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		methMeta.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "METH");
-		ArrayList<String> methLore = new ArrayList<String>();
+		ArrayList<String> methLore = new ArrayList<>();
 		methLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		methLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Absorption");
-		methLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slowness");
-		methLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Weakness");
+		methLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Resistance");
+		methLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Fire Resistance");
 		methLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Levitation");
 		methLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
 		methMeta.setLore(methLore);
 		is.setItemMeta(methMeta);
 		return is;
 	}
-	
+
 	private ItemStack ketamine(ItemStack is) {
 		ItemMeta ketamineMeta = is.getItemMeta();
-	    ketamineMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		ketamineMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		ketamineMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		ketamineMeta.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + "KETAMINE");
-		ArrayList<String> ketamineLore = new ArrayList<String>();
+		ArrayList<String> ketamineLore = new ArrayList<>();
 		ketamineLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		ketamineLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Night Vison");
 		ketamineLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Speed");
@@ -309,6 +313,57 @@ public class Drugs {
 		ketamineLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
 		ketamineMeta.setLore(ketamineLore);
 		is.setItemMeta(ketamineMeta);
+		return is;
+	}
+
+	private ItemStack oxy(ItemStack is) {
+		ItemMeta oxyMeta = is.getItemMeta();
+		oxyMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		oxyMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
+		oxyMeta.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "OXY");
+		ArrayList<String> oxyLore = new ArrayList<>();
+		oxyLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
+		oxyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Absorption");
+		oxyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Resistance");
+		oxyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Confusion");
+		oxyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Glowing");
+		oxyLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
+		oxyMeta.setLore(oxyLore);
+		is.setItemMeta(oxyMeta);
+		return is;
+	}
+
+	private ItemStack xannx(ItemStack is) {
+		ItemMeta xannxMeta = is.getItemMeta();
+		xannxMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		xannxMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
+		xannxMeta.setDisplayName(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "XANAX");
+		ArrayList<String> xannxLore = new ArrayList<>();
+		xannxLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
+		xannxLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slowness");
+		xannxLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slow Digging");
+		xannxLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slow Falling");
+		xannxLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Blindness");
+		xannxLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
+		xannxMeta.setLore(xannxLore);
+		is.setItemMeta(xannxMeta);
+		return is;
+	}
+
+	private ItemStack tussin(ItemStack is) {
+		ItemMeta tussinMeta = is.getItemMeta();
+		tussinMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		tussinMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
+		tussinMeta.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "TUSSIN");
+		ArrayList<String> tussinLore = new ArrayList<>();
+		tussinLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
+		tussinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Increase Damage");
+		tussinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Heal");
+		tussinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Jump");
+		tussinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Confusion");
+		tussinLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
+		tussinMeta.setLore(tussinLore);
+		is.setItemMeta(tussinMeta);
 		return is;
 	}
 
@@ -374,6 +429,122 @@ public class Drugs {
 		Bukkit.addRecipe(molly1);
 	}
 
+	public void AlcoholRecipe() {
+
+		ShapedRecipe alcohol = new ShapedRecipe(new NamespacedKey(this.plugin, "drugs_alcohol/WATERBUCKET"),
+				new ItemStack(Alcohol));
+		alcohol.shape(" P ", "GGG", "WWW");
+		alcohol.setIngredient('W', Material.WATER_BUCKET);
+		alcohol.setIngredient('P', Material.PAPER);
+		alcohol.setIngredient('G', Material.GUNPOWDER);
+		Bukkit.addRecipe(alcohol);
+	}
+
+	public void DMTRecipe() {
+
+		ShapedRecipe dmt = new ShapedRecipe(new NamespacedKey(this.plugin, "drugs_DMT/GLOWSTONEDUST"),
+				new ItemStack(DMT));
+		dmt.shape("SSS", "SGS", "SGS");
+		dmt.setIngredient('S', Material.SUGAR);
+		dmt.setIngredient('G', Material.GLOWSTONE_DUST);
+		Bukkit.addRecipe(dmt);
+	}
+
+	public void FlakkaRecipe() {
+
+		ShapedRecipe flakka = new ShapedRecipe(new NamespacedKey(this.plugin, "drugs_flakka/QUARTZ"),
+				new ItemStack(Flakka));
+		flakka.shape(" D ", "SSS", "W W");
+		flakka.setIngredient('S', Material.SWEET_BERRIES);
+		flakka.setIngredient('W', Material.WATER_BUCKET);
+		flakka.setIngredient('D', Material.BIRCH_DOOR);
+		Bukkit.addRecipe(flakka);
+	}
+
+	public void KetamineRecipe() {
+
+		ShapedRecipe ketamine = new ShapedRecipe(new NamespacedKey(this.plugin, "drugs_ketamine/SNOWBUCKET"),
+				new ItemStack(Ketamine));
+		ketamine.shape("SSS", "SLS", "SSS");
+		ketamine.setIngredient('S', Material.SNOWBALL);
+		ketamine.setIngredient('L', Material.LAVA_BUCKET);
+		Bukkit.addRecipe(ketamine);
+	}
+
+	public void MethRecipe() {
+
+		ShapedRecipe meth = new ShapedRecipe(new NamespacedKey(this.plugin, "drugs_meth/PRISMINESHARD"),
+				new ItemStack(Meth));
+		meth.shape(" D ", " P ", " G ");
+		meth.setIngredient('D', Material.DIRT);
+		meth.setIngredient('P', Material.PAPER);
+		meth.setIngredient('G', Material.GUNPOWDER);
+		Bukkit.addRecipe(meth);
+	}
+
+	public void OxyRecipe() {
+
+		ShapedRecipe oxy = new ShapedRecipe(new NamespacedKey(this.plugin, "drugs_oxy/WHITEDYE"), new ItemStack(Oxy));
+		oxy.shape("WWW", "B B", " L ");
+		oxy.setIngredient('W', Material.WHITE_WOOL);
+		oxy.setIngredient('B', Material.WATER_BUCKET);
+		oxy.setIngredient('L', Material.LAVA_BUCKET);
+		Bukkit.addRecipe(oxy);
+	}
+
+	public void PCPRecipe() {
+
+		ShapedRecipe pcp = new ShapedRecipe(new NamespacedKey(this.plugin, "drugs_pcp/SUNFLOWER"), new ItemStack(PCP));
+		pcp.shape("WMP", "PMW", "WMP");
+		pcp.setIngredient('W', Material.WHEAT_SEEDS);
+		pcp.setIngredient('M', Material.MELON_SEEDS);
+		pcp.setIngredient('P', Material.PUMPKIN_SEEDS);
+		Bukkit.addRecipe(pcp);
+	}
+
+	public void SalviaRecipe() {
+
+		ShapedRecipe slavia = new ShapedRecipe(new NamespacedKey(this.plugin, "drugs_salvia/DIREDKELP"),
+				new ItemStack(Salvia));
+		slavia.shape(" B ", "CCC", "D D");
+		slavia.setIngredient('B', Material.GREEN_BED);
+		slavia.setIngredient('C', Material.GREEN_CANDLE);
+		slavia.setIngredient('D', Material.GREEN_DYE);
+		Bukkit.addRecipe(slavia);
+	}
+
+	public void ShroomsRecipe() {
+
+		ShapedRecipe shrooms = new ShapedRecipe(new NamespacedKey(this.plugin, "drugs_shrooms/BROWNMUSHROOM"),
+				new ItemStack(Shrooms));
+		shrooms.shape("DDD", "S S", " B ");
+		shrooms.setIngredient('D', Material.DIRT);
+		shrooms.setIngredient('S', Material.STICK);
+		shrooms.setIngredient('B', Material.BROWN_MUSHROOM);
+		Bukkit.addRecipe(shrooms);
+	}
+
+	public void XannxRecipe() {
+
+		ShapedRecipe xannx = new ShapedRecipe(new NamespacedKey(this.plugin, "drugs_xannx/GREENCANDLE"),
+				new ItemStack(Xannx));
+		xannx.shape(" G ", "W W", " P ");
+		xannx.setIngredient('G', Material.GREEN_BED);
+		xannx.setIngredient('W', Material.WHITE_TULIP);
+		xannx.setIngredient('P', Material.GUNPOWDER);
+		Bukkit.addRecipe(xannx);
+	}
+
+	public void TussinRecipe() {
+
+		ShapedRecipe tussin = new ShapedRecipe(new NamespacedKey(this.plugin, "drugs_tussin/PURPLECANDLE"),
+				new ItemStack(Tussin));
+		tussin.shape("W W", "G G", "WGW");
+		tussin.setIngredient('W', Material.WATER_BUCKET);
+		tussin.setIngredient('G', Material.GLASS_BOTTLE);
+		Bukkit.addRecipe(tussin);
+	}
+
 	public void CiggyRecipe() {
 
 		ShapedRecipe ciggy1 = new ShapedRecipe(new NamespacedKey(this.plugin, "drugs_ciggy/REDSTONETORCH"),
@@ -384,4 +555,5 @@ public class Drugs {
 		ciggy1.setIngredient('G', Material.GUNPOWDER);
 		Bukkit.addRecipe(ciggy1);
 	}
+
 }

@@ -17,13 +17,12 @@ import net.md_5.bungee.api.ChatColor;
 
 public class PlayerJoin implements Listener {
 
-	
 	private Main plugin;
 
 	public ItemStack bag = (HELLO(new ItemStack(Material.NETHER_STAR, (byte) 1)));
 
 	private ItemStack HELLO(ItemStack is) {
-		List<String> name = new ArrayList<String>();
+		List<String> name = new ArrayList<>();
 		name.add(ChatColor.DARK_GRAY + "---------------------");
 		name.add(ChatColor.RED + "A Bag Full Of Drugs :)");
 		name.add("Enjoy.");
@@ -55,8 +54,12 @@ public class PlayerJoin implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent ev) {
-		Player p = (Player) ev.getPlayer();
-		if (plugin.drugsConfig.getBoolean(Main.bagofdrugs + ".GiveOnJoin") == true) {
+		Player p = ev.getPlayer();
+		if (plugin.drugsConfig.getBoolean("Drugs.JoinMessage")) {
+			p.sendMessage(Main.prefix
+					+ ChatColor.translateAlternateColorCodes('&', "&f&lServer is running &5&l&oSIMPLE DRUGS"));
+		}
+		if (plugin.drugsConfig.getBoolean(Main.bagofdrugs + ".GiveOnJoin")) {
 			if (!p.getInventory().contains(bag)) {
 				p.getInventory().addItem(bag);
 

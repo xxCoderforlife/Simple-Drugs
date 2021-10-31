@@ -1,5 +1,5 @@
-name: Simple-Drugs-DEV
-version: 2.7-dev+build192
+name: Simple-Drugs
+version: 2.7-dev+build225
 author: xxCoderforlife
 prefix: SD
 load: POSTWORLD
@@ -16,69 +16,78 @@ commands:
   aliases: [d]
 #PERMISSIONS
 permissions:
-  drugs.main:
+ drugs.main:
    description: Used for '/drugs' comamnd.
    default: true
-  drugs.use.bagofdrugs:
+ drugs.use.bagofdrugs:
    description: Permission to use the Bag Of Drugs
    default: true
-  drugs.reload:
+ drugs.reload:
    description: Used for '/drugs reload' command.
-   default: false
-  drugs.command.bagofdrug:
+   default: op
+ drugs.command.bagofdrug:
    description: Used for '/drugs bagofdrugs' command.
    defualt: true
-  drugs.list:
+ drugs.list:
    description: Used for '/drugs list' command.
    default: true
-  drugs.soberup:
+ drugs.soberup:
    description: Used for '/drugs soberup' command.
    default: true
-  drugs.help:
+ drugs.help:
    description: Used for '/drugs help' command.
    default: true
-  drugs.use.weed:
+ drugs.use.weed:
    description: To use Weed
    default: true
-  drugs.use.coke:
+ drugs.use.coke:
    description: To use Coke
    default: true
-  drugs.use.heroin:
+ drugs.use.heroin:
    description: To use Heroin
    default: true
-  drugs.use.percocet:
+ drugs.use.percocet:
     description: To use Percocet
     default: true
-  drugs.use.acid:
+ drugs.use.acid:
     description: To use Acid
     default: true
-  drugs.use.molly:
+ drugs.use.molly:
     description: To use Molly
     default: true
-  drugs.use.ciggy:
+ drugs.use.ciggy:
     description: To Use Ciggy
     default: true
-  drugs.use.alcohol:
+ drugs.use.alcohol:
     description: To Use Alcohol
     default: true
-  drugs.use.dmt:
+ drugs.use.dmt:
     description: To Use DMT
     default: true
-  drugs.use.flakka:
+ drugs.use.flakka:
     description: To Use Flakka
     default: true
-  drugs.use.ketamine:
+ drugs.use.ketamine:
     description: To Use Ketamine
     default: true
-  drugs.use.meth:
+ drugs.use.meth:
     description: To Use Meth
     default: true
-  drugs.use.pcp:
+ drugs.use.pcp:
     description: To Use PCP
     default: true
-  drugs.use.salvia:
+ drugs.use.salvia:
     description: To Use Salvia
     default: true
-  drugs.use.shrooms:
+ drugs.use.shrooms:
     description: To Use Shrooms
+    default: true
+ drugs.use.oxy:
+    description: To Use Oxy
+    default: true
+ drugs.use.tussin:
+    description: To Use Tussin
+    default: true
+ drugs.use.xannx:
+    description: To Use To Use Xanax
     default: true

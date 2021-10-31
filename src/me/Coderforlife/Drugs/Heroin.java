@@ -17,6 +17,7 @@ public class Heroin implements Listener {
 	public Heroin() {
 		return;
 	}
+
 	Drugs D = new Drugs();
 
 	private Main plugin;
@@ -40,19 +41,40 @@ public class Heroin implements Listener {
 
 		if (pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
 			if (p.getInventory().getItemInMainHand().hasItemMeta()) {
-				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(D.Heroin.getItemMeta().getDisplayName())) {
+				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
+						.equals(D.Heroin.getItemMeta().getDisplayName())) {
 					if (p.hasPermission("drugs.use.heroin")) {
 						try {
 							if (p.getInventory().getItemInMainHand().getAmount() > 1) {
 								p.sendMessage(Main.prefix + Main.stack);
 							} else {
-								p.addPotionEffect(PotionEffectType.SLOW.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Heroin.Time.SLOW"), 1));
-								p.addPotionEffect(PotionEffectType.WEAKNESS.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Heroin.Time.WEAKNESS"), 1));
-								p.addPotionEffect(PotionEffectType.POISON.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Heroin.Time.POISON"), 1));
-								p.addPotionEffect(PotionEffectType.UNLUCK.createEffect(plugin.drugsConfig.getInt("Core.Drugs.Heroin.Time.UNLUCK"), 1));
-								p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
-								p.getInventory().getItemInMainHand().getAmount();
-								p.getInventory().getItemInMainHand().setAmount(0);
+								for (@SuppressWarnings("unused")
+								String enchant : plugin.getCustomConfig().getConfigurationSection("Drugs.Heroin")
+										.getKeys(false)) {
+									String slow = "Drugs.Heroin.SLOW";
+									String weakness = "Drugs.Heroin.WEAKNESS";
+									String poison = "Drugs.Heroin.POISON";
+									String unluck = "Drugs.Heroin.UNLUCK";
+									int unluckTime = plugin.getCustomConfig().getInt(unluck + ".Time");
+									int unluckLvl = plugin.getCustomConfig().getInt(unluck + ".Level");
+									int slowTime = plugin.getCustomConfig().getInt(slow + ".Time");
+									int slowLvl = plugin.getCustomConfig().getInt(slow + ".Level");
+									int weaknessTime = plugin.getCustomConfig().getInt(weakness + "Time");
+									int weaknessLvl = plugin.getCustomConfig().getInt(weakness + ".Level");
+									int poisonTime = plugin.getCustomConfig().getInt(poison + ".Time");
+									int poisonLvl = plugin.getCustomConfig().getInt(poison + ".Level");
+									p.addPotionEffect(PotionEffectType.SLOW.createEffect(slowTime * 20, slowLvl - 1));
+									p.addPotionEffect(
+											PotionEffectType.WEAKNESS.createEffect(weaknessTime * 20, weaknessLvl - 1));
+									p.addPotionEffect(
+											PotionEffectType.POISON.createEffect(poisonTime * 20, poisonLvl - 1));
+									p.addPotionEffect(
+											PotionEffectType.UNLUCK.createEffect(unluckTime * 20, unluckLvl - 1));
+									p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
+									p.getInventory().getItemInMainHand().getAmount();
+									p.getInventory().getItemInMainHand().setAmount(0);
+								}
+
 							}
 						} catch (Exception e1) {
 							p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Error in the Console");
@@ -61,8 +83,7 @@ public class Heroin implements Listener {
 							e1.printStackTrace();
 						}
 					} else {
-						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + ChatColor.BLACK + ""
-								+ ChatColor.MAGIC + "HEROINHEROIN");
+						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + D.Heroin.getItemMeta().getDisplayName());
 					}
 				}
 			}

@@ -21,13 +21,7 @@ public class KillerCommands implements CommandExecutor {
 	}
 
 	PlayerJoin pj = new PlayerJoin();
-	Weed weed = new Weed();
-	Coke coke = new Coke();
-	Acid acid = new Acid();
-	Heroin heroin = new Heroin();
-	Molly molly = new Molly();
-	Percocet percocet = new Percocet();
-	Ciggy ciggy = new Ciggy();
+	Drugs D = new Drugs();
 
 	public Main getPlugin() {
 		return this.plugin;
@@ -41,6 +35,7 @@ public class KillerCommands implements CommandExecutor {
 	public static String header = ChatColor.DARK_RED + "" + ChatColor.BOLD + "==========" + ChatColor.WHITE + ""
 			+ ChatColor.BOLD + "[SIMPLE-DRUGS]" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "==========";
 
+	@Override
 	public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args) {
 		if (sender instanceof Player) {
 			Player p = (Player) sender;
@@ -64,8 +59,7 @@ public class KillerCommands implements CommandExecutor {
 							p.sendMessage(header);
 							p.sendMessage(Main.prefix + "Craft the drugs and Right-Click with in your hand.");
 							p.sendMessage(Main.prefix + "Find out how to craft on the Wiki.");
-							p.sendMessage(
-									"https://github.com/xxCoderforlife/Simple-Drugs/wiki/FAQs-&-How-To#how-to-craft-and-use-drugs");
+							p.sendMessage("https://xxcoderforlife.gitbook.io/simpledrugswiki/");
 						} else {
 							p.sendMessage(
 									Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
@@ -92,13 +86,24 @@ public class KillerCommands implements CommandExecutor {
 					} else if (args[0].equalsIgnoreCase("list")) {
 						if (p.hasPermission("drugs.list")) {
 							p.sendMessage(header);
-							p.sendMessage(dash + weed.WeedName);
-							p.sendMessage(dash + molly.MollyName);
-							p.sendMessage(dash + coke.CokeName);
-							p.sendMessage(dash + heroin.HeroinName);
-							p.sendMessage(dash + percocet.PercocetName);
-							p.sendMessage(dash + ciggy.CiggyName);
-							p.sendMessage(dash + acid.AcidName);
+							p.sendMessage(dash + D.WeedStack.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Molly.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Coke.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Heroin.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Percocet.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Ciggy.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Acid.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Alcohol.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.DMT.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Flakka.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Ketamine.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Meth.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Oxy.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.PCP.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Salvia.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Shrooms.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Tussin.getItemMeta().getDisplayName());
+							p.sendMessage(dash + D.Xannx.getItemMeta().getDisplayName());
 
 						} else {
 							p.sendMessage(
@@ -144,6 +149,25 @@ public class KillerCommands implements CommandExecutor {
 			} else {
 				p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
 				p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.main");
+			}
+		} else {
+			if (args.length == 0) {
+				sender.sendMessage("Only /drugs reload works in the console");
+			} else if (args.length == 1) {
+				if (args[0].equalsIgnoreCase("reload")) {
+					sender.sendMessage(header);
+					sender.sendMessage(Main.prefix + "Reloading Config...");
+					try {
+						plugin.drugsConfig.load(plugin.drugsConfigFile);
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (InvalidConfigurationException e) {
+						e.printStackTrace();
+					}
+					sender.sendMessage(Main.prefix + "Reloaded Config.");
+				}
 			}
 		}
 		return true;
