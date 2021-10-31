@@ -63,7 +63,8 @@ public class Tussin implements Listener {
 
 									p.addPotionEffect(PotionEffectType.INCREASE_DAMAGE
 											.createEffect(increasedamTime * 20, increasedamLvl - 1));
-									p.addPotionEffect(PotionEffectType.REGENERATION.createEffect(healTime * 20, healLvl - 1));
+									p.addPotionEffect(
+											PotionEffectType.REGENERATION.createEffect(healTime * 20, healLvl - 1));
 									p.addPotionEffect(
 											PotionEffectType.CONFUSION.createEffect(conTime * 20, conLvl - 1));
 									p.addPotionEffect(PotionEffectType.JUMP.createEffect(jumpTime * 20, jumpLvl - 1));
@@ -79,7 +80,8 @@ public class Tussin implements Listener {
 							e1.printStackTrace();
 						}
 					} else {
-						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + D.Tussin.getItemMeta().getDisplayName());
+						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use "
+								+ D.Tussin.getItemMeta().getDisplayName());
 					}
 				}
 			}

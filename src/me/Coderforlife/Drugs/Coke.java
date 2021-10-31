@@ -85,7 +85,8 @@ public class Coke implements Listener {
 							e1.printStackTrace();
 						}
 					} else {
-						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + D.Coke.getItemMeta().getDisplayName());
+						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use "
+								+ D.Coke.getItemMeta().getDisplayName());
 					}
 				}
 			}

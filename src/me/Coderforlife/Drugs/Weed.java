@@ -12,7 +12,6 @@ import org.bukkit.potion.PotionEffectType;
 
 public class Weed implements Listener {
 
-	
 	Drugs D = new Drugs();
 
 	public Weed() {
@@ -40,7 +39,8 @@ public class Weed implements Listener {
 
 		if (pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
 			if (p.getInventory().getItemInMainHand().hasItemMeta()) {
-				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(D.WeedStack.getItemMeta().getDisplayName())) {
+				if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName()
+						.equals(D.WeedStack.getItemMeta().getDisplayName())) {
 					if (p.hasPermission("drugs.use.weed")) {
 						try {
 
@@ -81,7 +81,8 @@ public class Weed implements Listener {
 
 						}
 					} else {
-						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + D.WeedStack.getItemMeta().getDisplayName());
+						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use "
+								+ D.WeedStack.getItemMeta().getDisplayName());
 					}
 				}
 			}

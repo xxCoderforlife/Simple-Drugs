@@ -81,7 +81,8 @@ public class Percocet implements Listener {
 					}
 
 				} else {
-					p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + D.Percocet.getItemMeta().getDisplayName());
+					p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use "
+							+ D.Percocet.getItemMeta().getDisplayName());
 				}
 			}
 		}
