@@ -25,8 +25,12 @@ public class Main extends JavaPlugin {
 	public File drugsConfigFile;
 	public FileConfiguration drugsConfig;
 
+	@SuppressWarnings("unused")
 	@Override
 	public void onEnable() {
+		 int pluginId = 13155;
+		 Metrics metrics = new Metrics(this, pluginId);
+
 		getServer().getConsoleSender().sendMessage(header1);
 		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Loading all Class files and Handlers...");
 		createCustomConfig();

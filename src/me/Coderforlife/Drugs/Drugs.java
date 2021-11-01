@@ -14,16 +14,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Drugs {
 
-	public ItemStack WeedStack = (weed(new ItemStack(Material.WHEAT)));
+	public ItemStack WeedStack = (weed(new ItemStack(Material.GREEN_DYE)));
 	public ItemStack Percocet = (percocet(new ItemStack(Material.PUMPKIN_SEEDS)));
 	public ItemStack Acid = (acid(new ItemStack(Material.PAPER)));
 	public ItemStack Coke = (coke(new ItemStack(Material.SUGAR)));
 	public ItemStack Heroin = (heroin(new ItemStack(Material.WITHER_ROSE)));
 	public ItemStack Molly = (molly(new ItemStack(Material.IRON_NUGGET)));
 	public ItemStack Ciggy = (ciggy(new ItemStack(Material.REDSTONE_TORCH)));
-	public ItemStack Shrooms = (shrooms(new ItemStack(Material.BROWN_MUSHROOM)));
+	public ItemStack Shrooms = (shrooms(new ItemStack(Material.CRIMSON_FUNGUS)));
 	public ItemStack Salvia = (salvia(new ItemStack(Material.DRIED_KELP)));
-	public ItemStack PCP = (pcp(new ItemStack(Material.SUNFLOWER)));
+	public ItemStack PCP = (pcp(new ItemStack(Material.SPORE_BLOSSOM)));
 	public ItemStack DMT = (dmt(new ItemStack(Material.GLOWSTONE_DUST)));
 	public ItemStack Alcohol = (alcohol(new ItemStack(Material.WATER_BUCKET)));
 	public ItemStack Flakka = (flakka(new ItemStack(Material.QUARTZ)));

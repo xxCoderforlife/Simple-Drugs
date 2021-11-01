@@ -70,12 +70,15 @@ public class KillerCommands implements CommandExecutor {
 						if (p.hasPermission("drugs.soberup")) {
 							if (!p.getActivePotionEffects().isEmpty()) {
 								for (PotionEffect effect : p.getActivePotionEffects()) {
-									p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 10, 29);
+									p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 10, 42);
 									p.removePotionEffect(effect.getType());
 								}
 							} else {
-								p.sendMessage(header);
-								p.sendMessage(Main.prefix + ChatColor.RED + "You need some drugs.");
+								p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 12, 1);
+								// Text | SubText | FadeIn | Stay | FadeOut
+								p.sendTitle(ChatColor.translateAlternateColorCodes('&', "&c&lYOU ARE SOBER"),
+										ChatColor.translateAlternateColorCodes('&', "&f&oYou need some drugs"), 10,
+										4 * 20, 10);
 							}
 						} else {
 							p.sendMessage(

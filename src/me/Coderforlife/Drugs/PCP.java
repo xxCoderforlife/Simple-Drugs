@@ -46,8 +46,10 @@ public class PCP implements Listener {
 								p.sendMessage(Main.prefix + Main.stack);
 							} else {
 								for (@SuppressWarnings("unused")
-								String enchant : plugin.getCustomConfig().getConfigurationSection("Drugs.Ketamine")
+								String enchant : plugin.getCustomConfig().getConfigurationSection("Drugs.PCP")
 										.getKeys(false)) {
+									p.getInventory().getItemInMainHand().getAmount();
+									p.getInventory().getItemInMainHand().setAmount(0);
 									String confusion = "Drugs.PCP.CONFUSION";
 									String omen = "Drugs.PCP.BAD_OMEN";
 									String damageres = "Drugs.PCP.DAMAGE_RESISTANCE";
@@ -64,8 +66,7 @@ public class PCP implements Listener {
 									p.addPotionEffect(PotionEffectType.DAMAGE_RESISTANCE
 											.createEffect(damageresTime * 20, damageresLvl - 1));
 									p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
-									p.getInventory().getItemInMainHand().getAmount();
-									p.getInventory().getItemInMainHand().setAmount(0);
+
 								}
 							}
 						} catch (Exception e1) {
