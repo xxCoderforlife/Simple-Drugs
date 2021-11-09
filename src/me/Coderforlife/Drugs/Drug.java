@@ -32,9 +32,9 @@ public class Drug {
 	            PotionEffectType... effects) {
 		this.name = name;
 		this.displayName = displayName;
-		this.drugItem = createDrugItem(drugMaterial);
 		this.usePermission = "drugs.use." + name.toLowerCase();
 		this.effects = effects;
+		this.drugItem = createDrugItem(drugMaterial);
 	}
 	
 	public String getName() {
@@ -91,13 +91,25 @@ public class Drug {
 		lore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 		
 		for (PotionEffectType type : effects) {
-			String effectName = type.getName();
-			effectName = effectName.substring(0, 1).toLowerCase() + effectName.substring(1).toLowerCase();
-			lore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + effectName);
+			lore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + toTitleCase(type));
 		}
 		lore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
 		meta.setLore(lore);
 		drugItem.setItemMeta(meta);
 		return drugItem;
+	}
+	
+	private String toTitleCase(PotionEffectType type) {
+		String[] words = type.getName().split("_");
+		StringBuilder builder = new StringBuilder();
+		
+		for (int i = 0; i < words.length; i++) {
+			if (i > 0) {
+				builder.append(" ");
+			}
+			builder.append(Character.toUpperCase(words[i].charAt(0)));
+			builder.append(words[i].substring(1).toLowerCase());
+		}
+		return builder.toString().trim();
 	}
 }

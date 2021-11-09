@@ -82,7 +82,7 @@ public class Drugs {
 		Drug acid = new Drug(
 				"Heroin",
 				ChatColor.AQUA + "" + ChatColor.BOLD + "ACID",
-				Material.PUMPKIN_SEEDS,
+				Material.PAPER,
 				PotionEffectType.CONFUSION,
 				PotionEffectType.NIGHT_VISION,
 				PotionEffectType.HEALTH_BOOST,
