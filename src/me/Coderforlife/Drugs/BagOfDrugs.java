@@ -24,11 +24,10 @@ public class BagOfDrugs implements Listener {
 	public static String bagName = ChatColor.GOLD + "" + ChatColor.BOLD + "Bag Of Drugs";
 	public static String invName = ChatColor.translateAlternateColorCodes('&', "          &6&l&oBag Of Drugs");
 	private Main plugin;
-	private Drugs drugs;
+	Drugs drugs = new Drugs();
 
-	public BagOfDrugs(Main plugin, Drugs drugs) {
+	public BagOfDrugs(Main plugin) {
 		this.setPlugin(plugin);
-		this.drugs = drugs;
 	}
 
 	public Main getPlugin() {
@@ -51,11 +50,11 @@ public class BagOfDrugs implements Listener {
 				if (p.hasPermission("drugs.use.bagofdrugs")) {
 					if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(bagName)) {
 						Inventory gui = Bukkit.createInventory(p, 18, invName);
-//						ItemStack[] menu_items = { drugs.WeedStack, drugs.Acid, drugs.Ciggy, drugs.Coke, drugs.Heroin,
-//								drugs.Molly, drugs.Percocet, drugs.Shrooms, drugs.Alcohol, drugs.DMT, drugs.Flakka,
-//								drugs.Ketamine, drugs.Meth, drugs.PCP, drugs.Salvia, drugs.Xannx, drugs.Oxy,
-//								drugs.Tussin };
-						gui.setContents(drugs.getDrugItemArray());
+						ItemStack[] menu_items = { drugs.WeedStack, drugs.Acid, drugs.Ciggy, drugs.Coke, drugs.Heroin,
+								drugs.Molly, drugs.Percocet, drugs.Shrooms, drugs.Alcohol, drugs.DMT, drugs.Flakka,
+								drugs.Ketamine, drugs.Meth, drugs.PCP, drugs.Salvia, drugs.Xannx, drugs.Oxy,
+								drugs.Tussin };
+						gui.setContents(menu_items);
 						p.playSound(p.getLocation(), Sound.AMBIENT_NETHER_WASTES_ADDITIONS, 12, 12);
 						p.openInventory(gui);
 
@@ -81,20 +80,178 @@ public class BagOfDrugs implements Listener {
 					p.setItemOnCursor(null);
 				}
 			}
-			if (!ev.getView().getTitle().equals(invName)) {
-				return;
-			}
-			ev.setCancelled(true);
-			
-			for (Drug drug : drugs.getAllDrugs()) {
-				if (!drug.isDrugItem(clickedItem)) {
-					continue;
+			if (ev.getView().getTitle().equals(invName)) {
+				ev.setCancelled(true);
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.WeedStack.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.WeedStack);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.WeedStack.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
 				}
-				p.getInventory().addItem(drug.getDrugItem());
-				p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given " + drug.getDisplayName());
-				p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
-				p.closeInventory();
-				p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Coke.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Coke);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Coke.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Molly.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Molly);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Molly.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Heroin.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Heroin);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Heroin.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Percocet.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Percocet);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Percocet.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Ciggy.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Ciggy);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Ciggy.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Acid.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Acid);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Acid.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Shrooms.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Shrooms);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Shrooms.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Alcohol.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Alcohol);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Alcohol.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.DMT.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.DMT);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.DMT.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Flakka.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Flakka);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Flakka.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Meth.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Meth);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Meth.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.PCP.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.PCP);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.PCP.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Salvia.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Salvia);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Salvia.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Ketamine.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Ketamine);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Ketamine.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Oxy.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Oxy);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Oxy.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Tussin.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Tussin);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Tussin.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+				if (clickedItem.getItemMeta().getDisplayName().equals(drugs.Xannx.getItemMeta().getDisplayName())) {
+					p.getInventory().addItem(drugs.Xannx);
+					p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given "
+							+ drugs.Xannx.getItemMeta().getDisplayName());
+					p.playSound(p.getLocation(), Sound.ENTITY_CAT_PURREOW, 20, 12);
+					p.closeInventory();
+					p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
+
+				}
+
+			} else {
+				return;
 			}
 		}
 
