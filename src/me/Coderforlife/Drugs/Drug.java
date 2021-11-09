@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * A class to hold all information related to a drug.
@@ -22,19 +23,17 @@ public class Drug {
 	private final String displayName;
 	private final ItemStack drugItem;
 	private final String usePermission;
-	private final Recipe itemRecipe;
 	private final PotionEffectType[] effects;
+	private Recipe itemRecipe;
 	
 	public Drug(String name,
-	            String displayName, Material drugMaterial,
-	            String permission,
-	            Recipe drugRecipe,
+	            String displayName,
+	            Material drugMaterial,
 	            PotionEffectType... effects) {
 		this.name = name;
 		this.displayName = displayName;
 		this.drugItem = createDrugItem(drugMaterial);
-		this.usePermission = permission;
-		this.itemRecipe = drugRecipe;
+		this.usePermission = "drugs.use." + name.toLowerCase();
 		this.effects = effects;
 	}
 	
@@ -44,6 +43,10 @@ public class Drug {
 	
 	public String getUsePermission() {
 		return usePermission;
+	}
+	
+	public void setItemRecipe(Recipe itemRecipe) {
+		this.itemRecipe = itemRecipe;
 	}
 	
 	public Recipe getItemRecipe() {
