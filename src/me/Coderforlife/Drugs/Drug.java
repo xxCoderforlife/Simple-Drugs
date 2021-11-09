@@ -41,6 +41,14 @@ public class Drug {
 		return name;
 	}
 	
+	public String getDisplayName() {
+		return displayName;
+	}
+	
+	public ItemStack getDrugItem() {
+		return drugItem.clone();
+	}
+	
 	public String getUsePermission() {
 		return usePermission;
 	}

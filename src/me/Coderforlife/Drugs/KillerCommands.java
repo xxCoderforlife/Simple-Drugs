@@ -16,12 +16,13 @@ public class KillerCommands implements CommandExecutor {
 
 	private Main plugin;
 
-	public KillerCommands(Main plugin) {
+	public KillerCommands(Main plugin, Drugs D) {
 		this.setPlugin(plugin);
+		this.D = D;
 	}
 
 	PlayerJoin pj = new PlayerJoin();
-	Drugs D = new Drugs();
+	Drugs D;
 
 	public Main getPlugin() {
 		return this.plugin;
@@ -89,24 +90,9 @@ public class KillerCommands implements CommandExecutor {
 					} else if (args[0].equalsIgnoreCase("list")) {
 						if (p.hasPermission("drugs.list")) {
 							p.sendMessage(header);
-							p.sendMessage(dash + D.WeedStack.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Molly.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Coke.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Heroin.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Percocet.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Ciggy.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Acid.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Alcohol.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.DMT.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Flakka.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Ketamine.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Meth.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Oxy.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.PCP.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Salvia.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Shrooms.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Tussin.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Xannx.getItemMeta().getDisplayName());
+							for (Drug drug : D.getAllDrugs()) {
+								p.sendMessage(dash + drug.getDisplayName());
+							}
 
 						} else {
 							p.sendMessage(

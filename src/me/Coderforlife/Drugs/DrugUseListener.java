@@ -1,5 +1,7 @@
 package me.Coderforlife.Drugs;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,11 +17,11 @@ import java.util.List;
  */
 public class DrugUseListener implements Listener {
 	
-	private final List<Drug> availableDrugs;
+	private final Drugs drugs;
 	private final Main plugin;
 	
-	public DrugUseListener(Main plugin, List<Drug> availableDrugs) {
-		this.availableDrugs = availableDrugs;
+	public DrugUseListener(Main plugin, Drugs drugs) {
+		this.drugs = drugs;
 		this.plugin = plugin;
 	}
 	
@@ -38,21 +40,32 @@ public class DrugUseListener implements Listener {
 		ItemStack itemInHand = p.getInventory().getItemInMainHand();
 		Drug drug = matchDrug(itemInHand);
 		
-		if (null == drug || !p.hasPermission(drug.getUsePermission())) {
+		if (null == drug) {
+			return;
+		}
+		if (!p.hasPermission(drug.getUsePermission())) {
+			p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + drug.getDisplayName());
 			return;
 		}
 		if (itemInHand.getAmount() > 1) {
 			p.sendMessage(Main.prefix + Main.stack);
 			return;
 		}
-		drug.influencePlayer(p, plugin.getCustomConfig());
+		
+		try {
+			drug.influencePlayer(p, plugin.getCustomConfig());
+		} catch (Exception e1) {
+			p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Error in the Console");
+			Bukkit.getLogger().severe(Main.prefix + ChatColor.GREEN + "Send this Error to xxCoderforlife on https://Spigotmc.org");
+			e1.printStackTrace();
+		}
 		p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
 		itemInHand.getAmount();
 		itemInHand.setAmount(0);
 	}
 	
 	private Drug matchDrug(ItemStack item) {
-		for (Drug drug : availableDrugs) {
+		for (Drug drug : drugs.getAllDrugs()) {
 			if (drug.isDrugItem(item)) {
 				return drug;
 			}
