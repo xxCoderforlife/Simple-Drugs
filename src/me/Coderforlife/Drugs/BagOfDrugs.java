@@ -50,11 +50,7 @@ public class BagOfDrugs implements Listener {
 				if (p.hasPermission("drugs.use.bagofdrugs")) {
 					if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(bagName)) {
 						Inventory gui = Bukkit.createInventory(p, 18, invName);
-						ItemStack[] menu_items = { drugs.WeedStack, drugs.Acid, drugs.Ciggy, drugs.Coke, drugs.Heroin,
-								drugs.Molly, drugs.Percocet, drugs.Shrooms, drugs.Alcohol, drugs.DMT, drugs.Flakka,
-								drugs.Ketamine, drugs.Meth, drugs.PCP, drugs.Salvia, drugs.Xannx, drugs.Oxy,
-								drugs.Tussin };
-						gui.setContents(menu_items);
+						gui.setContents(drugs.getDrugItemArray());
 						p.playSound(p.getLocation(), Sound.AMBIENT_NETHER_WASTES_ADDITIONS, 12, 12);
 						p.openInventory(gui);
 
