@@ -1,8 +1,4 @@
 package me.Coderforlife.Drugs;
-<<<<<<< HEAD
-=======
-
->>>>>>> b9c930ead7f7ebbca59ff71b10b61f124da9ccdd
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,14 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
-<<<<<<< HEAD
 import java.util.ArrayList;
-=======
-
-import java.util.ArrayList;
-import java.util.Locale;
-
->>>>>>> b9c930ead7f7ebbca59ff71b10b61f124da9ccdd
 /**
  * A class to hold all information related to a drug.
  */
@@ -43,11 +32,7 @@ public class Drug {
 		this.effects = effects;
 		this.drugItem = createDrugItem(drugMaterial);
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> b9c930ead7f7ebbca59ff71b10b61f124da9ccdd
 	public String getName() {
 		return name;
 	}
@@ -100,11 +85,7 @@ public class Drug {
 		
 		ArrayList<String> lore = new ArrayList<>();
 		lore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> b9c930ead7f7ebbca59ff71b10b61f124da9ccdd
 		for (PotionEffectType type : effects) {
 			lore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + toTitleCase(type));
 		}
@@ -113,7 +94,6 @@ public class Drug {
 		drugItem.setItemMeta(meta);
 		return drugItem;
 	}
-<<<<<<< HEAD
 
 	private String toTitleCase(PotionEffectType type) {
 		String[] words = type.getName().split("_");
@@ -129,18 +109,3 @@ public class Drug {
 		return builder.toString().trim();
 	}
 }
-=======
-	
-	private String toTitleCase(PotionEffectType type) {
-		String[] words = type.getName().split("_");
-		StringBuilder builder = new StringBuilder();
-		
-		for (int i = 0; i < words.length; i++) {
-			builder.append(Character.toUpperCase(words[i].charAt(0)));
-			builder.append(words[i].substring(1).toLowerCase());
-			builder.append(" ");
-		}
-		return builder.toString().trim();
-	}
-}
->>>>>>> b9c930ead7f7ebbca59ff71b10b61f124da9ccdd

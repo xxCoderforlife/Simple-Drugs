@@ -54,7 +54,6 @@ public class BagOfDrugs implements Listener {
 					if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(bagName)) {
 						Inventory gui = Bukkit.createInventory(p, 18, invName);
 						gui.setContents(drugs.getDrugItemArray());
-<<<<<<< HEAD
 						Location loc = p.getLocation();
 						for (int degree = 0; degree < 360; degree++) {
 						    double radians = Math.toRadians(degree);
@@ -64,8 +63,6 @@ public class BagOfDrugs implements Listener {
 						    loc.getWorld().playEffect(loc, Effect.ENDER_SIGNAL, degree);
 						    loc.subtract(x,0,z);
 						}
-=======
->>>>>>> b9c930ead7f7ebbca59ff71b10b61f124da9ccdd
 						p.playSound(p.getLocation(), Sound.AMBIENT_NETHER_WASTES_ADDITIONS, 12, 12);
 						p.openInventory(gui);
 

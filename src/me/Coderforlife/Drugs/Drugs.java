@@ -35,7 +35,6 @@ public class Drugs {
 	public void setPlugin(Main plugin) {
 		this.plugin = plugin;
 	}
-<<<<<<< HEAD
 	
 	/**
 	 * Returns a list of all drugs in the plugin
@@ -53,46 +52,6 @@ public class Drugs {
 	
 	public void enableDrug(Drug drug) {
 		Bukkit.addRecipe(drug.getItemRecipe());
-=======
-
-	public Drugs() {
-		return;
-	}
-
-	private ItemStack weed(ItemStack is) {
-		ItemMeta weedMeta = is.getItemMeta();
-		weedMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		weedMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		weedMeta.setDisplayName(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "WEED");
-		ArrayList<String> weedLore = new ArrayList<>();
-		weedLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		weedLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slowness");
-		weedLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Luck");
-		weedLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slow Falling");
-		weedLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slow Digging");
-		weedLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-		weedMeta.setLore(weedLore);
-		is.setItemMeta(weedMeta);
-		return is;
-	}
-
-	private ItemStack percocet(ItemStack is) {
-		ItemMeta percocetMeta = is.getItemMeta();
-		percocetMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		percocetMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		percocetMeta.setDisplayName(ChatColor.WHITE + "" + ChatColor.BOLD + "PERCOCET");
-		ArrayList<String> percocetLore = new ArrayList<>();
-		percocetLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Confusion");
-		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slow");
-		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Luck");
-		percocetLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Night Vision");
-		percocetLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-
-		percocetMeta.setLore(percocetLore);
-		is.setItemMeta(percocetMeta);
-		return is;
->>>>>>> b9c930ead7f7ebbca59ff71b10b61f124da9ccdd
 	}
 	
 	/**
@@ -120,15 +79,9 @@ public class Drugs {
 				PotionEffectType.NIGHT_VISION);
 		
 		Drug acid = new Drug(
-<<<<<<< HEAD
 				"Acid",
 				ChatColor.AQUA + "" + ChatColor.BOLD + "ACID",
 				Material.PUMPKIN_SEEDS,
-=======
-				"Heroin",
-				ChatColor.AQUA + "" + ChatColor.BOLD + "ACID",
-				Material.PAPER,
->>>>>>> b9c930ead7f7ebbca59ff71b10b61f124da9ccdd
 				PotionEffectType.CONFUSION,
 				PotionEffectType.NIGHT_VISION,
 				PotionEffectType.HEALTH_BOOST,
@@ -172,11 +125,7 @@ public class Drugs {
 				PotionEffectType.SLOW_DIGGING);
 		
 		Drug shrooms = new Drug(
-<<<<<<< HEAD
 				"Shrooms",
-=======
-				"shrooms",
->>>>>>> b9c930ead7f7ebbca59ff71b10b61f124da9ccdd
 				ChatColor.GRAY + "" + ChatColor.BOLD + "SHROOMS",
 				Material.CRIMSON_FUNGUS,
 				PotionEffectType.LUCK,
@@ -298,274 +247,7 @@ public class Drugs {
 		drugItemArray = allDrugs.stream().map(Drug::getDrugItem).toArray(ItemStack[]::new);
 	}
 
-<<<<<<< HEAD
 	public Recipe WeedRecipe(ItemStack item) {
-=======
-	private ItemStack heroin(ItemStack is) {
-		ItemMeta heroinMeta = is.getItemMeta();
-		heroinMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		heroinMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		heroinMeta.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "HEROIN");
-		ArrayList<String> heroinLore = new ArrayList<>();
-		heroinLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		heroinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Weakness");
-		heroinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slowness");
-		heroinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Unluck");
-		heroinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Poison");
-		heroinLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-
-		heroinMeta.setLore(heroinLore);
-		is.setItemMeta(heroinMeta);
-		return is;
-	}
-
-	private ItemStack coke(ItemStack is) {
-		ItemMeta cokeMeta = is.getItemMeta();
-		cokeMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		cokeMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		cokeMeta.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "COKE");
-
-		ArrayList<String> cokeLore = new ArrayList<>();
-		cokeLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		cokeLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Increase");
-		cokeLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Fast Digging");
-		cokeLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Health Boost");
-		cokeLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Resistance");
-		cokeLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-		cokeMeta.setLore(cokeLore);
-		is.setItemMeta(cokeMeta);
-		return is;
-	}
-
-	private ItemStack ciggy(ItemStack is) {
-		ItemMeta CiggyMeta = is.getItemMeta();
-		CiggyMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		CiggyMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		CiggyMeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "CIGGY");
-		ArrayList<String> CiggyLore = new ArrayList<>();
-		CiggyLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		CiggyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Saturation");
-		CiggyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Resistance");
-		CiggyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Jump");
-		CiggyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slow Digging");
-		CiggyLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-
-		CiggyMeta.setLore(CiggyLore);
-		is.setItemMeta(CiggyMeta);
-		return is;
-	}
-
-	private ItemStack molly(ItemStack is) {
-		ItemMeta MollyMeta = is.getItemMeta();
-		MollyMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		MollyMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		MollyMeta.setDisplayName(ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "MOLLY");
-		ArrayList<String> MollyLore = new ArrayList<>();
-		MollyLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		MollyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Confusion");
-		MollyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Speed");
-		MollyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Fast Digging");
-		MollyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Fire Resistance");
-		MollyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Night Vision");
-		MollyLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-
-		MollyMeta.setLore(MollyLore);
-		is.setItemMeta(MollyMeta);
-		return is;
-	}
-
-	private ItemStack shrooms(ItemStack is) {
-		ItemMeta shroomsMeta = is.getItemMeta();
-		shroomsMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		shroomsMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		shroomsMeta.setDisplayName(ChatColor.GRAY + "" + ChatColor.BOLD + "SHROOMS");
-		ArrayList<String> shroomsLore = new ArrayList<>();
-		shroomsLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		shroomsLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Luck");
-		shroomsLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Night Vision");
-		shroomsLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Confusion");
-		shroomsLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Glowing");
-
-		shroomsLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-		shroomsMeta.setLore(shroomsLore);
-		is.setItemMeta(shroomsMeta);
-		return is;
-	}
-
-	private ItemStack salvia(ItemStack is) {
-		ItemMeta salviaMeta = is.getItemMeta();
-		salviaMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		salviaMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		salviaMeta.setDisplayName(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "SALVIA");
-		ArrayList<String> salviaLore = new ArrayList<>();
-		salviaLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		salviaLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Night Vision");
-		salviaLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Regeneration");
-		salviaLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Weakness");
-		salviaLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Glowing");
-
-		salviaLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-		salviaMeta.setLore(salviaLore);
-		is.setItemMeta(salviaMeta);
-		return is;
-	}
-
-	private ItemStack pcp(ItemStack is) {
-		ItemMeta pcpMeta = is.getItemMeta();
-		pcpMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		pcpMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		pcpMeta.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "PCP");
-		ArrayList<String> pcpLore = new ArrayList<>();
-		pcpLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		pcpLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Resistance");
-		pcpLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Bad Omen");
-		pcpLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Confusion");
-		pcpLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-		pcpMeta.setLore(pcpLore);
-		is.setItemMeta(pcpMeta);
-		return is;
-	}
-
-	private ItemStack dmt(ItemStack is) {
-		ItemMeta dmtMeta = is.getItemMeta();
-		dmtMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		dmtMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		dmtMeta.setDisplayName(ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "DMT");
-		ArrayList<String> dmtLore = new ArrayList<>();
-		dmtLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		dmtLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Resistance");
-		dmtLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slow Falling");
-		dmtLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slowness");
-		dmtLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Glowing");
-		dmtLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-		dmtMeta.setLore(dmtLore);
-		is.setItemMeta(dmtMeta);
-		return is;
-	}
-
-	private ItemStack alcohol(ItemStack is) {
-		ItemMeta alcoholMeta = is.getItemMeta();
-		alcoholMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		alcoholMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		alcoholMeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "ALCOHOL");
-		ArrayList<String> alcoholLore = new ArrayList<>();
-		alcoholLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		alcoholLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Speed");
-		alcoholLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Night Vison");
-		alcoholLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Hunger");
-		alcoholLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Confusion");
-		alcoholLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-		alcoholMeta.setLore(alcoholLore);
-		is.setItemMeta(alcoholMeta);
-		return is;
-	}
-
-	private ItemStack flakka(ItemStack is) {
-		ItemMeta flakkaMeta = is.getItemMeta();
-		flakkaMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		flakkaMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		flakkaMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "FLAKKA");
-		ArrayList<String> flakkaLore = new ArrayList<>();
-		flakkaLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		flakkaLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Speed");
-		flakkaLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Resistance");
-		flakkaLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Unluck");
-		flakkaLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Dolphins Grace");
-
-		flakkaLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-		flakkaMeta.setLore(flakkaLore);
-		is.setItemMeta(flakkaMeta);
-		return is;
-	}
-
-	private ItemStack meth(ItemStack is) {
-		ItemMeta methMeta = is.getItemMeta();
-		methMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		methMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		methMeta.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "METH");
-		ArrayList<String> methLore = new ArrayList<>();
-		methLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		methLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Absorption");
-		methLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Resistance");
-		methLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Fire Resistance");
-		methLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Levitation");
-		methLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-		methMeta.setLore(methLore);
-		is.setItemMeta(methMeta);
-		return is;
-	}
-
-	private ItemStack ketamine(ItemStack is) {
-		ItemMeta ketamineMeta = is.getItemMeta();
-		ketamineMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		ketamineMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		ketamineMeta.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + "KETAMINE");
-		ArrayList<String> ketamineLore = new ArrayList<>();
-		ketamineLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		ketamineLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Night Vison");
-		ketamineLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Speed");
-		ketamineLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Fast Digging");
-		ketamineLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Confusion");
-		ketamineLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slow Falling");
-		ketamineLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-		ketamineMeta.setLore(ketamineLore);
-		is.setItemMeta(ketamineMeta);
-		return is;
-	}
-
-	private ItemStack oxy(ItemStack is) {
-		ItemMeta oxyMeta = is.getItemMeta();
-		oxyMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		oxyMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		oxyMeta.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "OXY");
-		ArrayList<String> oxyLore = new ArrayList<>();
-		oxyLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		oxyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Absorption");
-		oxyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Damage Resistance");
-		oxyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Confusion");
-		oxyLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Glowing");
-		oxyLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-		oxyMeta.setLore(oxyLore);
-		is.setItemMeta(oxyMeta);
-		return is;
-	}
-
-	private ItemStack xannx(ItemStack is) {
-		ItemMeta xannxMeta = is.getItemMeta();
-		xannxMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		xannxMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		xannxMeta.setDisplayName(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "XANAX");
-		ArrayList<String> xannxLore = new ArrayList<>();
-		xannxLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		xannxLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slowness");
-		xannxLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slow Digging");
-		xannxLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Slow Falling");
-		xannxLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Blindness");
-		xannxLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-		xannxMeta.setLore(xannxLore);
-		is.setItemMeta(xannxMeta);
-		return is;
-	}
-
-	private ItemStack tussin(ItemStack is) {
-		ItemMeta tussinMeta = is.getItemMeta();
-		tussinMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		tussinMeta.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
-		tussinMeta.setDisplayName(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "TUSSIN");
-		ArrayList<String> tussinLore = new ArrayList<>();
-		tussinLore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
-		tussinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Increase Damage");
-		tussinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Heal");
-		tussinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Jump");
-		tussinLore.add(ChatColor.GRAY + "- " + ChatColor.GOLD + "Confusion");
-		tussinLore.add(ChatColor.GRAY + "" + ChatColor.UNDERLINE + "Right-Click To Use");
-		tussinMeta.setLore(tussinLore);
-		is.setItemMeta(tussinMeta);
-		return is;
-	}
-
-	public void WeedRecipe() {
->>>>>>> b9c930ead7f7ebbca59ff71b10b61f124da9ccdd
 		ShapedRecipe weed = new ShapedRecipe(new NamespacedKey(this.plugin, "drug_wheat-weed"),
 				new ItemStack(item));
 
