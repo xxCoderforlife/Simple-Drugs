@@ -1,5 +1,5 @@
 name: Simple-Drugs
-version: 2.7-dev+build232
+version: 2.7-dev+build242
 author: xxCoderforlife
 prefix: SD
 load: POSTWORLD
@@ -25,9 +25,9 @@ permissions:
  drugs.reload:
    description: Used for '/drugs reload' command.
    default: op
- drugs.command.bagofdrug:
+ drugs.command.bagofdrugs:
    description: Used for '/drugs bagofdrugs' command.
-   defualt: true
+   default: true
  drugs.list:
    description: Used for '/drugs list' command.
    default: true
@@ -91,3 +91,12 @@ permissions:
  drugs.use.xannx:
     description: To Use To Use Xanax
     default: true
+ drugs.command.bagofdrugs.others:
+    description: To Use /bagofdrugs <player>
+    default: op
+ drugs.soberup.others:
+    description: To Use /soberup <player>
+    default: op
+ drugs.updater:
+    description: Sends a messages to anyone with this perm that there is an update
+    default: op

@@ -1,8 +1,9 @@
-package me.Coderforlife.Drugs;
+package me.Coderforlife.Drugs.Events;
 
 import java.util.ArrayList;
 import java.util.List;
 
+//import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -13,6 +14,8 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import me.Coderforlife.Drugs.BagOfDrugs;
+import me.Coderforlife.Drugs.Main;
 import net.md_5.bungee.api.ChatColor;
 
 public class PlayerJoin implements Listener {
@@ -54,15 +57,11 @@ public class PlayerJoin implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent ev) {
+
 		Player p = ev.getPlayer();
-		if (plugin.drugsConfig.getBoolean("Drugs.JoinMessage")) {
-			p.sendMessage(Main.prefix
-					+ ChatColor.translateAlternateColorCodes('&', "&f&lServer is running &5&l&oSIMPLE DRUGS"));
-		}
 		if (plugin.drugsConfig.getBoolean(Main.bagofdrugs + ".GiveOnJoin")) {
 			if (!p.getInventory().contains(bag)) {
 				p.getInventory().addItem(bag);
-
 			}
 		} else {
 			return;

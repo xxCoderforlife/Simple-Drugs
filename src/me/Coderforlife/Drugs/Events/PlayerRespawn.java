@@ -1,9 +1,11 @@
-package me.Coderforlife.Drugs;
+package me.Coderforlife.Drugs.Events;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
+
+import me.Coderforlife.Drugs.Main;
 
 public class PlayerRespawn implements Listener {
 

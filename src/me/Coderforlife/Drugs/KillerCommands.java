@@ -12,16 +12,19 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
+import me.Coderforlife.Drugs.Events.PlayerJoin;
+
 public class KillerCommands implements CommandExecutor {
 
 	private Main plugin;
 
-	public KillerCommands(Main plugin) {
+	public KillerCommands(Main plugin, Drugs D) {
 		this.setPlugin(plugin);
+		this.D = D;
 	}
 
 	PlayerJoin pj = new PlayerJoin();
-	Drugs D = new Drugs();
+	Drugs D;
 
 	public Main getPlugin() {
 		return this.plugin;
@@ -70,11 +73,14 @@ public class KillerCommands implements CommandExecutor {
 						if (p.hasPermission("drugs.soberup")) {
 							if (!p.getActivePotionEffects().isEmpty()) {
 								for (PotionEffect effect : p.getActivePotionEffects()) {
-									p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 10, 42);
+									p.sendTitle(ChatColor.translateAlternateColorCodes('&', "&a&lSOBERED UP"),
+											ChatColor.translateAlternateColorCodes('&', "&l&egood job."), 10,
+											4 * 20, 10);
+									p.playSound(p.getLocation(), Sound.BLOCK_BELL_RESONATE, 1, 2);
 									p.removePotionEffect(effect.getType());
 								}
 							} else {
-								p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 12, 1);
+								p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1, (float)0.2);
 								// Text | SubText | FadeIn | Stay | FadeOut
 								p.sendTitle(ChatColor.translateAlternateColorCodes('&', "&c&lYOU ARE SOBER"),
 										ChatColor.translateAlternateColorCodes('&', "&f&oYou need some drugs"), 10,
@@ -89,24 +95,9 @@ public class KillerCommands implements CommandExecutor {
 					} else if (args[0].equalsIgnoreCase("list")) {
 						if (p.hasPermission("drugs.list")) {
 							p.sendMessage(header);
-							p.sendMessage(dash + D.WeedStack.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Molly.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Coke.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Heroin.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Percocet.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Ciggy.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Acid.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Alcohol.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.DMT.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Flakka.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Ketamine.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Meth.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Oxy.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.PCP.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Salvia.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Shrooms.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Tussin.getItemMeta().getDisplayName());
-							p.sendMessage(dash + D.Xannx.getItemMeta().getDisplayName());
+							for (Drug drug : D.getAllDrugs()) {
+								p.sendMessage(dash + drug.getDisplayName());
+							}
 
 						} else {
 							p.sendMessage(
@@ -117,8 +108,12 @@ public class KillerCommands implements CommandExecutor {
 
 					} else if (args[0].equalsIgnoreCase("bagofdrugs")) {
 						if (p.hasPermission("drugs.command.bagofdrugs")) {
+							if(!p.getInventory().contains(pj.bag)) {
 							p.sendMessage(Main.prefix + ChatColor.GRAY + "You've Been Given The Bag Of Drugs");
 							p.getInventory().addItem(pj.bag);
+							}else {	
+								p.sendMessage(Main.prefix + ChatColor.RED + "You already have the bag");
+							}
 						} else {
 							p.sendMessage(
 									Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
