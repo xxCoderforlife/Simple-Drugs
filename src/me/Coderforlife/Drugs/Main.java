@@ -32,27 +32,27 @@ public class Main extends JavaPlugin {
 	@SuppressWarnings("unused")
 	@Override
 	public void onEnable() {
-		 int pluginId = 13155;
-		 Metrics metrics = new Metrics(this,pluginId);
-		 new Updater(this, 9684, "drugs.updater").checkForUpdate();
+		int pluginId = 13155;
+		Metrics metrics = new Metrics(this, pluginId);
+		new Updater(this, 9684).checkForUpdate();
 
 		getServer().getConsoleSender().sendMessage(header1);
 		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Loading all Class files and Handlers...");
 		createCustomConfig();
-		
+
 		D = new Drugs(this);
 		for (Drug drug : D.getAllDrugs()) {
 			boolean isCraftingDisabled = drugsConfig.getBoolean("Drugs." + drug.getName() + ".DisableCrafting");
-			
+
 			if (isCraftingDisabled) {
 				getServer().getConsoleSender()
-						.sendMessage(ChatColor.WHITE + "Weed Recipe:" + ChatColor.RED + " NOT LOADED");
+						.sendMessage(ChatColor.WHITE + drug.getName() + ":" + ChatColor.RED + " NOT LOADED");
 			} else {
 				D.enableDrug(drug);
-				getServer().getConsoleSender().sendMessage(ChatColor.WHITE + "Weed Recipe:" + ChatColor.GREEN + " LOADED");
+				getServer().getConsoleSender()
+						.sendMessage(ChatColor.WHITE + drug.getName() + ":" + ChatColor.GREEN + " LOADED");
 			}
 		}
-
 		try {
 
 			RegisterEvents();

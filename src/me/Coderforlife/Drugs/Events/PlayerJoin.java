@@ -3,6 +3,7 @@ package me.Coderforlife.Drugs.Events;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 //import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -63,8 +64,17 @@ public class PlayerJoin implements Listener {
 			if (!p.getInventory().contains(bag)) {
 				p.getInventory().addItem(bag);
 			}
-		} else {
-			return;
+			if(plugin.drugsConfig.getBoolean("Drugs.JoinMessage")) {
+				Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+					@Override
+					public void run() {
+					p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&',
+							"&f&lServer is running &5&l&oSIMPLE DRUGS"));
+			}
+			},40l);
+			}else {
+				p.sendMessage("hi im a debug message.");
+			}
 		}
 
 	}

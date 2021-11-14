@@ -1,5 +1,5 @@
 name: Simple-Drugs
-version: 2.7-dev+build242
+version: 2.7-dev+build244
 author: xxCoderforlife
 prefix: SD
 load: POSTWORLD
@@ -17,35 +17,35 @@ commands:
 #PERMISSIONS
 permissions:
  drugs.main:
-   description: Used for '/drugs' comamnd.
-   default: true
+    description: Used for '/drugs' comamnd.
+    default: true
  drugs.use.bagofdrugs:
-   description: Permission to use the Bag Of Drugs
-   default: true
+    description: Permission to use the Bag Of Drugs
+    default: true
  drugs.reload:
-   description: Used for '/drugs reload' command.
-   default: op
+    description: Used for '/drugs reload' command.
+    default: op
  drugs.command.bagofdrugs:
-   description: Used for '/drugs bagofdrugs' command.
-   default: true
+    description: Used for '/drugs bagofdrugs' command.
+    default: true
  drugs.list:
-   description: Used for '/drugs list' command.
-   default: true
+    description: Used for '/drugs list' command.
+    default: true
  drugs.soberup:
-   description: Used for '/drugs soberup' command.
-   default: true
+    description: Used for '/drugs soberup' command.
+    default: true
  drugs.help:
-   description: Used for '/drugs help' command.
-   default: true
+    description: Used for '/drugs help' command.
+    default: true
  drugs.use.weed:
-   description: To use Weed
-   default: true
+    description: To use Weed
+    default: true
  drugs.use.coke:
-   description: To use Coke
-   default: true
+    description: To use Coke
+    default: true
  drugs.use.heroin:
-   description: To use Heroin
-   default: true
+    description: To use Heroin
+    default: true
  drugs.use.percocet:
     description: To use Percocet
     default: true
@@ -98,5 +98,5 @@ permissions:
     description: To Use /soberup <player>
     default: op
  drugs.updater:
-    description: Sends a messages to anyone with this perm that there is an update
+    description: Sends update message to player on Join
     default: op

@@ -30,7 +30,9 @@ public class TabCommands implements TabCompleter {
 			tab.add("soberup");
 		} else if (args.length == 2) {
 			for (Player all : Bukkit.getOnlinePlayers()) {
-				tab.remove(all.getName());
+				if (args[0].equalsIgnoreCase("bagofdrugs") || args[0].equalsIgnoreCase("soberup")) {
+					tab.add(all.getName());
+				}
 			}
 		}
 

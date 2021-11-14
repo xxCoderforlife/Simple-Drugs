@@ -56,14 +56,14 @@ public class BagOfDrugs implements Listener {
 						gui.setContents(drugs.getDrugItemArray());
 						Location loc = p.getLocation();
 						for (int degree = 0; degree < 360; degree++) {
-						    double radians = Math.toRadians(degree);
-						    double x = Math.cos(radians);
-						    double z = Math.sin(radians);
-						    loc.add(x,0,z);
-						    loc.getWorld().playEffect(loc, Effect.ENDER_SIGNAL, degree);
-						    loc.subtract(x,0,z);
+							double radians = Math.toRadians(degree);
+							double x = Math.cos(radians);
+							double z = Math.sin(radians);
+							loc.add(x, 0, z);
+							loc.getWorld().playEffect(loc, Effect.SMOKE, degree);
+							loc.subtract(x, 0, z);
 						}
-						p.playSound(p.getLocation(), Sound.AMBIENT_NETHER_WASTES_ADDITIONS, 12, 12);
+						p.playSound(p.getLocation(), Sound.AMBIENT_CRIMSON_FOREST_ADDITIONS, 1, (float) 0.4);
 						p.openInventory(gui);
 
 					}
@@ -92,7 +92,7 @@ public class BagOfDrugs implements Listener {
 				return;
 			}
 			ev.setCancelled(true);
-			
+
 			for (Drug drug : drugs.getAllDrugs()) {
 				if (!drug.isDrugItem(clickedItem)) {
 					continue;

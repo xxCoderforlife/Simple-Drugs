@@ -15,9 +15,9 @@ import java.util.List;
 
 public class Drugs {
 
-	//a list with all drugs stored in it
+	// a list with all drugs stored in it
 	private List<Drug> allDrugs;
-	//an array that holds all the items of drugs
+	// an array that holds all the items of drugs
 	private ItemStack[] drugItemArray;
 
 	private Main plugin;
@@ -35,195 +35,103 @@ public class Drugs {
 	public void setPlugin(Main plugin) {
 		this.plugin = plugin;
 	}
-	
+
 	/**
 	 * Returns a list of all drugs in the plugin
 	 */
 	public List<Drug> getAllDrugs() {
 		return allDrugs;
 	}
-	
+
 	/**
 	 * Returns an array containing the items of all drugs
 	 */
 	public ItemStack[] getDrugItemArray() {
 		return drugItemArray;
 	}
-	
+
 	public void enableDrug(Drug drug) {
 		Bukkit.addRecipe(drug.getItemRecipe());
 	}
-	
+
 	/**
-	 * Creates all drugs and their recipes. The recipes are not added to the server here.
+	 * Creates all drugs and their recipes. The recipes are not added to the server
+	 * here.
 	 */
 	private void loadDrugs() {
 		allDrugs.clear();
-		
-		Drug weed = new Drug(
-				"Weed",
-				ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "WEED",
-				Material.GREEN_DYE,
-				PotionEffectType.SLOW,
-				PotionEffectType.LUCK,
-				PotionEffectType.SLOW_FALLING,
+
+		Drug weed = new Drug("Weed", ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "WEED", Material.GREEN_DYE,
+				PotionEffectType.SLOW, PotionEffectType.LUCK, PotionEffectType.SLOW_FALLING,
 				PotionEffectType.SLOW_DIGGING);
-		
-		Drug percocet = new Drug(
-				"Percocet",
-				ChatColor.WHITE + "" + ChatColor.BOLD + "PERCOCET",
-				Material.PUMPKIN_SEEDS,
-				PotionEffectType.CONFUSION,
-				PotionEffectType.SLOW,
-				PotionEffectType.LUCK,
+
+		Drug percocet = new Drug("Percocet", ChatColor.WHITE + "" + ChatColor.BOLD + "PERCOCET", Material.PUMPKIN_SEEDS,
+				PotionEffectType.CONFUSION, PotionEffectType.SLOW, PotionEffectType.LUCK,
 				PotionEffectType.NIGHT_VISION);
-		
-		Drug acid = new Drug(
-				"Acid",
-				ChatColor.AQUA + "" + ChatColor.BOLD + "ACID",
-				Material.PUMPKIN_SEEDS,
-				PotionEffectType.CONFUSION,
-				PotionEffectType.NIGHT_VISION,
-				PotionEffectType.HEALTH_BOOST,
+
+		Drug acid = new Drug("Acid", ChatColor.AQUA + "" + ChatColor.BOLD + "ACID", Material.PUMPKIN_SEEDS,
+				PotionEffectType.CONFUSION, PotionEffectType.NIGHT_VISION, PotionEffectType.HEALTH_BOOST,
 				PotionEffectType.SLOW_FALLING);
-		
-		Drug coke = new Drug(
-				"Coke",
-				ChatColor.AQUA + "" + ChatColor.BOLD + "COKE",
-				Material.SUGAR,
-				PotionEffectType.INCREASE_DAMAGE,
-				PotionEffectType.FAST_DIGGING,
-				PotionEffectType.HEALTH_BOOST,
+
+		Drug coke = new Drug("Coke", ChatColor.AQUA + "" + ChatColor.BOLD + "COKE", Material.SUGAR,
+				PotionEffectType.INCREASE_DAMAGE, PotionEffectType.FAST_DIGGING, PotionEffectType.HEALTH_BOOST,
 				PotionEffectType.DAMAGE_RESISTANCE);
-		
-		Drug heroin = new Drug(
-				"Heroin",
-				ChatColor.DARK_RED + "" + ChatColor.BOLD + "HEROIN",
-				Material.WITHER_ROSE,
-				PotionEffectType.WEAKNESS,
-				PotionEffectType.SLOW,
-				PotionEffectType.UNLUCK,
-				PotionEffectType.POISON);
-		
-		Drug molly = new Drug(
-				"Molly",
-				ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "MOLLY",
-				Material.IRON_NUGGET,
-				PotionEffectType.CONFUSION,
-				PotionEffectType.SPEED,
-				PotionEffectType.FAST_DIGGING,
-				PotionEffectType.FIRE_RESISTANCE,
-				PotionEffectType.NIGHT_VISION);
-		
-		Drug ciggy = new Drug(
-				"Ciggy",
-				ChatColor.GOLD + "" + ChatColor.BOLD + "CIGGY",
-				Material.REDSTONE_TORCH,
-				PotionEffectType.SATURATION,
-				PotionEffectType.DAMAGE_RESISTANCE,
-				PotionEffectType.JUMP,
+
+		Drug heroin = new Drug("Heroin", ChatColor.DARK_RED + "" + ChatColor.BOLD + "HEROIN", Material.WITHER_ROSE,
+				PotionEffectType.WEAKNESS, PotionEffectType.SLOW, PotionEffectType.UNLUCK, PotionEffectType.POISON);
+
+		Drug molly = new Drug("Molly", ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "MOLLY", Material.IRON_NUGGET,
+				PotionEffectType.CONFUSION, PotionEffectType.SPEED, PotionEffectType.FAST_DIGGING,
+				PotionEffectType.FIRE_RESISTANCE, PotionEffectType.NIGHT_VISION);
+
+		Drug ciggy = new Drug("Ciggy", ChatColor.GOLD + "" + ChatColor.BOLD + "CIGGY", Material.REDSTONE_TORCH,
+				PotionEffectType.SATURATION, PotionEffectType.DAMAGE_RESISTANCE, PotionEffectType.JUMP,
 				PotionEffectType.SLOW_DIGGING);
-		
-		Drug shrooms = new Drug(
-				"Shrooms",
-				ChatColor.GRAY + "" + ChatColor.BOLD + "SHROOMS",
-				Material.CRIMSON_FUNGUS,
-				PotionEffectType.LUCK,
-				PotionEffectType.NIGHT_VISION,
-				PotionEffectType.CONFUSION,
+
+		Drug shrooms = new Drug("Shrooms", ChatColor.GRAY + "" + ChatColor.BOLD + "SHROOMS", Material.CRIMSON_FUNGUS,
+				PotionEffectType.LUCK, PotionEffectType.NIGHT_VISION, PotionEffectType.CONFUSION,
 				PotionEffectType.GLOWING);
-		
-		Drug salvia = new Drug(
-				"Salvia",
-				ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "SALVIA",
-				Material.DRIED_KELP,
-				PotionEffectType.NIGHT_VISION,
-				PotionEffectType.REGENERATION,
-				PotionEffectType.WEAKNESS,
+
+		Drug salvia = new Drug("Salvia", ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "SALVIA", Material.DRIED_KELP,
+				PotionEffectType.NIGHT_VISION, PotionEffectType.REGENERATION, PotionEffectType.WEAKNESS,
 				PotionEffectType.GLOWING);
-		
-		Drug pcp = new Drug(
-				"PCP",
-				ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "PCP",
-				Material.SPORE_BLOSSOM,
-				PotionEffectType.DAMAGE_RESISTANCE,
-				PotionEffectType.BAD_OMEN,
+
+		Drug pcp = new Drug("PCP", ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "PCP", Material.SPORE_BLOSSOM,
+				PotionEffectType.DAMAGE_RESISTANCE, PotionEffectType.BAD_OMEN, PotionEffectType.CONFUSION);
+
+		Drug dmt = new Drug("DMT", ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "DMT", Material.GLOWSTONE_DUST,
+				PotionEffectType.DAMAGE_RESISTANCE, PotionEffectType.SLOW_FALLING, PotionEffectType.SLOW,
+				PotionEffectType.GLOWING);
+
+		Drug alcohol = new Drug("Alcohol", ChatColor.GOLD + "" + ChatColor.BOLD + "ALCOHOL", Material.WATER_BUCKET,
+				PotionEffectType.SPEED, PotionEffectType.NIGHT_VISION, PotionEffectType.HUNGER,
 				PotionEffectType.CONFUSION);
-		
-		Drug dmt = new Drug(
-				"DMT",
-				ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "DMT",
-				Material.GLOWSTONE_DUST,
-				PotionEffectType.DAMAGE_RESISTANCE,
-				PotionEffectType.SLOW_FALLING,
-				PotionEffectType.SLOW,
-				PotionEffectType.GLOWING);
-		
-		Drug alcohol = new Drug(
-				"Alcohol",
-				ChatColor.GOLD + "" + ChatColor.BOLD + "ALCOHOL",
-				Material.WATER_BUCKET,
-				PotionEffectType.SPEED,
-				PotionEffectType.NIGHT_VISION,
-				PotionEffectType.HUNGER,
-				PotionEffectType.CONFUSION);
-		
-		Drug flakka = new Drug(
-				"Flakka",
-				ChatColor.YELLOW + "" + ChatColor.BOLD + "FLAKKA",
-				Material.QUARTZ,
-				PotionEffectType.SPEED,
-				PotionEffectType.DAMAGE_RESISTANCE,
-				PotionEffectType.UNLUCK,
+
+		Drug flakka = new Drug("Flakka", ChatColor.YELLOW + "" + ChatColor.BOLD + "FLAKKA", Material.QUARTZ,
+				PotionEffectType.SPEED, PotionEffectType.DAMAGE_RESISTANCE, PotionEffectType.UNLUCK,
 				PotionEffectType.DOLPHINS_GRACE);
-		
-		Drug meth = new Drug(
-				"Meth",
-				ChatColor.AQUA + "" + ChatColor.BOLD + "METH",
-				Material.PRISMARINE_SHARD,
-				PotionEffectType.ABSORPTION,
-				PotionEffectType.DAMAGE_RESISTANCE,
-				PotionEffectType.FIRE_RESISTANCE,
+
+		Drug meth = new Drug("Meth", ChatColor.AQUA + "" + ChatColor.BOLD + "METH", Material.PRISMARINE_SHARD,
+				PotionEffectType.ABSORPTION, PotionEffectType.DAMAGE_RESISTANCE, PotionEffectType.FIRE_RESISTANCE,
 				PotionEffectType.LEVITATION);
-		
-		Drug ketamine = new Drug(
-				"Ketamine",
-				ChatColor.RED + "" + ChatColor.BOLD + "KETAMINE",
-				Material.POWDER_SNOW_BUCKET,
-				PotionEffectType.NIGHT_VISION,
-				PotionEffectType.SPEED,
-				PotionEffectType.FAST_DIGGING,
-				PotionEffectType.CONFUSION,
-				PotionEffectType.SLOW_FALLING);
-		
-		Drug oxy = new Drug(
-				"Oxy",
-				ChatColor.AQUA + "" + ChatColor.BOLD + "OXY",
-				Material.WHITE_DYE,
-				PotionEffectType.ABSORPTION,
-				PotionEffectType.DAMAGE_RESISTANCE,
-				PotionEffectType.CONFUSION,
+
+		Drug ketamine = new Drug("Ketamine", ChatColor.RED + "" + ChatColor.BOLD + "KETAMINE",
+				Material.POWDER_SNOW_BUCKET, PotionEffectType.NIGHT_VISION, PotionEffectType.SPEED,
+				PotionEffectType.FAST_DIGGING, PotionEffectType.CONFUSION, PotionEffectType.SLOW_FALLING);
+
+		Drug oxy = new Drug("Oxy", ChatColor.AQUA + "" + ChatColor.BOLD + "OXY", Material.WHITE_DYE,
+				PotionEffectType.ABSORPTION, PotionEffectType.DAMAGE_RESISTANCE, PotionEffectType.CONFUSION,
 				PotionEffectType.GLOWING);
-		
-		Drug tussin = new Drug(
-				"Tussin",
-				ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "TUSSIN",
-				Material.PURPLE_CANDLE,
-				PotionEffectType.INCREASE_DAMAGE,
-				PotionEffectType.HEAL,
-				PotionEffectType.JUMP,
+
+		Drug tussin = new Drug("Tussin", ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "TUSSIN", Material.PURPLE_CANDLE,
+				PotionEffectType.INCREASE_DAMAGE, PotionEffectType.HEAL, PotionEffectType.JUMP,
 				PotionEffectType.CONFUSION);
-		
-		Drug xannx = new Drug(
-				"Xannx",
-				ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "XANAX",
-				Material.GREEN_CANDLE,
-				PotionEffectType.SLOW,
-				PotionEffectType.SLOW_DIGGING,
-				PotionEffectType.SLOW_FALLING,
+
+		Drug xannx = new Drug("Xannx", ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "XANAX", Material.GREEN_CANDLE,
+				PotionEffectType.SLOW, PotionEffectType.SLOW_DIGGING, PotionEffectType.SLOW_FALLING,
 				PotionEffectType.BLINDNESS);
-		
-		//creates the recipes one by one
+
+		// creates the recipes one by one
 		weed.setItemRecipe(WeedRecipe(weed.getDrugItem()));
 		acid.setItemRecipe(AcidRecipe(acid.getDrugItem()));
 		percocet.setItemRecipe(PercocetRecipe(percocet.getDrugItem()));
@@ -242,14 +150,14 @@ public class Drugs {
 		oxy.setItemRecipe(OxyRecipe(oxy.getDrugItem()));
 		tussin.setItemRecipe(TussinRecipe(tussin.getDrugItem()));
 		xannx.setItemRecipe(XannxRecipe(xannx.getDrugItem()));
-		
-		allDrugs.addAll(Arrays.asList(weed, acid, percocet, coke, heroin, molly, ciggy, shrooms, salvia, pcp, dmt, alcohol, flakka, meth, ketamine, oxy, tussin, xannx));
+
+		allDrugs.addAll(Arrays.asList(weed, acid, percocet, coke, heroin, molly, ciggy, shrooms, salvia, pcp, dmt,
+				alcohol, flakka, meth, ketamine, oxy, tussin, xannx));
 		drugItemArray = allDrugs.stream().map(Drug::getDrugItem).toArray(ItemStack[]::new);
 	}
 
 	public Recipe WeedRecipe(ItemStack item) {
-		ShapedRecipe weed = new ShapedRecipe(new NamespacedKey(this.plugin, "drug_wheat-weed"),
-				new ItemStack(item));
+		ShapedRecipe weed = new ShapedRecipe(new NamespacedKey(this.plugin, "drug_wheat-weed"), new ItemStack(item));
 
 		weed.shape("WDW", " D ", "WWW");
 		weed.setIngredient('W', Material.WHEAT);
