@@ -1,5 +1,5 @@
 name: Simple-Drugs
-version: 2.7-dev+build244
+version: 2.7-dev+build252
 author: xxCoderforlife
 prefix: SD
 load: POSTWORLD
@@ -100,3 +100,57 @@ permissions:
  drugs.updater:
     description: Sends update message to player on Join
     default: op
+ drugs.craft.weed:
+    description: To craft Weed
+    default: true
+ drugs.craft.coke:
+    description: To craft Coke
+    default: true
+ drugs.craft.heroin:
+    description: To craft Heroin
+    default: true
+ drugs.craft.percocet:
+    description: To craft Percocet
+    default: true
+ drugs.craft.acid:
+    description: To craft Acid
+    default: true
+ drugs.craft.molly:
+    description: To craft Molly
+    default: true
+ drugs.craft.ciggy:
+    description: To craft Ciggy
+    default: true
+ drugs.craft.alcohol:
+    description: To craft Alcohol
+    default: true
+ drugs.craft.dmt:
+    description: To craft DMT
+    default: true
+ drugs.craft.flakka:
+    description: To craft Flakka
+    default: true
+ drugs.craft.ketamine:
+    description: To craft Ketamine
+    default: true
+ drugs.craft.meth:
+    description: To craft Meth
+    default: true
+ drugs.craft.pcp:
+    description: To craft PCP
+    default: true
+ drugs.craft.salvia:
+    description: To craft Salvia
+    default: true
+ drugs.craft.shrooms:
+    description: To craft Shrooms
+    default: true
+ drugs.craft.oxy:
+    description: To craft Oxy
+    default: true
+ drugs.craft.tussin:
+    description: To craft Tussin
+    default: true
+ drugs.craft.xannx:
+    description: To craft Xanax
+    default: true
