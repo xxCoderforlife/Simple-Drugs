@@ -1,5 +1,6 @@
 package me.Coderforlife.Drugs.Events;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,9 +21,6 @@ public class CraftingEvent implements Listener{
 		this.D = D;
 	}
 
-	public CraftingEvent() {
-		return;
-	}
 
 	public Main getPlugin() {
 		return this.plugin;
@@ -40,6 +38,11 @@ public class CraftingEvent implements Listener{
 				if(e.getInventory().getResult().equals(drugs.getDrugItem())) {
 					if(!p.hasPermission("drugs.craft" + drugs.getName().toLowerCase())) {
 						e.setCancelled(true);
+					}else {
+						p.sendMessage(
+								Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
+						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.RED
+								+ "drugs.craft." + drugs.getName());
 					}
 				}
 			}

@@ -32,6 +32,9 @@ public class Drug {
 		this.drugItem = createDrugItem(drugMaterial);
 	}
 
+
+
+
 	public String getName() {
 		return name;
 	}

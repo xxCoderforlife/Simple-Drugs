@@ -15,19 +15,24 @@ import me.Coderforlife.Drugs.Main;
 import net.md_5.bungee.api.ChatColor;
 
 public class Updater implements Listener {
+	private Main plugin;
+
 	public static String spigotVersion;
 	private static String currVersion;
 	private Boolean isnew = false;
 	private Boolean isdev = false;
-	private Main plugin;
 	private Integer recourceID;
 	JSONParser parser = new JSONParser();
 
 	public Updater(Main plugin, Integer recourceID) {
 		this.plugin = plugin;
 		this.recourceID = recourceID;
-		Bukkit.getPluginManager().registerEvents(this, plugin);
+		if(plugin.drugsConfig.getBoolean("Drugs.UpdateMessage") == true) {
+			Bukkit.getPluginManager().registerEvents(this, plugin);
+
+		}
 	}
+
 
 	public void checkForUpdate() {
 		currVersion = plugin.getDescription().getVersion();

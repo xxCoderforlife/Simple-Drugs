@@ -9,6 +9,10 @@
 #    https://xxcoderforlife.gitbook.io/simpledrugswiki/
 #=========================================================================#
 Drugs:
+#If you want to even check for an update
+ CheckForUpdate: true
+#If you want a message sent to players in game with the permission 'drugs.updater'
+ UpdateMessage: false
 #Sends the player a plugin message on Join
  JoinMessage: true
  BagOfDrugs:

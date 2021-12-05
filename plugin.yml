@@ -1,7 +1,8 @@
 name: Simple-Drugs
-version: 2.7-dev+build252
+version: 2.7-dev+build256
 author: xxCoderforlife
 prefix: SD
+softdepend: [Vault,PlaceHolderAPI]
 load: POSTWORLD
 api-version: 1.13
 website: https://www.spigotmc.org/resources/simple-drugs.9684/

@@ -40,26 +40,44 @@ public class KillerCommands implements CommandExecutor {
 
 	public static String dash = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "- ";
 	public static String header = ChatColor.translateAlternateColorCodes('&',
-			"&8&l=============&4&oSIMPLE DRUGS&8&l=============");
+			"&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&f&l[&4&o&lSIMPLE DRUGS&f&l]"
+			+ "&8&l&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=");
 
-	@Override
 	public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args) {
 		if (sender instanceof Player) {
 			Player p = (Player) sender;
 			if (p.hasPermission("drugs.main")) {
 				if (args.length == 0) {
 					p.sendMessage(header);
-					p.sendMessage(ChatColor.ITALIC + "Use these following commands.");
-					p.sendMessage(ChatColor.DARK_GRAY + "- " + ChatColor.WHITE + "/drugs help" + ChatColor.GRAY + "|"
-							+ ChatColor.ITALIC + " Basic How-to");
-					p.sendMessage(ChatColor.DARK_GRAY + "- " + ChatColor.WHITE + "/drugs soberup" + ChatColor.GRAY + "|"
-							+ ChatColor.ITALIC + " Remove all effects.");
-					p.sendMessage(ChatColor.DARK_GRAY + "- " + ChatColor.WHITE + "/drugs list" + ChatColor.GRAY + "|"
-							+ ChatColor.ITALIC + " A list of all the drugs.");
-					p.sendMessage(ChatColor.DARK_GRAY + "- " + ChatColor.WHITE + "/drugs bagofdrugs" + ChatColor.GRAY
-							+ "|" + ChatColor.ITALIC + " Be given The Bag Of Drugs.");
-					p.sendMessage(ChatColor.DARK_GRAY + "- " + ChatColor.WHITE + "/drugs reload" + ChatColor.GRAY + "|"
-							+ ChatColor.ITALIC + " Reload the config.");
+					p.sendMessage( 
+							ChatColor.translateAlternateColorCodes('&', 
+									"&7&o&nUse the following commands:"));
+					p.sendMessage(
+							ChatColor.translateAlternateColorCodes('&', 
+									"&7- &f/drugs help &8| &fHow-To and Wiki Link."));
+					p.sendMessage(
+							ChatColor.translateAlternateColorCodes('&', 
+									"&7- &f/drugs list &8| &fSee a list of All Drugs."));
+					p.sendMessage(
+							ChatColor.translateAlternateColorCodes('&', 
+									"&7- &f/drugs soberup &e[player] &8| &fSoberup yourself or another player."));
+					p.sendMessage(
+							ChatColor.translateAlternateColorCodes('&', 
+									"&7- &f/drugs bagofdrugs &e[player] &8| &fGives you or another player the bag."));
+					p.sendMessage(
+							ChatColor.translateAlternateColorCodes('&',
+									"&7- &f/drugs give &a<drug> &e[player] &8| &fGives you or another player a drug."));
+					p.sendMessage(
+							ChatColor.translateAlternateColorCodes('&',
+									"&7- &f/drugs version &8| &fCheck the version you are running."));
+					p.sendMessage(
+							ChatColor.translateAlternateColorCodes('&', 
+									"&7- &f/drugs reload &8| &fReloads the config."));
+					/*
+					p.sendMessage(
+							ChatColor.translateAlternateColorCodes('&', 
+									"&7- &f/drugs sell &8| &fSells the Drug in your hand."));
+									*/
 				} else if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("help")) {
 						if (p.hasPermission("drugs.help")) {
@@ -144,6 +162,17 @@ public class KillerCommands implements CommandExecutor {
 							p.sendMessage(
 									Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.reload");
 						}
+					}else if(args[0].equalsIgnoreCase("sell")) {
+						p.sendMessage(Main.prefix + 
+								ChatColor.translateAlternateColorCodes('&', 
+										"&eThis will be added in soon."));
+					}else if(args[0].equalsIgnoreCase("version")) {
+						if(p.hasPermission("drugs.version")) {
+							p.sendMessage(header);
+							p.sendMessage(Main.prefix + 
+									ChatColor.translateAlternateColorCodes('&', 
+											"&4&oYou are running version:&f " + plugin.getDescription().getVersion()));
+						}
 					}
 				} else if (args.length == 2) {
 					if (args[0].equalsIgnoreCase("bagofdrugs")) {
@@ -225,8 +254,8 @@ public class KillerCommands implements CommandExecutor {
 						}
 					}
 				} else if (args.length == 3) {
-					if (p.hasPermission("durgs.give.others")) {
-						if (args[0].equalsIgnoreCase("give")) {
+					if (args[0].equalsIgnoreCase("give")) {
+						if (p.hasPermission("durgs.give.others")) {
 							for (Drug drugs : D.getAllDrugs()) {
 								if (args[1].equalsIgnoreCase(drugs.getName())) {
 									for (Player players : Bukkit.getOnlinePlayers()) {
@@ -241,14 +270,14 @@ public class KillerCommands implements CommandExecutor {
 													args[2] + " &cis not a player"));
 										}
 									}
-								}
+												}
 							}
+						     }else {
+							p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
+							p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.DARK_GRAY
+									+ "drugs.give.others");
 						}
-					} else {
-						p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
-						p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.DARK_GRAY
-								+ "drugs.give.others");
-					}
+					}	 
 				} else if (args.length > 3) {
 					p.sendMessage(Main.prefix + "Don't use " + args[4]);
 				}
