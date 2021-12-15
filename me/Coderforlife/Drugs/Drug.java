@@ -86,7 +86,7 @@ public class Drug {
 		meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
 		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
 
-		ArrayList<String> lore = new ArrayList<>();
+		ArrayList<String> lore = new ArrayList<String>();
 		lore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "Effects:");
 
 		for (PotionEffectType type : effects) {

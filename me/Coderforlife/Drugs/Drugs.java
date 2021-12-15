@@ -24,7 +24,7 @@ public class Drugs {
 
 	public Drugs(Main plugin) {
 		this.setPlugin(plugin);
-		this.allDrugs = new LinkedList<>();
+		this.allDrugs = new LinkedList<Drug>();
 		loadDrugs();
 	}
 

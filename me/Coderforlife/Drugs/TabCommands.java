@@ -46,6 +46,7 @@ public class TabCommands implements TabCompleter {
 			tab.add("bagofdrugs");
 			tab.add("soberup");
 			tab.add("give");
+			tab.add("version");
 			//tab.add("sell");
 		} else if (args.length == 2) {
 			for (Player all : Bukkit.getOnlinePlayers()) {

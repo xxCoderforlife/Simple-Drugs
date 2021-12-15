@@ -26,7 +26,7 @@ public class PlayerJoin implements Listener {
 	public ItemStack bag = (HELLO(new ItemStack(Material.NETHER_STAR, (byte) 1)));
 
 	private ItemStack HELLO(ItemStack is) {
-		List<String> name = new ArrayList<>();
+		List<String> name = new ArrayList<String>();
 		name.add(ChatColor.DARK_GRAY + "---------------------");
 		name.add(ChatColor.RED + "A Bag Full Of Drugs :)");
 		name.add("Enjoy.");
