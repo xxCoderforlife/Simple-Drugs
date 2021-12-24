@@ -1,5 +1,5 @@
 name: Simple-Drugs
-version: 2.7-dev+build256
+version: 2.7-dev+build264
 author: xxCoderforlife
 prefix: SD
 softdepend: [Vault,PlaceHolderAPI]

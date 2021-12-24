@@ -87,7 +87,7 @@ public class Main extends JavaPlugin {
 		D.getAllDrugs().clear();
 	}
 
-	private void createCustomConfig() {
+	public void createCustomConfig() {
 		drugsConfigFile = new File(getDataFolder(), "config.yml");
 		if (!drugsConfigFile.exists()) {
 			drugsConfigFile.getParentFile().mkdir();

@@ -2,9 +2,6 @@ package me.Coderforlife.Drugs;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Random;
-import java.util.logging.Logger;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -177,7 +174,7 @@ public class KillerCommands implements CommandExecutor {
 				} else if (args.length == 2) {
 					if (args[0].equalsIgnoreCase("bagofdrugs")) {
 						if (p.hasPermission("drugs.command.bagofdrugs.others")) {
-							for (final Player players : Bukkit.getOnlinePlayers()) {
+							for (Player players : Bukkit.getOnlinePlayers()) {
 								if (args[1].equalsIgnoreCase(players.getName())) {
 									if (players.isOnline()) {
 										if (players.getInventory().contains(this.pj.bag)) {
@@ -207,15 +204,18 @@ public class KillerCommands implements CommandExecutor {
 						}
 					} else if (args[0].equalsIgnoreCase("soberup")) {
 						if (p.hasPermission("drugs.soberup.others")) {
-							for (final Player players : Bukkit.getOnlinePlayers()) {
+							for (Player players : Bukkit.getOnlinePlayers()) {
 								if (args[1].equalsIgnoreCase(players.getName())) {
 									if (players.isOnline()) {
 										if (!players.getActivePotionEffects().isEmpty()) {
-											for (final PotionEffect effect2 : p.getActivePotionEffects()) {
+											for (PotionEffect effect2 : p.getActivePotionEffects()) {
 												players.removePotionEffect(effect2.getType());
 											}
 											p.sendMessage(String.valueOf(Main.prefix) + ChatColor.GRAY
 													+ "You sobered up " + players.getDisplayName());
+											players.sendMessage(Main.prefix + 
+													ChatColor.translateAlternateColorCodes('&', 
+															p.getDisplayName() + "&7 sobered you up!"));
 											players.sendTitle(
 													ChatColor.translateAlternateColorCodes('&', "&a&lSOBERED UP"),
 													ChatColor.translateAlternateColorCodes('&', "&l&egood job."), 10,
@@ -246,11 +246,16 @@ public class KillerCommands implements CommandExecutor {
 									p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&', 
 											"&7You've been given "  + drugs.getDisplayName()));
 								} else {
-
+									p.sendMessage(Main.prefix + 
+											ChatColor.translateAlternateColorCodes('&',
+													"&c&o" + args[1] + "&f is not a drug"));
 								}
 							}
 						} else {
-
+							p.sendMessage(
+									Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
+							p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.DARK_GRAY
+									+ "drugs.give");
 						}
 					}
 				} else if (args.length == 3) {
@@ -270,23 +275,29 @@ public class KillerCommands implements CommandExecutor {
 													args[2] + " &cis not a player"));
 										}
 									}
-												}
+								}else {
+									p.sendMessage(Main.prefix + 
+											ChatColor.translateAlternateColorCodes('&',
+													"&c&o" + args[1] + "&f is not a drug"));
+								}
 							}
-						     }else {
+						}else {
 							p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
 							p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.DARK_GRAY
 									+ "drugs.give.others");
 						}
 					}	 
-				} else if (args.length > 3) {
-					p.sendMessage(Main.prefix + "Don't use " + args[4]);
+				} else if (args.length > 4) {
+					p.sendMessage(Main.prefix + "Don't use " + args.clone().toString());
 				}
 			} else {
 				p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
 				p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.main");
 			}
 		} else if (args.length == 0) {
-			sender.sendMessage("Only /drugs reload works in the console");
+			sender.sendMessage(Main.prefix + 
+					ChatColor.translateAlternateColorCodes('&', 
+							"&eUse &a&odrugs reload &eand &a&odrugs version"));
 		} else if (args.length == 1) {
 			if (args[0].equalsIgnoreCase("reload")) {
 				Bukkit.getServer().getConsoleSender()
@@ -294,7 +305,10 @@ public class KillerCommands implements CommandExecutor {
 				try {
 					this.plugin.drugsConfig.load(this.plugin.drugsConfigFile);
 				} catch (FileNotFoundException e4) {
-					e4.printStackTrace();
+					Bukkit.getConsoleSender().sendMessage(
+							ChatColor.translateAlternateColorCodes('&', 
+									Main.prefix + "&cCould not find Config... Creating one"));
+					plugin.createCustomConfig();
 				} catch (IOException e5) {
 					e5.printStackTrace();
 				} catch (InvalidConfigurationException e6) {
@@ -302,33 +316,8 @@ public class KillerCommands implements CommandExecutor {
 				}
 				Bukkit.getServer().getConsoleSender()
 						.sendMessage(String.valueOf(Main.prefix) + ChatColor.GREEN + "Config has been reloaded");
-			} else if (args[0].length() >= 2) {
-				final Random sev = new Random();
-				final int ef = sev.nextInt(4);
-				if (ef == 1) {
-					Bukkit.getServer().getConsoleSender().sendMessage(String.valueOf(Main.prefix) + ChatColor.GREEN
-							+ "That's all you can do for now. I'm sorry and I'm also not that sorry, because you guys asked me to make this");
-				}
-				if (ef == 2) {
-					Bukkit.getServer().getConsoleSender()
-							.sendMessage(String.valueOf(Main.prefix) + ChatColor.GREEN + "Please stop doing that.");
-				}
-				if (ef == 3) {
-					final Logger log = Bukkit.getLogger();
-					log.severe("SERVER SHUTTING DOWN....");
-					log.severe("Unloading all plugins...");
-					log.severe("Sending all your private data to the Goverment");
-					log.severe("Deleting all files and cookies...");
-					log.severe("Reusing a tissue...");
-					log.severe("*cough* *cough* should'nt have done that");
-					log.severe("Installing CCLEANER...");
-					Bukkit.getServer().getConsoleSender()
-							.sendMessage(String.valueOf(Main.prefix) + ChatColor.GREEN + "jK LOL");
-				}
-				if (ef == 4) {
-					Bukkit.getServer().getConsoleSender().sendMessage(
-							String.valueOf(Main.prefix) + ChatColor.GREEN + "You must be a very boring person.");
-				}
+			}else if(args[0].equalsIgnoreCase("version")) {
+				
 			}
 		}
 		return true;
