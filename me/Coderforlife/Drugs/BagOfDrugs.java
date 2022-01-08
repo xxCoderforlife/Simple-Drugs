@@ -3,6 +3,7 @@ package me.Coderforlife.Drugs;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -10,23 +11,27 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.ItemSpawnEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import me.Coderforlife.Drugs.Events.PlayerJoin;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 
 public class BagOfDrugs implements Listener {
 
-	public static String bagName = ChatColor.GOLD + "" + ChatColor.BOLD + "Bag Of Drugs";
+	public static String bagName = ChatColor.translateAlternateColorCodes('&', "&6&lBag Of Drugs");
 	public static String invName = ChatColor.translateAlternateColorCodes('&', "          &6&l&oBag Of Drugs");
 	private Main plugin;
 	private Drugs drugs;
+	PlayerJoin pj = new PlayerJoin();
 
 	public BagOfDrugs(Main plugin, Drugs drugs) {
 		this.setPlugin(plugin);
@@ -104,7 +109,10 @@ public class BagOfDrugs implements Listener {
 				p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
 			}
 		}
-
+		
+		if(ev.getInventory().getSize() < 9) {
+			
+		}
 	}
 
 	@EventHandler
@@ -135,6 +143,23 @@ public class BagOfDrugs implements Listener {
 				return;
 			}
 
+		}
+	}
+	
+	
+	
+	@EventHandler
+	public void DisableBeaconDup(CraftItemEvent e) {
+		Player p = (Player) e.getView().getPlayer();
+		CraftingInventory inv = e.getInventory();
+		ItemStack[] mat = inv.getMatrix();
+		
+		if(inv.getResult().getType() == Material.BEACON) {
+			if(mat[4].getItemMeta().getDisplayName().contentEquals(bagName)) {
+				p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&', "&c&oCan not use " + bagName + " &c&oto craft a " 
+						+ ChatColor.AQUA +  inv.getResult().getType().toString()));
+				e.setCancelled(true);
+			}
 		}
 	}
 

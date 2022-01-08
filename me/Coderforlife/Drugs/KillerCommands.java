@@ -2,6 +2,7 @@ package me.Coderforlife.Drugs;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -38,7 +39,7 @@ public class KillerCommands implements CommandExecutor {
 	public static String dash = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "- ";
 	public static String header = ChatColor.translateAlternateColorCodes('&',
 			"&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&f&l[&4&o&lSIMPLE DRUGS&f&l]"
-			+ "&8&l&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=");
+					+ "&8&l&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=");
 
 	public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args) {
 		if (sender instanceof Player) {
@@ -46,35 +47,25 @@ public class KillerCommands implements CommandExecutor {
 			if (p.hasPermission("drugs.main")) {
 				if (args.length == 0) {
 					p.sendMessage(header);
-					p.sendMessage( 
-							ChatColor.translateAlternateColorCodes('&', 
-									"&7&o&nUse the following commands:"));
-					p.sendMessage(
-							ChatColor.translateAlternateColorCodes('&', 
-									"&7- &f/drugs help &8| &fHow-To and Wiki Link."));
-					p.sendMessage(
-							ChatColor.translateAlternateColorCodes('&', 
-									"&7- &f/drugs list &8| &fSee a list of All Drugs."));
-					p.sendMessage(
-							ChatColor.translateAlternateColorCodes('&', 
-									"&7- &f/drugs soberup &e[player] &8| &fSoberup yourself or another player."));
-					p.sendMessage(
-							ChatColor.translateAlternateColorCodes('&', 
-									"&7- &f/drugs bagofdrugs &e[player] &8| &fGives you or another player the bag."));
-					p.sendMessage(
-							ChatColor.translateAlternateColorCodes('&',
-									"&7- &f/drugs give &a<drug> &e[player] &8| &fGives you or another player a drug."));
-					p.sendMessage(
-							ChatColor.translateAlternateColorCodes('&',
-									"&7- &f/drugs version &8| &fCheck the version you are running."));
-					p.sendMessage(
-							ChatColor.translateAlternateColorCodes('&', 
-									"&7- &f/drugs reload &8| &fReloads the config."));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&o&nUse the following commands:"));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+							"&7- &f/drugs help &8| &fHow-To and Wiki Link."));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+							"&7- &f/drugs list &8| &fSee a list of All Drugs."));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+							"&7- &f/drugs soberup &e[player] &8| &fSoberup yourself or another player."));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+							"&7- &f/drugs bagofdrugs &e[player] &8| &fGives you or another player the bag."));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+							"&7- &f/drugs give &a<drug> &e[player] &8| &fGives you or another player a drug."));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+							"&7- &f/drugs version &8| &fCheck the version you are running."));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+							"&7- &f/drugs reload &8| &fReloads the config."));
 					/*
-					p.sendMessage(
-							ChatColor.translateAlternateColorCodes('&', 
-									"&7- &f/drugs sell &8| &fSells the Drug in your hand."));
-									*/
+					 * p.sendMessage( ChatColor.translateAlternateColorCodes('&',
+					 * "&7- &f/drugs sell &8| &fSells the Drug in your hand."));
+					 */
 				} else if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("help")) {
 						if (p.hasPermission("drugs.help")) {
@@ -159,16 +150,14 @@ public class KillerCommands implements CommandExecutor {
 							p.sendMessage(
 									Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.reload");
 						}
-					}else if(args[0].equalsIgnoreCase("sell")) {
-						p.sendMessage(Main.prefix + 
-								ChatColor.translateAlternateColorCodes('&', 
-										"&eThis will be added in soon."));
-					}else if(args[0].equalsIgnoreCase("version")) {
-						if(p.hasPermission("drugs.version")) {
+					} else if (args[0].equalsIgnoreCase("sell")) {
+						p.sendMessage(Main.prefix
+								+ ChatColor.translateAlternateColorCodes('&', "&eThis will be added in soon."));
+					} else if (args[0].equalsIgnoreCase("version")) {
+						if (p.hasPermission("drugs.version")) {
 							p.sendMessage(header);
-							p.sendMessage(Main.prefix + 
-									ChatColor.translateAlternateColorCodes('&', 
-											"&4&oYou are running version:&f " + plugin.getDescription().getVersion()));
+							p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&',
+									"&4&oYou are running version:&f " + plugin.getDescription().getVersion()));
 						}
 					}
 				} else if (args.length == 2) {
@@ -213,9 +202,8 @@ public class KillerCommands implements CommandExecutor {
 											}
 											p.sendMessage(String.valueOf(Main.prefix) + ChatColor.GRAY
 													+ "You sobered up " + players.getDisplayName());
-											players.sendMessage(Main.prefix + 
-													ChatColor.translateAlternateColorCodes('&', 
-															p.getDisplayName() + "&7 sobered you up!"));
+											players.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes(
+													'&', p.getDisplayName() + "&7 sobered you up!"));
 											players.sendTitle(
 													ChatColor.translateAlternateColorCodes('&', "&a&lSOBERED UP"),
 													ChatColor.translateAlternateColorCodes('&', "&l&egood job."), 10,
@@ -243,14 +231,13 @@ public class KillerCommands implements CommandExecutor {
 							for (Drug drugs : D.getAllDrugs()) {
 								if (args[1].equalsIgnoreCase(drugs.getName())) {
 									p.getInventory().addItem(drugs.getDrugItem());
-									p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&', 
-											"&7You've been given "  + drugs.getDisplayName()));
-								} else {
-									p.sendMessage(Main.prefix + 
-											ChatColor.translateAlternateColorCodes('&',
-													"&c&o" + args[1] + "&f is not a drug"));
+									p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&',
+											"&7You've been given " + drugs.getDisplayName()));
+									return true;
 								}
 							}
+							p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&',
+									"&c&o" + args[1] + "&f is not a drug"));
 						} else {
 							p.sendMessage(
 									Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
@@ -265,28 +252,28 @@ public class KillerCommands implements CommandExecutor {
 								if (args[1].equalsIgnoreCase(drugs.getName())) {
 									for (Player players : Bukkit.getOnlinePlayers()) {
 										if (args[2].equalsIgnoreCase(players.getName())) {
-											p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&', 
-													"You sent "  + players.getName() + " " + drugs.getDisplayName()));
-											players.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&', 
+											p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&',
+													"You sent " + players.getName() + " " + drugs.getDisplayName()));
+											players.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes(
+													'&',
 													p.getDisplayName() + " Sent you some " + drugs.getDisplayName()));
 											players.getInventory().addItem(drugs.getDrugItem());
-										}else {
-											p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&', 
-													args[2] + " &cis not a player"));
+											return true;
 										}
 									}
-								}else {
-									p.sendMessage(Main.prefix + 
-											ChatColor.translateAlternateColorCodes('&',
-													"&c&o" + args[1] + "&f is not a drug"));
+									p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&',
+											args[2] + " &cis not a player"));
 								}
 							}
-						}else {
-							p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
+							p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&',
+									"&c&o" + args[1] + "&f is not a drug"));
+						} else {
+							p.sendMessage(
+									Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
 							p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.DARK_GRAY
 									+ "drugs.give.others");
 						}
-					}	 
+					}
 				} else if (args.length > 4) {
 					p.sendMessage(Main.prefix + "Don't use " + args.clone().toString());
 				}
@@ -295,9 +282,8 @@ public class KillerCommands implements CommandExecutor {
 				p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.main");
 			}
 		} else if (args.length == 0) {
-			sender.sendMessage(Main.prefix + 
-					ChatColor.translateAlternateColorCodes('&', 
-							"&eUse &a&odrugs reload &eand &a&odrugs version"));
+			sender.sendMessage(Main.prefix
+					+ ChatColor.translateAlternateColorCodes('&', "&eUse &a&odrugs reload &eand &a&odrugs version"));
 		} else if (args.length == 1) {
 			if (args[0].equalsIgnoreCase("reload")) {
 				Bukkit.getServer().getConsoleSender()
@@ -305,9 +291,8 @@ public class KillerCommands implements CommandExecutor {
 				try {
 					this.plugin.drugsConfig.load(this.plugin.drugsConfigFile);
 				} catch (FileNotFoundException e4) {
-					Bukkit.getConsoleSender().sendMessage(
-							ChatColor.translateAlternateColorCodes('&', 
-									Main.prefix + "&cCould not find Config... Creating one"));
+					Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&',
+							Main.prefix + "&cCould not find Config... Creating one"));
 					plugin.createCustomConfig();
 				} catch (IOException e5) {
 					e5.printStackTrace();
@@ -316,8 +301,8 @@ public class KillerCommands implements CommandExecutor {
 				}
 				Bukkit.getServer().getConsoleSender()
 						.sendMessage(String.valueOf(Main.prefix) + ChatColor.GREEN + "Config has been reloaded");
-			}else if(args[0].equalsIgnoreCase("version")) {
-				
+			} else if (args[0].equalsIgnoreCase("version")) {
+
 			}
 		}
 		return true;

@@ -32,7 +32,7 @@ public class PlayerJoin implements Listener {
 		name.add("Enjoy.");
 		name.add(ChatColor.ITALIC + "Simple-Drugs®");
 		ItemMeta im = is.getItemMeta();
-		im.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		im.addEnchant(Enchantment.BINDING_CURSE, 7766, true);
 		im.addItemFlags(new ItemFlag[] { ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES });
 		im.setDisplayName(BagOfDrugs.bagName);
 		im.setLore(name);

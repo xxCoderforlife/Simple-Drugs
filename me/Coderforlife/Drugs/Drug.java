@@ -1,5 +1,8 @@
 package me.Coderforlife.Drugs;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -10,7 +13,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
-import java.util.ArrayList;
 
 /**
  * A class to hold all information related to a drug.
@@ -79,11 +81,12 @@ public class Drug {
 	 * Creates the drug item automatically with information about the drug
 	 */
 	private ItemStack createDrugItem(Material drugMaterial) {
+		Random r = new Random();
 		ItemStack drugItem = new ItemStack(drugMaterial);
 		ItemMeta meta = drugItem.getItemMeta();
 
 		meta.setDisplayName(displayName);
-		meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+		meta.addEnchant(Enchantment.DAMAGE_ALL, r.nextInt(45654), true);
 		meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
 
 		ArrayList<String> lore = new ArrayList<String>();
