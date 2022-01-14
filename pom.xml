@@ -7,8 +7,20 @@
   <groupId>com.Coderforlife</groupId>
   <artifactId>Drugs</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-  <name>Drugs</name>
+    <name>Drugs</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
     <properties>
