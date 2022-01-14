@@ -60,7 +60,12 @@ public class KillerCommands implements CommandExecutor {
 									*/
                 } else if(args.length == 1) {
                     if(args[0].equalsIgnoreCase("settings")) {
-                        p.openInventory(GUI.create());
+                        if(p.hasPermission("drugs.use.settings")) {
+                            p.openInventory(GUI.create());
+                        } else {
+                            p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
+                            p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.use.settings");
+                        }
                     } else if(args[0].equalsIgnoreCase("help")) {
                         if(p.hasPermission("drugs.help")) {
                             p.sendMessage(header);

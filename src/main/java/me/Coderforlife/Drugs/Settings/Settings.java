@@ -13,9 +13,9 @@ public class Settings {
     private static boolean BagOfDrugs_DropOnDeath;
     private static boolean BagofDrugs_GiveOnRespawn;
 
+    private static Main plugin = (Main) Main.plugin;
 
     static {
-        Main plugin = (Main) Main.plugin;
         setCheckForUpdate(plugin.drugsConfig.getBoolean("Drugs.CheckForUpdate"));
         setUpdateMessage(plugin.drugsConfig.getBoolean("Drugs.UpdateMessage"));
         setJoinMessage(plugin.drugsConfig.getBoolean("Drugs.JoinMessage"));
@@ -32,6 +32,7 @@ public class Settings {
 
     public static void setCheckForUpdate(boolean checkForUpdate) {
         CheckForUpdate = checkForUpdate;
+        plugin.drugsConfig.set("Drugs.CheckForUpdate", checkForUpdate);
     }
 
     public static boolean UpdateMessage() {
@@ -40,6 +41,7 @@ public class Settings {
 
     public static void setUpdateMessage(boolean updateMessage) {
         UpdateMessage = updateMessage;
+        plugin.drugsConfig.set("Drugs.UpdateMessage", updateMessage);
     }
 
     public static boolean JoinMessage() {
@@ -48,6 +50,7 @@ public class Settings {
 
     public static void setJoinMessage(boolean joinMessage) {
         JoinMessage = joinMessage;
+        plugin.drugsConfig.set("Drugs.JoinMessage", joinMessage);
     }
 
     public static boolean BagOfDrugs_CanMove() {
@@ -56,6 +59,7 @@ public class Settings {
 
     public static void setBagOfDrugs_CanMove(boolean bagOfDrugs_CanMove) {
         BagOfDrugs_CanMove = bagOfDrugs_CanMove;
+        plugin.drugsConfig.set("Drugs.BagOfDrugs.CanMove", bagOfDrugs_CanMove);
     }
 
     public static boolean BagOfDrugs_CanDrop() {
@@ -64,6 +68,7 @@ public class Settings {
 
     public static void setBagOfDrugs_CanDrop(boolean bagOfDrugs_CanDrop) {
         BagOfDrugs_CanDrop = bagOfDrugs_CanDrop;
+        plugin.drugsConfig.set("Drugs.BagOfDrugs.CanDrop", bagOfDrugs_CanDrop);
     }
 
     public static boolean BagOfDrugs_GiveOnJoin() {
@@ -72,6 +77,7 @@ public class Settings {
 
     public static void setBagOfDrugs_GiveOnJoin(boolean bagOfDrugs_GiveOnJoin) {
         BagOfDrugs_GiveOnJoin = bagOfDrugs_GiveOnJoin;
+        plugin.drugsConfig.set("Drugs.BagOfDrugs.GiveOnJoin", bagOfDrugs_GiveOnJoin);
     }
 
     public static boolean BagOfDrugs_DropOnDeath() {
@@ -80,6 +86,7 @@ public class Settings {
 
     public static void setBagOfDrugs_DropOnDeath(boolean bagOfDrugs_DropOnDeath) {
         BagOfDrugs_DropOnDeath = bagOfDrugs_DropOnDeath;
+        plugin.drugsConfig.set("Drugs.BagOfDrugs.DropOnDeath", bagOfDrugs_DropOnDeath);
     }
 
     public static boolean BagofDrugs_GiveOnRespawn() {
@@ -88,6 +95,7 @@ public class Settings {
 
     public static void setBagofDrugs_GiveOnRespawn(boolean bagofDrugs_GiveOnRespawn) {
         BagofDrugs_GiveOnRespawn = bagofDrugs_GiveOnRespawn;
+        plugin.drugsConfig.set("Drugs.BagOfDrugs.GiveOnRespawn", bagofDrugs_GiveOnRespawn);
     }
 }
 

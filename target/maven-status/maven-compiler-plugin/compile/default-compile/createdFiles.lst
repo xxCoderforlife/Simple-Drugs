@@ -20,6 +20,7 @@ me\Coderforlife\Drugs\UpdateChecker\Updater$1.class
 me\Coderforlife\Drugs\Events\PlayerDeath.class
 me\Coderforlife\Drugs\Settings\GUI.class
 me\Coderforlife\Drugs\Metrics.class
+me\Coderforlife\Drugs\Settings\SettingsClickEvent.class
 me\Coderforlife\Drugs\Metrics$AdvancedBarChart.class
 me\Coderforlife\Drugs\Metrics$DrilldownPie.class
 me\Coderforlife\Drugs\Metrics$MultiLineChart.class

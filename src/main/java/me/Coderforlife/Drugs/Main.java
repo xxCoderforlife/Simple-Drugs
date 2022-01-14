@@ -4,7 +4,7 @@ import me.Coderforlife.Drugs.Events.DrugUseListener;
 import me.Coderforlife.Drugs.Events.PlayerJoin;
 import me.Coderforlife.Drugs.Events.PlayerRespawn;
 import me.Coderforlife.Drugs.PlaceHolder.DrugPlaceHolders;
-import me.Coderforlife.Drugs.Settings.Settings;
+import me.Coderforlife.Drugs.Settings.SettingsClickEvent;
 import me.Coderforlife.Drugs.UpdateChecker.Updater;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.economy.Economy;
@@ -84,23 +84,24 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         D.getAllDrugs().clear();
+        try {
+            getCustomConfig().save(drugsConfigFile);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void createCustomConfig() {
         drugsConfigFile = new File(getDataFolder(), "config.yml");
         if(!drugsConfigFile.exists()) {
             drugsConfigFile.getParentFile().mkdir();
-
             saveResource("config.yml", false);
         }
-
         drugsConfig = new YamlConfiguration();
         try {
             drugsConfig.load(drugsConfigFile);
-
         } catch(IOException | InvalidConfigurationException e) {
             e.printStackTrace();
-
         }
     }
 
@@ -113,10 +114,9 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new BagOfDrugs(this, D), this);
         this.getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
         this.getServer().getPluginManager().registerEvents(new DrugUseListener(this, D), this);
+        this.getServer().getPluginManager().registerEvents(new SettingsClickEvent(this), this);
         this.getCommand("drugs").setExecutor(new KillerCommands(this, D));
         this.getCommand("drugs").setTabCompleter(new TabCommands(this, D));
-
-
     }
 
     public void loadPlaceHolders() {
