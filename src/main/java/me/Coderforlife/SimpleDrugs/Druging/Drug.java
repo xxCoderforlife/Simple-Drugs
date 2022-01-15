@@ -118,8 +118,12 @@ public class Drug {
                     disabled.append(drug.name).append(", ");
                 }
             }
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Enabled Drugs: " + ChatColor.GREEN + enabled);
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Disabled Drugs: " + ChatColor.RED + disabled);
+            if(enabled.length() > 0)
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Enabled Drugs: " + ChatColor.GREEN + enabled);
+
+            if(disabled.length() > 0)
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Disabled Drugs: " + ChatColor.RED + disabled);
+
         } catch(FileNotFoundException e) {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "[INFO] Could not find drugs.json, creating a new one.");
             try {
