@@ -9,7 +9,9 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
@@ -59,19 +61,20 @@ public class Drug {
 
                 /* Get the Effects */
                 JsonArray effects = drug.getAsJsonArray("effects");
-                ArrayList<DrugEffect> effectsList = new ArrayList<DrugEffect>();
+                ArrayList<DrugEffect> effectsList = new ArrayList<>();
                 for(JsonElement effect : effects) {
                     JsonObject effectObject = effect.getAsJsonObject();
-                    PotionEffectType type = PotionEffectType.getByName(effectObject.get("type").getAsString().toUpperCase());
+                    PotionEffectType type = getEffectfromJson(effectObject);
                     int duration = effectObject.get("time").getAsInt();
-                    int amplifier = effectObject.get("intensity").getAsInt();
+                    int amplifier = effectObject.get("intensity").getAsInt() - 1;
                     effectsList.add(new DrugEffect(type, duration, amplifier));
                 }
 
                 /* Get the Item Result for Crafting */
-                ItemStack result = new ItemStack(Material.getMaterial(drug.get("item").getAsString().toUpperCase()));
+                ItemStack result = new ItemStack(MaterialFromObject(drug, "item"));
                 ItemMeta meta = result.getItemMeta();
                 meta.setDisplayName(displayname);
+                meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                 ArrayList<String> lore = new ArrayList<>();
                 lore.add("§a§lEffects:");
                 for(DrugEffect effect : effectsList) {
@@ -80,6 +83,7 @@ public class Drug {
                 lore.add("§7Click to Use");
                 meta.setLore(lore);
                 result.setItemMeta(meta);
+                result.addUnsafeEnchantment(Enchantment.ARROW_FIRE, 1);
 
                 /* Generate the Recipe */
                 JsonArray recipe = drug.getAsJsonArray("recipe");
@@ -87,15 +91,15 @@ public class Drug {
                 ShapedRecipe shapedRecipe = new ShapedRecipe(key, result);
 
                 shapedRecipe.shape("ABC", "DEF", "GHI");
-                shapedRecipe.setIngredient('A', material(recipe, 0));
-                shapedRecipe.setIngredient('B', material(recipe, 1));
-                shapedRecipe.setIngredient('C', material(recipe, 2));
-                shapedRecipe.setIngredient('D', material(recipe, 3));
-                shapedRecipe.setIngredient('E', material(recipe, 4));
-                shapedRecipe.setIngredient('F', material(recipe, 5));
-                shapedRecipe.setIngredient('G', material(recipe, 6));
-                shapedRecipe.setIngredient('H', material(recipe, 7));
-                shapedRecipe.setIngredient('I', material(recipe, 8));
+                shapedRecipe.setIngredient('A', MaterialFromArray(recipe, 0));
+                shapedRecipe.setIngredient('B', MaterialFromArray(recipe, 1));
+                shapedRecipe.setIngredient('C', MaterialFromArray(recipe, 2));
+                shapedRecipe.setIngredient('D', MaterialFromArray(recipe, 3));
+                shapedRecipe.setIngredient('E', MaterialFromArray(recipe, 4));
+                shapedRecipe.setIngredient('F', MaterialFromArray(recipe, 5));
+                shapedRecipe.setIngredient('G', MaterialFromArray(recipe, 6));
+                shapedRecipe.setIngredient('H', MaterialFromArray(recipe, 7));
+                shapedRecipe.setIngredient('I', MaterialFromArray(recipe, 8));
 
                 boolean craftable = drug.get("crafting").getAsBoolean();
                 String permission = drug.get("permission").getAsString();
@@ -105,8 +109,19 @@ public class Drug {
 
                 drugs.put(name, new Drug(name, displayname, shapedRecipe, effectsList, result, permission, craftable));
             }
+            StringBuilder enabled = new StringBuilder();
+            StringBuilder disabled = new StringBuilder();
+            for(Drug drug : drugs.values()) {
+                if(drug.isCrafting()) {
+                    enabled.append(drug.name).append(", ");
+                } else {
+                    disabled.append(drug.name).append(", ");
+                }
+            }
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Enabled Drugs: " + ChatColor.GREEN + enabled);
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Disabled Drugs: " + ChatColor.RED + disabled);
         } catch(FileNotFoundException e) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "drugs.json not found, creating File");
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "[INFO] Could not find drugs.json, creating a new one.");
             try {
                 byte[] in = Drug.class.getResourceAsStream("/drugs.json").readAllBytes();
                 File targetFile = new File("plugins/Simple-Drugs/drugs.json");
@@ -115,9 +130,7 @@ public class Drug {
                 outStream.write(in);
                 outStream.close();
                 loadDrugs();
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Drugs are Ready to Use");
-            } catch(FileNotFoundException ex) {
-                ex.printStackTrace();
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Drugs.json Created!");
             } catch(IOException ex) {
                 ex.printStackTrace();
             }
@@ -129,7 +142,7 @@ public class Drug {
     }
 
     public static ArrayList<Drug> getDrugs() {
-        return new ArrayList<Drug>(drugs.values());
+        return new ArrayList<>(drugs.values());
     }
 
     public void influencePlayer(Player player) {
@@ -151,16 +164,41 @@ public class Drug {
         return null;
     }
 
-    private static Character getRandomCharacter() {
-        return (char) (Math.random() * 26 + 'a');
+    private static PotionEffectType getEffectfromJson(JsonObject element) {
+        PotionEffectType effect = PotionEffectType.getByName(element.get("type").getAsString().toUpperCase());
+        if(effect == null) {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Could not find Effect: " + ChatColor.DARK_GRAY + element.get("type").getAsString());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Make Sure the Name is Correct!");
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "[INFO] Replacing all Unknown Effects with POISON to Ensure the Plugin keeps Running!");
+            effect = PotionEffectType.POISON;
+        }
+        return effect;
     }
 
-    private static Material material(JsonArray obj, int i) {
-        return Material.getMaterial(obj.get(i).getAsString().toUpperCase());
+    private static Material MaterialFromArray(JsonArray obj, int i) {
+        Material mat = Material.getMaterial(obj.get(i).getAsString().toUpperCase());
+        if(mat == null) {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Could not find Material: " + ChatColor.DARK_GRAY + obj.get(i).getAsString());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Make Sure the Name is Correct!");
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "[INFO] Replacing all Unknown Items with BONE to Ensure the Plugin keeps Running!");
+            mat = Material.BONE;
+        }
+        return mat;
+    }
+
+    private static Material MaterialFromObject(JsonObject obj, String key) {
+        Material mat = Material.getMaterial(obj.get(key).getAsString().toUpperCase());
+        if(mat == null) {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Could not find Material: " + ChatColor.DARK_GRAY + obj.get(key).getAsString());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Make Sure the Name is Correct!");
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "[INFO] Replacing all Unknown Items with BONE to Ensure the Plugin keeps Running!");
+            mat = Material.BONE;
+        }
+        return mat;
     }
 
     public static ArrayList<Drug> getallDrugs() {
-        return new ArrayList<Drug>(drugs.values());
+        return new ArrayList<>(drugs.values());
     }
 
     public ArrayList<DrugEffect> getEffects() {

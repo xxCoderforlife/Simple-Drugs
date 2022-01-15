@@ -18,19 +18,16 @@ public class DrugPlaceHolders extends PlaceholderExpansion {
 
 	@Override
 	public @NotNull String getIdentifier() {
-		// TODO Auto-generated method stub
 		return "drug";
 	}
 
 	@Override
 	public @NotNull String getAuthor() {
-		// TODO Auto-generated method stub
 		return "xxCoderforlife";
 	}
 
 	@Override
 	public @NotNull String getVersion() {
-		// TODO Auto-generated method stub
 		return "2.7";
 	}
 

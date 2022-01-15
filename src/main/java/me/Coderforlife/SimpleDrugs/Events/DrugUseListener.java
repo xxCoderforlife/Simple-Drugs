@@ -18,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 public class DrugUseListener implements Listener {
 
     private final Main plugin;
+
     public DrugUseListener(Main plugin) {
         this.plugin = plugin;
     }
@@ -36,15 +37,11 @@ public class DrugUseListener implements Listener {
         }
         ItemStack itemInHand = p.getInventory().getItemInMainHand();
         Drug drug = Drug.matchDrug(itemInHand);
-
-        if(null == drug) return;
+        if(null == drug)
+            return;
 
         if(!p.hasPermission(drug.getPermission())) {
             p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + drug.getName());
-            return;
-        }
-        if(itemInHand.getAmount() > 1) {
-            p.sendMessage(Main.prefix + Main.stack);
             return;
         }
 
@@ -57,7 +54,7 @@ public class DrugUseListener implements Listener {
         }
 
         p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
-        itemInHand.getAmount();
-        itemInHand.setAmount(0);
+        itemInHand.setAmount(itemInHand.getAmount() - 1);
+        ev.setCancelled(true);
     }
 }

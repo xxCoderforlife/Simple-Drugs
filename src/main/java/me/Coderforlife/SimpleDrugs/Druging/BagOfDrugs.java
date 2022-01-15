@@ -24,7 +24,7 @@ import org.bukkit.inventory.ItemStack;
 public class BagOfDrugs implements Listener {
 
     public static String bagName = ChatColor.translateAlternateColorCodes('&', "&6&lBag Of Drugs");
-    public static String invName = ChatColor.translateAlternateColorCodes('&', "          &6&l&oBag Of Drugs");
+    public static String invName = ChatColor.translateAlternateColorCodes('&', "&6&l&oBag Of Drugs");
     private Main plugin;
     PlayerJoin pj = new PlayerJoin();
 
@@ -51,7 +51,16 @@ public class BagOfDrugs implements Listener {
             if(p.getInventory().getItemInMainHand().hasItemMeta()) {
                 if(p.hasPermission("drugs.use.bagofdrugs")) {
                     if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(bagName)) {
-                        Inventory gui = Bukkit.createInventory(p, 18, invName);
+                        int invsize = Drug.getallDrugs().size();
+                        if(invsize > 54) {
+                            p.sendMessage(Main.prefix + ChatColor.RED + "The bag is too full!");
+                            return;
+                            /* TODO: Add Pagination */
+                        }
+                        if(invsize % 9 != 0) {
+                            invsize = invsize + (9 - (invsize % 9));
+                        }
+                        Inventory gui = Bukkit.createInventory(p, invsize, invName);
                         for(Drug d : Drug.getallDrugs()) {
                             gui.addItem(d.getItem());
                         }
@@ -81,6 +90,7 @@ public class BagOfDrugs implements Listener {
         ItemStack clickedItem = ev.getCurrentItem();
         if(clickedItem == null || clickedItem.getType().isAir())
             return;
+
         if(clickedItem.hasItemMeta()) {
             if(!plugin.drugsConfig.getBoolean("Drugs.BagOfDrugs.CanMove")) {
                 if(clickedItem.getItemMeta().getDisplayName().equals(invName)) {

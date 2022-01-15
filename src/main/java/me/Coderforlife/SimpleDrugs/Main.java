@@ -58,14 +58,6 @@ public class Main extends JavaPlugin {
         plugin = this;
         Drug.loadDrugs();
 
-        for(Drug drug : Drug.getallDrugs()) {
-            if(drug.isCrafting()) {
-                getServer().getConsoleSender().sendMessage(ChatColor.WHITE + drug.getName() + ":" + ChatColor.GREEN + " Enabled");
-            } else {
-                getServer().getConsoleSender().sendMessage(ChatColor.WHITE + drug.getName() + ":" + ChatColor.RED + " Disabled");
-            }
-        }
-
         try {
             RegisterEvents();
             loadPlaceHolders();
