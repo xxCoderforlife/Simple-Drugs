@@ -6,7 +6,7 @@ softdepend: [ Vault,PlaceHolderAPI ]
 load: POSTWORLD
 api-version: 1.13
 website: https://www.spigotmc.org/resources/simple-drugs.9684/
-main: me.Coderforlife.Drugs.Main
+main: me.Coderforlife.SimpleDrugs.Main
 
 #COMMANDS
 commands:
