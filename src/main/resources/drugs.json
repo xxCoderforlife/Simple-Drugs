@@ -76,7 +76,7 @@
       }
     ],
     "item": "PUMPKIN_SEEDS",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.percocet",
     "crafting": true
   },
   {
@@ -116,7 +116,7 @@
       }
     ],
     "item": "PUMPKIN_SEEDS",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.acid",
     "crafting": true
   },
   {
@@ -156,7 +156,7 @@
       }
     ],
     "item": "SUGAR",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.coke",
     "crafting": true
   },
   {
@@ -196,7 +196,7 @@
       }
     ],
     "item": "WITHER_ROSE",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.heroin",
     "crafting": true
   },
   {
@@ -241,7 +241,7 @@
       }
     ],
     "item": "IRON_NUGGET",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.molly",
     "crafting": true
   },
   {
@@ -281,7 +281,7 @@
       }
     ],
     "item": "REDSTONE_TORCH",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.ciggy",
     "crafting": true
   },
   {
@@ -321,7 +321,7 @@
       }
     ],
     "item": "CRIMSON_FUNGUS",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.shrooms",
     "crafting": true
   },
   {
@@ -361,7 +361,7 @@
       }
     ],
     "item": "DRIED_KELP",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.salvia",
     "crafting": true
   },
   {
@@ -396,7 +396,7 @@
       }
     ],
     "item": "SPORE_BLOSSOM",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.pcp",
     "crafting": true
   },
   {
@@ -436,7 +436,7 @@
       }
     ],
     "item": "GLOWSTONE_DUST",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.dmt",
     "crafting": true
   },
   {
@@ -476,7 +476,7 @@
       }
     ],
     "item": "WATER_BUCKET",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.alcohol",
     "crafting": true
   },
   {
@@ -516,7 +516,7 @@
       }
     ],
     "item": "QUARTZ",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.flakka",
     "crafting": true
   },
   {
@@ -556,7 +556,7 @@
       }
     ],
     "item": "PRISMARINE_SHARD",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.meth",
     "crafting": true
   },
   {
@@ -601,7 +601,7 @@
       }
     ],
     "item": "POWDER_SNOW_BUCKET",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.ketamine",
     "crafting": true
   },
   {
@@ -641,7 +641,7 @@
       }
     ],
     "item": "WHITE_DYE",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.oxy",
     "crafting": true
   },
   {
@@ -681,7 +681,7 @@
       }
     ],
     "item": "PURPLE_CANDLE",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.tussin",
     "crafting": true
   },
   {
@@ -721,7 +721,7 @@
       }
     ],
     "item": "GREEN_CANDLE",
-    "permission": "drugs.use.weed",
+    "permission": "drugs.use.xannx",
     "crafting": true
   }
 ]

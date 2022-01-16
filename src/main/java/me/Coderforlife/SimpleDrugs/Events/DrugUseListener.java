@@ -5,11 +5,14 @@ import me.Coderforlife.SimpleDrugs.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -23,8 +26,9 @@ public class DrugUseListener implements Listener {
         this.plugin = plugin;
     }
 
+
     /**
-     * Tries to match a right clicked item with a drug item. Influences the player
+     * Tries to match a right-clicked item with a drug item. Influences the player
      * with the drug if the item was one.
      */
     @EventHandler
@@ -35,10 +39,16 @@ public class DrugUseListener implements Listener {
         if(!pa.equals(Action.RIGHT_CLICK_AIR) && !pa.equals(Action.RIGHT_CLICK_BLOCK)) {
             return;
         }
+
         ItemStack itemInHand = p.getInventory().getItemInMainHand();
         Drug drug = Drug.matchDrug(itemInHand);
         if(null == drug)
             return;
+        ev.setCancelled(true);
+
+        if(ev.getHand().equals(EquipmentSlot.OFF_HAND)) {
+            return;
+        }
 
         if(!p.hasPermission(drug.getPermission())) {
             p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + drug.getName());
@@ -55,6 +65,17 @@ public class DrugUseListener implements Listener {
 
         p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
         itemInHand.setAmount(itemInHand.getAmount() - 1);
-        ev.setCancelled(true);
+    }
+
+    @EventHandler
+    public void BlockPlace(BlockPlaceEvent ev) {
+        Block block = ev.getBlock();
+        Player p = ev.getPlayer();
+
+        ItemStack stack = p.getInventory().getItemInMainHand() == null ? p.getInventory().getItemInOffHand() : p.getInventory().getItemInMainHand();
+        boolean isDrug = Drug.matchDrug(stack) == null;
+        if(isDrug) {
+            ev.setCancelled(true);
+        }
     }
 }
