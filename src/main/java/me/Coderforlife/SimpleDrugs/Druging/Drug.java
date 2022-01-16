@@ -74,7 +74,7 @@ public class Drug {
                 ItemStack result = new ItemStack(MaterialFromObject(drug, "item"));
                 ItemMeta meta = result.getItemMeta();
                 meta.setDisplayName(displayname);
-                meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
                 ArrayList<String> lore = new ArrayList<>();
                 lore.add("§a§lEffects:");
                 for(DrugEffect effect : effectsList) {
