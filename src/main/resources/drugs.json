@@ -1,0 +1,727 @@
+[
+  {
+    "name": "Weed",
+    "displayname": "&2Weed",
+    "recipe": [
+      "WHEAT",
+      "DIAMOND",
+      "WHEAT",
+      "AIR",
+      "DIAMOND",
+      "AIR",
+      "WHEAT",
+      "WHEAT",
+      "WHEAT"
+    ],
+    "effects": [
+      {
+        "type": "SLOW",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "LUCK",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "SLOW_FALLING",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "SLOW_DIGGING",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "GREEN_DYE",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Percocet",
+    "displayname": "&f&lPERCOCET",
+    "recipe": [
+      "ARROW",
+      "ARROW",
+      "ARROW",
+      "MILK_BUCKET",
+      "WHITE_DYE",
+      "MILK_BUCKET",
+      "MILK_BUCKET",
+      "MILK_BUCKET",
+      "MILK_BUCKET"
+    ],
+    "effects": [
+      {
+        "type": "CONFUSION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "SLOW",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "LUCK",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "NIGHT_VISION",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "PUMPKIN_SEEDS",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Acid",
+    "displayname": "&b&lACID",
+    "recipe": [
+      "SPIDER_EYE",
+      "PAPER",
+      "SPIDER_EYE",
+      "PAPER",
+      "WATER_BUCKET",
+      "PAPER",
+      "SPIDER_EYE",
+      "PAPER",
+      "SPIDER_EYE"
+    ],
+    "effects": [
+      {
+        "type": "CONFUSION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "NIGHT_VISION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "HEALTH_BOOST",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "SLOW_FALLING",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "PUMPKIN_SEEDS",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Coke",
+    "displayname": "&b&lCOKE",
+    "recipe": [
+      "SUGAR",
+      "SUGAR",
+      "SUGAR",
+      "SUGAR",
+      "WATER_BUCKET",
+      "SUGAR",
+      "SUGAR",
+      "SUGAR",
+      "SUGAR"
+    ],
+    "effects": [
+      {
+        "type": "INCREASE_DAMAGE",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "FAST_DIGGING",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "HEALTH_BOOST",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "DAMAGE_RESISTANCE",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "SUGAR",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Heroin",
+    "displayname": "&4&lHEROIN",
+    "recipe": [
+      "DIRT",
+      "RED_MUSHROOM",
+      "RED_MUSHROOM",
+      "AIR",
+      "DIRT",
+      "WOODEN_SWORD",
+      "AIR",
+      "DIRT",
+      "AIR"
+    ],
+    "effects": [
+      {
+        "type": "WEAKNESS",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "SLOW",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "UNLUCK",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "POISON",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "WITHER_ROSE",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Molly",
+    "displayname": "&b&lMOLLY",
+    "recipe": [
+      "IRON_INGOT",
+      "IRON_INGOT",
+      "IRON_INGOT",
+      "GUNPOWDER",
+      "WATER_BUCKET",
+      "GUNPOWDER",
+      "IRON_INGOT",
+      "IRON_INGOT",
+      "IRON_INGOT"
+    ],
+    "effects": [
+      {
+        "type": "CONFUSION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "SPEED",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "FAST_DIGGING",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "FIRE_RESISTANCE",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "NIGHT_VISION",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "IRON_NUGGET",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Ciggy",
+    "displayname": "&6&lCIGGY",
+    "recipe": [
+      "AIR",
+      "GUNPOWDER",
+      "AIR",
+      "PAPER",
+      "STICK",
+      "PAPER",
+      "PAPER",
+      "PAPER",
+      "PAPER"
+    ],
+    "effects": [
+      {
+        "type": "SATURATION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "DAMAGE_RESISTANCE",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "JUMP",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "SLOW_DIGGING",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "REDSTONE_TORCH",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Shrooms",
+    "displayname": "&7&lSHROOMS",
+    "recipe": [
+      "DIRT",
+      "DIRT",
+      "DIRT",
+      "STICK",
+      "AIR",
+      "STICK",
+      "AIR",
+      "BROWN_MUSHROOM",
+      "AIR"
+    ],
+    "effects": [
+      {
+        "type": "LUCK",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "NIGHT_VISION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "CONFUSION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "GLOWING",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "CRIMSON_FUNGUS",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Salvia",
+    "displayname": "&2&lSALVIA",
+    "recipe": [
+      "AIR",
+      "GREEN_BED",
+      "AIR",
+      "GREEN_CANDLE",
+      "GREEN_CANDLE",
+      "GREEN_CANDLE",
+      "GREEN_DYE",
+      "AIR",
+      "GREEN_DYE"
+    ],
+    "effects": [
+      {
+        "type": "NIGHT_VISION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "REGENERATION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "WEAKNESS",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "GLOWING",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "DRIED_KELP",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "PCP",
+    "displayname": "&5&lPCP",
+    "recipe": [
+      "WHEAT_SEEDS",
+      "MELON_SEEDS",
+      "PUMPKIN_SEEDS",
+      "PUMPKIN_SEEDS",
+      "MELON_SEEDS",
+      "WHEAT_SEEDS",
+      "WHEAT_SEEDS",
+      "MELON_SEEDS",
+      "PUMPKIN_SEEDS"
+    ],
+    "effects": [
+      {
+        "type": "DAMAGE_RESISTANCE",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "BAD_OMEN",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "CONFUSION",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "SPORE_BLOSSOM",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "DMT",
+    "displayname": "&3&lDMT",
+    "recipe": [
+      "SUGAR",
+      "SUGAR",
+      "SUGAR",
+      "SUGAR",
+      "GLOWSTONE_DUST",
+      "SUGAR",
+      "SUGAR",
+      "GLOWSTONE_DUST",
+      "SUGAR"
+    ],
+    "effects": [
+      {
+        "type": "DAMAGE_RESISTANCE",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "SLOW_FALLING",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "SLOW",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "GLOWING",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "GLOWSTONE_DUST",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Alcohol",
+    "displayname": "&6&lALCOHOL",
+    "recipe": [
+      "AIR",
+      "PAPER",
+      "AIR",
+      "GUNPOWDER",
+      "GUNPOWDER",
+      "GUNPOWDER",
+      "WATER_BUCKET",
+      "WATER_BUCKET",
+      "WATER_BUCKET"
+    ],
+    "effects": [
+      {
+        "type": "SPEED",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "NIGHT_VISION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "HUNGER",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "CONFUSION",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "WATER_BUCKET",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Flakka",
+    "displayname": "&e&lFLAKKA",
+    "recipe": [
+      "AIR",
+      "BIRCH_DOOR",
+      "AIR",
+      "SWEET_BERRIES",
+      "SWEET_BERRIES",
+      "SWEET_BERRIES",
+      "WATER_BUCKET",
+      "AIR",
+      "WATER_BUCKET"
+    ],
+    "effects": [
+      {
+        "type": "SPEED",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "DAMAGE_RESISTANCE",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "UNLUCK",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "DOLPHINS_GRACE",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "QUARTZ",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Meth",
+    "displayname": "&b&lMETH",
+    "recipe": [
+      "AIR",
+      "DIRT",
+      "AIR",
+      "AIR",
+      "PAPER",
+      "AIR",
+      "AIR",
+      "GUNPOWDER",
+      "AIR"
+    ],
+    "effects": [
+      {
+        "type": "ABSORPTION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "DAMAGE_RESISTANCE",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "FIRE_RESISTANCE",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "LEVITATION",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "PRISMARINE_SHARD",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Ketamine",
+    "displayname": "&4&lKETAMINE",
+    "recipe": [
+      "SNOWBALL",
+      "SNOWBALL",
+      "SNOWBALL",
+      "SNOWBALL",
+      "LAVA_BUCKET",
+      "SNOWBALL",
+      "SNOWBALL",
+      "SNOWBALL",
+      "SNOWBALL"
+    ],
+    "effects": [
+      {
+        "type": "NIGHT_VISION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "SPEED",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "FAST_DIGGING",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "CONFUSION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "SLOW_FALLING",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "POWDER_SNOW_BUCKET",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Oxy",
+    "displayname": "&b&lOXY",
+    "recipe": [
+      "WHITE_WOOL",
+      "WHITE_WOOL",
+      "WHITE_WOOL",
+      "WATER_BUCKET",
+      "AIR",
+      "WATER_BUCKET",
+      "AIR",
+      "LAVA_BUCKET",
+      "AIR"
+    ],
+    "effects": [
+      {
+        "type": "ABSORPTION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "DAMAGE_RESISTANCE",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "CONFUSION",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "GLOWING",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "WHITE_DYE",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Tussin",
+    "displayname": "&5&lTUSSIN",
+    "recipe": [
+      "WATER_BUCKET",
+      "AIR",
+      "WATER_BUCKET",
+      "GLASS_BOTTLE",
+      "AIR",
+      "GLASS_BOTTLE",
+      "WATER_BUCKET",
+      "GLASS_BOTTLE",
+      "WATER_BUCKET"
+    ],
+    "effects": [
+      {
+        "type": "INCREASE_DAMAGE",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "HEAL",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "JUMP",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "CONFUSION",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "PURPLE_CANDLE",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  },
+  {
+    "name": "Xannx",
+    "displayname": "&2&lXANAX",
+    "recipe": [
+      "AIR",
+      "GREEN_BED",
+      "AIR",
+      "WHITE_TULIP",
+      "AIR",
+      "WHITE_TULIP",
+      "AIR",
+      "GUNPOWDER",
+      "AIR"
+    ],
+    "effects": [
+      {
+        "type": "SLOW",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "SLOW_DIGGING",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "SLOW_FALLING",
+        "time": 90,
+        "intensity": 1
+      },
+      {
+        "type": "BLINDNESS",
+        "time": 90,
+        "intensity": 1
+      }
+    ],
+    "item": "GREEN_CANDLE",
+    "permission": "drugs.use.weed",
+    "crafting": true
+  }
+]
