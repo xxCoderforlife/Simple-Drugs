@@ -100,7 +100,7 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(this), this);
         this.getServer().getPluginManager().registerEvents(new BagOfDrugs(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
-        this.getServer().getPluginManager().registerEvents(new DrugUseListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new DrugUseListener(), this);
         this.getServer().getPluginManager().registerEvents(new SettingsClickEvent(this), this);
         this.getCommand("drugs").setExecutor(new KillerCommands(this));
         this.getCommand("drugs").setTabCompleter(new TabCommands(this));
