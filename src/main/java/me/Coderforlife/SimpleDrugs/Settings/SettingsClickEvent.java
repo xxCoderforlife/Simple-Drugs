@@ -29,6 +29,7 @@ public class SettingsClickEvent implements Listener {
 
     @EventHandler
     public static void onInventoryClick(InventoryClickEvent event) {
+        Settings s = new Settings();
         Player p = (Player) event.getWhoClicked();
         ItemStack stack = event.getCurrentItem();
 
@@ -46,7 +47,7 @@ public class SettingsClickEvent implements Listener {
 
         switch(settingsname) {
             case "§6§lCheck for Updates":
-                Settings.setCheckForUpdate(!isEnabled);
+                s.setCheckForUpdate(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aChecking for Updates.");
                 } else {
@@ -55,7 +56,7 @@ public class SettingsClickEvent implements Listener {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
                 break;
             case "§6§lUpdate Message":
-                Settings.setUpdateMessage(!isEnabled);
+                s.setUpdateMessage(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §asending Update Message");
                 } else {
@@ -64,7 +65,7 @@ public class SettingsClickEvent implements Listener {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
                 break;
             case "§6§lJoin Message":
-                Settings.setJoinMessage(!isEnabled);
+                s.setJoinMessage(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §asending Join Message");
                 } else {
@@ -73,7 +74,7 @@ public class SettingsClickEvent implements Listener {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
                 break;
             case "§6§lBag Movable":
-                Settings.setBagOfDrugs_CanMove(!isEnabled);
+                s.setBagOfDrugs_CanMove(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aMovable Bag of Drugs.");
                 } else {
@@ -82,7 +83,7 @@ public class SettingsClickEvent implements Listener {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
                 break;
             case "§6§lBag Droppable":
-                Settings.setBagOfDrugs_CanDrop(!isEnabled);
+                s.setBagOfDrugs_CanDrop(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aDroppable Bag of Drugs.");
                 } else {
@@ -91,7 +92,7 @@ public class SettingsClickEvent implements Listener {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
                 break;
             case "§6§lGive Bag on Join":
-                Settings.setBagOfDrugs_GiveOnJoin(!isEnabled);
+                s.setBagOfDrugs_GiveOnJoin(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §agiving Bag of Drugs on Join.");
                 } else {
@@ -100,7 +101,7 @@ public class SettingsClickEvent implements Listener {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
                 break;
             case "§6§lBag Dropped on Death":
-                Settings.setBagOfDrugs_DropOnDeath(!isEnabled);
+                s.setBagOfDrugs_DropOnDeath(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aBag of Drugs Dropped on Death.");
                 } else {
@@ -109,7 +110,7 @@ public class SettingsClickEvent implements Listener {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
                 break;
             case "§6§lKeep Bag on Respawn":
-                Settings.setBagofDrugs_GiveOnRespawn(!isEnabled);
+                s.setBagofDrugs_GiveOnRespawn(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §agiving Bag of Drugs on Respawn.");
                 } else {
@@ -122,7 +123,8 @@ public class SettingsClickEvent implements Listener {
         }
 
         event.setCancelled(true);
-        p.openInventory(GUI.create());
+        GUI g = new GUI();
+        p.openInventory(g.create());
     }
 
 }
