@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -35,10 +36,15 @@ public class DrugUseListener implements Listener {
         if(!pa.equals(Action.RIGHT_CLICK_AIR) && !pa.equals(Action.RIGHT_CLICK_BLOCK)) {
             return;
         }
+
         ItemStack itemInHand = p.getInventory().getItemInMainHand();
         Drug drug = Drug.matchDrug(itemInHand);
         if(null == drug)
             return;
+
+        if(ev.getHand().equals(EquipmentSlot.OFF_HAND)) {
+            return;
+        }
 
         if(!p.hasPermission(drug.getPermission())) {
             p.sendMessage(Main.prefix + ChatColor.DARK_RED + "You can't use " + drug.getName());
