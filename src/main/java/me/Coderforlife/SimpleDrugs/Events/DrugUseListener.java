@@ -5,7 +5,6 @@ import me.Coderforlife.SimpleDrugs.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,10 +19,8 @@ import org.bukkit.inventory.ItemStack;
  */
 public class DrugUseListener implements Listener {
 
-    private final Main plugin;
 
-    public DrugUseListener(Main plugin) {
-        this.plugin = plugin;
+    public DrugUseListener() {
     }
 
 
@@ -42,7 +39,7 @@ public class DrugUseListener implements Listener {
 
         ItemStack itemInHand = p.getInventory().getItemInMainHand();
         Drug drug = Drug.matchDrug(itemInHand);
-        if(null == drug)
+        if(drug == null)
             return;
         ev.setCancelled(true);
 
@@ -67,9 +64,15 @@ public class DrugUseListener implements Listener {
         itemInHand.setAmount(itemInHand.getAmount() - 1);
     }
 
-    @EventHandler
+    /*
+    TODO Fix this method to check if the player doesn't have the permission to use the drug and then cancel the event.    
+    */
+    
+   
+   
+    /*  @EventHandler
     public void BlockPlace(BlockPlaceEvent ev) {
-        Block block = ev.getBlock();
+        //Block block = ev.getBlock();
         Player p = ev.getPlayer();
 
         ItemStack stack = p.getInventory().getItemInMainHand() == null ? p.getInventory().getItemInOffHand() : p.getInventory().getItemInMainHand();
@@ -77,5 +80,5 @@ public class DrugUseListener implements Listener {
         if(isDrug) {
             ev.setCancelled(true);
         }
-    }
+    }*/
 }

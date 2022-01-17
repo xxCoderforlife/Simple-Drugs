@@ -28,7 +28,7 @@ permissions:
     default: op
   drugs.command.bagofdrugs:
     description: Used for '/drugs bagofdrugs' command.
-    default: true
+    default: op
   drugs.list:
     description: Used for '/drugs list' command.
     default: true
