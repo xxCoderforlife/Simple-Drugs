@@ -39,7 +39,7 @@ public class DrugUseListener implements Listener {
 
         ItemStack itemInHand = p.getInventory().getItemInMainHand();
         Drug drug = Drug.matchDrug(itemInHand);
-        if(null == drug)
+        if(drug == null)
             return;
         ev.setCancelled(true);
 
@@ -64,7 +64,13 @@ public class DrugUseListener implements Listener {
         itemInHand.setAmount(itemInHand.getAmount() - 1);
     }
 
-    @EventHandler
+    /*
+    TODO Fix this method to check if the player doesn't have the permission to use the drug and then cancel the event.    
+    */
+    
+   
+   
+    /*  @EventHandler
     public void BlockPlace(BlockPlaceEvent ev) {
         //Block block = ev.getBlock();
         Player p = ev.getPlayer();
@@ -74,5 +80,5 @@ public class DrugUseListener implements Listener {
         if(isDrug) {
             ev.setCancelled(true);
         }
-    }
+    }*/
 }
