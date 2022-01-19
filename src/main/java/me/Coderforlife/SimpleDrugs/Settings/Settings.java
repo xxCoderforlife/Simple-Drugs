@@ -24,7 +24,6 @@ public class Settings {
         setBagofDrugs_GiveOnRespawn(plugin.drugsConfig.getBoolean("Drugs.BagOfDrugs.GiveOnRespawn"));
         setBagOfDrugs_GiveOnJoin(plugin.drugsConfig.getBoolean("Drugs.BagOfDrugs.GiveOnJoin"));
         setBagOfDrugs_DropOnDeath(plugin.drugsConfig.getBoolean("Drugs.BagOfDrugs.DropOnDeath"));
-
     }
 
     public boolean CheckForUpdate() {

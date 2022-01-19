@@ -29,15 +29,9 @@ public class TabCommands implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> tab = new ArrayList<>();
-        if(args.length == 0) {
-            for(Player all : Bukkit.getOnlinePlayers()) {
-                tab.remove(all.getName());
-            }
+        if (args.length == 0) {
             tab.add("drugs");
-        } else if(args.length == 1) {
-            for(Player all : Bukkit.getOnlinePlayers()) {
-                tab.remove(all.getName());
-            }
+        } else if (args.length == 1) {
             tab.add("help");
             tab.add("list");
             tab.add("reload");
@@ -47,23 +41,22 @@ public class TabCommands implements TabCompleter {
             tab.add("version");
             tab.add("settings");
             //tab.add("sell");
-        } else if(args.length == 2) {
-            for(Player all : Bukkit.getOnlinePlayers()) {
-                if(args[0].equalsIgnoreCase("bagofdrugs") || args[0].equalsIgnoreCase("soberup")) {
+        } else if (args.length == 2) {
+            for (Player all : Bukkit.getOnlinePlayers()) {
+                if (args[0].equalsIgnoreCase("bagofdrugs") || args[0].equalsIgnoreCase("soberup")) {
                     tab.add(all.getName());
                 }
             }
-            if(args[0].equalsIgnoreCase("give")) {
-                for(Drug drugs : Drug.getallDrugs()) {
+            if (args[0].equalsIgnoreCase("give")) {
+                for (Drug drugs : Drug.getallDrugs()) {
                     tab.add(drugs.getName());
                 }
             }
-        } else if(args.length == 3) {
-            for(Player all : Bukkit.getOnlinePlayers()) {
+        } else if (args.length == 3) {
+            for (Player all : Bukkit.getOnlinePlayers()) {
                 tab.add(all.getName());
             }
         }
-
         return tab;
     }
 

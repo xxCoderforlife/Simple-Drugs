@@ -24,14 +24,14 @@ public class PlayerJoin implements Listener {
     public ItemStack bag = (HELLO(new ItemStack(Material.NETHER_STAR, (byte) 1)));
 
     private ItemStack HELLO(ItemStack is) {
-        List<String> name = new ArrayList<String>();
+        List<String> name = new ArrayList<>();
         name.add(ChatColor.DARK_GRAY + "---------------------");
         name.add(ChatColor.RED + "A Bag Full Of Drugs :)");
         name.add("Enjoy.");
         name.add(ChatColor.ITALIC + "Simple-Drugs®");
         ItemMeta im = is.getItemMeta();
         im.addEnchant(Enchantment.BINDING_CURSE, 7766, true);
-        im.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES});
+        im.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
         im.setDisplayName(BagOfDrugs.bagName);
         im.setLore(name);
         is.setItemMeta(im);
@@ -42,9 +42,7 @@ public class PlayerJoin implements Listener {
         this.setPlugin(plugin);
     }
 
-    public PlayerJoin() {
-        return;
-    }
+    public PlayerJoin() {}
 
     public Main getPlugin() {
         return this.plugin;
@@ -68,7 +66,7 @@ public class PlayerJoin implements Listener {
                     public void run() {
                         p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&', "&f&lServer is running &5&l&oSIMPLE DRUGS"));
                     }
-                }, 40l);
+                }, 40L);
             }
         }
 

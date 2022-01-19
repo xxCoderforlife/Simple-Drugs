@@ -1,5 +1,6 @@
 package me.Coderforlife.SimpleDrugs.Settings;
 
+import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
 import me.Coderforlife.SimpleDrugs.Main;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -45,85 +46,85 @@ public class SettingsClickEvent implements Listener {
         String settingsname = String.join(" ", Arrays.copyOfRange(name, 0, name.length - 1));
         boolean isEnabled = name[name.length - 1].equalsIgnoreCase("§a(Enabled)");
 
-        switch(settingsname) {
-            case "§6§lCheck for Updates":
+        switch (settingsname) {
+            case "§6§lCheck for Updates" -> {
                 s.setCheckForUpdate(!isEnabled);
-                if(isEnabled) {
+                if (isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aChecking for Updates.");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Checking for Updates.");
                 }
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
-                break;
-            case "§6§lUpdate Message":
+            }
+            case "§6§lUpdate Message" -> {
                 s.setUpdateMessage(!isEnabled);
-                if(isEnabled) {
+                if (isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §asending Update Message");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled sending Update Message.");
                 }
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
-                break;
-            case "§6§lJoin Message":
+            }
+            case "§6§lJoin Message" -> {
                 s.setJoinMessage(!isEnabled);
-                if(isEnabled) {
+                if (isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §asending Join Message");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled sending Join Message.");
                 }
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
-                break;
-            case "§6§lBag Movable":
+            }
+            case "§6§lBag Movable" -> {
                 s.setBagOfDrugs_CanMove(!isEnabled);
-                if(isEnabled) {
+                if (isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aMovable Bag of Drugs.");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Movable Bag of Drugs.");
                 }
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
-                break;
-            case "§6§lBag Droppable":
+            }
+            case "§6§lBag Droppable" -> {
                 s.setBagOfDrugs_CanDrop(!isEnabled);
-                if(isEnabled) {
+                if (isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aDroppable Bag of Drugs.");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Droppable Bag of Drugs.");
                 }
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
-                break;
-            case "§6§lGive Bag on Join":
+            }
+            case "§6§lGive Bag on Join" -> {
                 s.setBagOfDrugs_GiveOnJoin(!isEnabled);
-                if(isEnabled) {
+                if (isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §agiving Bag of Drugs on Join.");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled giving Bag of Drugs on Join.");
                 }
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
-                break;
-            case "§6§lBag Dropped on Death":
+            }
+            case "§6§lBag Dropped on Death" -> {
                 s.setBagOfDrugs_DropOnDeath(!isEnabled);
-                if(isEnabled) {
+                if (isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aBag of Drugs Dropped on Death.");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Bag of Drugs Dropped on Death.");
                 }
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
-                break;
-            case "§6§lKeep Bag on Respawn":
+            }
+            case "§6§lKeep Bag on Respawn" -> {
                 s.setBagofDrugs_GiveOnRespawn(!isEnabled);
-                if(isEnabled) {
+                if (isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §agiving Bag of Drugs on Respawn.");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled giving Bag of Drugs on Respawn.");
                 }
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
-                break;
-            default:
-                break;
+            }
+            default -> {
+            }
         }
 
         event.setCancelled(true);
-        GUI g = new GUI();
+        SettingsGUI g = new SettingsGUI();
         p.openInventory(g.create());
     }
 
