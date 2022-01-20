@@ -4,6 +4,7 @@ import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -63,13 +64,18 @@ public class RecipeGUI {
     }
 
     public void handleClick(InventoryClickEvent event) {
-        if(event.getClick().isShiftClick()) {
+        if(event.getClick().isShiftClick() || event.getClick().isRightClick()) {
             event.setCancelled(true);
             return;
         }
-
         if(!event.getClickedInventory().getType().equals(InventoryType.PLAYER)) {
             event.setCancelled(true);
+        }
+    }
+
+    public void handleDrag(InventoryDragEvent ev) {
+        if(!ev.getInventory().getType().equals(InventoryType.PLAYER)) {
+            ev.setCancelled(true);
         }
     }
 

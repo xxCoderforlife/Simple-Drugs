@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class Settings {
-
     public static boolean CheckForUpdate;
     public static boolean UpdateMessage;
     public static boolean JoinMessage;

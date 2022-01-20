@@ -10,21 +10,7 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryType;
 
 public class CraftingEvent implements Listener {
-
-    private Main plugin;
-
-    public CraftingEvent(Main plugin) {
-        this.setPlugin(plugin);
-    }
-
-    public Main getPlugin() {
-        return this.plugin;
-    }
-
-    public void setPlugin(Main plugin) {
-        this.plugin = plugin;
-    }
-
+    
     @EventHandler
     public void OnCraftEvent(CraftItemEvent e) {
         Player p = (Player) e.getWhoClicked();

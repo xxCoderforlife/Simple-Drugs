@@ -16,24 +16,9 @@ import org.bukkit.potion.PotionEffect;
 
 import java.util.Arrays;
 
-public class KillerCommands implements CommandExecutor {
+public class Commands implements CommandExecutor {
 
-    private Main plugin;
-
-    public KillerCommands(Main plugin) {
-        this.setPlugin(plugin);
-    }
-
-    PlayerJoin pj = new PlayerJoin();
-
-    public Main getPlugin() {
-        return this.plugin;
-    }
-
-    public void setPlugin(Main plugin) {
-        this.plugin = plugin;
-    }
-
+    private static PlayerJoin pj = new PlayerJoin();
     public static String dash = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "- ";
     public static String header = ChatColor.translateAlternateColorCodes('&', "&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&f&l[&4&o&lSIMPLE DRUGS&f&l]" + "&8&l&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=");
 
@@ -42,7 +27,7 @@ public class KillerCommands implements CommandExecutor {
             if(p.hasPermission("drugs.main")) {
                 if(args.length == 0) {
                     p.sendMessage(header);
-                    p.sendMessage("§7§o&nUse the following commands:");
+                    p.sendMessage("§7§o§nUse the following commands:");
                     p.sendMessage("§7- §f/drugs help §8| §fHow-To and Wiki Link.");
                     p.sendMessage("§7- §f/drugs list §8| §fSee a list of All Drugs.");
                     p.sendMessage("§7- §f/drugs soberup §e[player] §8| §fSoberup yourself or another player.");
@@ -116,7 +101,7 @@ public class KillerCommands implements CommandExecutor {
                     } else if(args[0].equalsIgnoreCase("version")) {
                         if(p.hasPermission("drugs.version")) {
                             p.sendMessage(header);
-                            p.sendMessage(Main.prefix + "§4§oYou are running version:§f " + plugin.getDescription().getVersion());
+                            p.sendMessage(Main.prefix + "§4§oYou are running version:§f " + Main.plugin.getDescription().getVersion());
                         }
                     }
                 } else if(args.length == 2) {

@@ -15,9 +15,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class DrugUseListener implements Listener {
 
-    public DrugUseListener() {
-    }
-
     @EventHandler
     public void RightClickEvent(PlayerInteractEvent ev) {
         Player p = ev.getPlayer();

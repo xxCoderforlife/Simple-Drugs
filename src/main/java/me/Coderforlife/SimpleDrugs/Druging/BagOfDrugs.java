@@ -28,20 +28,6 @@ public class BagOfDrugs implements Listener {
 
     public static String bagName = "§6§lBag Of Drugs";
     public static String invName = "§6§l§oBag Of Drugs";
-    private Main plugin;
-
-    public BagOfDrugs(Main plugin) {
-        this.setPlugin(plugin);
-    }
-
-    public Main getPlugin() {
-        return this.plugin;
-    }
-
-    public void setPlugin(Main plugin) {
-        this.plugin = plugin;
-    }
-
     private final String sober = ChatColor.ITALIC + "Remove Drugs With" + " §c/d soberup";
 
     @EventHandler

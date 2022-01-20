@@ -20,57 +20,39 @@ import java.util.List;
 
 public class PlayerJoin implements Listener {
 
-    private Main plugin;
-
-    public ItemStack bag = (HELLO(new ItemStack(Material.NETHER_STAR, (byte) 1)));
-
-    private ItemStack HELLO(ItemStack is) {
-        List<String> name = new ArrayList<>();
-        name.add(ChatColor.DARK_GRAY + "---------------------");
-        name.add(ChatColor.RED + "A Bag Full Of Drugs :)");
-        name.add("Enjoy.");
-        name.add(ChatColor.ITALIC + "Simple-Drugs®");
-        ItemMeta im = is.getItemMeta();
-        im.addEnchant(Enchantment.BINDING_CURSE, 7766, true);
-        im.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
-        im.setDisplayName(BagOfDrugs.bagName);
-        im.setLore(name);
-        is.setItemMeta(im);
-        return is;
-    }
-
-    public PlayerJoin(Main plugin) {
-        this.setPlugin(plugin);
-    }
-
-    public PlayerJoin() {
-    }
-
-    public Main getPlugin() {
-        return this.plugin;
-    }
-
-    public void setPlugin(Main plugin) {
-        this.plugin = plugin;
-    }
+    public ItemStack bag = HELLO();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent ev) {
-
         Player p = ev.getPlayer();
         if(Settings.BagOfDrugs_GiveOnJoin) {
             if(!p.getInventory().contains(bag)) {
                 p.getInventory().addItem(bag);
             }
-            if(Settings.JoinMessage) {
-                Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&', "&f&lServer is running &5&l&oSIMPLE DRUGS"));
-                    }
-                }, 40L);
-            }
         }
+        if(Settings.JoinMessage) {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
+                @Override
+                public void run() {
+                    p.sendMessage(Main.prefix + "§f§lServer is running §5§l§oSIMPLE DRUGS");
+                }
+            }, 40L);
+        }
+    }
 
+    private ItemStack HELLO() {
+        ItemStack stack = new ItemStack(Material.NETHER_STAR);
+        ItemMeta meta = stack.getItemMeta();
+        meta.setDisplayName(BagOfDrugs.bagName);
+        List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.DARK_GRAY + "---------------------");
+        lore.add(ChatColor.RED + "A Bag Full Of Drugs :)");
+        lore.add("Enjoy.");
+        lore.add(ChatColor.ITALIC + "Simple-Drugs®");
+        meta.setLore(lore);
+        meta.addEnchant(Enchantment.BINDING_CURSE, 7766, true);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
+        stack.setItemMeta(meta);
+        return stack;
     }
 }

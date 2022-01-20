@@ -11,21 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TabCommands implements TabCompleter {
-
-    private Main plugin;
-
-    public TabCommands(Main plugin) {
-        this.setPlugin(plugin);
-    }
-
-    public Main getPlugin() {
-        return this.plugin;
-    }
-
-    public void setPlugin(Main plugin) {
-        this.plugin = plugin;
-    }
-
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> tab = new ArrayList<>();

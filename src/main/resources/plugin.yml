@@ -13,7 +13,7 @@ commands:
   drugs:
     permission: drugs.main
     description: Root Command For Simple-Drugs.
-    usage: /[d|drugs] [soberup|help|list|bagofdrugs|reload]
+    usage: /[d|drugs] [soberup|help|list|bagofdrugs|reload|recipe]
     aliases: [ d ]
 #PERMISSIONS
 permissions:

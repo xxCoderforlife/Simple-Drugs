@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Consumer;
 
 import java.io.InputStream;
@@ -14,7 +15,7 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class Updater implements Listener {
-    private Main plugin;
+    private Plugin plugin;
 
     public static String spigotVersion;
     private static String currVersion;
@@ -22,14 +23,13 @@ public class Updater implements Listener {
     private Boolean isdev = false;
     private Integer resourceID;
 
-    public Updater(Main plugin, Integer resourceID) {
+    public Updater(Plugin plugin, Integer resourceID) {
         this.plugin = plugin;
         this.resourceID = resourceID;
         if(Settings.UpdateMessage) {
             Bukkit.getPluginManager().registerEvents(this, plugin);
         }
     }
-
 
     public void checkForUpdate() {
         currVersion = plugin.getDescription().getVersion();
