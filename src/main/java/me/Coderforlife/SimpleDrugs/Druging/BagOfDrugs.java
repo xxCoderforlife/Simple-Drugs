@@ -94,7 +94,7 @@ public class BagOfDrugs implements Listener {
             return;
         }
 
-        for(Drug drug : Drug.getallDrugs()) {
+        for(Drug drug : new Drug().getallDrugs()) {
             if(!drug.isDrugItem(clickedItem)) {
                 continue;
             }

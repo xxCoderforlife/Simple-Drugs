@@ -21,7 +21,7 @@ public class Setup {
         checkForUpdate();
         loadVault();
 
-        Drug.loadDrugs();
+        new Drug().loadDrugs();
     }
 
     private void loadPlaceHolders() {

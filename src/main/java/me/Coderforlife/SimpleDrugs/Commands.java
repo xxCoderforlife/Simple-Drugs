@@ -18,7 +18,7 @@ import java.util.Arrays;
 
 public class Commands implements CommandExecutor {
 
-    private static PlayerJoin pj = new PlayerJoin();
+    private static final PlayerJoin pj = new PlayerJoin();
     public static String dash = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "- ";
     public static String header = ChatColor.translateAlternateColorCodes('&', "&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&f&l[&4&o&lSIMPLE DRUGS&f&l]" + "&8&l&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=");
 
@@ -75,7 +75,7 @@ public class Commands implements CommandExecutor {
                     } else if(args[0].equalsIgnoreCase("list")) {
                         if(p.hasPermission("drugs.list")) {
                             p.sendMessage(header);
-                            for(Drug drug : Drug.getallDrugs()) {
+                            for(Drug drug : new Drug().getallDrugs()) {
                                 p.sendMessage(dash + drug.getDisplayname());
                             }
                         } else {
@@ -106,7 +106,7 @@ public class Commands implements CommandExecutor {
                     }
                 } else if(args.length == 2) {
                     if(args[0].equalsIgnoreCase("recipe")) {
-                        Drug drug = Drug.getDrug(args[1]);
+                        Drug drug = new Drug().getDrug(args[1]);
                         if(drug == null) {
                             p.sendMessage(Main.prefix + "§e" + args[1] + " §cdoes not exist.");
                             return true;
@@ -117,11 +117,11 @@ public class Commands implements CommandExecutor {
                             for(Player players : Bukkit.getOnlinePlayers()) {
                                 if(args[1].equalsIgnoreCase(players.getName())) {
                                     if(players.isOnline()) {
-                                        if(players.getInventory().contains(this.pj.bag)) {
+                                        if(players.getInventory().contains(pj.bag)) {
                                             p.sendMessage(Main.prefix + ChatColor.GRAY + players.getDisplayName() + " Already has a bag");
                                         } else {
                                             p.sendMessage(Main.prefix + ChatColor.GRAY + "You sent " + players.getDisplayName() + " a " + BagOfDrugs.bagName);
-                                            players.getInventory().addItem(this.pj.bag);
+                                            players.getInventory().addItem(pj.bag);
                                             players.sendMessage(Main.prefix + ChatColor.GRAY + p.getDisplayName() + " Sent you a " + BagOfDrugs.bagName);
                                         }
                                     } else {
@@ -164,7 +164,7 @@ public class Commands implements CommandExecutor {
                         }
                     } else if(args[0].equalsIgnoreCase("give")) {
                         if(p.hasPermission("drugs.give")) {
-                            for(Drug drugs : Drug.getallDrugs()) {
+                            for(Drug drugs : new Drug().getallDrugs()) {
                                 if(args[1].equalsIgnoreCase(drugs.getName())) {
                                     p.getInventory().addItem(drugs.getItem());
                                     p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&', "&7You've been given " + drugs.getDisplayname()));
@@ -180,7 +180,7 @@ public class Commands implements CommandExecutor {
                 } else if(args.length == 3) {
                     if(args[0].equalsIgnoreCase("give")) {
                         if(p.hasPermission("durgs.give.others")) {
-                            for(Drug drugs : Drug.getallDrugs()) {
+                            for(Drug drugs : new Drug().getallDrugs()) {
                                 if(args[1].equalsIgnoreCase(drugs.getName())) {
                                     for(Player players : Bukkit.getOnlinePlayers()) {
                                         if(args[2].equalsIgnoreCase(players.getName())) {

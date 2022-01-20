@@ -36,6 +36,10 @@ public class Drug {
     private String permission;
     private boolean crafting;
 
+    public Drug() {
+
+    }
+
     public Drug(String name, String displayname, Recipe recipe, ArrayList<DrugEffect> effects, ItemStack item, String permission, boolean crafting) {
         this.name = name;
         this.displayname = displayname;
@@ -47,7 +51,7 @@ public class Drug {
         drugs.put(name, this);
     }
 
-    public static void loadDrugs() {
+    public void loadDrugs() {
         try {
             JsonArray array = (JsonArray) JsonParser.parseReader(new FileReader("plugins/Simple-Drugs/drugs.json"));
             for(JsonElement element : array) {
@@ -141,11 +145,11 @@ public class Drug {
         }
     }
 
-    public static Drug getDrug(String name) {
+    public Drug getDrug(String name) {
         return drugs.getOrDefault(name, null);
     }
 
-    public static ArrayList<Drug> getDrugs() {
+    public ArrayList<Drug> getDrugs() {
         return new ArrayList<>(drugs.values());
     }
 
@@ -159,7 +163,7 @@ public class Drug {
         return item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(this.displayname);
     }
 
-    public static Drug matchDrug(ItemStack item) {
+    public Drug matchDrug(ItemStack item) {
         for(Drug drug : drugs.values()) {
             if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(drug.getDisplayname())) {
                 return drug;
@@ -168,7 +172,7 @@ public class Drug {
         return null;
     }
 
-    private static PotionEffectType getEffectfromJson(JsonObject element) {
+    private PotionEffectType getEffectfromJson(JsonObject element) {
         PotionEffectType effect = PotionEffectType.getByName(element.get("type").getAsString().toUpperCase());
         if(effect == null) {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Could not find Effect: " + ChatColor.DARK_GRAY + element.get("type").getAsString());
@@ -179,7 +183,7 @@ public class Drug {
         return effect;
     }
 
-    private static Material MaterialFromArray(JsonArray obj, int i) {
+    private Material MaterialFromArray(JsonArray obj, int i) {
         Material mat = Material.getMaterial(obj.get(i).getAsString().toUpperCase());
         if(mat == null) {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Could not find Material: " + ChatColor.DARK_GRAY + obj.get(i).getAsString());
@@ -190,7 +194,7 @@ public class Drug {
         return mat;
     }
 
-    private static Material MaterialFromObject(JsonObject obj, String key) {
+    private Material MaterialFromObject(JsonObject obj, String key) {
         Material mat = Material.getMaterial(obj.get(key).getAsString().toUpperCase());
         if(mat == null) {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Could not find Material: " + ChatColor.DARK_GRAY + obj.get(key).getAsString());
@@ -201,7 +205,7 @@ public class Drug {
         return mat;
     }
 
-    public static ArrayList<Drug> getallDrugs() {
+    public ArrayList<Drug> getallDrugs() {
         return new ArrayList<>(drugs.values());
     }
 
