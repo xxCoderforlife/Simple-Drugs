@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Settings {
+
     public static boolean CheckForUpdate;
     public static boolean UpdateMessage;
     public static boolean JoinMessage;
@@ -22,7 +23,7 @@ public class Settings {
     private static File drugsConfigFile;
     private static FileConfiguration drugsConfig;
 
-    public static void setup() {
+    public void setup() {
         SetupConfig();
         CheckForUpdate(drugsConfig.getBoolean("Drugs.CheckForUpdate"));
         UpdateMessage(drugsConfig.getBoolean("Drugs.UpdateMessage"));
@@ -34,47 +35,47 @@ public class Settings {
         BagOfDrugs_DropOnDeath(drugsConfig.getBoolean("Drugs.BagOfDrugs.DropOnDeath"));
     }
 
-    public static void CheckForUpdate(boolean bol) {
+    public void CheckForUpdate(boolean bol) {
         CheckForUpdate = bol;
         drugsConfig.set("Drugs.CheckForUpdate", bol);
     }
 
-    public static void UpdateMessage(boolean bol) {
+    public void UpdateMessage(boolean bol) {
         UpdateMessage = bol;
         drugsConfig.set("Drugs.UpdateMessage", bol);
     }
 
-    public static void JoinMessage(boolean bol) {
+    public void JoinMessage(boolean bol) {
         JoinMessage = bol;
         drugsConfig.set("Drugs.JoinMessage", bol);
     }
 
-    public static void BagOfDrugs_CanMove(boolean bol) {
+    public void BagOfDrugs_CanMove(boolean bol) {
         BagOfDrugs_CanMove = bol;
         drugsConfig.set("Drugs.BagOfDrugs.CanMove", bol);
     }
 
-    public static void BagOfDrugs_CanDrop(boolean bol) {
+    public void BagOfDrugs_CanDrop(boolean bol) {
         BagOfDrugs_CanDrop = bol;
         drugsConfig.set("Drugs.BagOfDrugs.CanDrop", bol);
     }
 
-    public static void BagOfDrugs_GiveOnJoin(boolean bol) {
+    public void BagOfDrugs_GiveOnJoin(boolean bol) {
         BagOfDrugs_GiveOnJoin = bol;
         drugsConfig.set("Drugs.BagOfDrugs.GiveOnJoin", bol);
     }
 
-    public static void BagOfDrugs_DropOnDeath(boolean bol) {
+    public void BagOfDrugs_DropOnDeath(boolean bol) {
         BagOfDrugs_DropOnDeath = bol;
         drugsConfig.set("Drugs.BagOfDrugs.DropOnDeath", bol);
     }
 
-    public static void BagOfDrugs_GiveOnRespawn(boolean bol) {
+    public void BagOfDrugs_GiveOnRespawn(boolean bol) {
         BagOfDrugs_GiveOnRespawn = bol;
         drugsConfig.set("Drugs.BagOfDrugs.GiveOnRespawn", bol);
     }
 
-    public static void SetupConfig() {
+    public void SetupConfig() {
         drugsConfigFile = new File(plugin.getDataFolder(), "config.yml");
         if(!drugsConfigFile.exists()) {
             drugsConfigFile.getParentFile().mkdir();
@@ -88,7 +89,7 @@ public class Settings {
         }
     }
 
-    public static void save() {
+    public void save() {
         try {
             drugsConfig.save(drugsConfigFile);
         } catch(IOException e) {

@@ -16,13 +16,12 @@ public class Setup {
     public Setup(JavaPlugin plugin) {
         this.plugin = plugin;
         new Metrics(plugin, 13155);
-        Settings.setup();
+        new Settings().setup();
         loadPlaceHolders();
         checkForUpdate();
         loadVault();
 
         Drug.loadDrugs();
-        Settings.setup();
     }
 
     private void loadPlaceHolders() {

@@ -36,7 +36,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Settings.save();
+        new Settings().save();
     }
 
     private void sendConsoleMessage(String message) {

@@ -75,9 +75,11 @@ public class SettingsGUI {
         String settingsname = String.join(" ", Arrays.copyOfRange(name, 0, name.length - 1));
         boolean isEnabled = name[name.length - 1].equalsIgnoreCase("§a(Enabled)");
 
+        Settings s = new Settings();
+
         switch(settingsname) {
             case "§6§lCheck for Updates" -> {
-                Settings.CheckForUpdate(!isEnabled);
+                s.CheckForUpdate(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aChecking for Updates.");
                 } else {
@@ -86,7 +88,7 @@ public class SettingsGUI {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lUpdate Message" -> {
-                Settings.UpdateMessage(!isEnabled);
+                s.UpdateMessage(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §asending Update Message");
                 } else {
@@ -95,7 +97,7 @@ public class SettingsGUI {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lJoin Message" -> {
-                Settings.JoinMessage(!isEnabled);
+                s.JoinMessage(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §asending Join Message");
                 } else {
@@ -104,7 +106,7 @@ public class SettingsGUI {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lBag Movable" -> {
-                Settings.BagOfDrugs_CanMove(!isEnabled);
+                s.BagOfDrugs_CanMove(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aMovable Bag of Drugs.");
                 } else {
@@ -113,7 +115,7 @@ public class SettingsGUI {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lBag Droppable" -> {
-                Settings.BagOfDrugs_CanDrop(!isEnabled);
+                s.BagOfDrugs_CanDrop(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aDroppable Bag of Drugs.");
                 } else {
@@ -122,7 +124,7 @@ public class SettingsGUI {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lGive Bag on Join" -> {
-                Settings.BagOfDrugs_GiveOnJoin(!isEnabled);
+                s.BagOfDrugs_GiveOnJoin(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §agiving Bag of Drugs on Join.");
                 } else {
@@ -131,7 +133,7 @@ public class SettingsGUI {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lBag Dropped on Death" -> {
-                Settings.BagOfDrugs_DropOnDeath(!isEnabled);
+                s.BagOfDrugs_DropOnDeath(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aBag of Drugs Dropped on Death.");
                 } else {
@@ -140,7 +142,7 @@ public class SettingsGUI {
                 p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lKeep Bag on Respawn" -> {
-                Settings.BagOfDrugs_GiveOnRespawn(!isEnabled);
+                s.BagOfDrugs_GiveOnRespawn(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §agiving Bag of Drugs on Respawn.");
                 } else {
