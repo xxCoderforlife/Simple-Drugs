@@ -3,8 +3,6 @@
 #If you need help find me on Discord or Spigot.
 #Spigot: https://www.spigotmc.org/resources/simple-drugs-with-gui.9684/
 #Discord: https://discord.com/invite/jnmKj7Z
-#When you disable crafting you'll need to restart your server so it unloads the recipes.
-#Or Disable Crafting before you start the server
 #               WIKI LINK: 
 #    https://xxcoderforlife.gitbook.io/simpledrugswiki/
 #=========================================================================#
@@ -20,7 +18,7 @@ Drugs:
     CanMove: false
     #If the player can drop the bag
     CanDrop: false
-      #Is the bag given on player join
+    #Is the bag given on player join
     #If you set this to false use /drugs bagofdrugs to get it
     GiveOnJoin: true
     #If the Bag is dropped on death or not.

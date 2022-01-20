@@ -10,26 +10,12 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryType;
 
 public class CraftingEvent implements Listener {
-
-    private Main plugin;
-
-    public CraftingEvent(Main plugin) {
-        this.setPlugin(plugin);
-    }
-
-    public Main getPlugin() {
-        return this.plugin;
-    }
-
-    public void setPlugin(Main plugin) {
-        this.plugin = plugin;
-    }
-
+    
     @EventHandler
     public void OnCraftEvent(CraftItemEvent e) {
         Player p = (Player) e.getWhoClicked();
         if(e.getInventory().getType().equals(InventoryType.CRAFTING)) {
-            for(Drug drugs : Drug.getallDrugs()) {
+            for(Drug drugs : new Drug().getallDrugs()) {
                 if(e.getInventory().getResult().equals(drugs.getItem())) {
                     if(!p.hasPermission("drugs.craft" + drugs.getName().toLowerCase())) {
                         e.setCancelled(true);
