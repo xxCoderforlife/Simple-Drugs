@@ -37,7 +37,6 @@ public class DrugUseListener implements Listener {
         if(ev.getHand().equals(EquipmentSlot.OFF_HAND))
             return;
 
-
         if(!p.hasPermission(drug.getPermission())) {
             p.sendMessage(Main.prefix + "§4You can't use " + drug.getName());
             return;

@@ -2,6 +2,7 @@ package me.Coderforlife.SimpleDrugs.Events;
 
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Settings.Settings;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -42,7 +43,8 @@ public class PlayerJoin implements Listener {
         this.setPlugin(plugin);
     }
 
-    public PlayerJoin() {}
+    public PlayerJoin() {
+    }
 
     public Main getPlugin() {
         return this.plugin;
@@ -56,11 +58,11 @@ public class PlayerJoin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent ev) {
 
         Player p = ev.getPlayer();
-        if(plugin.drugsConfig.getBoolean(Main.bagofdrugs + ".GiveOnJoin")) {
+        if(Settings.BagOfDrugs_GiveOnJoin) {
             if(!p.getInventory().contains(bag)) {
                 p.getInventory().addItem(bag);
             }
-            if(plugin.drugsConfig.getBoolean("Drugs.JoinMessage")) {
+            if(Settings.JoinMessage) {
                 Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                     @Override
                     public void run() {

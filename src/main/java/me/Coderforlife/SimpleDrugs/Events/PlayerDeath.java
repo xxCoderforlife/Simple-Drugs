@@ -10,29 +10,28 @@ import org.bukkit.inventory.ItemStack;
 
 public class PlayerDeath implements Listener {
 
-    private Main plugin;
+	private Main plugin;
 
-    PlayerJoin pj = new PlayerJoin();
+	PlayerJoin pj = new PlayerJoin();
 
-    public PlayerDeath(Main plugin) {
-        this.setPlugin(plugin);
-    }
+	public PlayerDeath(Main plugin) {
+		this.setPlugin(plugin);
+	}
 
-    public Main getPlugin() {
-        return this.plugin;
-    }
+	public Main getPlugin() {
+		return this.plugin;
+	}
 
-    public void setPlugin(Main plugin) {
-        this.plugin = plugin;
-    }
+	public void setPlugin(Main plugin) {
+		this.plugin = plugin;
+	}
 
-    ItemStack handle = new ItemStack(Material.END_CRYSTAL);
+	ItemStack handle = new ItemStack(Material.END_CRYSTAL);
 
-    @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent ev) {
-        Settings s = new Settings();
-        if(s.BagOfDrugs_DropOnDeath() && ev.getDrops().contains(pj.bag)) {
-            ev.getDrops().remove(pj.bag);
-        }
-    }
+	@EventHandler
+	public void onPlayerDeath(PlayerDeathEvent ev) {
+		if (!Settings.BagOfDrugs_DropOnDeath) {
+			ev.getDrops().remove(pj.bag);
+		}
+	}
 }

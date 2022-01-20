@@ -12,15 +12,12 @@ import me.Coderforlife.SimpleDrugs.UpdateChecker.Updater;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 public class Main extends JavaPlugin {
@@ -45,56 +42,28 @@ public class Main extends JavaPlugin {
 
     public static String bagofdrugs = "Drugs.BagOfDrugs";
 
-    //Check for Update
-    @SuppressWarnings("unused")
     @Override
     public void onEnable() {
-        int pluginId = 13155;
-        Metrics metrics = new Metrics(this, pluginId);
+        new Metrics(this, 13155);
 
         getServer().getConsoleSender().sendMessage(header1);
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Loading all Class files and Handlers...");
-        createCustomConfig();
 
         plugin = this;
         Drug.loadDrugs();
+        new Settings();
 
-        try {
-            RegisterEvents();
-            loadPlaceHolders();
-            loadVault();
-            CheckforUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        RegisterEvents();
+        loadPlaceHolders();
+        loadVault();
+        CheckforUpdate();
+
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Loaded without Errors.");
     }
 
     @Override
     public void onDisable() {
-        try {
-            getCustomConfig().save(drugsConfigFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void createCustomConfig() {
-        drugsConfigFile = new File(getDataFolder(), "config.yml");
-        if (!drugsConfigFile.exists()) {
-            drugsConfigFile.getParentFile().mkdir();
-            saveResource("config.yml", false);
-        }
-        drugsConfig = new YamlConfiguration();
-        try {
-            drugsConfig.load(drugsConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public FileConfiguration getCustomConfig() {
-        return drugsConfig;
+        Settings.save();
     }
 
     public void RegisterEvents() {
@@ -108,7 +77,7 @@ public class Main extends JavaPlugin {
     }
 
     public void loadPlaceHolders() {
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', "&aFound PlaceHolderAPI."));
             Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', "&aHooked into PlaceHolderAPI"));
             new DrugPlaceHolders(this).register();
@@ -119,8 +88,7 @@ public class Main extends JavaPlugin {
     }
 
     public void CheckforUpdate() {
-        Settings s = new Settings();
-        if (s.CheckForUpdate()) {
+        if(Settings.CheckForUpdate) {
             new Updater(this, 9684).checkForUpdate();
         } else {
             Bukkit.getConsoleSender().sendMessage(Main.prefix + "§c§oDisabled Update Checking");
@@ -128,7 +96,7 @@ public class Main extends JavaPlugin {
     }
 
     public void loadVault() {
-        if (!setupEconomy()) {
+        if(!setupEconomy()) {
             Bukkit.getConsoleSender().sendMessage(prefix + "§cVault.jar was not found or you don't have an Economy Plugin");
             Bukkit.getConsoleSender().sendMessage(prefix + "§cDisabling all Vault elements");
         } else {
@@ -138,11 +106,11 @@ public class Main extends JavaPlugin {
     }
 
     private boolean setupEconomy() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+        if(getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
         }
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null) {
+        if(rsp == null) {
             return false;
         }
         econ = rsp.getProvider();

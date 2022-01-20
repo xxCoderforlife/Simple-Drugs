@@ -57,6 +57,7 @@ public class TabCommands implements TabCompleter {
                 tab.add(all.getName());
             }
         }
+
         return tab;
     }
 

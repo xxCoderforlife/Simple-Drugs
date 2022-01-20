@@ -4,18 +4,16 @@ import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
+import me.Coderforlife.SimpleDrugs.Settings.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Arrays;
 
 public class KillerCommands implements CommandExecutor {
@@ -117,11 +115,7 @@ public class KillerCommands implements CommandExecutor {
                         if(p.hasPermission("drugs.reload")) {
                             p.sendMessage(header);
                             p.sendMessage(Main.prefix + "Reloading Config...");
-                            try {
-                                plugin.drugsConfig.load(plugin.drugsConfigFile);
-                            } catch(IOException | InvalidConfigurationException e) {
-                                e.printStackTrace();
-                            }
+                            new Settings();
                             p.sendMessage(Main.prefix + "Reloaded Config.");
                         } else {
                             p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
@@ -236,14 +230,7 @@ public class KillerCommands implements CommandExecutor {
         } else if(args.length == 1) {
             if(args[0].equalsIgnoreCase("reload")) {
                 Bukkit.getServer().getConsoleSender().sendMessage(Main.prefix + ChatColor.GREEN + "Attempting to reload config...");
-                try {
-                    this.plugin.drugsConfig.load(this.plugin.drugsConfigFile);
-                } catch(FileNotFoundException e4) {
-                    Bukkit.getConsoleSender().sendMessage(Main.prefix + "§cCould not find Config" + "... Creating one");
-                    plugin.createCustomConfig();
-                } catch(IOException | InvalidConfigurationException e5) {
-                    e5.printStackTrace();
-                }
+                new Settings();
                 Bukkit.getServer().getConsoleSender().sendMessage(Main.prefix + ChatColor.GREEN + "Config has been reloaded");
             } else if(args[0].equalsIgnoreCase("version")) {
                 // TODO: Display Plugin Version

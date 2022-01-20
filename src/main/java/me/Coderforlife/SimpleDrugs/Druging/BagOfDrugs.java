@@ -77,12 +77,11 @@ public class BagOfDrugs implements Listener {
     public void onClickEvent(InventoryClickEvent ev) {
         Player p = (Player) ev.getWhoClicked();
         ItemStack clickedItem = ev.getCurrentItem();
-        Settings s = new Settings();
 
         if(clickedItem == null || clickedItem.getType().isAir() || !clickedItem.hasItemMeta())
             return;
 
-        if(s.BagOfDrugs_CanDrop()) {
+        if(Settings.BagOfDrugs_CanMove) {
             if(clickedItem.getItemMeta().getDisplayName().equals(invName)) {
                 ev.setCancelled(true);
                 p.getItemOnCursor();
@@ -130,7 +129,7 @@ public class BagOfDrugs implements Listener {
 
     @EventHandler
     public void onDropItem(PlayerDropItemEvent ev) {
-        if(!plugin.drugsConfig.getBoolean("Drugs.BagOfDrugs.CanDrop")) {
+        if(Settings.BagOfDrugs_CanDrop) {
             if(ev.getItemDrop().getItemStack().getItemMeta().getDisplayName().equals(invName)) {
                 ev.setCancelled(true);
             }

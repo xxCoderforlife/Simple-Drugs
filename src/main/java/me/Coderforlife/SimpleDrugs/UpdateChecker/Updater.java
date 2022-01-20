@@ -25,10 +25,8 @@ public class Updater implements Listener {
     public Updater(Main plugin, Integer resourceID) {
         this.plugin = plugin;
         this.resourceID = resourceID;
-        Settings s = new Settings();
-        if (s.UpdateMessage()) {
+        if(Settings.UpdateMessage) {
             Bukkit.getPluginManager().registerEvents(this, plugin);
-
         }
     }
 
@@ -37,17 +35,17 @@ public class Updater implements Listener {
         currVersion = plugin.getDescription().getVersion();
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
             getLatestVersion(version -> spigotVersion = version);
-            if (spigotVersion == null) {
+            if(spigotVersion == null) {
                 return;
             }
             String version1 = spigotVersion.replaceAll("[-+.]*", "");
             String version2 = currVersion.replaceAll("[-+.]*", "");
             int spigotVersionINT = Integer.parseInt(version1.replace("v27devbuild", ""));
             int currVersionINT = Integer.parseInt(version2.replace("27devbuild", ""));
-            if (spigotVersionINT == currVersionINT) {
+            if(spigotVersionINT == currVersionINT) {
                 Bukkit.getConsoleSender().sendMessage(Main.prefix + "Running the most current build " + currVersion);
             } else {
-                if (currVersionINT > spigotVersionINT) {
+                if(currVersionINT > spigotVersionINT) {
                     isdev = true;
                     Bukkit.getConsoleSender().sendMessage(Main.prefix + "You are running a Dev build.");
 
@@ -65,22 +63,22 @@ public class Updater implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        if (isnew) {
+        if(isnew) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                 @Override
                 public void run() {
-                    if (p.hasPermission("drugs.updater")) {
+                    if(p.hasPermission("drugs.updater")) {
                         p.sendMessage(Main.prefix + "§bThere is a new update!" + spigotVersion);
                         p.sendMessage(Main.prefix + "§6§lDownload the new version!");
                         p.sendMessage(Main.prefix + "https://www.spigotmc.org/resources/simple-drugs-gui.9684/");
                     }
                 }
             }, 60L);
-        } else if (isdev) {
+        } else if(isdev) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                 @Override
                 public void run() {
-                    if (p.hasPermission("drugs.updater")) {
+                    if(p.hasPermission("drugs.updater")) {
                         p.sendMessage(Main.prefix + "§eYou are running Dev Build : " + currVersion);
                         p.sendMessage(Main.prefix + "§cIf you find any bugs create a ticket on " + "GitHub");
                         p.sendMessage(Main.prefix + "https://github.com/xxCoderforlife/Simple-Drugs/issues/new");
@@ -92,11 +90,11 @@ public class Updater implements Listener {
     }
 
     private void getLatestVersion(final Consumer<String> consumer) {
-        try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + resourceID).openStream(); Scanner scanner = new Scanner(inputStream)) {
-            if (scanner.hasNext()) {
+        try(InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + resourceID).openStream(); Scanner scanner = new Scanner(inputStream)) {
+            if(scanner.hasNext()) {
                 consumer.accept(scanner.next());
             }
-        } catch (Exception e) {
+        } catch(Exception e) {
             plugin.getLogger().info("Failed to check for updates: " + e.getMessage());
         }
     }
