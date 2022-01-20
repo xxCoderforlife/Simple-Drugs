@@ -3,8 +3,8 @@ package me.Coderforlife.SimpleDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
+import me.Coderforlife.SimpleDrugs.GUI.RecipeGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
-import me.Coderforlife.SimpleDrugs.Settings.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -57,8 +57,8 @@ public class KillerCommands implements CommandExecutor {
                             SettingsGUI g = new SettingsGUI();
                             p.openInventory(g.create());
                         } else {
-                            p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
-                            p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.use.settings");
+                            p.sendMessage(Main.prefix + "§cYou don't have permission to use that command.");
+                            p.sendMessage(Main.prefix + "§4Permission: §cdrugs.use.settings");
                         }
                     } else if(args[0].equalsIgnoreCase("help")) {
                         if(p.hasPermission("drugs.help")) {
@@ -93,12 +93,10 @@ public class KillerCommands implements CommandExecutor {
                             for(Drug drug : Drug.getallDrugs()) {
                                 p.sendMessage(dash + drug.getDisplayname());
                             }
-
                         } else {
                             p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.list");
                         }
-
                     } else if(args[0].equalsIgnoreCase("bagofdrugs")) {
                         if(p.hasPermission("drugs.command.bagofdrugs")) {
                             if(!p.getInventory().contains(pj.bag)) {
@@ -112,15 +110,7 @@ public class KillerCommands implements CommandExecutor {
                             p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.command.bagofdrugs");
                         }
                     } else if(args[0].equalsIgnoreCase("reload")) {
-                        if(p.hasPermission("drugs.reload")) {
-                            p.sendMessage(header);
-                            p.sendMessage(Main.prefix + "Reloading Config...");
-                            new Settings();
-                            p.sendMessage(Main.prefix + "Reloaded Config.");
-                        } else {
-                            p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
-                            p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.reload");
-                        }
+                        p.sendMessage(Main.prefix + "§aUse §e/drugs settings §ato Change Settings");
                     } else if(args[0].equalsIgnoreCase("sell")) {
                         p.sendMessage(Main.prefix + "§eThis will be added in soon.");
                     } else if(args[0].equalsIgnoreCase("version")) {
@@ -130,7 +120,14 @@ public class KillerCommands implements CommandExecutor {
                         }
                     }
                 } else if(args.length == 2) {
-                    if(args[0].equalsIgnoreCase("bagofdrugs")) {
+                    if(args[0].equalsIgnoreCase("recipe")) {
+                        Drug drug = Drug.getDrug(args[1]);
+                        if(drug == null) {
+                            p.sendMessage(Main.prefix + "§e" + args[1] + " §cdoes not exist.");
+                            return true;
+                        }
+                        p.openInventory(new RecipeGUI().create(drug));
+                    } else if(args[0].equalsIgnoreCase("bagofdrugs")) {
                         if(p.hasPermission("drugs.command.bagofdrugs.others")) {
                             for(Player players : Bukkit.getOnlinePlayers()) {
                                 if(args[1].equalsIgnoreCase(players.getName())) {
@@ -232,8 +229,6 @@ public class KillerCommands implements CommandExecutor {
                 Bukkit.getServer().getConsoleSender().sendMessage(Main.prefix + ChatColor.GREEN + "Attempting to reload config...");
                 new Settings();
                 Bukkit.getServer().getConsoleSender().sendMessage(Main.prefix + ChatColor.GREEN + "Config has been reloaded");
-            } else if(args[0].equalsIgnoreCase("version")) {
-                // TODO: Display Plugin Version
             }
         }
         return true;

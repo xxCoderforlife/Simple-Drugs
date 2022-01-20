@@ -1,7 +1,7 @@
 package me.Coderforlife.SimpleDrugs.UpdateChecker;
 
 import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Settings.Settings;
+import me.Coderforlife.SimpleDrugs.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

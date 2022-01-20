@@ -1,9 +1,13 @@
 package me.Coderforlife.SimpleDrugs.GUI;
 
-import me.Coderforlife.SimpleDrugs.Settings.Settings;
+import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -44,7 +48,7 @@ public class SettingsGUI {
 
         items.add(stack(Material.BOOK, Settings.BagOfDrugs_DropOnDeath, "§6§lBag Dropped on Death" + enabledordisabled(Settings.BagOfDrugs_DropOnDeath), Arrays.asList("§7If the Bag is dropped on death or not.", " ", clickto(Settings.BagOfDrugs_DropOnDeath))));
 
-        items.add(stack(Material.BOOK, Settings.BagofDrugs_GiveOnRespawn, "§6§lKeep Bag on Respawn" + enabledordisabled(Settings.BagofDrugs_GiveOnRespawn), Arrays.asList("§7If the player Keeps the Bag when they Respawn", " ", clickto(Settings.BagofDrugs_GiveOnRespawn))));
+        items.add(stack(Material.BOOK, Settings.BagOfDrugs_GiveOnRespawn, "§6§lKeep Bag on Respawn" + enabledordisabled(Settings.BagOfDrugs_GiveOnRespawn), Arrays.asList("§7If the player Keeps the Bag when they Respawn", " ", clickto(Settings.BagOfDrugs_GiveOnRespawn))));
 
         for(int i = 0; i < 4; i++) {
             items.add(new ItemStack(Material.AIR));
@@ -57,6 +61,100 @@ public class SettingsGUI {
         inventory.setContents(items.toArray(new ItemStack[0]));
         return inventory;
     }
+
+    public void handleClick(InventoryClickEvent event) {
+        Player p = (Player) event.getWhoClicked();
+        ItemStack stack = event.getCurrentItem();
+
+        if(stack == null || stack.getType().equals(Material.BLACK_STAINED_GLASS_PANE)) {
+            event.setCancelled(true);
+            return;
+        }
+
+        String[] name = stack.getItemMeta().getDisplayName().split(" ");
+        String settingsname = String.join(" ", Arrays.copyOfRange(name, 0, name.length - 1));
+        boolean isEnabled = name[name.length - 1].equalsIgnoreCase("§a(Enabled)");
+
+        switch(settingsname) {
+            case "§6§lCheck for Updates" -> {
+                Settings.CheckForUpdate(!isEnabled);
+                if(isEnabled) {
+                    p.sendMessage(Main.prefix + "§cDisabled §aChecking for Updates.");
+                } else {
+                    p.sendMessage(Main.prefix + "§aEnabled Checking for Updates.");
+                }
+                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
+            }
+            case "§6§lUpdate Message" -> {
+                Settings.UpdateMessage(!isEnabled);
+                if(isEnabled) {
+                    p.sendMessage(Main.prefix + "§cDisabled §asending Update Message");
+                } else {
+                    p.sendMessage(Main.prefix + "§aEnabled sending Update Message.");
+                }
+                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
+            }
+            case "§6§lJoin Message" -> {
+                Settings.JoinMessage(!isEnabled);
+                if(isEnabled) {
+                    p.sendMessage(Main.prefix + "§cDisabled §asending Join Message");
+                } else {
+                    p.sendMessage(Main.prefix + "§aEnabled sending Join Message.");
+                }
+                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
+            }
+            case "§6§lBag Movable" -> {
+                Settings.BagOfDrugs_CanMove(!isEnabled);
+                if(isEnabled) {
+                    p.sendMessage(Main.prefix + "§cDisabled §aMovable Bag of Drugs.");
+                } else {
+                    p.sendMessage(Main.prefix + "§aEnabled Movable Bag of Drugs.");
+                }
+                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
+            }
+            case "§6§lBag Droppable" -> {
+                Settings.BagOfDrugs_CanDrop(!isEnabled);
+                if(isEnabled) {
+                    p.sendMessage(Main.prefix + "§cDisabled §aDroppable Bag of Drugs.");
+                } else {
+                    p.sendMessage(Main.prefix + "§aEnabled Droppable Bag of Drugs.");
+                }
+                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
+            }
+            case "§6§lGive Bag on Join" -> {
+                Settings.BagOfDrugs_GiveOnJoin(!isEnabled);
+                if(isEnabled) {
+                    p.sendMessage(Main.prefix + "§cDisabled §agiving Bag of Drugs on Join.");
+                } else {
+                    p.sendMessage(Main.prefix + "§aEnabled giving Bag of Drugs on Join.");
+                }
+                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
+            }
+            case "§6§lBag Dropped on Death" -> {
+                Settings.BagOfDrugs_DropOnDeath(!isEnabled);
+                if(isEnabled) {
+                    p.sendMessage(Main.prefix + "§cDisabled §aBag of Drugs Dropped on Death.");
+                } else {
+                    p.sendMessage(Main.prefix + "§aEnabled Bag of Drugs Dropped on Death.");
+                }
+                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
+            }
+            case "§6§lKeep Bag on Respawn" -> {
+                Settings.BagOfDrugs_GiveOnRespawn(!isEnabled);
+                if(isEnabled) {
+                    p.sendMessage(Main.prefix + "§cDisabled §agiving Bag of Drugs on Respawn.");
+                } else {
+                    p.sendMessage(Main.prefix + "§aEnabled giving Bag of Drugs on Respawn.");
+                }
+                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
+            }
+            default -> {
+            }
+        }
+        event.setCancelled(true);
+        p.openInventory(new SettingsGUI().create());
+    }
+
 
     private ItemStack stack(Material mat, boolean ench, String name, List<String> lore) {
         ItemStack stack = new ItemStack(mat);

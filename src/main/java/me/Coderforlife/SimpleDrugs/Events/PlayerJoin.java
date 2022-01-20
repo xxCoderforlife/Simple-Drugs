@@ -2,7 +2,7 @@ package me.Coderforlife.SimpleDrugs.Events;
 
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Settings.Settings;
+import me.Coderforlife.SimpleDrugs.Settings;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

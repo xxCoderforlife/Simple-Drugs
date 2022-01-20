@@ -1,7 +1,7 @@
 package me.Coderforlife.SimpleDrugs.Events;
 
 import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Settings.Settings;
+import me.Coderforlife.SimpleDrugs.Settings;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

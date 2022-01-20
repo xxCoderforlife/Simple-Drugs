@@ -3,11 +3,10 @@ package me.Coderforlife.SimpleDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Events.DrugUseListener;
+import me.Coderforlife.SimpleDrugs.Events.InventoryClickListener;
 import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
 import me.Coderforlife.SimpleDrugs.Events.PlayerRespawn;
 import me.Coderforlife.SimpleDrugs.PlaceHolder.DrugPlaceHolders;
-import me.Coderforlife.SimpleDrugs.Settings.Settings;
-import me.Coderforlife.SimpleDrugs.Settings.SettingsClickEvent;
 import me.Coderforlife.SimpleDrugs.UpdateChecker.Updater;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.economy.Economy;
@@ -24,7 +23,7 @@ public class Main extends JavaPlugin {
 
 
     //Vault Economy
-    private static Economy econ = null;
+    private static Economy econ;
     public static Plugin plugin;
 
     //Config File
@@ -44,21 +43,20 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        plugin = this;
         new Metrics(this, 13155);
 
-        getServer().getConsoleSender().sendMessage(header1);
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Loading all Class files and Handlers...");
+        sendConsoleMessage(header1);
+        sendConsoleMessage("§aLoading Plugin...");
 
-        plugin = this;
         Drug.loadDrugs();
-        new Settings();
-
+        Settings.setup();
         RegisterEvents();
         loadPlaceHolders();
         loadVault();
-        CheckforUpdate();
+        checkForUpdate();
 
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Loaded without Errors.");
+        sendConsoleMessage("§aLoaded without Errors. Plugin is ready to Use :D");
     }
 
     @Override
@@ -71,53 +69,43 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new BagOfDrugs(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
         this.getServer().getPluginManager().registerEvents(new DrugUseListener(), this);
-        this.getServer().getPluginManager().registerEvents(new SettingsClickEvent(this), this);
+        this.getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
         this.getCommand("drugs").setExecutor(new KillerCommands(this));
         this.getCommand("drugs").setTabCompleter(new TabCommands(this));
     }
 
     public void loadPlaceHolders() {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', "&aFound PlaceHolderAPI."));
-            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', "&aHooked into PlaceHolderAPI"));
+            sendConsoleMessage(prefix + "§aFound PlaceHolderAPI.");
             new DrugPlaceHolders(this).register();
+            sendConsoleMessage(prefix + "§aHooked into PlaceHolderAPI");
         } else {
-            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', "&cPlaceHolderAPI.jar was not found."));
-            Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', "&cDisabling all PlaceHolderAPI elements"));
+            sendConsoleMessage(prefix + "§cPlaceHolderAPI.jar was not found. Disabling all PlaceHolderAPI elements!");
         }
     }
 
-    public void CheckforUpdate() {
+    public void checkForUpdate() {
         if(Settings.CheckForUpdate) {
             new Updater(this, 9684).checkForUpdate();
         } else {
-            Bukkit.getConsoleSender().sendMessage(Main.prefix + "§c§oDisabled Update Checking");
+            sendConsoleMessage(Main.prefix + "§c§oDisabled Update Checking");
         }
     }
 
     public void loadVault() {
-        if(!setupEconomy()) {
-            Bukkit.getConsoleSender().sendMessage(prefix + "§cVault.jar was not found or you don't have an Economy Plugin");
-            Bukkit.getConsoleSender().sendMessage(prefix + "§cDisabling all Vault elements");
-        } else {
-            Bukkit.getConsoleSender().sendMessage(prefix + "§aVault has been found.");
-            Bukkit.getConsoleSender().sendMessage(prefix + "§aHooked into Vault.");
+        if(getServer().getPluginManager().getPlugin("Vault") != null) {
+            RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+            if(rsp != null)
+                econ = rsp.getProvider();
+            sendConsoleMessage(prefix + "§aVault has been found.");
+            sendConsoleMessage(prefix + "§aHooked into Vault.");
+            return;
         }
+        sendConsoleMessage(prefix + "§cVault.jar was not found or you don't have an Economy Plugin");
+        sendConsoleMessage(prefix + "§cDisabling all Vault elements");
     }
 
-    private boolean setupEconomy() {
-        if(getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
-        }
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if(rsp == null) {
-            return false;
-        }
-        econ = rsp.getProvider();
-        return econ != null;
-    }
-
-    public static Economy getEconomy() {
-        return econ;
+    private void sendConsoleMessage(String message) {
+        this.getServer().getConsoleSender().sendMessage(message);
     }
 }

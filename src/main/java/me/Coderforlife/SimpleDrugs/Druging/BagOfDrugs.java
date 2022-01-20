@@ -2,7 +2,7 @@ package me.Coderforlife.SimpleDrugs.Druging;
 
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Settings.Settings;
+import me.Coderforlife.SimpleDrugs.Settings;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;

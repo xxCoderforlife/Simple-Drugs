@@ -52,7 +52,7 @@ public class DrugUseListener implements Listener {
         Player p = ev.getPlayer();
 
         ItemStack stack = p.getInventory().getItemInMainHand() == null ? p.getInventory().getItemInOffHand() : p.getInventory().getItemInMainHand();
-        boolean isDrug = Drug.matchDrug(stack) == null;
+        boolean isDrug = Drug.matchDrug(stack) != null;
         if(isDrug) {
             ev.setCancelled(true);
         }

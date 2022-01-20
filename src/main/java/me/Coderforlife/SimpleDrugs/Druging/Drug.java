@@ -142,7 +142,7 @@ public class Drug {
     }
 
     public static Drug getDrug(String name) {
-        return drugs.get(name);
+        return drugs.getOrDefault(name, null);
     }
 
     public static ArrayList<Drug> getDrugs() {
