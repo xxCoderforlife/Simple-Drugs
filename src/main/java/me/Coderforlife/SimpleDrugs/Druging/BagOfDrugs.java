@@ -4,8 +4,6 @@ import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Settings;
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,7 +15,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -57,53 +54,6 @@ public class BagOfDrugs implements Listener {
             }
         }
 
-    }
-
-    @EventHandler
-    public void onClickEvent(InventoryClickEvent ev) {
-        Player p = (Player) ev.getWhoClicked();
-        ItemStack clickedItem = ev.getCurrentItem();
-
-        if(clickedItem == null || clickedItem.getType().isAir() || !clickedItem.hasItemMeta())
-            return;
-
-        if(Settings.BagOfDrugs_CanMove) {
-            if(clickedItem.getItemMeta().getDisplayName().equals(invName)) {
-                ev.setCancelled(true);
-                p.getItemOnCursor();
-                p.setItemOnCursor(null);
-            }
-        }
-
-        if(!ev.getView().getTitle().equals(invName)) {
-            return;
-        }
-        ev.setCancelled(true);
-
-        BagOfDrugsGUI bag = new BagOfDrugsGUI();
-        String itemname = clickedItem.getItemMeta().getDisplayName();
-        String[] pagenumber = itemname.split(" ");
-
-        if(ev.getCurrentItem().getType().equals(Material.ARROW) && itemname.startsWith("§6Page")) {
-            int page = Integer.parseInt(pagenumber[1]);
-            if(page == 1) {
-                p.openInventory(bag.create());
-            } else {
-                p.openInventory(bag.openPage(page));
-            }
-            return;
-        }
-
-        for(Drug drug : new Drug().getallDrugs()) {
-            if(!drug.isDrugItem(clickedItem)) {
-                continue;
-            }
-            p.getInventory().addItem(drug.getItem());
-            p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given " + drug.getDisplayname());
-            p.playSound(p.getLocation(), Sound.ITEM_FLINTANDSTEEL_USE, 1, (float) 0.5);
-            p.closeInventory();
-            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
-        }
     }
 
     @EventHandler

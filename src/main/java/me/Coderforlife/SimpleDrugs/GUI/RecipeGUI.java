@@ -21,7 +21,6 @@ public class RecipeGUI {
         ArrayList<ItemStack> stack = new ArrayList<>();
         ShapedRecipe recipe = (ShapedRecipe) drug.getRecipe();
 
-
         for(int i = 0; i < 10; i++) {
             stack.add(blackglass());
         }
@@ -63,18 +62,18 @@ public class RecipeGUI {
         return inv;
     }
 
-    public void handleClick(InventoryClickEvent event) {
-        if(event.getClick().isShiftClick() || event.getClick().isRightClick()) {
-            event.setCancelled(true);
+    public void handleClick(InventoryClickEvent ev) {
+        if(ev.getClick().isShiftClick() || ev.getClick().isRightClick()) {
+            ev.setCancelled(true);
             return;
         }
-        if(!event.getClickedInventory().getType().equals(InventoryType.PLAYER)) {
-            event.setCancelled(true);
+        if(ev.getClickedInventory() != null && !ev.getClickedInventory().getType().equals(InventoryType.PLAYER)) {
+            ev.setCancelled(true);
         }
     }
 
     public void handleDrag(InventoryDragEvent ev) {
-        if(!ev.getInventory().getType().equals(InventoryType.PLAYER)) {
+        if(ev.getInventory() != null && !ev.getInventory().getType().equals(InventoryType.PLAYER)) {
             ev.setCancelled(true);
         }
     }
