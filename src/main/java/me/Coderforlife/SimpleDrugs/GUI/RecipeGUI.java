@@ -17,7 +17,6 @@ public class RecipeGUI {
 
     public Inventory create(Drug drug) {
         Inventory inv = Bukkit.createInventory(null, 45, "§6§l" + drug.getName() + " Recipe");
-
         ArrayList<ItemStack> stack = new ArrayList<>();
         ShapedRecipe recipe = (ShapedRecipe) drug.getRecipe();
 

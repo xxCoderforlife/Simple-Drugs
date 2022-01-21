@@ -3,7 +3,6 @@ package me.Coderforlife.SimpleDrugs.Druging;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Settings;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -23,9 +22,15 @@ import org.bukkit.inventory.ItemStack;
 
 public class BagOfDrugs implements Listener {
 
-    public static String bagName = "§6§lBag Of Drugs";
-    public static String invName = "§6§l§oBag Of Drugs";
-    private final String sober = ChatColor.ITALIC + "Remove Drugs With" + " §c/d soberup";
+    private Main plugin;
+    public String bagName = "§6§lBag Of Drugs";
+    public String invName = "§6§l§oBag Of Drugs";
+
+    Settings s = new Settings(plugin);
+
+    public BagOfDrugs(Main plugin){
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void BagOpen(PlayerInteractEvent ev) {
@@ -46,7 +51,7 @@ public class BagOfDrugs implements Listener {
                             loc.subtract(x, 0, z);
                         }
                         p.playSound(p.getLocation(), Sound.AMBIENT_CRIMSON_FOREST_ADDITIONS, 1, (float) 0.4);
-                        BagOfDrugsGUI bag = new BagOfDrugsGUI();
+                        BagOfDrugsGUI bag = new BagOfDrugsGUI(plugin);
                         p.openInventory(bag.create());
                     }
                 }
@@ -65,7 +70,7 @@ public class BagOfDrugs implements Listener {
 
     @EventHandler
     public void onDropItem(PlayerDropItemEvent ev) {
-        if(Settings.BagOfDrugs_CanDrop) {
+        if(s.BagOfDrugs_CanDrop) {
             if(ev.getItemDrop().getItemStack().getItemMeta().getDisplayName().equals(invName)) {
                 ev.setCancelled(true);
             }

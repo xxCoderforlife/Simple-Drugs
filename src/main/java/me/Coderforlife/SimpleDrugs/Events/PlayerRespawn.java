@@ -1,5 +1,6 @@
 package me.Coderforlife.SimpleDrugs.Events;
 
+import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Settings;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,12 +9,18 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class PlayerRespawn implements Listener {
 
-    public static PlayerJoin pj = new PlayerJoin();
+    private Main plugin;
+    private PlayerJoin pj = new PlayerJoin(plugin);
+    private Settings s = new Settings(plugin);
+
+    public PlayerRespawn(Main plugin){
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent ev) {
         Player p = ev.getPlayer();
-        if(Settings.BagOfDrugs_GiveOnRespawn) {
+        if(s.BagOfDrugs_GiveOnRespawn) {
             if(p.getInventory().contains(pj.bag))
                 return;
 

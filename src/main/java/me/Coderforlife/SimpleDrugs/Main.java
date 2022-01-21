@@ -14,29 +14,31 @@ public class Main extends JavaPlugin {
     public String header1 = ChatColor.WHITE + "" + ChatColor.BOLD + "============" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "[Simple-Drugs]" + ChatColor.WHITE + "" + ChatColor.BOLD + "============";
     public static String prefix = ChatColor.GRAY + "" + ChatColor.BOLD + "[" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "SD" + ChatColor.GRAY + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
 
+    private Settings s;
     @Override
     public void onEnable() {
         plugin = this;
+        s = new Settings(this);
 
         sendConsoleMessage(header1);
         sendConsoleMessage("§aLoading Plugin...");
 
         new Setup(this);
 
-        this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
-        this.getServer().getPluginManager().registerEvents(new BagOfDrugs(), this);
-        this.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerRespawn(this), this);
+        this.getServer().getPluginManager().registerEvents(new BagOfDrugs(this), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
         this.getServer().getPluginManager().registerEvents(new DrugUseListener(), this);
-        this.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
+        this.getServer().getPluginManager().registerEvents(new InventoryListener(this), this);
         this.getServer().getPluginManager().registerEvents(new CraftingEvent(), this);
-        this.getCommand("drugs").setExecutor(new Commands());
+        this.getCommand("drugs").setExecutor(new Commands(this));
         this.getCommand("drugs").setTabCompleter(new TabCommands());
         sendConsoleMessage("§aLoaded without Errors. Plugin is ready to Use :D");
     }
 
     @Override
     public void onDisable() {
-        new Settings().save();
+        s.save();
     }
 
     private void sendConsoleMessage(String message) {

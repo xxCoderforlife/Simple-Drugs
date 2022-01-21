@@ -6,17 +6,18 @@ import me.Coderforlife.SimpleDrugs.UpdateChecker.Updater;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class Setup {
 
-    private static Economy econ;
-    private static JavaPlugin plugin;
+    private Economy econ;
+    private Main plugin;
+    private Settings s;
 
-    public Setup(JavaPlugin plugin) {
+    public Setup(Main plugin) {
         this.plugin = plugin;
         new Metrics(plugin, 13155);
-        new Settings().setup();
+        s = new Settings(plugin);
+        s.setup();
         loadPlaceHolders();
         checkForUpdate();
         loadVault();
@@ -35,7 +36,7 @@ public class Setup {
     }
 
     private void checkForUpdate() {
-        if(Settings.CheckForUpdate) {
+        if(s.CheckForUpdate) {
             new Updater(plugin, 9684).checkForUpdate();
         } else {
             sendConsoleMessage(Main.prefix + "§c§oDisabled Update Checking");

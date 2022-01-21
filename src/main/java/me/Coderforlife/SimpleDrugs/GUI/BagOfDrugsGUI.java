@@ -19,10 +19,16 @@ import java.util.ArrayList;
 
 public class BagOfDrugsGUI {
 
-    private static final int maxdrugs = 45;
-    public static String bagName = "§6§lBag Of Drugs";
-    public static String invName = "§6§l§oBag Of Drugs";
+    private final int maxdrugs = 45;
+    public String bagName = "§6§lBag Of Drugs";
+    public String invName = "§6§l§oBag Of Drugs";
+    private Main plugin;
     private final String sober = ChatColor.ITALIC + "Remove Drugs With" + " §c/d soberup";
+    private Settings s = new Settings(plugin);
+
+    public BagOfDrugsGUI(Main plugin){
+        this.plugin = plugin;
+    }
 
     public Inventory create() {
         ArrayList<Drug> drugs = new Drug().getallDrugs();
@@ -84,7 +90,7 @@ public class BagOfDrugsGUI {
         if(clickedItem == null || clickedItem.getType().isAir() || !clickedItem.hasItemMeta())
             return;
 
-        if(Settings.BagOfDrugs_CanMove) {
+        if(s.BagOfDrugs_CanMove) {
             if(clickedItem.getItemMeta().getDisplayName().equals(invName)) {
                 ev.setCancelled(true);
                 p.getItemOnCursor();
@@ -97,16 +103,15 @@ public class BagOfDrugsGUI {
         }
         ev.setCancelled(true);
 
-        BagOfDrugsGUI bag = new BagOfDrugsGUI();
         String itemname = clickedItem.getItemMeta().getDisplayName();
         String[] pagenumber = itemname.split(" ");
 
         if(ev.getCurrentItem().getType().equals(Material.ARROW) && itemname.startsWith("§6Page")) {
             int page = Integer.parseInt(pagenumber[1]);
             if(page == 1) {
-                p.openInventory(bag.create());
+                p.openInventory(this.create());
             } else {
-                p.openInventory(bag.openPage(page));
+                p.openInventory(this.openPage(page));
             }
             return;
         }

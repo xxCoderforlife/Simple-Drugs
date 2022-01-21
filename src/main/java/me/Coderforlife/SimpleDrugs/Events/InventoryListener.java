@@ -1,5 +1,6 @@
 package me.Coderforlife.SimpleDrugs.Events;
 
+import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.RecipeGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
@@ -10,6 +11,13 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 
 public class InventoryListener implements Listener {
 
+    private Main plugin;
+    public InventoryListener(Main plugin){
+        this.plugin = plugin;
+    }
+    BagOfDrugsGUI bdg = new BagOfDrugsGUI(plugin);
+    SettingsGUI sGui = new SettingsGUI(plugin);
+    BagOfDrugsGUI bGui = new BagOfDrugsGUI(plugin);
     @EventHandler
     public void InventoryClick(InventoryClickEvent event) {
         String name = event.getView().getTitle();
@@ -20,12 +28,12 @@ public class InventoryListener implements Listener {
         }
 
         if(name.equalsIgnoreCase("§6§lDrugs Settings")) {
-            new SettingsGUI().handleClick(event);
+            sGui.handleClick(event);
             return;
         }
 
-        if(name.equalsIgnoreCase(BagOfDrugsGUI.invName)) {
-            new BagOfDrugsGUI().handleInventoryClick(event);
+        if(name.equalsIgnoreCase(bdg.invName)) {
+            bGui.handleInventoryClick(event);
         }
     }
 
