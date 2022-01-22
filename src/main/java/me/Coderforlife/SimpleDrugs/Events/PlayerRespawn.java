@@ -11,9 +11,9 @@ public class PlayerRespawn implements Listener {
 
     private Main plugin;
     private PlayerJoin pj = new PlayerJoin(plugin);
-    private Settings s = new Settings(plugin);
+    private Settings s = new Settings();
 
-    public PlayerRespawn(Main plugin){
+    public PlayerRespawn(Main plugin) {
         this.plugin = plugin;
     }
 

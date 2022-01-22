@@ -18,6 +18,7 @@ public class InventoryListener implements Listener {
     BagOfDrugsGUI bdg = new BagOfDrugsGUI(plugin);
     SettingsGUI sGui = new SettingsGUI(plugin);
     BagOfDrugsGUI bGui = new BagOfDrugsGUI(plugin);
+
     @EventHandler
     public void InventoryClick(InventoryClickEvent event) {
         String name = event.getView().getTitle();

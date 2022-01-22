@@ -3,28 +3,24 @@ package me.Coderforlife.SimpleDrugs;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
 import java.io.File;
 import java.io.IOException;
 
 public class Settings {
 
-    public boolean CheckForUpdate;
-    public boolean UpdateMessage;
-    public boolean JoinMessage;
-    public boolean BagOfDrugs_CanMove;
-    public boolean BagOfDrugs_CanDrop;
-    public boolean BagOfDrugs_GiveOnJoin;
-    public boolean BagOfDrugs_DropOnDeath;
-    public boolean BagOfDrugs_GiveOnRespawn;
+    public static boolean CheckForUpdate;
+    public static boolean UpdateMessage;
+    public static boolean JoinMessage;
+    public static boolean BagOfDrugs_CanMove;
+    public static boolean BagOfDrugs_CanDrop;
+    public static boolean BagOfDrugs_GiveOnJoin;
+    public static boolean BagOfDrugs_DropOnDeath;
+    public static boolean BagOfDrugs_GiveOnRespawn;
 
-    private File drugsConfigFile;
-    private FileConfiguration drugsConfig;
+    private static File drugsConfigFile;
+    private static FileConfiguration drugsConfig;
 
-    private Main plugin;
-    public Settings(Main plugin){
-        this.plugin = plugin;
-
-    }
     public void setup() {
         SetupConfig();
         CheckForUpdate(drugsConfig.getBoolean("Drugs.CheckForUpdate"));
@@ -78,10 +74,10 @@ public class Settings {
     }
 
     public void SetupConfig() {
-        drugsConfigFile = new File(plugin.getDataFolder(), "config.yml");
+        drugsConfigFile = new File(Main.plugin.getDataFolder(), "config.yml");
         if(!drugsConfigFile.exists()) {
             drugsConfigFile.getParentFile().mkdir();
-            plugin.saveResource("config.yml", false);
+            Main.plugin.saveResource("config.yml", false);
         }
         drugsConfig = new YamlConfiguration();
         try {

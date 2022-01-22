@@ -26,7 +26,7 @@ public class BagOfDrugs implements Listener {
     public String bagName = "§6§lBag Of Drugs";
     public String invName = "§6§l§oBag Of Drugs";
 
-    Settings s = new Settings(plugin);
+    Settings s = new Settings();
 
     public BagOfDrugs(Main plugin){
         this.plugin = plugin;
@@ -58,7 +58,6 @@ public class BagOfDrugs implements Listener {
 
             }
         }
-
     }
 
     @EventHandler

@@ -8,7 +8,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 public class PlayerDeath implements Listener {   
     
     private Main plugin;
-    private Settings s = new Settings(plugin);
+    private Settings s = new Settings();
     private PlayerJoin pj = new PlayerJoin(plugin);
 
     public PlayerDeath(Main plugin){

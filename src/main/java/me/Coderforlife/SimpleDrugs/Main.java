@@ -18,7 +18,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        s = new Settings(this);
+        s = new Settings();
 
         sendConsoleMessage(header1);
         sendConsoleMessage("§aLoading Plugin...");

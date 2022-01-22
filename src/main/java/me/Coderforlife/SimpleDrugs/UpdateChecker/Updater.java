@@ -21,7 +21,7 @@ public class Updater implements Listener {
     private Boolean isnew = false;
     private Boolean isdev = false;
     private Integer resourceID;
-    private Settings s = new Settings(plugin);
+    private Settings s = new Settings();
 
     public Updater(Main plugin, Integer resourceID) {
         this.plugin = plugin;

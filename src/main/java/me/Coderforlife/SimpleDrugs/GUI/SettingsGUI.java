@@ -22,7 +22,7 @@ public class SettingsGUI {
     public SettingsGUI(Main plugin){
         this.plugin = plugin;
     }
-    Settings s = new Settings(plugin);
+    Settings s = new Settings();
 
     public Inventory create() {
         Inventory inventory = Bukkit.createInventory(null, (9 * 5), "§6§lDrugs Settings");

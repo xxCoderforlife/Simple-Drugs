@@ -16,7 +16,7 @@ public class Setup {
     public Setup(Main plugin) {
         this.plugin = plugin;
         new Metrics(plugin, 13155);
-        s = new Settings(plugin);
+        s = new Settings();
         s.setup();
         loadPlaceHolders();
         checkForUpdate();

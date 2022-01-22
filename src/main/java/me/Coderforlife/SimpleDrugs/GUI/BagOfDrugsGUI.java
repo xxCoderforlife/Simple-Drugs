@@ -24,7 +24,7 @@ public class BagOfDrugsGUI {
     public String invName = "§6§l§oBag Of Drugs";
     private Main plugin;
     private final String sober = ChatColor.ITALIC + "Remove Drugs With" + " §c/d soberup";
-    private Settings s = new Settings(plugin);
+    private Settings s = new Settings();
 
     public BagOfDrugsGUI(Main plugin){
         this.plugin = plugin;
