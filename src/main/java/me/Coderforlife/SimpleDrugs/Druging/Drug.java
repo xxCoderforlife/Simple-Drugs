@@ -1,9 +1,9 @@
 package me.Coderforlife.SimpleDrugs.Druging;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import me.Coderforlife.SimpleDrugs.Main;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -53,7 +53,8 @@ public class Drug {
 
     public void loadDrugs() {
         try {
-            JsonArray array = (JsonArray) JsonParser.parseReader(new FileReader("plugins/Simple-Drugs/drugs.json"));
+            JsonArray array = new Gson().fromJson(new FileReader("plugins/Simple-Drugs/drugs.json"), JsonArray.class);
+
             for(JsonElement element : array) {
                 JsonObject drug = element.getAsJsonObject();
 
@@ -123,10 +124,10 @@ public class Drug {
                 }
             }
             if(enabled.length() > 0)
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Enabled Drugs: " + ChatColor.GREEN + enabled);
+                sendConsoleMessage("§6Enabled Drugs: §a" + enabled);
 
             if(disabled.length() > 0)
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Disabled Drugs: " + ChatColor.RED + disabled);
+                sendConsoleMessage("§6Disabled Drugs: §c" + disabled);
 
         } catch(FileNotFoundException e) {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "[INFO] Could not find drugs.json, creating a new one.");
@@ -145,6 +146,44 @@ public class Drug {
         }
     }
 
+    private PotionEffectType getEffectfromJson(JsonObject element) {
+        PotionEffectType effect = PotionEffectType.getByName(element.get("type").getAsString().toUpperCase());
+        if(effect != null)
+            return effect;
+
+        sendConsoleMessage("§c[ERROR] Could not find Effect: §7" + element.get("type").getAsString());
+        sendConsoleMessage("§c[ERROR] Make Sure the Name is Correct!");
+        sendConsoleMessage("§c[INFO] Replacing all Unknown Effects with POISON to Ensure the Plugin keeps Running!");
+        return PotionEffectType.POISON;
+    }
+
+    private Material MaterialFromArray(JsonArray obj, int i) {
+        Material mat = Material.getMaterial(obj.get(i).getAsString().toUpperCase());
+        if(mat != null)
+            return mat;
+
+        sendConsoleMessage("§c[ERROR] Could not find Material: §7" + obj.get(i).getAsString());
+        sendConsoleMessage("§c[ERROR] Make Sure the Name is Correct!");
+        sendConsoleMessage("§b[INFO] Replacing all Unknown Items with BONE to Ensure the Plugin keeps Running!");
+        return Material.BONE;
+    }
+
+    private Material MaterialFromObject(JsonObject obj, String key) {
+        Material mat = Material.getMaterial(obj.get(key).getAsString().toUpperCase());
+        if(mat != null)
+            return mat;
+
+        sendConsoleMessage("§c[ERROR] Could not find Material: §7" + obj.get(key).getAsString());
+        sendConsoleMessage("§cMake Sure the Name is Correct!");
+        sendConsoleMessage("§b[INFO] Replacing all Unknown Items with BONE to Ensure the Plugin keeps Running!");
+        return Material.BONE;
+    }
+
+    private void sendConsoleMessage(String message) {
+        Bukkit.getConsoleSender().sendMessage(message);
+    }
+
+    /* Grabbing and Setting Drug Data */
     public Drug getDrug(String name) {
         return drugs.getOrDefault(name, null);
     }
@@ -170,39 +209,6 @@ public class Drug {
             }
         }
         return null;
-    }
-
-    private PotionEffectType getEffectfromJson(JsonObject element) {
-        PotionEffectType effect = PotionEffectType.getByName(element.get("type").getAsString().toUpperCase());
-        if(effect == null) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Could not find Effect: " + ChatColor.DARK_GRAY + element.get("type").getAsString());
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Make Sure the Name is Correct!");
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "[INFO] Replacing all Unknown Effects with POISON to Ensure the Plugin keeps Running!");
-            effect = PotionEffectType.POISON;
-        }
-        return effect;
-    }
-
-    private Material MaterialFromArray(JsonArray obj, int i) {
-        Material mat = Material.getMaterial(obj.get(i).getAsString().toUpperCase());
-        if(mat == null) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Could not find Material: " + ChatColor.DARK_GRAY + obj.get(i).getAsString());
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Make Sure the Name is Correct!");
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "[INFO] Replacing all Unknown Items with BONE to Ensure the Plugin keeps Running!");
-            mat = Material.BONE;
-        }
-        return mat;
-    }
-
-    private Material MaterialFromObject(JsonObject obj, String key) {
-        Material mat = Material.getMaterial(obj.get(key).getAsString().toUpperCase());
-        if(mat == null) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Could not find Material: " + ChatColor.DARK_GRAY + obj.get(key).getAsString());
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Make Sure the Name is Correct!");
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "[INFO] Replacing all Unknown Items with BONE to Ensure the Plugin keeps Running!");
-            mat = Material.BONE;
-        }
-        return mat;
     }
 
     public ArrayList<Drug> getallDrugs() {
