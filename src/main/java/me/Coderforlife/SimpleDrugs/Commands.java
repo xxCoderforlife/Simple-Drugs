@@ -17,15 +17,16 @@ import org.bukkit.potion.PotionEffect;
 import java.util.Arrays;
 
 public class Commands implements CommandExecutor {
-private Main plugin;
-    private PlayerJoin pj = new PlayerJoin(plugin);
-    BagOfDrugs bd = new BagOfDrugs(plugin);
+    private Main plugin;
+    private PlayerJoin pj = new PlayerJoin();
+
     public String dash = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "- ";
     public String header = ChatColor.translateAlternateColorCodes('&', "&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&f&l[&4&o&lSIMPLE DRUGS&f&l]" + "&8&l&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=");
 
-    public Commands(Main plugin){
+    public Commands(Main plugin) {
         this.plugin = plugin;
     }
+
     public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args) {
         if(sender instanceof Player p) {
             if(p.hasPermission("drugs.main")) {
@@ -43,7 +44,7 @@ private Main plugin;
                 } else if(args.length == 1) {
                     if(args[0].equalsIgnoreCase("settings")) {
                         if(p.hasPermission("drugs.use.settings")) {
-                            SettingsGUI g = new SettingsGUI(plugin);
+                            SettingsGUI g = new SettingsGUI();
                             p.openInventory(g.create());
                         } else {
                             p.sendMessage(Main.prefix + "§cYou don't have permission to use that command.");
@@ -124,9 +125,9 @@ private Main plugin;
                                         if(players.getInventory().contains(pj.bag)) {
                                             p.sendMessage(Main.prefix + ChatColor.GRAY + players.getDisplayName() + " Already has a bag");
                                         } else {
-                                            p.sendMessage(Main.prefix + ChatColor.GRAY + "You sent " + players.getDisplayName() + " a " + bd.bagName);
+                                            p.sendMessage(Main.prefix + ChatColor.GRAY + "You sent " + players.getDisplayName() + " a " + BagOfDrugs.bagName);
                                             players.getInventory().addItem(pj.bag);
-                                            players.sendMessage(Main.prefix + ChatColor.GRAY + p.getDisplayName() + " Sent you a " + bd.bagName);
+                                            players.sendMessage(Main.prefix + ChatColor.GRAY + p.getDisplayName() + " Sent you a " + BagOfDrugs.bagName);
                                         }
                                     } else {
                                         p.sendMessage(Main.prefix + ChatColor.GRAY + "That player is not online.");

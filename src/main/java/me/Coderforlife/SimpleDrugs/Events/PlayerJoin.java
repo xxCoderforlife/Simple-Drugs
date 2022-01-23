@@ -21,21 +21,16 @@ import java.util.List;
 public class PlayerJoin implements Listener {
 
     public ItemStack bag = HELLO();
-    private Main plugin;
-    public PlayerJoin(Main plugin){
-        this.plugin = plugin;
-    }
-    Settings s = new Settings();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent ev) {
         Player p = ev.getPlayer();
-        if(s.BagOfDrugs_GiveOnJoin) {
+        if(Settings.BagOfDrugs_GiveOnJoin) {
             if(!p.getInventory().contains(bag)) {
                 p.getInventory().addItem(bag);
             }
         }
-        if(s.JoinMessage) {
+        if(Settings.JoinMessage) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
                 @Override
                 public void run() {
@@ -48,7 +43,7 @@ public class PlayerJoin implements Listener {
     private ItemStack HELLO() {
         ItemStack stack = new ItemStack(Material.NETHER_STAR);
         ItemMeta meta = stack.getItemMeta();
-        BagOfDrugs bd = new BagOfDrugs(plugin);
+        BagOfDrugs bd = new BagOfDrugs();
         meta.setDisplayName(bd.bagName);
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.DARK_GRAY + "---------------------");

@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 public class PlayerRespawn implements Listener {
 
     private Main plugin;
-    private PlayerJoin pj = new PlayerJoin(plugin);
+    private PlayerJoin pj = new PlayerJoin();
     private Settings s = new Settings();
 
     public PlayerRespawn(Main plugin) {

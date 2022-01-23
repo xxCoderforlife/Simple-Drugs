@@ -22,13 +22,7 @@ public class BagOfDrugsGUI {
     private final int maxdrugs = 45;
     public String bagName = "§6§lBag Of Drugs";
     public String invName = "§6§l§oBag Of Drugs";
-    private Main plugin;
     private final String sober = ChatColor.ITALIC + "Remove Drugs With" + " §c/d soberup";
-    private Settings s = new Settings();
-
-    public BagOfDrugsGUI(Main plugin){
-        this.plugin = plugin;
-    }
 
     public Inventory create() {
         ArrayList<Drug> drugs = new Drug().getallDrugs();
@@ -90,7 +84,7 @@ public class BagOfDrugsGUI {
         if(clickedItem == null || clickedItem.getType().isAir() || !clickedItem.hasItemMeta())
             return;
 
-        if(s.BagOfDrugs_CanMove) {
+        if(Settings.BagOfDrugs_CanMove) {
             if(clickedItem.getItemMeta().getDisplayName().equals(invName)) {
                 ev.setCancelled(true);
                 p.getItemOnCursor();

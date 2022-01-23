@@ -18,10 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SettingsGUI {
-    private Main plugin;
-    public SettingsGUI(Main plugin){
-        this.plugin = plugin;
-    }
     Settings s = new Settings();
 
     public Inventory create() {

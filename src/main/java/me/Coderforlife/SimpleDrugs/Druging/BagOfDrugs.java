@@ -22,15 +22,9 @@ import org.bukkit.inventory.ItemStack;
 
 public class BagOfDrugs implements Listener {
 
-    private Main plugin;
-    public String bagName = "§6§lBag Of Drugs";
-    public String invName = "§6§l§oBag Of Drugs";
-
+    public static String bagName = "§6§lBag Of Drugs";
+    public static String invName = "§6§l§oBag Of Drugs";
     Settings s = new Settings();
-
-    public BagOfDrugs(Main plugin){
-        this.plugin = plugin;
-    }
 
     @EventHandler
     public void BagOpen(PlayerInteractEvent ev) {
@@ -51,7 +45,7 @@ public class BagOfDrugs implements Listener {
                             loc.subtract(x, 0, z);
                         }
                         p.playSound(p.getLocation(), Sound.AMBIENT_CRIMSON_FOREST_ADDITIONS, 1, (float) 0.4);
-                        BagOfDrugsGUI bag = new BagOfDrugsGUI(plugin);
+                        BagOfDrugsGUI bag = new BagOfDrugsGUI();
                         p.openInventory(bag.create());
                     }
                 }

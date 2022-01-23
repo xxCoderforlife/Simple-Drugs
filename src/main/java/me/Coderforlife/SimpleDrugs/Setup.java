@@ -1,28 +1,33 @@
 package me.Coderforlife.SimpleDrugs;
 
-import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
 import me.Coderforlife.SimpleDrugs.PlaceHolder.DrugPlaceHolders;
 import me.Coderforlife.SimpleDrugs.UpdateChecker.Updater;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 public class Setup {
 
     private Economy econ;
     private Main plugin;
-    private Settings s;
 
     public Setup(Main plugin) {
         this.plugin = plugin;
         new Metrics(plugin, 13155);
-        s = new Settings();
-        s.setup();
+        new Settings().setup();
         loadPlaceHolders();
         checkForUpdate();
         loadVault();
 
-        new Drug().loadDrugs();
+        try {
+            new DrugManager().loadFiles();
+        } catch(URISyntaxException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadPlaceHolders() {
@@ -36,7 +41,7 @@ public class Setup {
     }
 
     private void checkForUpdate() {
-        if(s.CheckForUpdate) {
+        if(Settings.CheckForUpdate) {
             new Updater(plugin, 9684).checkForUpdate();
         } else {
             sendConsoleMessage(Main.prefix + "§c§oDisabled Update Checking");
