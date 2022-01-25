@@ -43,7 +43,8 @@ public class PlayerJoin implements Listener {
     private ItemStack HELLO() {
         ItemStack stack = new ItemStack(Material.NETHER_STAR);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName(BagOfDrugs.bagName);
+        BagOfDrugs bd = new BagOfDrugs();
+        meta.setDisplayName(bd.bagName);
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.DARK_GRAY + "---------------------");
         lore.add(ChatColor.RED + "A Bag Full Of Drugs :)");

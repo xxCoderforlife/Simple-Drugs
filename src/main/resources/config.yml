@@ -13,6 +13,8 @@ Drugs:
   UpdateMessage: false
   #Sends the player a plugin message on Join
   JoinMessage: true
+  #Cooldown between Drug Usage in Seconds (Change to 0 to disable)
+  Cooldown: 3
   BagOfDrugs:
     #If the player can move the bag in their Inventory
     CanMove: false

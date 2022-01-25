@@ -17,10 +17,15 @@ import org.bukkit.potion.PotionEffect;
 import java.util.Arrays;
 
 public class Commands implements CommandExecutor {
+    private Main plugin;
+    private PlayerJoin pj = new PlayerJoin();
 
-    private static final PlayerJoin pj = new PlayerJoin();
-    public static String dash = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "- ";
-    public static String header = ChatColor.translateAlternateColorCodes('&', "&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&f&l[&4&o&lSIMPLE DRUGS&f&l]" + "&8&l&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=");
+    public String dash = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "- ";
+    public String header = ChatColor.translateAlternateColorCodes('&', "&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&f&l[&4&o&lSIMPLE DRUGS&f&l]" + "&8&l&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=&0&l=&8&l=");
+
+    public Commands(Main plugin) {
+        this.plugin = plugin;
+    }
 
     public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args) {
         if(sender instanceof Player p) {
@@ -212,7 +217,7 @@ public class Commands implements CommandExecutor {
         } else if(args.length == 1) {
             if(args[0].equalsIgnoreCase("reload")) {
                 Bukkit.getServer().getConsoleSender().sendMessage(Main.prefix + ChatColor.GREEN + "Attempting to reload config...");
-                new Settings();
+                plugin.reloadConfig();
                 Bukkit.getServer().getConsoleSender().sendMessage(Main.prefix + ChatColor.GREEN + "Config has been reloaded");
             }
         }

@@ -10,22 +10,26 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 
 public class InventoryListener implements Listener {
 
+    BagOfDrugsGUI BagOfDrugsGUI = new BagOfDrugsGUI();
+    SettingsGUI SettingsGUI = new SettingsGUI();
+    RecipeGUI RecipeGUI = new RecipeGUI();
+
     @EventHandler
     public void InventoryClick(InventoryClickEvent event) {
         String name = event.getView().getTitle();
 
         if(name.contains("Recipe")) {
-            new RecipeGUI().handleClick(event);
+            RecipeGUI.handleClick(event);
             return;
         }
 
         if(name.equalsIgnoreCase("§6§lDrugs Settings")) {
-            new SettingsGUI().handleClick(event);
+            SettingsGUI.handleClick(event);
             return;
         }
 
         if(name.equalsIgnoreCase(BagOfDrugsGUI.invName)) {
-            new BagOfDrugsGUI().handleInventoryClick(event);
+            BagOfDrugsGUI.handleInventoryClick(event);
         }
     }
 
@@ -36,7 +40,6 @@ public class InventoryListener implements Listener {
         if(name.contains("Recipe")) {
             new RecipeGUI().handleDrag(event);
         }
-
     }
 
 }

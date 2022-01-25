@@ -3,7 +3,6 @@ package me.Coderforlife.SimpleDrugs.Druging;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Settings;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -25,7 +24,7 @@ public class BagOfDrugs implements Listener {
 
     public static String bagName = "§6§lBag Of Drugs";
     public static String invName = "§6§l§oBag Of Drugs";
-    private final String sober = ChatColor.ITALIC + "Remove Drugs With" + " §c/d soberup";
+    Settings s = new Settings();
 
     @EventHandler
     public void BagOpen(PlayerInteractEvent ev) {
@@ -53,7 +52,6 @@ public class BagOfDrugs implements Listener {
 
             }
         }
-
     }
 
     @EventHandler
@@ -65,7 +63,7 @@ public class BagOfDrugs implements Listener {
 
     @EventHandler
     public void onDropItem(PlayerDropItemEvent ev) {
-        if(Settings.BagOfDrugs_CanDrop) {
+        if(s.BagOfDrugs_CanDrop) {
             if(ev.getItemDrop().getItemStack().getItemMeta().getDisplayName().equals(invName)) {
                 ev.setCancelled(true);
             }

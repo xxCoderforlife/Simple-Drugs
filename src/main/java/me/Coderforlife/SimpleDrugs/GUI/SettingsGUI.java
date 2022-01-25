@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SettingsGUI {
+    Settings s = new Settings();
 
     public Inventory create() {
         Inventory inventory = Bukkit.createInventory(null, (9 * 5), "§6§lDrugs Settings");
@@ -31,23 +33,20 @@ public class SettingsGUI {
         items.add(stack(Material.PAPER, Settings.CheckForUpdate, "§6§lCheck for Updates" + enabledordisabled(Settings.CheckForUpdate), Arrays.asList("§7Making sure the plugin is up to date", " ", clickto(Settings.CheckForUpdate))));
         items.add(stack(Material.PAPER, Settings.UpdateMessage, "§6§lUpdate Message" + enabledordisabled(Settings.UpdateMessage), Arrays.asList("§7Whether to send a Message to Players", "§7with the Permission 'drugs.updater'", "§7once a new update is available", " ", clickto(Settings.UpdateMessage))));
         items.add(stack(Material.PAPER, Settings.JoinMessage, "§6§lJoin Message" + enabledordisabled(Settings.JoinMessage), Arrays.asList("§7Sends the player a plugin message on Join", " ", clickto(Settings.JoinMessage))));
+        items.add(stack(Material.PAPER, (Settings.Cooldown >= 1), "§6§lDrug Cooldown" + enabledordisabled(Settings.Cooldown >= 1), Arrays.asList("§7Cooldown between Drug Use", "§c➯Right Click to Decrease", "§a➯LeftClick to Increase", " ", "§7Current Cooldown: §a" + Settings.Cooldown + " Seconds")));
 
-        for(int i = 0; i < 6; i++) {
+        for(int i = 0; i < 5; i++) {
             items.add(new ItemStack(Material.AIR));
         }
 
         for(int i = 0; i < 9; i++) {
-            items.add(stack(Material.BLACK_STAINED_GLASS_PANE, false, "§7⇧ General Settings", Arrays.asList("§7⇩ Bag Settings")));
+            items.add(stack(Material.BLACK_STAINED_GLASS_PANE, false, "§7⇧ General Settings", List.of("§7⇩ Bag Settings")));
         }
 
         items.add(stack(Material.BOOK, Settings.BagOfDrugs_CanMove, "§6§lBag Movable" + enabledordisabled(Settings.BagOfDrugs_CanMove), Arrays.asList("§7If the player can move the bag in their Inventory", " ", clickto(Settings.BagOfDrugs_CanMove))));
-
         items.add(stack(Material.BOOK, Settings.BagOfDrugs_CanDrop, "§6§lBag Droppable" + enabledordisabled(Settings.BagOfDrugs_CanDrop), Arrays.asList("§7If the player can drop the bag in their Inventory", " ", clickto(Settings.BagOfDrugs_CanDrop))));
-
         items.add(stack(Material.BOOK, Settings.BagOfDrugs_GiveOnJoin, "§6§lGive Bag on Join" + enabledordisabled(Settings.BagOfDrugs_GiveOnJoin), Arrays.asList("§7Is the bag given on player join", " ", clickto(Settings.BagOfDrugs_GiveOnJoin))));
-
         items.add(stack(Material.BOOK, Settings.BagOfDrugs_DropOnDeath, "§6§lBag Dropped on Death" + enabledordisabled(Settings.BagOfDrugs_DropOnDeath), Arrays.asList("§7If the Bag is dropped on death or not.", " ", clickto(Settings.BagOfDrugs_DropOnDeath))));
-
         items.add(stack(Material.BOOK, Settings.BagOfDrugs_GiveOnRespawn, "§6§lKeep Bag on Respawn" + enabledordisabled(Settings.BagOfDrugs_GiveOnRespawn), Arrays.asList("§7If the player Keeps the Bag when they Respawn", " ", clickto(Settings.BagOfDrugs_GiveOnRespawn))));
 
         for(int i = 0; i < 4; i++) {
@@ -74,10 +73,20 @@ public class SettingsGUI {
         String[] name = stack.getItemMeta().getDisplayName().split(" ");
         String settingsname = String.join(" ", Arrays.copyOfRange(name, 0, name.length - 1));
         boolean isEnabled = name[name.length - 1].equalsIgnoreCase("§a(Enabled)");
-
-        Settings s = new Settings();
-
         switch(settingsname) {
+            case "§6§lDrug Cooldown" -> {
+                if(event.getClick().equals(ClickType.RIGHT)) {
+                    if(Settings.Cooldown < 1) {
+                        p.sendMessage(Main.prefix + "§c§lDrug Cooldown is Disabled. Right Click to Increase");
+                    } else {
+                        s.Cooldown(Settings.Cooldown - 1);
+                        p.sendMessage(Main.prefix + "§aDrug Cooldown set to §e" + Settings.Cooldown + " §aSeconds");
+                    }
+                } else {
+                    s.Cooldown(Settings.Cooldown + 1);
+                    p.sendMessage(Main.prefix + "§aDrug Cooldown set to §e" + Settings.Cooldown + " §aSeconds");
+                }
+            }
             case "§6§lCheck for Updates" -> {
                 s.CheckForUpdate(!isEnabled);
                 if(isEnabled) {
@@ -85,7 +94,6 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Checking for Updates.");
                 }
-                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lUpdate Message" -> {
                 s.UpdateMessage(!isEnabled);
@@ -94,7 +102,6 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled sending Update Message.");
                 }
-                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lJoin Message" -> {
                 s.JoinMessage(!isEnabled);
@@ -103,7 +110,6 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled sending Join Message.");
                 }
-                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lBag Movable" -> {
                 s.BagOfDrugs_CanMove(!isEnabled);
@@ -112,7 +118,6 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Movable Bag of Drugs.");
                 }
-                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lBag Droppable" -> {
                 s.BagOfDrugs_CanDrop(!isEnabled);
@@ -121,7 +126,6 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Droppable Bag of Drugs.");
                 }
-                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lGive Bag on Join" -> {
                 s.BagOfDrugs_GiveOnJoin(!isEnabled);
@@ -130,7 +134,6 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled giving Bag of Drugs on Join.");
                 }
-                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lBag Dropped on Death" -> {
                 s.BagOfDrugs_DropOnDeath(!isEnabled);
@@ -139,7 +142,6 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Bag of Drugs Dropped on Death.");
                 }
-                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             case "§6§lKeep Bag on Respawn" -> {
                 s.BagOfDrugs_GiveOnRespawn(!isEnabled);
@@ -148,13 +150,15 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled giving Bag of Drugs on Respawn.");
                 }
-                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
             }
             default -> {
+                event.setCancelled(true);
+                return;
             }
         }
+        p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
         event.setCancelled(true);
-        p.openInventory(new SettingsGUI().create());
+        p.openInventory(this.create());
     }
 
 
