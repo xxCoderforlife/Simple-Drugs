@@ -3,6 +3,7 @@ package me.Coderforlife.SimpleDrugs;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.Coderforlife.SimpleDrugs.DrugPlants.PlantItemListener;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Events.CraftingEvent;
 import me.Coderforlife.SimpleDrugs.Events.DrugUseListener;
@@ -41,6 +42,7 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new DrugUseListener(), this);
         this.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
         this.getServer().getPluginManager().registerEvents(new CraftingEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new PlantItemListener(), this);
         this.getCommand("drugs").setExecutor(new Commands());
         this.getCommand("drugs").setTabCompleter(new TabCommands());
         sendConsoleMessage("§aLoaded without Errors. Plugin is ready to Use :D");
