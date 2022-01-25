@@ -28,12 +28,12 @@ public class Settings {
         CheckForUpdate(drugsConfig.getBoolean("Drugs.CheckForUpdate"));
         UpdateMessage(drugsConfig.getBoolean("Drugs.UpdateMessage"));
         JoinMessage(drugsConfig.getBoolean("Drugs.JoinMessage"));
+        Cooldown(drugsConfig.getInt("Drugs.Cooldown"));
         BagOfDrugs_CanMove(drugsConfig.getBoolean("Drugs.BagOfDrugs.CanMove"));
         BagOfDrugs_CanDrop(drugsConfig.getBoolean("Drugs.BagOfDrugs.CanDrop"));
         BagOfDrugs_GiveOnRespawn(drugsConfig.getBoolean("Drugs.BagOfDrugs.GiveOnRespawn"));
         BagOfDrugs_GiveOnJoin(drugsConfig.getBoolean("Drugs.BagOfDrugs.GiveOnJoin"));
         BagOfDrugs_DropOnDeath(drugsConfig.getBoolean("Drugs.BagOfDrugs.DropOnDeath"));
-        Cooldown(drugsConfig.getInt("Drugs.Cooldown"));
     }
 
     public void CheckForUpdate(boolean bol) {
