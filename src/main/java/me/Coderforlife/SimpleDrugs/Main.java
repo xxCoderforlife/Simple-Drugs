@@ -1,23 +1,36 @@
 package me.Coderforlife.SimpleDrugs;
 
+import org.bukkit.NamespacedKey;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
-import me.Coderforlife.SimpleDrugs.Events.*;
+import me.Coderforlife.SimpleDrugs.Events.CraftingEvent;
+import me.Coderforlife.SimpleDrugs.Events.DrugUseListener;
+import me.Coderforlife.SimpleDrugs.Events.InventoryListener;
+import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
+import me.Coderforlife.SimpleDrugs.Events.PlayerRespawn;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-    public static Plugin plugin;
+    public static Main plugin;
 
     //Mess of Strings
     public String header1 = ChatColor.WHITE + "" + ChatColor.BOLD + "============" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "[Simple-Drugs]" + ChatColor.WHITE + "" + ChatColor.BOLD + "============";
     public static String prefix = ChatColor.GRAY + "" + ChatColor.BOLD + "[" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "SD" + ChatColor.GRAY + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
 
+    private NamespacedKey drugMain;
+    private NamespacedKey drugPlantedOn;
+    private NamespacedKey drugKey;
+    
     @Override
     public void onEnable() {
         plugin = this;
+        
+        drugMain = new NamespacedKey(plugin, "SimpleDrugs-DrugMain");
+        drugPlantedOn = new NamespacedKey(plugin, "SimpleDrugs-DrugPlantedOn");
+        drugKey = new NamespacedKey(plugin, "SimpleDrugs-DrugName");
 
         sendConsoleMessage(header1);
         sendConsoleMessage("§aLoading Plugin...");
@@ -45,4 +58,17 @@ public class Main extends JavaPlugin {
     private void sendConsoleMessage(String message) {
         this.getServer().getConsoleSender().sendMessage(message);
     }
+    
+    public NamespacedKey getDrugMain() {
+    	return drugMain;
+    }
+    
+    public NamespacedKey getDrugKey() {
+    	return drugKey;
+    }
+    
+    public NamespacedKey getDrugPlantedOn() {
+    	return drugPlantedOn;
+    }
+    
 }
