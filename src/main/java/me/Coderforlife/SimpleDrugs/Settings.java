@@ -12,11 +12,13 @@ public class Settings {
     public static boolean CheckForUpdate;
     public static boolean UpdateMessage;
     public static boolean JoinMessage;
+    public static int Cooldown;
     public static boolean BagOfDrugs_CanMove;
     public static boolean BagOfDrugs_CanDrop;
     public static boolean BagOfDrugs_GiveOnJoin;
     public static boolean BagOfDrugs_DropOnDeath;
     public static boolean BagOfDrugs_GiveOnRespawn;
+
 
     private static File drugsConfigFile;
     private static FileConfiguration drugsConfig;
@@ -31,6 +33,7 @@ public class Settings {
         BagOfDrugs_GiveOnRespawn(drugsConfig.getBoolean("Drugs.BagOfDrugs.GiveOnRespawn"));
         BagOfDrugs_GiveOnJoin(drugsConfig.getBoolean("Drugs.BagOfDrugs.GiveOnJoin"));
         BagOfDrugs_DropOnDeath(drugsConfig.getBoolean("Drugs.BagOfDrugs.DropOnDeath"));
+        Cooldown(drugsConfig.getInt("Drugs.Cooldown"));
     }
 
     public void CheckForUpdate(boolean bol) {
@@ -46,6 +49,11 @@ public class Settings {
     public void JoinMessage(boolean bol) {
         JoinMessage = bol;
         drugsConfig.set("Drugs.JoinMessage", bol);
+    }
+
+    public void Cooldown(int i) {
+        Cooldown = i;
+        drugsConfig.set("Drugs.Cooldown", i);
     }
 
     public void BagOfDrugs_CanMove(boolean bol) {
