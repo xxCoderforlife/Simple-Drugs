@@ -3,6 +3,8 @@ package me.Coderforlife.SimpleDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Events.*;
 import net.md_5.bungee.api.ChatColor;
+
+import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,10 +16,13 @@ public class Main extends JavaPlugin {
     public String header1 = ChatColor.WHITE + "" + ChatColor.BOLD + "============" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "[Simple-Drugs]" + ChatColor.WHITE + "" + ChatColor.BOLD + "============";
     public static String prefix = ChatColor.GRAY + "" + ChatColor.BOLD + "[" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "SD" + ChatColor.GRAY + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
 
+    private NamespacedKey key;
+    
     @Override
     public void onEnable() {
         plugin = this;
-
+        key = new NamespacedKey(plugin, "SimpleDrugs");
+        
         sendConsoleMessage(header1);
         sendConsoleMessage("§aLoading Plugin...");
 
@@ -41,5 +46,9 @@ public class Main extends JavaPlugin {
 
     private void sendConsoleMessage(String message) {
         this.getServer().getConsoleSender().sendMessage(message);
+    }
+    
+    public NamespacedKey getKey() {
+    	return key;
     }
 }
