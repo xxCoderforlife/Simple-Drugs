@@ -73,8 +73,11 @@ public class SettingsGUI {
         String[] name = stack.getItemMeta().getDisplayName().split(" ");
         String settingsname = String.join(" ", Arrays.copyOfRange(name, 0, name.length - 1));
         boolean isEnabled = name[name.length - 1].equalsIgnoreCase("§a(Enabled)");
+        p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
+        event.setCancelled(true);
+        p.openInventory(this.create());
         switch(settingsname) {
-            case "§6§lDrug Cooldown" -> {
+            case "§6§lDrug Cooldown":
                 if(event.getClick().equals(ClickType.RIGHT)) {
                     if(Settings.Cooldown < 1) {
                         p.sendMessage(Main.prefix + "§c§lDrug Cooldown is Disabled. Right Click to Increase");
@@ -86,81 +89,67 @@ public class SettingsGUI {
                     s.Cooldown(Settings.Cooldown + 1);
                     p.sendMessage(Main.prefix + "§aDrug Cooldown set to §e" + Settings.Cooldown + " §aSeconds");
                 }
-            }
-            case "§6§lCheck for Updates" -> {
+            case "§6§lCheck for Updates":
                 s.CheckForUpdate(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aChecking for Updates.");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Checking for Updates.");
                 }
-            }
-            case "§6§lUpdate Message" -> {
+            case "§6§lUpdate Message":
                 s.UpdateMessage(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §asending Update Message");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled sending Update Message.");
                 }
-            }
-            case "§6§lJoin Message" -> {
+            case "§6§lJoin Message":
                 s.JoinMessage(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §asending Join Message");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled sending Join Message.");
                 }
-            }
-            case "§6§lBag Movable" -> {
+            case "§6§lBag Movable":
                 s.BagOfDrugs_CanMove(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aMovable Bag of Drugs.");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Movable Bag of Drugs.");
                 }
-            }
-            case "§6§lBag Droppable" -> {
+            case "§6§lBag Droppable":
                 s.BagOfDrugs_CanDrop(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aDroppable Bag of Drugs.");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Droppable Bag of Drugs.");
                 }
-            }
-            case "§6§lGive Bag on Join" -> {
+            case "§6§lGive Bag on Join":
                 s.BagOfDrugs_GiveOnJoin(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §agiving Bag of Drugs on Join.");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled giving Bag of Drugs on Join.");
                 }
-            }
-            case "§6§lBag Dropped on Death" -> {
+            case "§6§lBag Dropped on Death":
                 s.BagOfDrugs_DropOnDeath(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §aBag of Drugs Dropped on Death.");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Bag of Drugs Dropped on Death.");
                 }
-            }
-            case "§6§lKeep Bag on Respawn" -> {
+            case "§6§lKeep Bag on Respawn":
                 s.BagOfDrugs_GiveOnRespawn(!isEnabled);
                 if(isEnabled) {
                     p.sendMessage(Main.prefix + "§cDisabled §agiving Bag of Drugs on Respawn.");
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled giving Bag of Drugs on Respawn.");
                 }
-            }
-            default -> {
+            default:
                 event.setCancelled(true);
                 return;
-            }
         }
-        p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 1);
-        event.setCancelled(true);
-        p.openInventory(this.create());
     }
-
 
     private ItemStack stack(Material mat, boolean ench, String name, List<String> lore) {
         ItemStack stack = new ItemStack(mat);

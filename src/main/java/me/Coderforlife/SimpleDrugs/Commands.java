@@ -4,13 +4,16 @@ import java.util.Arrays;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
+import me.Coderforlife.SimpleDrugs.DrugPlants.DrugPlantItem;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
@@ -29,7 +32,14 @@ public class Commands implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args) {
-        if(sender instanceof Player p) {
+        if(sender instanceof Player) {
+        	Player p = (Player)sender;
+        	
+        	if(args[0].equalsIgnoreCase("test")) {
+        		DrugPlantItem dpi = new DrugPlantItem(new Drug().getDrug("Weed"), new ItemStack(Material.STICK), Material.FARMLAND, 1);
+        		p.getInventory().addItem(dpi.makeItem());
+        	}
+        	
             if(p.hasPermission("drugs.main")) {
                 if(args.length == 0) {
                     p.sendMessage(header);
