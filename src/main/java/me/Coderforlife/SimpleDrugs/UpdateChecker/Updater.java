@@ -38,10 +38,13 @@ public class Updater implements Listener {
             if(spigotVersion == null) {
                 return;
             }
-            String version1 = spigotVersion.replaceAll("[-+.]*", "");
-            String version2 = currVersion.replaceAll("[-+.]*", "");
-            int spigotVersionINT = Integer.parseInt(version1.replace("v27devbuild", ""));
-            int currVersionINT = Integer.parseInt(version2.replace("27devbuild", ""));
+            String version1 = spigotVersion.replaceAll("[A-Za-z-+.]*", "");
+            String version2 = currVersion.replaceAll("[A-Za-z-+.]*", "");
+            //The remove 44 is needed to remove the old verison type from the string/integer.
+            //This will be removed after this update and the version will be replaced with
+            //The new version system  it's just added in to not spam us when we test.- xxCoderforlife
+            int spigotVersionINT = Integer.parseInt(version1.replaceAll("44", ""));
+            int currVersionINT = Integer.parseInt(version2);
             if(spigotVersionINT == currVersionINT) {
                 Bukkit.getConsoleSender().sendMessage(Main.prefix + "Running the most current build " + currVersion);
             } else {
@@ -51,6 +54,8 @@ public class Updater implements Listener {
 
                 } else {
                     isnew = true;
+                    Bukkit.getConsoleSender().sendMessage(Integer.toString(spigotVersionINT));
+                    Bukkit.getConsoleSender().sendMessage(Integer.toString(currVersionINT));
                     Bukkit.getConsoleSender().sendMessage(Main.prefix + "§c§oYou are running an " + "outdated version.");
                     Bukkit.getConsoleSender().sendMessage(Main.prefix + "§dDownload the newest " + "version here:");
                     Bukkit.getConsoleSender().sendMessage(Main.prefix + "§e§nhttps://www.spigotmc" + ".org/resources/simple-drugs-gui.9684/");
