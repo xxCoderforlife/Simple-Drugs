@@ -23,7 +23,7 @@ public class Settings {
     private FileConfiguration drugsConfig;
 
     public void setup() {
-        SetupConfig();
+        setupConfig();
         CheckForUpdate(drugsConfig.getBoolean("Drugs.CheckForUpdate"));
         UpdateMessage(drugsConfig.getBoolean("Drugs.UpdateMessage"));
         JoinMessage(drugsConfig.getBoolean("Drugs.JoinMessage"));
@@ -79,9 +79,9 @@ public class Settings {
         BagOfDrugs_GiveOnRespawn = bol;
         drugsConfig.set("Drugs.BagOfDrugs.GiveOnRespawn", bol);
     }
-
-    public void SetupConfig() {
-        drugsConfigFile = new File(Main.plugin.getDataFolder(), "config.yml");
+    
+    private void setupConfig() {
+    	drugsConfigFile = new File(Main.plugin.getDataFolder(), "config.yml");
         if(!drugsConfigFile.exists()) {
             drugsConfigFile.getParentFile().mkdir();
             Main.plugin.saveResource("config.yml", false);

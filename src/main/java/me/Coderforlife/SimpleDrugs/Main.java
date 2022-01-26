@@ -63,8 +63,8 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        new Settings().save();
-        new DrugManager().saveallDrugs();
+        getSettings().save();
+        getDrugManager().saveallDrugs();
     }
 
     private void sendConsoleMessage(String message) {
