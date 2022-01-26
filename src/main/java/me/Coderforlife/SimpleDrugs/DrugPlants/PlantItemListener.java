@@ -72,7 +72,7 @@ public class PlantItemListener implements Listener {
 		if(age.getAge() < age.getMaximumAge()) return;
 		age.setAge(0);
 		e.getClickedBlock().setBlockData(age);
-		Drug d = new Drug().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING));
+		Drug d = Main.plugin.getDrugManager().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING));
 		ItemStack i = d.getItem();
 		i.setAmount(bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));
 		e.getPlayer().getWorld().dropItemNaturally(e.getClickedBlock().getLocation(), i);
@@ -90,7 +90,7 @@ public class PlantItemListener implements Listener {
 		e.setDropItems(false);
 		
 		Ageable age = (Ageable)e.getBlock().getBlockData();
-		Drug d = new Drug().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING));
+		Drug d = Main.plugin.getDrugManager().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING));
 		if(age.getAge() >= age.getMaximumAge()) {
 			ItemStack i = d.getItem();
 			i.setAmount(bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));

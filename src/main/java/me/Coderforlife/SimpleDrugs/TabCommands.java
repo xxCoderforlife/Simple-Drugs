@@ -34,7 +34,7 @@ public class TabCommands implements TabCompleter {
                 }
             }
             if(args[0].equalsIgnoreCase("give") || args[0].equalsIgnoreCase("recipe")) {
-                for(Drug drugs : new Drug().getallDrugs()) {
+                for(Drug drugs : Main.plugin.getDrugManager().getallDrugs()) {
                     tab.add(drugs.getName());
                 }
             }

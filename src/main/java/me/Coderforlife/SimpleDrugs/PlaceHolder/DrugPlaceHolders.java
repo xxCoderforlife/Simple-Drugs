@@ -1,5 +1,6 @@
 package me.Coderforlife.SimpleDrugs.PlaceHolder;
 
+import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
@@ -29,7 +30,7 @@ public class DrugPlaceHolders extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer player, String params) {
-        for(Drug drugs : new Drug().getallDrugs()) {
+        for(Drug drugs : Main.plugin.getDrugManager().getallDrugs()) {
             if(params.equalsIgnoreCase(drugs.getName())) {
                 return drugs.getDisplayname();
             }

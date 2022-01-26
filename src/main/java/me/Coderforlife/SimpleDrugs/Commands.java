@@ -82,7 +82,7 @@ public class Commands implements CommandExecutor {
                     } else if(args[0].equalsIgnoreCase("list")) {
                         if(p.hasPermission("drugs.list")) {
                             p.sendMessage(header);
-                            for(Drug drug : new Drug().getallDrugs()) {
+                            for(Drug drug : Main.plugin.getDrugManager().getallDrugs()) {
                                 p.sendMessage(dash + drug.getDisplayname());
                             }
                         } else {
@@ -113,7 +113,7 @@ public class Commands implements CommandExecutor {
                     }
                 } else if(args.length == 2) {
                     if(args[0].equalsIgnoreCase("recipe")) {
-                        Drug drug = new Drug().getDrug(args[1]);
+                        Drug drug = Main.plugin.getDrugManager().getDrug(args[1]);
                         if(drug == null) {
                             p.sendMessage(Main.prefix + "§e" + args[1] + " §cdoes not exist.");
                             return true;
@@ -171,7 +171,7 @@ public class Commands implements CommandExecutor {
                         }
                     } else if(args[0].equalsIgnoreCase("give")) {
                         if(p.hasPermission("drugs.give")) {
-                            for(Drug drugs : new Drug().getallDrugs()) {
+                            for(Drug drugs : Main.plugin.getDrugManager().getallDrugs()) {
                                 if(args[1].equalsIgnoreCase(drugs.getName())) {
                                     p.getInventory().addItem(drugs.getItem());
                                     p.sendMessage(Main.prefix + ChatColor.translateAlternateColorCodes('&', "&7You've been given " + drugs.getDisplayname()));
@@ -187,7 +187,7 @@ public class Commands implements CommandExecutor {
                 } else if(args.length == 3) {
                     if(args[0].equalsIgnoreCase("give")) {
                         if(p.hasPermission("durgs.give.others")) {
-                            for(Drug drugs : new Drug().getallDrugs()) {
+                            for(Drug drugs : Main.plugin.getDrugManager().getallDrugs()) {
                                 if(args[1].equalsIgnoreCase(drugs.getName())) {
                                     for(Player players : Bukkit.getOnlinePlayers()) {
                                         if(args[2].equalsIgnoreCase(players.getName())) {

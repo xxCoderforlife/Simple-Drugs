@@ -1,14 +1,14 @@
 package me.Coderforlife.SimpleDrugs;
 
-import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
-import me.Coderforlife.SimpleDrugs.PlaceHolder.DrugPlaceHolders;
-import me.Coderforlife.SimpleDrugs.UpdateChecker.Updater;
-import net.milkbowl.vault.economy.Economy;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
+import me.Coderforlife.SimpleDrugs.PlaceHolder.DrugPlaceHolders;
+import me.Coderforlife.SimpleDrugs.UpdateChecker.Updater;
+import net.milkbowl.vault.economy.Economy;
 
 public class Setup {
 
@@ -24,7 +24,7 @@ public class Setup {
         loadVault();
 
         try {
-            new DrugManager().loadFiles();
+        	Main.plugin.getDrugManager().loadFiles();
         } catch(URISyntaxException | IOException e) {
             e.printStackTrace();
         }

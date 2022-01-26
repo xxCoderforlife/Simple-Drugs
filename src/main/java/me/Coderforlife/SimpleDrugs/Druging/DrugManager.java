@@ -1,11 +1,17 @@
 package me.Coderforlife.SimpleDrugs.Druging;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import me.Coderforlife.SimpleDrugs.Main;
-import net.md_5.bungee.api.ChatColor;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -16,13 +22,17 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 
-import java.io.*;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Locale;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import me.Coderforlife.SimpleDrugs.Main;
+import net.md_5.bungee.api.ChatColor;
 
 public class DrugManager {
     final File folder = new File("plugins/Simple-Drugs/");
+    private Map<String, Drug> drugs = new HashMap<>();
 
     public void loadFiles() throws IOException, URISyntaxException {
         if(folder.listFiles().length < 2) {
@@ -39,7 +49,7 @@ public class DrugManager {
         }
         StringBuilder enabled = new StringBuilder();
         StringBuilder disabled = new StringBuilder();
-        for(Drug drug : new Drug().getallDrugs()) {
+        for(Drug drug : getallDrugs()) {
             if(drug.isCraftable()) {
                 enabled.append(drug.getName()).append(", ");
             } else {
@@ -51,6 +61,37 @@ public class DrugManager {
 
         if(disabled.length() > 0)
             sendConsoleMessage("§6Disabled Drugs: §c" + disabled);
+    }
+    
+    /* Grabbing and Setting Drug Data */
+    public void addDrug(Drug drug, String name) {
+        drugs.put(name, drug);
+    }
+
+    public Drug getDrug(String name) {
+        return drugs.getOrDefault(name, null);
+    }
+
+    public ArrayList<Drug> getallDrugs() {
+        return new ArrayList<>(drugs.values());
+    }
+    
+    public Drug matchDrug(ItemStack item) {
+        for(Drug drug : drugs.values()) {
+            if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(drug.getDisplayname())) {
+                return drug;
+            }
+        }
+        return null;
+    }
+    
+    public boolean isDrugItem(ItemStack item) {
+    	for(Drug d : getallDrugs()) {
+    		if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(d.getDisplayname())) {
+    			return true;
+    		}
+    	}
+        return false;
     }
 
     private void DrugfromJson(JsonObject drug, String name) {
@@ -105,7 +146,7 @@ public class DrugManager {
         if(craftable)
             Main.plugin.getServer().addRecipe(shapedRecipe);
 
-        new Drug().addDrug(new Drug(name, displayname, shapedRecipe, effectsList, result, permission, craftable), name);
+        addDrug(new Drug(name, displayname, shapedRecipe, effectsList, result, permission, craftable), name);
     }
 
     private void DrugtoJson(Drug drug) {
@@ -162,7 +203,7 @@ public class DrugManager {
     }
 
     public void saveallDrugs() {
-        for(Drug drug : new Drug().getallDrugs()) {
+        for(Drug drug : getallDrugs()) {
             DrugtoJson(drug);
         }
     }

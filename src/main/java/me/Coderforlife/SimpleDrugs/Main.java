@@ -27,6 +27,8 @@ public class Main extends JavaPlugin {
     private NamespacedKey drugHarvestAmount;
     private NamespacedKey drugSeedKey;
     
+    private DrugManager drugManager;
+    
     @Override
     public void onEnable() {
         plugin = this;
@@ -36,6 +38,8 @@ public class Main extends JavaPlugin {
         drugKey = new NamespacedKey(plugin, "SimpleDrugs-DrugName");
         drugHarvestAmount = new NamespacedKey(plugin, "SimpleDrugs-HarvestAmount");
         drugSeedKey = new NamespacedKey(plugin, "SimpleDrugs-DrugSeed");
+        
+        drugManager = new DrugManager();
         
         sendConsoleMessage(header1);
         sendConsoleMessage("§aLoading Plugin...");
@@ -63,6 +67,10 @@ public class Main extends JavaPlugin {
 
     private void sendConsoleMessage(String message) {
         this.getServer().getConsoleSender().sendMessage(message);
+    }
+    
+    public DrugManager getDrugManager() {
+    	return drugManager;
     }
     
     public NamespacedKey getDrugMain() {

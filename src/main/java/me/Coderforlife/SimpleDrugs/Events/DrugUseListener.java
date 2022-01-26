@@ -31,7 +31,7 @@ public class DrugUseListener implements Listener {
         }
 
         ItemStack itemInHand = p.getInventory().getItemInMainHand();
-        Drug drug = new Drug().matchDrug(itemInHand);
+        Drug drug = Main.plugin.getDrugManager().matchDrug(itemInHand);
         if(drug == null)
             return;
 
@@ -61,7 +61,7 @@ public class DrugUseListener implements Listener {
         Player p = ev.getPlayer();
 
         ItemStack stack = p.getInventory().getItemInMainHand() == null ? p.getInventory().getItemInOffHand() : p.getInventory().getItemInMainHand();
-        boolean isDrug = new Drug().matchDrug(stack) != null;
+        boolean isDrug = Main.plugin.getDrugManager().matchDrug(stack) != null;
         if(isDrug) {
             ev.setCancelled(true);
         }

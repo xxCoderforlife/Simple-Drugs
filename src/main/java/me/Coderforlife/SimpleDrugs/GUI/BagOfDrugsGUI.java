@@ -25,7 +25,7 @@ public class BagOfDrugsGUI {
     private final String sober = ChatColor.ITALIC + "Remove Drugs With" + " §c/d soberup";
 
     public Inventory create() {
-        ArrayList<Drug> drugs = new Drug().getallDrugs();
+        ArrayList<Drug> drugs = Main.plugin.getDrugManager().getallDrugs();
         int amountofdrugs = drugs.size();
 
         ArrayList<ItemStack> stack = new ArrayList<>();
@@ -51,7 +51,7 @@ public class BagOfDrugsGUI {
     }
 
     public Inventory openPage(int page) {
-        ArrayList<Drug> drugs = new Drug().getallDrugs();
+        ArrayList<Drug> drugs = Main.plugin.getDrugManager().getallDrugs();
         int amountofdrugs = drugs.size();
 
         int drugsleft = amountofdrugs - ((page - 1) * maxdrugs);
@@ -110,8 +110,8 @@ public class BagOfDrugsGUI {
             return;
         }
 
-        for(Drug drug : new Drug().getallDrugs()) {
-            if(!drug.isDrugItem(clickedItem)) {
+        for(Drug drug : Main.plugin.getDrugManager().getallDrugs()) {
+            if(!Main.plugin.getDrugManager().isDrugItem(clickedItem)) {
                 continue;
             }
             p.getInventory().addItem(drug.getItem());
