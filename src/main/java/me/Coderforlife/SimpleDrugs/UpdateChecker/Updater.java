@@ -40,9 +40,8 @@ public class Updater implements Listener {
             }
             String version1 = spigotVersion.replaceAll("[A-Za-z-+.]*", "");
             String version2 = currVersion.replaceAll("[A-Za-z-+.]*", "");
-            //The remove 44 is needed to remove the old verison type from the string/integer.
-            //This will be removed after this update and the version will be replaced with
-            //The new version system  it's just added in to not spam us when we test.- xxCoderforlife
+            //Added remove 44 so we don't get spammed with an outdated version, message every test.
+            //We can remove this when we post a new spigot update.
             int spigotVersionINT = Integer.parseInt(version1.replaceAll("44", ""));
             int currVersionINT = Integer.parseInt(version2);
             if(spigotVersionINT == currVersionINT) {
