@@ -1,17 +1,11 @@
 package me.Coderforlife.SimpleDrugs.Druging;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import me.Coderforlife.SimpleDrugs.Main;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -22,13 +16,12 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import me.Coderforlife.SimpleDrugs.Main;
-import net.md_5.bungee.api.ChatColor;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class DrugManager {
     final File folder = new File("plugins/Simple-Drugs/");
@@ -62,7 +55,7 @@ public class DrugManager {
         if(disabled.length() > 0)
             sendConsoleMessage("§6Disabled Drugs: §c" + disabled);
     }
-    
+
     /* Grabbing and Setting Drug Data */
     public void addDrug(Drug drug, String name) {
         drugs.put(name, drug);
@@ -75,7 +68,7 @@ public class DrugManager {
     public ArrayList<Drug> getallDrugs() {
         return new ArrayList<>(drugs.values());
     }
-    
+
     public Drug matchDrug(ItemStack item) {
         for(Drug drug : drugs.values()) {
             if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(drug.getDisplayname())) {
@@ -84,13 +77,13 @@ public class DrugManager {
         }
         return null;
     }
-    
+
     public boolean isDrugItem(ItemStack item) {
-    	for(Drug d : getallDrugs()) {
-    		if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(d.getDisplayname())) {
-    			return true;
-    		}
-    	}
+        for(Drug d : getallDrugs()) {
+            if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(d.getDisplayname())) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -163,7 +156,7 @@ public class DrugManager {
         for(DrugEffect effect : drug.getEffects()) {
             JsonObject effectObject = new JsonObject();
             effectObject.addProperty("type", effect.getEffect().getName());
-            effectObject.addProperty("time", effect.getTime());
+            effectObject.addProperty("time", (effect.getTime() / 20));
             effectObject.addProperty("intensity", effect.getIntensity());
             effects.add(effectObject);
         }
