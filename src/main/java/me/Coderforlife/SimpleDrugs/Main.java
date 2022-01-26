@@ -3,6 +3,7 @@ package me.Coderforlife.SimpleDrugs;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.Coderforlife.SimpleDrugs.DrugPlants.PlantItemListener;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
 import me.Coderforlife.SimpleDrugs.Events.CraftingEvent;
@@ -23,6 +24,8 @@ public class Main extends JavaPlugin {
     private NamespacedKey drugMain;
     private NamespacedKey drugPlantedOn;
     private NamespacedKey drugKey;
+    private NamespacedKey drugHarvestAmount;
+    private NamespacedKey drugSeedKey;
     
     @Override
     public void onEnable() {
@@ -31,7 +34,9 @@ public class Main extends JavaPlugin {
         drugMain = new NamespacedKey(plugin, "SimpleDrugs-DrugMain");
         drugPlantedOn = new NamespacedKey(plugin, "SimpleDrugs-DrugPlantedOn");
         drugKey = new NamespacedKey(plugin, "SimpleDrugs-DrugName");
-
+        drugHarvestAmount = new NamespacedKey(plugin, "SimpleDrugs-HarvestAmount");
+        drugSeedKey = new NamespacedKey(plugin, "SimpleDrugs-DrugSeed");
+        
         sendConsoleMessage(header1);
         sendConsoleMessage("§aLoading Plugin...");
 
@@ -43,6 +48,7 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new DrugUseListener(), this);
         this.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
         this.getServer().getPluginManager().registerEvents(new CraftingEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new PlantItemListener(), this);
         this.getCommand("drugs").setExecutor(new Commands(this));
         this.getCommand("drugs").setTabCompleter(new TabCommands());
 
@@ -69,6 +75,14 @@ public class Main extends JavaPlugin {
     
     public NamespacedKey getDrugPlantedOn() {
     	return drugPlantedOn;
+    }
+    
+    public NamespacedKey getDrugHarvestAmount() {
+    	return drugHarvestAmount;
+    }
+    
+    public NamespacedKey getDrugSeedKey() {
+    	return drugSeedKey;
     }
     
 }

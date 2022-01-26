@@ -13,11 +13,13 @@ public class DrugPlantItem {
 	private Drug drugToBePlaced;
 	private ItemStack plantableItem;
 	private Material plantOn;
+	private Integer amount;
 	
-	public DrugPlantItem(Drug d, ItemStack pi, Material m) {
+	public DrugPlantItem(Drug d, ItemStack pi, Material m, Integer i) {
 		drugToBePlaced = d;
 		plantableItem = pi;
 		plantOn = m;
+		amount = i;
 	}
 	
 	public ItemStack makeItem(Integer i) {
@@ -27,6 +29,8 @@ public class DrugPlantItem {
 		im.getPersistentDataContainer().set(Main.plugin.getDrugMain(), PersistentDataType.BYTE, (byte)1);
 		im.getPersistentDataContainer().set(Main.plugin.getDrugKey(), PersistentDataType.STRING, drugToBePlaced.getName());
 		im.getPersistentDataContainer().set(Main.plugin.getDrugPlantedOn(), PersistentDataType.STRING, plantOn.toString());
+		im.getPersistentDataContainer().set(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER, amount);
+		im.getPersistentDataContainer().set(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING, plantableItem.getType().toString());
 		
 		plantableItem.setItemMeta(im);
 		plantableItem.setAmount(i);

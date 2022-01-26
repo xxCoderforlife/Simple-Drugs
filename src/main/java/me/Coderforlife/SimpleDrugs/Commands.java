@@ -1,10 +1,7 @@
 package me.Coderforlife.SimpleDrugs;
 
-import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
-import me.Coderforlife.SimpleDrugs.Druging.Drug;
-import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
-import me.Coderforlife.SimpleDrugs.GUI.RecipeGUI;
-import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
+import java.util.Arrays;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -14,7 +11,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
-import java.util.Arrays;
+import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
+import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
+import me.Coderforlife.SimpleDrugs.GUI.RecipeGUI;
+import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
 
 public class Commands implements CommandExecutor {
     private Main plugin;
