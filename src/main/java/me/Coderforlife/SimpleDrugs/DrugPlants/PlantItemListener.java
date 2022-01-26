@@ -114,6 +114,37 @@ public class PlantItemListener implements Listener {
 	}
 	
 	@EventHandler
+	public void onBreakSoil(BlockBreakEvent e) {
+		if(!e.getBlock().getType().equals(Material.FARMLAND)) return;
+		if(!e.getBlock().getLocation().add(0, 1, 0).getBlock().getType().equals(Material.WHEAT)) return;
+		Block b = e.getBlock().getLocation().add(0, 1, 0).getBlock();
+		CustomBlockData cbd = new CustomBlockData(b, Main.plugin);
+		PersistentDataContainer bPDC = cbd;
+		if(!bPDC.has(Main.plugin.getDrugMain(), PersistentDataType.BYTE)) return;
+		if(bPDC.get(Main.plugin.getDrugMain(), PersistentDataType.BYTE) != (byte)1) return;
+		if(!bPDC.has(Main.plugin.getDrugKey(), PersistentDataType.STRING)) return;
+		if(!bPDC.has(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER)) return;
+		if(!bPDC.has(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING)) return;
+		
+		Ageable age = (Ageable)b.getBlockData();
+		Drug d = Main.plugin.getDrugManager().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING));
+		if(age.getAge() >= age.getMaximumAge()) {
+			ItemStack i = d.getItem();
+			i.setAmount(bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));
+			e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), i);
+		}
+		
+		ItemStack seed = new ItemStack(Material.valueOf(bPDC.get(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING)));
+		Material m = e.getBlock().getLocation().subtract(0, 1, 0).getBlock().getType();
+		Integer amountHarvest = bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER);
+		
+		DrugPlantItem cpi = new DrugPlantItem(d, seed, m, amountHarvest);
+		e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), cpi.makeItem());
+		cbd.removeBlock(b);
+		b.setType(Material.AIR);
+	}
+	
+	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		if(!e.getBlock().getType().equals(Material.WHEAT)) return;
 		CustomBlockData cbd = new CustomBlockData(e.getBlock(), Main.plugin);
