@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.DrugPlants.DrugPlantItem;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -135,11 +136,44 @@ public class DrugManager {
 
         boolean craftable = drug.get("crafting").getAsBoolean();
         String permission = drug.get("permission").getAsString();
-
+        
         if(craftable)
             Main.plugin.getServer().addRecipe(shapedRecipe);
 
-        addDrug(new Drug(name, displayname, shapedRecipe, effectsList, result, permission, craftable), name);
+        Drug d = new Drug(name, displayname, shapedRecipe, effectsList, result, permission, craftable);
+        Boolean hasSeed = drug.has("has_seed") ? drug.get("has_seed").getAsBoolean() : false;
+        d.setHasSeed(hasSeed);
+        
+        if(drug.has("seed_recipe")) {
+        	JsonArray seedRecipe = drug.getAsJsonArray("seed_recipe");
+            NamespacedKey seedKey = new NamespacedKey(Main.plugin, "drugseeds_" + name);
+            
+            String seedMat = drug.has("seed_item") ? drug.get("seed_item").getAsString() : "WHEAT_SEEDS";
+            Integer harvestAmount = drug.has("seed_harvest_amount") ? drug.get("seed_harvest_amount").getAsInt() : 1;
+            
+            DrugPlantItem dpi = new DrugPlantItem(d, new ItemStack(Material.valueOf(seedMat)), Material.FARMLAND, harvestAmount);
+            
+            ShapedRecipe seedShapedRecipe = new ShapedRecipe(seedKey, dpi.makeItem());
+            
+            seedShapedRecipe.shape("ABC", "DEF", "GHI");
+            seedShapedRecipe.setIngredient('A', MaterialFromArray(seedRecipe, 0));
+            seedShapedRecipe.setIngredient('B', MaterialFromArray(seedRecipe, 1));
+            seedShapedRecipe.setIngredient('C', MaterialFromArray(seedRecipe, 2));
+            seedShapedRecipe.setIngredient('D', MaterialFromArray(seedRecipe, 3));
+            seedShapedRecipe.setIngredient('E', MaterialFromArray(seedRecipe, 4));
+            seedShapedRecipe.setIngredient('F', MaterialFromArray(seedRecipe, 5));
+            seedShapedRecipe.setIngredient('G', MaterialFromArray(seedRecipe, 6));
+            seedShapedRecipe.setIngredient('H', MaterialFromArray(seedRecipe, 7));
+            seedShapedRecipe.setIngredient('I', MaterialFromArray(seedRecipe, 8));
+            Main.plugin.getServer().addRecipe(seedShapedRecipe);
+            
+            d.setHarvestAmount(harvestAmount);
+            d.setSeedItem(Material.valueOf(seedMat));
+            d.setHasSeed(hasSeed);
+            d.setSeedRecipe(seedShapedRecipe);
+        }
+        
+        addDrug(d, name);
     }
 
     private void DrugtoJson(Drug drug) {
@@ -174,6 +208,25 @@ public class DrugManager {
         recipe.add(r.getIngredientMap().get('I').getType().toString());
         obj.add("recipe", recipe);
 
+        obj.addProperty("has_seed", drug.hasSeed());
+        obj.addProperty("seed_harvest_amount", drug.getHarvestAmount());
+        obj.addProperty("seed_item", drug.getSeedItem().toString());
+        
+        ShapedRecipe sr = (ShapedRecipe)drug.getSeedRecipe();
+        if(sr != null) {
+	        JsonArray sRec = new JsonArray();
+	        sRec.add(sr.getIngredientMap().get('A').getType().toString());
+	        sRec.add(sr.getIngredientMap().get('B').getType().toString());
+	        sRec.add(sr.getIngredientMap().get('C').getType().toString());
+	        sRec.add(sr.getIngredientMap().get('D').getType().toString());
+	        sRec.add(sr.getIngredientMap().get('E').getType().toString());
+	        sRec.add(sr.getIngredientMap().get('F').getType().toString());
+	        sRec.add(sr.getIngredientMap().get('G').getType().toString());
+	        sRec.add(sr.getIngredientMap().get('H').getType().toString());
+	        sRec.add(sr.getIngredientMap().get('I').getType().toString());
+	        obj.add("seed_recipe", sRec);
+        }
+        
         try {
             file.createNewFile();
             FileWriter writer = new FileWriter(file);

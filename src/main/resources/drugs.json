@@ -37,7 +37,21 @@
       ],
       "item":"GREEN_DYE",
       "permission":"drugs.use.weed",
-      "crafting":true
+      "crafting":true,
+      "has_seed": true,
+      "seed_item": "STICK",
+      "seed_harvest_amount": 1,
+      "seed_recipe": [
+      	 "WHEAT",
+      	 "DIAMOND",
+      	 "WHEAT",
+      	 "WHEAT",
+      	 "DIAMOND",
+      	 "WHEAT",
+      	 "WHEAT",
+      	 "DIAMOND",
+      	 "WHEAT"
+      ]
    },
    {
       "name":"Percocet",

@@ -2,6 +2,7 @@ package me.Coderforlife.SimpleDrugs.Druging;
 
 import java.util.ArrayList;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -16,9 +17,10 @@ public class Drug {
     private ItemStack item;
     private String permission;
     private boolean crafting;
-
-    public Drug() {
-    }
+    private boolean hasSeed = false;
+    private Material seedItem = Material.WHEAT_SEEDS;
+    private Recipe seedRecipe = null;
+    private Integer harvestAmount = 1;
 
     public Drug(String name, String displayname, Recipe recipe, ArrayList<DrugEffect> effects, ItemStack item, String permission, boolean crafting) {
         this.name = name;
@@ -91,4 +93,37 @@ public class Drug {
     public void setCraftable(boolean crafting) {
         this.crafting = crafting;
     }
+    
+    public void setHasSeed(boolean b) {
+    	hasSeed = b;
+    }
+    
+    public boolean hasSeed() {
+    	return hasSeed;
+    }
+    
+    public void setSeedRecipe(Recipe r) {
+    	seedRecipe = r;
+    }
+    
+    public Recipe getSeedRecipe() {
+    	return seedRecipe;
+    }
+    
+    public Material getSeedItem() {
+    	return seedItem;
+    }
+    
+    public void setSeedItem(Material m) {
+    	seedItem = m;
+    }
+    
+    public Integer getHarvestAmount() {
+    	return harvestAmount;
+    }
+    
+    public void setHarvestAmount(int i) {
+    	harvestAmount = i;
+    }
+    
 }
