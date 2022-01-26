@@ -16,6 +16,7 @@ package me.Coderforlife.SimpleDrugs.Util;
 
 import java.util.Set;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
@@ -44,6 +45,7 @@ public class CustomBlockData implements PersistentDataContainer {
     private final PersistentDataContainer pdc;
     private final Chunk chunk;
     private final NamespacedKey key;
+    private final Plugin p;
 
     /**
      * Gets the PersistentDataContainer associated with the given block and plugin
@@ -55,21 +57,7 @@ public class CustomBlockData implements PersistentDataContainer {
         this.chunk = block.getChunk();
         this.key = new NamespacedKey(plugin, getOldKey(block));
         this.pdc = getPersistentDataContainer();
-    }
-
-    /**
-     * Gets the PersistentDataContainer associated with the given block and plugin
-     *
-     * @param block     Block
-     * @param namespace Namespace
-     *
-     * @deprecated Use {@link #CustomBlockData(Block, Plugin)} instead.
-     */
-    @Deprecated()
-    public CustomBlockData(final Block block, final String namespace) {
-        this.chunk = block.getChunk();
-        this.key = new NamespacedKey(namespace, getOldKey(block));
-        this.pdc = getPersistentDataContainer();
+        p = plugin;
     }
 
     /**
@@ -91,6 +79,11 @@ public class CustomBlockData implements PersistentDataContainer {
     public void clear() {
         pdc.getKeys().forEach(pdc::remove);
         save();
+    }
+    
+    public void removeBlock(Block b) {
+    	chunk.getPersistentDataContainer().remove(new NamespacedKey(p, getOldKey(b)));
+    	Bukkit.getConsoleSender().sendMessage("removed block");
     }
 
     /**
