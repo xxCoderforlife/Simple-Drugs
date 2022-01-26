@@ -2,6 +2,7 @@ package me.Coderforlife.SimpleDrugs.DrugPlants;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.Ageable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -13,6 +14,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Util.CustomBlockData;
 
 public class PlantItemListener implements Listener {
@@ -49,6 +51,30 @@ public class PlantItemListener implements Listener {
 		bPDC.set(Main.plugin.getDrugKey(), PersistentDataType.STRING, pdc.get(Main.plugin.getDrugKey(), PersistentDataType.STRING));
 		bPDC.set(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER, pdc.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));
 		bPDC.set(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING, pdc.get(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING));
+	}
+	
+	@EventHandler
+	public void onHarvest(PlayerInteractEvent e) {
+		if(!e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
+		if(!e.getHand().equals(EquipmentSlot.HAND)) return;
+		if(!(e.getClickedBlock().getBlockData() instanceof Ageable)) return;
+		if(!e.getClickedBlock().getType().equals(Material.WHEAT)) return;
+		
+		PersistentDataContainer bPDC = new CustomBlockData(e.getClickedBlock(), Main.plugin);
+		if(!bPDC.has(Main.plugin.getDrugMain(), PersistentDataType.BYTE)) return;
+		if(bPDC.get(Main.plugin.getDrugMain(), PersistentDataType.BYTE) != (byte)1) return;
+		if(!bPDC.has(Main.plugin.getDrugKey(), PersistentDataType.STRING)) return;
+		if(!bPDC.has(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER)) return;
+		if(!bPDC.has(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING)) return;
+		
+		Ageable age = (Ageable)e.getClickedBlock().getBlockData();
+		if(age.getAge() < age.getMaximumAge()) return;
+		age.setAge(0);
+		e.getClickedBlock().setBlockData(age);
+		Drug d = new Drug().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING));
+		ItemStack i = d.getItem();
+		i.setAmount(bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));
+		e.getPlayer().getWorld().dropItemNaturally(e.getClickedBlock().getLocation(), i);
 	}
 	
 }
