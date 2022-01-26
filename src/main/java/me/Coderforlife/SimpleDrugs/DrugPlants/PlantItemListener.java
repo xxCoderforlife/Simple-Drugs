@@ -1,7 +1,7 @@
 package me.Coderforlife.SimpleDrugs.DrugPlants;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -13,6 +13,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Util.CustomBlockData;
 
 public class PlantItemListener implements Listener {
 
@@ -34,11 +35,20 @@ public class PlantItemListener implements Listener {
 		if(pdc.get(Main.plugin.getDrugMain(), PersistentDataType.BYTE) != (byte)1) return;
 		if(!pdc.has(Main.plugin.getDrugPlantedOn(), PersistentDataType.STRING)) return;
 		if(!pdc.has(Main.plugin.getDrugKey(), PersistentDataType.STRING)) return;
+		if(!pdc.has(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING)) return;
+		if(!pdc.has(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER)) return;
 		
-		
-		// Debug and print
 		Material m = Material.valueOf(pdc.get(Main.plugin.getDrugPlantedOn(), PersistentDataType.STRING));
-		Bukkit.getConsoleSender().sendMessage(m.toString());
+		if(!e.getClickedBlock().getType().equals(m)) return;
+		
+		is.setAmount(is.getAmount() - 1);
+		Block b = e.getClickedBlock().getLocation().add(0, 1, 0).getBlock();
+		b.setType(Material.WHEAT);
+		PersistentDataContainer bPDC = new CustomBlockData(b, Main.plugin);
+		bPDC.set(Main.plugin.getDrugMain(), PersistentDataType.BYTE, (byte)1);
+		bPDC.set(Main.plugin.getDrugKey(), PersistentDataType.STRING, pdc.get(Main.plugin.getDrugKey(), PersistentDataType.STRING));
+		bPDC.set(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER, pdc.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));
+		bPDC.set(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING, pdc.get(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING));
 	}
 	
 }
