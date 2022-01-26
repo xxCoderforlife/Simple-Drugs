@@ -23,7 +23,7 @@ import org.bukkit.inventory.ItemStack;
 public class BagOfDrugs implements Listener {
 
     public static String bagName = "§6§lBag Of Drugs";
-    public static String invName = "§6§l§oBag Of Drugs";
+    public String invName = "§6§l§oBag Of Drugs";
     Settings s = new Settings();
 
     @EventHandler

@@ -1,8 +1,8 @@
 package me.Coderforlife.SimpleDrugs.Events;
 
-import me.Coderforlife.SimpleDrugs.Druging.Drug;
-import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Settings;
+import java.util.HashMap;
+import java.util.UUID;
+
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,8 +13,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.UUID;
+import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Druging.Drug;
 
 
 public class DrugUseListener implements Listener {
@@ -53,7 +53,7 @@ public class DrugUseListener implements Listener {
         drug.influencePlayer(p);
         p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
         itemInHand.setAmount(itemInHand.getAmount() - 1);
-        cooldown.put(p.getUniqueId(), System.currentTimeMillis() + Settings.Cooldown * 1000);
+        cooldown.put(p.getUniqueId(), System.currentTimeMillis() + Main.plugin.getSettings().Cooldown * 1000);
     }
 
     @EventHandler

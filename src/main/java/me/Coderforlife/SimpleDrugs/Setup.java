@@ -18,7 +18,7 @@ public class Setup {
     public Setup(Main plugin) {
         this.plugin = plugin;
         new Metrics(plugin, 13155);
-        new Settings().setup();
+        Main.plugin.getSettings().setup();
         loadPlaceHolders();
         checkForUpdate();
         loadVault();
@@ -41,7 +41,7 @@ public class Setup {
     }
 
     private void checkForUpdate() {
-        if(Settings.CheckForUpdate) {
+        if(Main.plugin.getSettings().CheckForUpdate) {
             new Updater(plugin, 9684).checkForUpdate();
         } else {
             sendConsoleMessage(Main.prefix + "§c§oDisabled Update Checking");

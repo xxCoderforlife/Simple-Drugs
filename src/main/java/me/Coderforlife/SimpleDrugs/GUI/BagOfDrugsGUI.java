@@ -1,11 +1,7 @@
 package me.Coderforlife.SimpleDrugs.GUI;
 
-import me.Coderforlife.SimpleDrugs.Druging.Drug;
-import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Settings;
-import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -15,7 +11,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
+import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 
 public class BagOfDrugsGUI {
 
@@ -84,7 +84,7 @@ public class BagOfDrugsGUI {
         if(clickedItem == null || clickedItem.getType().isAir() || !clickedItem.hasItemMeta())
             return;
 
-        if(Settings.BagOfDrugs_CanMove) {
+        if(Main.plugin.getSettings().BagOfDrugs_CanMove) {
             if(clickedItem.getItemMeta().getDisplayName().equals(invName)) {
                 ev.setCancelled(true);
                 p.getItemOnCursor();

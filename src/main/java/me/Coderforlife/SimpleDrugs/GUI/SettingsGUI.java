@@ -30,10 +30,10 @@ public class SettingsGUI {
             items.add(blackglass());
         }
 
-        items.add(stack(Material.PAPER, Settings.CheckForUpdate, "§6§lCheck for Updates" + enabledordisabled(Settings.CheckForUpdate), Arrays.asList("§7Making sure the plugin is up to date", " ", clickto(Settings.CheckForUpdate))));
-        items.add(stack(Material.PAPER, Settings.UpdateMessage, "§6§lUpdate Message" + enabledordisabled(Settings.UpdateMessage), Arrays.asList("§7Whether to send a Message to Players", "§7with the Permission 'drugs.updater'", "§7once a new update is available", " ", clickto(Settings.UpdateMessage))));
-        items.add(stack(Material.PAPER, Settings.JoinMessage, "§6§lJoin Message" + enabledordisabled(Settings.JoinMessage), Arrays.asList("§7Sends the player a plugin message on Join", " ", clickto(Settings.JoinMessage))));
-        items.add(stack(Material.PAPER, (Settings.Cooldown >= 1), "§6§lDrug Cooldown" + enabledordisabled(Settings.Cooldown >= 1), Arrays.asList("§7Cooldown between Drug Use", "§c➯Right Click to Decrease", "§a➯LeftClick to Increase", " ", "§7Current Cooldown: §a" + Settings.Cooldown + " Seconds")));
+        items.add(stack(Material.PAPER, Main.plugin.getSettings().CheckForUpdate, "§6§lCheck for Updates" + enabledordisabled(Main.plugin.getSettings().CheckForUpdate), Arrays.asList("§7Making sure the plugin is up to date", " ", clickto(Main.plugin.getSettings().CheckForUpdate))));
+        items.add(stack(Material.PAPER, Main.plugin.getSettings().UpdateMessage, "§6§lUpdate Message" + enabledordisabled(Main.plugin.getSettings().UpdateMessage), Arrays.asList("§7Whether to send a Message to Players", "§7with the Permission 'drugs.updater'", "§7once a new update is available", " ", clickto(Main.plugin.getSettings().UpdateMessage))));
+        items.add(stack(Material.PAPER, Main.plugin.getSettings().JoinMessage, "§6§lJoin Message" + enabledordisabled(Main.plugin.getSettings().JoinMessage), Arrays.asList("§7Sends the player a plugin message on Join", " ", clickto(Main.plugin.getSettings().JoinMessage))));
+        items.add(stack(Material.PAPER, (Main.plugin.getSettings().Cooldown >= 1), "§6§lDrug Cooldown" + enabledordisabled(Main.plugin.getSettings().Cooldown >= 1), Arrays.asList("§7Cooldown between Drug Use", "§c➯Right Click to Decrease", "§a➯LeftClick to Increase", " ", "§7Current Cooldown: §a" + Main.plugin.getSettings().Cooldown + " Seconds")));
 
         for(int i = 0; i < 5; i++) {
             items.add(new ItemStack(Material.AIR));
@@ -43,11 +43,11 @@ public class SettingsGUI {
             items.add(stack(Material.BLACK_STAINED_GLASS_PANE, false, "§7⇧ General Settings", List.of("§7⇩ Bag Settings")));
         }
 
-        items.add(stack(Material.BOOK, Settings.BagOfDrugs_CanMove, "§6§lBag Movable" + enabledordisabled(Settings.BagOfDrugs_CanMove), Arrays.asList("§7If the player can move the bag in their Inventory", " ", clickto(Settings.BagOfDrugs_CanMove))));
-        items.add(stack(Material.BOOK, Settings.BagOfDrugs_CanDrop, "§6§lBag Droppable" + enabledordisabled(Settings.BagOfDrugs_CanDrop), Arrays.asList("§7If the player can drop the bag in their Inventory", " ", clickto(Settings.BagOfDrugs_CanDrop))));
-        items.add(stack(Material.BOOK, Settings.BagOfDrugs_GiveOnJoin, "§6§lGive Bag on Join" + enabledordisabled(Settings.BagOfDrugs_GiveOnJoin), Arrays.asList("§7Is the bag given on player join", " ", clickto(Settings.BagOfDrugs_GiveOnJoin))));
-        items.add(stack(Material.BOOK, Settings.BagOfDrugs_DropOnDeath, "§6§lBag Dropped on Death" + enabledordisabled(Settings.BagOfDrugs_DropOnDeath), Arrays.asList("§7If the Bag is dropped on death or not.", " ", clickto(Settings.BagOfDrugs_DropOnDeath))));
-        items.add(stack(Material.BOOK, Settings.BagOfDrugs_GiveOnRespawn, "§6§lKeep Bag on Respawn" + enabledordisabled(Settings.BagOfDrugs_GiveOnRespawn), Arrays.asList("§7If the player Keeps the Bag when they Respawn", " ", clickto(Settings.BagOfDrugs_GiveOnRespawn))));
+        items.add(stack(Material.BOOK, Main.plugin.getSettings().BagOfDrugs_CanMove, "§6§lBag Movable" + enabledordisabled(Main.plugin.getSettings().BagOfDrugs_CanMove), Arrays.asList("§7If the player can move the bag in their Inventory", " ", clickto(Main.plugin.getSettings().BagOfDrugs_CanMove))));
+        items.add(stack(Material.BOOK, Main.plugin.getSettings().BagOfDrugs_CanDrop, "§6§lBag Droppable" + enabledordisabled(Main.plugin.getSettings().BagOfDrugs_CanDrop), Arrays.asList("§7If the player can drop the bag in their Inventory", " ", clickto(Main.plugin.getSettings().BagOfDrugs_CanDrop))));
+        items.add(stack(Material.BOOK, Main.plugin.getSettings().BagOfDrugs_GiveOnJoin, "§6§lGive Bag on Join" + enabledordisabled(Main.plugin.getSettings().BagOfDrugs_GiveOnJoin), Arrays.asList("§7Is the bag given on player join", " ", clickto(Main.plugin.getSettings().BagOfDrugs_GiveOnJoin))));
+        items.add(stack(Material.BOOK, Main.plugin.getSettings().BagOfDrugs_DropOnDeath, "§6§lBag Dropped on Death" + enabledordisabled(Main.plugin.getSettings().BagOfDrugs_DropOnDeath), Arrays.asList("§7If the Bag is dropped on death or not.", " ", clickto(Main.plugin.getSettings().BagOfDrugs_DropOnDeath))));
+        items.add(stack(Material.BOOK, Main.plugin.getSettings().BagOfDrugs_GiveOnRespawn, "§6§lKeep Bag on Respawn" + enabledordisabled(Main.plugin.getSettings().BagOfDrugs_GiveOnRespawn), Arrays.asList("§7If the player Keeps the Bag when they Respawn", " ", clickto(Main.plugin.getSettings().BagOfDrugs_GiveOnRespawn))));
 
         for(int i = 0; i < 4; i++) {
             items.add(new ItemStack(Material.AIR));
@@ -79,15 +79,15 @@ public class SettingsGUI {
         switch(settingsname) {
             case "§6§lDrug Cooldown":
                 if(event.getClick().equals(ClickType.RIGHT)) {
-                    if(Settings.Cooldown < 1) {
+                    if(Main.plugin.getSettings().Cooldown < 1) {
                         p.sendMessage(Main.prefix + "§c§lDrug Cooldown is Disabled. Right Click to Increase");
                     } else {
-                        s.Cooldown(Settings.Cooldown - 1);
-                        p.sendMessage(Main.prefix + "§aDrug Cooldown set to §e" + Settings.Cooldown + " §aSeconds");
+                        s.Cooldown(Main.plugin.getSettings().Cooldown - 1);
+                        p.sendMessage(Main.prefix + "§aDrug Cooldown set to §e" + Main.plugin.getSettings().Cooldown + " §aSeconds");
                     }
                 } else {
-                    s.Cooldown(Settings.Cooldown + 1);
-                    p.sendMessage(Main.prefix + "§aDrug Cooldown set to §e" + Settings.Cooldown + " §aSeconds");
+                    s.Cooldown(Main.plugin.getSettings().Cooldown + 1);
+                    p.sendMessage(Main.prefix + "§aDrug Cooldown set to §e" + Main.plugin.getSettings().Cooldown + " §aSeconds");
                 }
             case "§6§lCheck for Updates":
                 s.CheckForUpdate(!isEnabled);

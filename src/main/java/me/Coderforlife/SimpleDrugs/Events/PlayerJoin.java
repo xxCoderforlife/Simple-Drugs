@@ -1,9 +1,8 @@
 package me.Coderforlife.SimpleDrugs.Events;
 
-import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
-import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Settings;
-import net.md_5.bungee.api.ChatColor;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -15,8 +14,9 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.List;
+import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
+import net.md_5.bungee.api.ChatColor;
 
 public class PlayerJoin implements Listener {
 
@@ -25,12 +25,12 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent ev) {
         Player p = ev.getPlayer();
-        if(Settings.BagOfDrugs_GiveOnJoin) {
+        if(Main.plugin.getSettings().BagOfDrugs_GiveOnJoin) {
             if(!p.getInventory().contains(bag)) {
                 p.getInventory().addItem(bag);
             }
         }
-        if(Settings.JoinMessage) {
+        if(Main.plugin.getSettings().JoinMessage) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
                 @Override
                 public void run() {

@@ -9,19 +9,18 @@ import java.io.IOException;
 
 public class Settings {
 
-    public static boolean CheckForUpdate;
-    public static boolean UpdateMessage;
-    public static boolean JoinMessage;
-    public static int Cooldown;
-    public static boolean BagOfDrugs_CanMove;
-    public static boolean BagOfDrugs_CanDrop;
-    public static boolean BagOfDrugs_GiveOnJoin;
-    public static boolean BagOfDrugs_DropOnDeath;
-    public static boolean BagOfDrugs_GiveOnRespawn;
+    public boolean CheckForUpdate;
+    public boolean UpdateMessage;
+    public boolean JoinMessage;
+    public int Cooldown;
+    public boolean BagOfDrugs_CanMove;
+    public boolean BagOfDrugs_CanDrop;
+    public boolean BagOfDrugs_GiveOnJoin;
+    public boolean BagOfDrugs_DropOnDeath;
+    public boolean BagOfDrugs_GiveOnRespawn;
 
-
-    private static File drugsConfigFile;
-    private static FileConfiguration drugsConfig;
+    private File drugsConfigFile;
+    private FileConfiguration drugsConfig;
 
     public void setup() {
         SetupConfig();

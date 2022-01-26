@@ -28,6 +28,7 @@ public class Main extends JavaPlugin {
     private NamespacedKey drugSeedKey;
     
     private DrugManager drugManager;
+    private Settings settings;
     
     @Override
     public void onEnable() {
@@ -40,13 +41,14 @@ public class Main extends JavaPlugin {
         drugSeedKey = new NamespacedKey(plugin, "SimpleDrugs-DrugSeed");
         
         drugManager = new DrugManager();
+        settings = new Settings();
         
         sendConsoleMessage(header1);
         sendConsoleMessage("§aLoading Plugin...");
 
         new Setup(this);
 
-        this.getServer().getPluginManager().registerEvents(new PlayerRespawn(this), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
         this.getServer().getPluginManager().registerEvents(new BagOfDrugs(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         this.getServer().getPluginManager().registerEvents(new DrugUseListener(), this);
@@ -71,6 +73,10 @@ public class Main extends JavaPlugin {
     
     public DrugManager getDrugManager() {
     	return drugManager;
+    }
+    
+    public Settings getSettings() {
+    	return settings;
     }
     
     public NamespacedKey getDrugMain() {
