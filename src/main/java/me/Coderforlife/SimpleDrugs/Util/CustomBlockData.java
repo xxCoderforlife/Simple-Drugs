@@ -83,7 +83,6 @@ public class CustomBlockData implements PersistentDataContainer {
     
     public void removeBlock(Block b) {
     	chunk.getPersistentDataContainer().remove(new NamespacedKey(p, getOldKey(b)));
-    	Bukkit.getConsoleSender().sendMessage("removed block");
     }
 
     /**

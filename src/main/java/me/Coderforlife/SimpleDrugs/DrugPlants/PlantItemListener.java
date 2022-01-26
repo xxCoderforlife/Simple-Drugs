@@ -62,33 +62,31 @@ public class PlantItemListener implements Listener {
 		if(!e.getClickedBlock().getLocation().add(0, 1, 0).getBlock().getType().equals(Material.WHEAT)) return;
 		
 		Block b = e.getClickedBlock().getLocation().add(0, 1, 0).getBlock();
-		PersistentDataContainer bPDC = new CustomBlockData(b, Main.plugin);
+		CustomBlockData cbd = new CustomBlockData(b, Main.plugin);
+		PersistentDataContainer bPDC = cbd;
 		if(!bPDC.has(Main.plugin.getDrugMain(), PersistentDataType.BYTE)) return;
 		if(bPDC.get(Main.plugin.getDrugMain(), PersistentDataType.BYTE) != (byte)1) return;
 		if(!bPDC.has(Main.plugin.getDrugKey(), PersistentDataType.STRING)) return;
 		if(!bPDC.has(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER)) return;
 		if(!bPDC.has(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING)) return;
 		
-		e.getPlayer().sendMessage("Test");
+		Ageable age = (Ageable)b.getBlockData();
+		Drug d = Main.plugin.getDrugManager().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING));
+		if(age.getAge() >= age.getMaximumAge()) {
+			ItemStack i = d.getItem();
+			i.setAmount(bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));
+			e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), i);
+		}
 		
-//		Block b = e.getClickedBlock().getLocation().add(0, 1, 0).getBlock();
-//		
-//		Ageable age = (Ageable)b.getBlockData();
-//		Drug d = Main.plugin.getDrugManager().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING));
-//		if(age.getAge() >= age.getMaximumAge()) {
-//			ItemStack i = d.getItem();
-//			i.setAmount(bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));
-//			e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), i);
-//		}
-//		
-//		ItemStack seed = new ItemStack(Material.valueOf(bPDC.get(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING)));
-//		Material m = e.getClickedBlock().getType();
-//		Integer amountHarvest = bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER);
-//		
-//		DrugPlantItem cpi = new DrugPlantItem(d, seed, m, amountHarvest);
-//		e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), cpi.makeItem());
-//		
-//		b.setType(Material.AIR);
+		ItemStack seed = new ItemStack(Material.valueOf(bPDC.get(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING)));
+		Material m = e.getClickedBlock().getType();
+		Integer amountHarvest = bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER);
+		
+		DrugPlantItem cpi = new DrugPlantItem(d, seed, m, amountHarvest);
+		e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), cpi.makeItem());
+		
+		b.setType(Material.AIR);
+		cbd.removeBlock(b);
 	}
 	
 	@EventHandler
