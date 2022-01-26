@@ -6,6 +6,7 @@ import org.bukkit.block.data.Ageable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -75,6 +76,33 @@ public class PlantItemListener implements Listener {
 		ItemStack i = d.getItem();
 		i.setAmount(bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));
 		e.getPlayer().getWorld().dropItemNaturally(e.getClickedBlock().getLocation(), i);
+	}
+	
+	@EventHandler
+	public void onBreak(BlockBreakEvent e) {
+		if(!e.getBlock().getType().equals(Material.WHEAT)) return;
+		PersistentDataContainer bPDC = new CustomBlockData(e.getBlock(), Main.plugin);
+		if(!bPDC.has(Main.plugin.getDrugMain(), PersistentDataType.BYTE)) return;
+		if(bPDC.get(Main.plugin.getDrugMain(), PersistentDataType.BYTE) != (byte)1) return;
+		if(!bPDC.has(Main.plugin.getDrugKey(), PersistentDataType.STRING)) return;
+		if(!bPDC.has(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER)) return;
+		if(!bPDC.has(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING)) return;
+		e.setDropItems(false);
+		
+		Ageable age = (Ageable)e.getBlock().getBlockData();
+		Drug d = new Drug().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING));
+		if(age.getAge() >= age.getMaximumAge()) {
+			ItemStack i = d.getItem();
+			i.setAmount(bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));
+			e.getPlayer().getWorld().dropItemNaturally(e.getBlock().getLocation(), i);
+		}
+		
+		ItemStack seed = new ItemStack(Material.valueOf(bPDC.get(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING)));
+		Material m = e.getBlock().getLocation().subtract(0, 1, 0).getBlock().getType();
+		Integer amountHarvest = bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER);
+		
+		DrugPlantItem cpi = new DrugPlantItem(d, seed, m, amountHarvest);
+		e.getPlayer().getWorld().dropItemNaturally(e.getBlock().getLocation(), cpi.makeItem());
 	}
 	
 }
