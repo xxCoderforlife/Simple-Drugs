@@ -54,8 +54,6 @@ public class Updater implements Listener {
 
                 } else {
                     isnew = true;
-                    Bukkit.getConsoleSender().sendMessage(Integer.toString(spigotVersionINT));
-                    Bukkit.getConsoleSender().sendMessage(Integer.toString(currVersionINT));
                     Bukkit.getConsoleSender().sendMessage(Main.prefix + "§c§oYou are running an " + "outdated version.");
                     Bukkit.getConsoleSender().sendMessage(Main.prefix + "§dDownload the newest " + "version here:");
                     Bukkit.getConsoleSender().sendMessage(Main.prefix + "§e§nhttps://www.spigotmc" + ".org/resources/simple-drugs-gui.9684/");
