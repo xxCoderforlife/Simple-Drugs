@@ -10,11 +10,12 @@ import me.Coderforlife.SimpleDrugs.Main;
 public class PlayerRespawn implements Listener {
 
     private PlayerJoin pj = new PlayerJoin();
+    private Main plugin = Main.plugin;
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent ev) {
         Player p = ev.getPlayer();
-        if(Main.plugin.getSettings().BagOfDrugs_GiveOnRespawn) {
+        if(plugin.getSettings().isBagOfDrugs_GiveOnRespawn()) {
             if(p.getInventory().contains(pj.bag))
                 return;
 

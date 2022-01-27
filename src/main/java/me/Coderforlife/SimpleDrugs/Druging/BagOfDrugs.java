@@ -1,6 +1,7 @@
 package me.Coderforlife.SimpleDrugs.Druging;
 
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
+import net.md_5.bungee.api.ChatColor;
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Settings;
 import org.bukkit.Effect;
@@ -22,9 +23,10 @@ import org.bukkit.inventory.ItemStack;
 
 public class BagOfDrugs implements Listener {
 
-    public static String bagName = "§6§lBag Of Drugs";
-    public String invName = "§6§l§oBag Of Drugs";
-    Settings s = new Settings();
+    private final String bagName = "§6§lBag Of Drugs";
+    private final String invName = "§6§l§oBag Of Drugs";
+    private Main plugin = Main.plugin;
+    Settings s = plugin.getSettings();
 
     @EventHandler
     public void BagOpen(PlayerInteractEvent ev) {
@@ -63,7 +65,7 @@ public class BagOfDrugs implements Listener {
 
     @EventHandler
     public void onDropItem(PlayerDropItemEvent ev) {
-        if(s.BagOfDrugs_CanDrop) {
+        if(s.isBagOfDrugs_CanDrop()) {
             if(ev.getItemDrop().getItemStack().getItemMeta().getDisplayName().equals(invName)) {
                 ev.setCancelled(true);
             }
@@ -90,10 +92,14 @@ public class BagOfDrugs implements Listener {
 
         if(inv.getResult().getType() == Material.BEACON) {
             if(mat[4].getItemMeta().getDisplayName().contentEquals(bagName)) {
-                p.sendMessage(Main.prefix + "§c§oCan " + "not use " + bagName + " §c§oto craft a " + "§b" + inv.getResult().getType());
+                p.sendMessage(plugin.getMessages().getPrefix() + "§c§oCan " + "not use " + bagName + " §c§oto craft a " + "§b" + inv.getResult().getType());
                 e.setCancelled(true);
             }
         }
+    }
+
+    public String getBagName(){
+        return bagName;
     }
 
 }

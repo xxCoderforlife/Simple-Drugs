@@ -19,7 +19,8 @@ import me.Coderforlife.SimpleDrugs.Druging.Drug;
 
 public class DrugUseListener implements Listener {
 
-    private static HashMap<UUID, Long> cooldown = new HashMap<>();
+    private Main plugin = Main.plugin;
+    private HashMap<UUID, Long> cooldownMap = new HashMap<>();
 
     @EventHandler
     public void RightClickEvent(PlayerInteractEvent ev) {
@@ -41,19 +42,19 @@ public class DrugUseListener implements Listener {
             return;
 
         if(!p.hasPermission(drug.getPermission())) {
-            p.sendMessage(Main.prefix + "§4You can't use " + drug.getName());
+            p.sendMessage(plugin.getMessages().getPrefix() + "§4You can't use " + drug.getName());
             return;
         }
 
-        if(cooldown.getOrDefault(p.getUniqueId(), System.currentTimeMillis()) > System.currentTimeMillis()) {
-            p.sendMessage(Main.prefix + "§4You can't use " + drug.getName() + " for another §c" + (cooldown.get(p.getUniqueId()) - System.currentTimeMillis()) / 1000 + "§4 seconds");
+        if(cooldownMap.getOrDefault(p.getUniqueId(), System.currentTimeMillis()) > System.currentTimeMillis()) {
+            p.sendMessage(plugin.getMessages().getPrefix() + "§4You can't use " + drug.getName() + " for another §c" + (cooldownMap.get(p.getUniqueId()) - System.currentTimeMillis()) / 1000 + "§4 seconds");
             return;
         }
 
         drug.influencePlayer(p);
         p.playSound(p.getLocation(), Sound.ITEM_HONEY_BOTTLE_DRINK, 10, 29);
         itemInHand.setAmount(itemInHand.getAmount() - 1);
-        cooldown.put(p.getUniqueId(), System.currentTimeMillis() + Main.plugin.getSettings().Cooldown * 1000);
+        cooldownMap.put(p.getUniqueId(), System.currentTimeMillis() + plugin.getSettings().getCooldown() * 1000);
     }
 
     @EventHandler
@@ -61,7 +62,7 @@ public class DrugUseListener implements Listener {
         Player p = ev.getPlayer();
 
         ItemStack stack = p.getInventory().getItemInMainHand() == null ? p.getInventory().getItemInOffHand() : p.getInventory().getItemInMainHand();
-        boolean isDrug = Main.plugin.getDrugManager().matchDrug(stack) != null;
+        boolean isDrug = plugin.getDrugManager().matchDrug(stack) != null;
         if(isDrug) {
             ev.setCancelled(true);
         }

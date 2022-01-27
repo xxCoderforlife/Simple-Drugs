@@ -13,12 +13,11 @@ import net.milkbowl.vault.economy.Economy;
 public class Setup {
 
     private Economy econ;
-    private Main plugin;
+    private Main plugin = Main.plugin;
 
-    public Setup(Main plugin) {
-        this.plugin = plugin;
-        new Metrics(plugin, 13155);
-        Main.plugin.getSettings().setup();
+    public Setup() {
+        new Metrics(13155);
+        plugin.getSettings().setup();
         loadPlaceHolders();
         checkForUpdate();
         loadVault();
@@ -32,19 +31,19 @@ public class Setup {
 
     private void loadPlaceHolders() {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            sendConsoleMessage(Main.prefix + "§aFound PlaceHolderAPI.");
+            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aFound PlaceHolderAPI.");
             new DrugPlaceHolders().register();
-            sendConsoleMessage(Main.prefix + "§aHooked into PlaceHolderAPI");
+            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aHooked into PlaceHolderAPI");
         } else {
-            sendConsoleMessage(Main.prefix + "§cPlaceHolderAPI.jar was not found. Disabling all PlaceHolderAPI elements!");
+            sendConsoleMessage(plugin.getMessages().getPrefix() + "§cPlaceHolderAPI.jar was not found. Disabling all PlaceHolderAPI elements!");
         }
     }
 
     private void checkForUpdate() {
-        if(Main.plugin.getSettings().CheckForUpdate) {
-            new Updater(plugin, 9684).checkForUpdate();
+        if(Main.plugin.getSettings().isCheckForUpdate()) {
+            new Updater(9684).checkForUpdate();
         } else {
-            sendConsoleMessage(Main.prefix + "§c§oDisabled Update Checking");
+            sendConsoleMessage(plugin.getMessages().getPrefix() + "§c§oDisabled Update Checking");
         }
     }
 
@@ -53,12 +52,12 @@ public class Setup {
             RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager().getRegistration(Economy.class);
             if(rsp != null)
                 econ = rsp.getProvider();
-            sendConsoleMessage(Main.prefix + "§aVault has been found.");
-            sendConsoleMessage(Main.prefix + "§aHooked into Vault.");
+            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aVault has been found.");
+            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aHooked into Vault.");
             return;
         }
-        sendConsoleMessage(Main.prefix + "§cVault.jar was not found or you don't have an Economy Plugin");
-        sendConsoleMessage(Main.prefix + "§cDisabling all Vault elements");
+        sendConsoleMessage(plugin.getMessages().getPrefix() + "§cVault.jar was not found or you don't have an Economy Plugin");
+        sendConsoleMessage(plugin.getMessages().getPrefix() + "§cDisabling all Vault elements");
     }
 
     private void sendConsoleMessage(String message) {

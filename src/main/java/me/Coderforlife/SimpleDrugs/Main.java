@@ -11,6 +11,7 @@ import me.Coderforlife.SimpleDrugs.Events.DrugUseListener;
 import me.Coderforlife.SimpleDrugs.Events.InventoryListener;
 import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
 import me.Coderforlife.SimpleDrugs.Events.PlayerRespawn;
+import me.Coderforlife.SimpleDrugs.Util.Messages;
 import net.md_5.bungee.api.ChatColor;
 
 public class Main extends JavaPlugin {
@@ -19,8 +20,6 @@ public class Main extends JavaPlugin {
 
     //Mess of Strings
     public String header1 = ChatColor.WHITE + "" + ChatColor.BOLD + "============" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "[Simple-Drugs]" + ChatColor.WHITE + "" + ChatColor.BOLD + "============";
-    public static String prefix = ChatColor.GRAY + "" + ChatColor.BOLD + "[" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "SD" + ChatColor.GRAY + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
-
     private NamespacedKey drugMain;
     private NamespacedKey drugPlantedOn;
     private NamespacedKey drugKey;
@@ -29,6 +28,7 @@ public class Main extends JavaPlugin {
     
     private DrugManager drugManager;
     private Settings settings;
+    private Messages messages;
     
     @Override
     public void onEnable() {
@@ -42,11 +42,12 @@ public class Main extends JavaPlugin {
         
         drugManager = new DrugManager();
         settings = new Settings();
+        messages = new Messages();
         
         sendConsoleMessage(header1);
         sendConsoleMessage("§aLoading Plugin...");
 
-        new Setup(this);
+        new Setup();
 
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
         this.getServer().getPluginManager().registerEvents(new BagOfDrugs(), this);
@@ -55,7 +56,7 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
         this.getServer().getPluginManager().registerEvents(new CraftingEvent(), this);
         this.getServer().getPluginManager().registerEvents(new PlantItemListener(), this);
-        this.getCommand("drugs").setExecutor(new Commands(this));
+        this.getCommand("drugs").setExecutor(new Commands());
         this.getCommand("drugs").setTabCompleter(new TabCommands());
 
         sendConsoleMessage("§aLoaded without Errors. Plugin is ready to Use :D");
@@ -99,4 +100,7 @@ public class Main extends JavaPlugin {
     	return drugSeedKey;
     }
     
+    public Messages getMessages(){
+        return messages;
+    }
 }

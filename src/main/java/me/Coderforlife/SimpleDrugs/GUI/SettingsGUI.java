@@ -20,7 +20,8 @@ import java.util.List;
 
 public class SettingsGUI {
 
-    Settings s = Main.plugin.getSettings();
+    private Main plugin = Main.plugin;
+    Settings s = plugin.getSettings();
 
     public Inventory create() {
         Inventory inventory = Bukkit.createInventory(null, (9 * 5), "§6§lDrugs Settings");
@@ -31,10 +32,10 @@ public class SettingsGUI {
             items.add(blackglass());
         }
 
-        items.add(stack(Material.PAPER, Main.plugin.getSettings().CheckForUpdate, "§6§lCheck for Updates" + enabledordisabled(Main.plugin.getSettings().CheckForUpdate), Arrays.asList("§7Making sure the plugin is up to date", " ", clickto(Main.plugin.getSettings().CheckForUpdate))));
-        items.add(stack(Material.PAPER, Main.plugin.getSettings().UpdateMessage, "§6§lUpdate Message" + enabledordisabled(Main.plugin.getSettings().UpdateMessage), Arrays.asList("§7Whether to send a Message to Players", "§7with the Permission 'drugs.updater'", "§7once a new update is available", " ", clickto(Main.plugin.getSettings().UpdateMessage))));
-        items.add(stack(Material.PAPER, Main.plugin.getSettings().JoinMessage, "§6§lJoin Message" + enabledordisabled(Main.plugin.getSettings().JoinMessage), Arrays.asList("§7Sends the player a plugin message on Join", " ", clickto(Main.plugin.getSettings().JoinMessage))));
-        items.add(stack(Material.PAPER, (Main.plugin.getSettings().Cooldown >= 1), "§6§lDrug Cooldown" + enabledordisabled(Main.plugin.getSettings().Cooldown >= 1), Arrays.asList("§7Cooldown between Drug Use", "§c➯Right Click to Decrease", "§a➯LeftClick to Increase", " ", "§7Current Cooldown: §a" + Main.plugin.getSettings().Cooldown + " Seconds")));
+        items.add(stack(Material.PAPER, Main.plugin.getSettings().isCheckForUpdate(), "§6§lCheck for Updates" + enabledordisabled(Main.plugin.getSettings().isCheckForUpdate()), Arrays.asList("§7Making sure the plugin is up to date", " ", clickto(Main.plugin.getSettings().isCheckForUpdate()))));
+        items.add(stack(Material.PAPER, Main.plugin.getSettings().isUpdateMessage(), "§6§lUpdate Message" + enabledordisabled(Main.plugin.getSettings().isUpdateMessage()), Arrays.asList("§7Whether to send a Message to Players", "§7with the Permission 'drugs.updater'", "§7once a new update is available", " ", clickto(Main.plugin.getSettings().isUpdateMessage()))));
+        items.add(stack(Material.PAPER, Main.plugin.getSettings().isJoinMessage(), "§6§lJoin Message" + enabledordisabled(Main.plugin.getSettings().isJoinMessage()), Arrays.asList("§7Sends the player a plugin message on Join", " ", clickto(Main.plugin.getSettings().isJoinMessage()))));
+        items.add(stack(Material.PAPER, (Main.plugin.getSettings().getCooldown() >= 1), "§6§lDrug Cooldown" + enabledordisabled(Main.plugin.getSettings().getCooldown() >= 1), Arrays.asList("§7Cooldown between Drug Use", "§c➯Right Click to Decrease", "§a➯LeftClick to Increase", " ", "§7Current Cooldown: §a" + Main.plugin.getSettings().getCooldown() + " Seconds")));
 
         for(int i = 0; i < 5; i++) {
             items.add(new ItemStack(Material.AIR));
@@ -44,11 +45,11 @@ public class SettingsGUI {
             items.add(stack(Material.BLACK_STAINED_GLASS_PANE, false, "§7⇧ General Settings", List.of("§7⇩ Bag Settings")));
         }
 
-        items.add(stack(Material.BOOK, Main.plugin.getSettings().BagOfDrugs_CanMove, "§6§lBag Movable" + enabledordisabled(Main.plugin.getSettings().BagOfDrugs_CanMove), Arrays.asList("§7If the player can move the bag in their Inventory", " ", clickto(Main.plugin.getSettings().BagOfDrugs_CanMove))));
-        items.add(stack(Material.BOOK, Main.plugin.getSettings().BagOfDrugs_CanDrop, "§6§lBag Droppable" + enabledordisabled(Main.plugin.getSettings().BagOfDrugs_CanDrop), Arrays.asList("§7If the player can drop the bag in their Inventory", " ", clickto(Main.plugin.getSettings().BagOfDrugs_CanDrop))));
-        items.add(stack(Material.BOOK, Main.plugin.getSettings().BagOfDrugs_GiveOnJoin, "§6§lGive Bag on Join" + enabledordisabled(Main.plugin.getSettings().BagOfDrugs_GiveOnJoin), Arrays.asList("§7Is the bag given on player join", " ", clickto(Main.plugin.getSettings().BagOfDrugs_GiveOnJoin))));
-        items.add(stack(Material.BOOK, Main.plugin.getSettings().BagOfDrugs_DropOnDeath, "§6§lBag Dropped on Death" + enabledordisabled(Main.plugin.getSettings().BagOfDrugs_DropOnDeath), Arrays.asList("§7If the Bag is dropped on death or not.", " ", clickto(Main.plugin.getSettings().BagOfDrugs_DropOnDeath))));
-        items.add(stack(Material.BOOK, Main.plugin.getSettings().BagOfDrugs_GiveOnRespawn, "§6§lKeep Bag on Respawn" + enabledordisabled(Main.plugin.getSettings().BagOfDrugs_GiveOnRespawn), Arrays.asList("§7If the player Keeps the Bag when they Respawn", " ", clickto(Main.plugin.getSettings().BagOfDrugs_GiveOnRespawn))));
+        items.add(stack(Material.BOOK, Main.plugin.getSettings().isBagOfDrugs_CanMove(), "§6§lBag Movable" + enabledordisabled(Main.plugin.getSettings().isBagOfDrugs_CanMove()), Arrays.asList("§7If the player can move the bag in their Inventory", " ", clickto(Main.plugin.getSettings().isBagOfDrugs_CanMove()))));
+        items.add(stack(Material.BOOK, Main.plugin.getSettings().isBagOfDrugs_CanDrop(), "§6§lBag Droppable" + enabledordisabled(Main.plugin.getSettings().isBagOfDrugs_CanDrop()), Arrays.asList("§7If the player can drop the bag in their Inventory", " ", clickto(Main.plugin.getSettings().isBagOfDrugs_CanDrop()))));
+        items.add(stack(Material.BOOK, Main.plugin.getSettings().isBagOfDrugs_GiveOnJoin(), "§6§lGive Bag on Join" + enabledordisabled(Main.plugin.getSettings().isBagOfDrugs_GiveOnJoin()), Arrays.asList("§7Is the bag given on player join", " ", clickto(Main.plugin.getSettings().isBagOfDrugs_GiveOnJoin()))));
+        items.add(stack(Material.BOOK, Main.plugin.getSettings().isBagOfDrugs_DropOnDeath(), "§6§lBag Dropped on Death" + enabledordisabled(Main.plugin.getSettings().isBagOfDrugs_DropOnDeath()), Arrays.asList("§7If the Bag is dropped on death or not.", " ", clickto(Main.plugin.getSettings().isBagOfDrugs_DropOnDeath()))));
+        items.add(stack(Material.BOOK, Main.plugin.getSettings().isBagOfDrugs_GiveOnRespawn(), "§6§lKeep Bag on Respawn" + enabledordisabled(Main.plugin.getSettings().isBagOfDrugs_GiveOnRespawn()), Arrays.asList("§7If the player Keeps the Bag when they Respawn", " ", clickto(Main.plugin.getSettings().isBagOfDrugs_GiveOnRespawn()))));
 
         for(int i = 0; i < 4; i++) {
             items.add(new ItemStack(Material.AIR));
@@ -80,79 +81,79 @@ public class SettingsGUI {
         switch(settingsname) {
             case "§6§lDrug Cooldown":
                 if(event.getClick().equals(ClickType.RIGHT)) {
-                    if(Main.plugin.getSettings().Cooldown < 1) {
-                        p.sendMessage(Main.prefix + "§c§lDrug Cooldown is Disabled. Right Click to Increase");
+                    if(Main.plugin.getSettings().getCooldown() < 1) {
+                        p.sendMessage(plugin.getMessages().getPrefix() + "§c§lDrug Cooldown is Disabled. Right Click to Increase");
                     } else {
-                        s.Cooldown(Main.plugin.getSettings().Cooldown - 1);
-                        p.sendMessage(Main.prefix + "§aDrug Cooldown set to §e" + Main.plugin.getSettings().Cooldown + " §aSeconds");
+                        s.setCooldown(plugin.getSettings().getCooldown() - 1);
+                        p.sendMessage(plugin.getMessages().getPrefix() + "§aDrug Cooldown set to §e" + Main.plugin.getSettings().getCooldown() + " §aSeconds");
                     }
                 } else {
-                    s.Cooldown(Main.plugin.getSettings().Cooldown + 1);
-                    p.sendMessage(Main.prefix + "§aDrug Cooldown set to §e" + Main.plugin.getSettings().Cooldown + " §aSeconds");
+                    s.setCooldown(Main.plugin.getSettings().getCooldown() + 1);
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§aDrug Cooldown set to §e" + Main.plugin.getSettings().getCooldown() + " §aSeconds");
                 }
                 break;
             case "§6§lCheck for Updates":
-                s.CheckForUpdate(!isEnabled);
+                s.setCheckForUpdate(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(Main.prefix + "§cDisabled §aChecking for Updates.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §aChecking for Updates.");
                 } else {
-                    p.sendMessage(Main.prefix + "§aEnabled Checking for Updates.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled Checking for Updates.");
                 }
                 break;
             case "§6§lUpdate Message":
-                s.UpdateMessage(!isEnabled);
+                s.setUpdateMessage(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(Main.prefix + "§cDisabled §asending Update Message");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §asending Update Message");
                 } else {
-                    p.sendMessage(Main.prefix + "§aEnabled sending Update Message.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled sending Update Message.");
                 }
                 break;
             case "§6§lJoin Message":
-                s.JoinMessage(!isEnabled);
+                s.setJoinMessage(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(Main.prefix + "§cDisabled §asending Join Message");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §asending Join Message");
                 } else {
-                    p.sendMessage(Main.prefix + "§aEnabled sending Join Message.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled sending Join Message.");
                 }
                 break;
             case "§6§lBag Movable":
-                s.BagOfDrugs_CanMove(!isEnabled);
+                s.setBagOfDrugs_CanMove(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(Main.prefix + "§cDisabled §aMovable Bag of Drugs.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §aMovable Bag of Drugs.");
                 } else {
-                    p.sendMessage(Main.prefix + "§aEnabled Movable Bag of Drugs.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled Movable Bag of Drugs.");
                 }
                 break;
             case "§6§lBag Droppable":
-                s.BagOfDrugs_CanDrop(!isEnabled);
+                s.setBagOfDrugs_CanDrop(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(Main.prefix + "§cDisabled §aDroppable Bag of Drugs.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §aDroppable Bag of Drugs.");
                 } else {
-                    p.sendMessage(Main.prefix + "§aEnabled Droppable Bag of Drugs.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled Droppable Bag of Drugs.");
                 }
                 break;
             case "§6§lGive Bag on Join":
-                s.BagOfDrugs_GiveOnJoin(!isEnabled);
+                s.setBagOfDrugs_GiveOnJoin(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(Main.prefix + "§cDisabled §agiving Bag of Drugs on Join.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §agiving Bag of Drugs on Join.");
                 } else {
-                    p.sendMessage(Main.prefix + "§aEnabled giving Bag of Drugs on Join.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled giving Bag of Drugs on Join.");
                 }
                 break;
             case "§6§lBag Dropped on Death":
-                s.BagOfDrugs_DropOnDeath(!isEnabled);
+                s.setBagOfDrugs_DropOnDeath(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(Main.prefix + "§cDisabled §aBag of Drugs Dropped on Death.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §aBag of Drugs Dropped on Death.");
                 } else {
-                    p.sendMessage(Main.prefix + "§aEnabled Bag of Drugs Dropped on Death.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled Bag of Drugs Dropped on Death.");
                 }
                 break;
             case "§6§lKeep Bag on Respawn":
-                s.BagOfDrugs_GiveOnRespawn(!isEnabled);
+                s.setBagOfDrugs_GiveOnRespawn(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(Main.prefix + "§cDisabled §agiving Bag of Drugs on Respawn.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §agiving Bag of Drugs on Respawn.");
                 } else {
-                    p.sendMessage(Main.prefix + "§aEnabled giving Bag of Drugs on Respawn.");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled giving Bag of Drugs on Respawn.");
                 }
                 break;
             default:

@@ -19,6 +19,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 
 public class BagOfDrugsGUI {
 
+    private Main plugin = Main.plugin;
     private final int maxdrugs = 45;
     public String bagName = "§6§lBag Of Drugs";
     public String invName = "§6§l§oBag Of Drugs";
@@ -84,7 +85,7 @@ public class BagOfDrugsGUI {
         if(clickedItem == null || clickedItem.getType().isAir() || !clickedItem.hasItemMeta())
             return;
 
-        if(Main.plugin.getSettings().BagOfDrugs_CanMove) {
+        if(Main.plugin.getSettings().isBagOfDrugs_CanMove()) {
             if(clickedItem.getItemMeta().getDisplayName().equals(invName)) {
                 ev.setCancelled(true);
                 p.getItemOnCursor();
@@ -115,7 +116,7 @@ public class BagOfDrugsGUI {
                 continue;
             }
             p.getInventory().addItem(drug.getItem());
-            p.sendMessage(Main.prefix + ChatColor.GRAY + "You've been given " + drug.getDisplayname());
+            p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.GRAY + "You've been given " + drug.getDisplayname());
             p.playSound(p.getLocation(), Sound.ITEM_FLINTANDSTEEL_USE, 1, (float) 0.5);
             p.closeInventory();
             p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(sober));
