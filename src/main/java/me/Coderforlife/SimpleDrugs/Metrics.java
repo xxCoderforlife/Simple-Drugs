@@ -25,7 +25,7 @@ import java.util.zip.GZIPOutputStream;
 
 public class Metrics {
 
-	private final Plugin plugin;
+	private Main plugin = Main.plugin;
 	private final MetricsBase metricsBase;
 
 	/**
@@ -36,8 +36,7 @@ public class Metrics {
 	 *                  <a href="https://bstats.org/what-is-my-plugin-id">What is my
 	 *                  plugin id?</a>
 	 */
-	public Metrics(JavaPlugin plugin, int serviceId) {
-		this.plugin = plugin;
+	public Metrics(int serviceId) {
 		// Get the config file
 		File bStatsFolder = new File(plugin.getDataFolder().getParentFile(), "bStats");
 		File configFile = new File(bStatsFolder, "config.yml");

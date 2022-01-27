@@ -21,20 +21,21 @@ import net.md_5.bungee.api.ChatColor;
 public class PlayerJoin implements Listener {
 
     public ItemStack bag = HELLO();
+    private Main plugin = Main.plugin;
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent ev) {
         Player p = ev.getPlayer();
-        if(Main.plugin.getSettings().BagOfDrugs_GiveOnJoin) {
+        if(plugin.getSettings().isBagOfDrugs_GiveOnJoin()) {
             if(!p.getInventory().contains(bag)) {
                 p.getInventory().addItem(bag);
             }
         }
-        if(Main.plugin.getSettings().JoinMessage) {
+        if(plugin.getSettings().isJoinMessage()) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
                 @Override
                 public void run() {
-                    p.sendMessage(Main.prefix + "§f§lServer is running §5§l§oSIMPLE DRUGS");
+                    p.sendMessage(plugin.getMessages().getPrefix() + "§f§lServer is running §5§l§oSIMPLE DRUGS");
                 }
             }, 40L);
         }
@@ -44,7 +45,7 @@ public class PlayerJoin implements Listener {
         ItemStack stack = new ItemStack(Material.NETHER_STAR);
         ItemMeta meta = stack.getItemMeta();
         BagOfDrugs bd = new BagOfDrugs();
-        meta.setDisplayName(bd.bagName);
+        meta.setDisplayName(bd.getBagName());
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.DARK_GRAY + "---------------------");
         lore.add(ChatColor.RED + "A Bag Full Of Drugs :)");

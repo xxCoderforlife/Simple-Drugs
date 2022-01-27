@@ -25,10 +25,14 @@ import java.util.Locale;
 import java.util.Map;
 
 public class DrugManager {
-    final File folder = new File("plugins/Simple-Drugs/");
+    Main plugin = Main.plugin;
+    final File folder = new File(plugin.getDataFolder() + File.separator + "Drugs");
     private Map<String, Drug> drugs = new HashMap<>();
 
     public void loadFiles() throws IOException, URISyntaxException {
+        if(!(folder.exists())){
+            folder.mkdir();
+        }
         if(folder.listFiles().length < 2) {
             createDrugs();
             return;

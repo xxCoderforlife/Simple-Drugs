@@ -11,6 +11,7 @@ import org.bukkit.event.inventory.InventoryType;
 
 public class CraftingEvent implements Listener {
     
+    private Main plugin = Main.plugin;
     @EventHandler
     public void OnCraftEvent(CraftItemEvent e) {
         Player p = (Player) e.getWhoClicked();
@@ -20,8 +21,8 @@ public class CraftingEvent implements Listener {
                     if(!p.hasPermission("drugs.craft" + drugs.getName().toLowerCase())) {
                         e.setCancelled(true);
                     } else {
-                        p.sendMessage(Main.prefix + ChatColor.RED + "You don't have permission to use that command.");
-                        p.sendMessage(Main.prefix + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.craft." + drugs.getName());
+                        p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED + "You don't have permission to use that command.");
+                        p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.craft." + drugs.getName());
                     }
                 }
             }
