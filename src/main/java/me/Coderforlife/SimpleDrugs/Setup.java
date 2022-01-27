@@ -1,8 +1,5 @@
 package me.Coderforlife.SimpleDrugs;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
@@ -22,11 +19,7 @@ public class Setup {
         checkForUpdate();
         loadVault();
 
-        try {
-        	Main.plugin.getDrugManager().loadFiles();
-        } catch(URISyntaxException | IOException e) {
-            e.printStackTrace();
-        }
+        Main.plugin.getDrugManager().loadFiles();
     }
 
     private void loadPlaceHolders() {

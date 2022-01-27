@@ -1,9 +1,5 @@
 package me.Coderforlife.SimpleDrugs.Druging;
 
-import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
-import net.md_5.bungee.api.ChatColor;
-import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Settings;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,6 +16,10 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
+
+import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Settings;
+import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 
 public class BagOfDrugs implements Listener {
 
