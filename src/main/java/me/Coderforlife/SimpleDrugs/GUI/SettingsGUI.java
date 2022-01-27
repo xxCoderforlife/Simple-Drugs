@@ -19,7 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SettingsGUI {
-    Settings s = new Settings();
+
+    Settings s = Main.plugin.getSettings();
 
     public Inventory create() {
         Inventory inventory = Bukkit.createInventory(null, (9 * 5), "§6§lDrugs Settings");
@@ -89,6 +90,7 @@ public class SettingsGUI {
                     s.Cooldown(Main.plugin.getSettings().Cooldown + 1);
                     p.sendMessage(Main.prefix + "§aDrug Cooldown set to §e" + Main.plugin.getSettings().Cooldown + " §aSeconds");
                 }
+                break;
             case "§6§lCheck for Updates":
                 s.CheckForUpdate(!isEnabled);
                 if(isEnabled) {
@@ -96,6 +98,7 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Checking for Updates.");
                 }
+                break;
             case "§6§lUpdate Message":
                 s.UpdateMessage(!isEnabled);
                 if(isEnabled) {
@@ -103,6 +106,7 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled sending Update Message.");
                 }
+                break;
             case "§6§lJoin Message":
                 s.JoinMessage(!isEnabled);
                 if(isEnabled) {
@@ -110,6 +114,7 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled sending Join Message.");
                 }
+                break;
             case "§6§lBag Movable":
                 s.BagOfDrugs_CanMove(!isEnabled);
                 if(isEnabled) {
@@ -117,6 +122,7 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Movable Bag of Drugs.");
                 }
+                break;
             case "§6§lBag Droppable":
                 s.BagOfDrugs_CanDrop(!isEnabled);
                 if(isEnabled) {
@@ -124,6 +130,7 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Droppable Bag of Drugs.");
                 }
+                break;
             case "§6§lGive Bag on Join":
                 s.BagOfDrugs_GiveOnJoin(!isEnabled);
                 if(isEnabled) {
@@ -131,6 +138,7 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled giving Bag of Drugs on Join.");
                 }
+                break;
             case "§6§lBag Dropped on Death":
                 s.BagOfDrugs_DropOnDeath(!isEnabled);
                 if(isEnabled) {
@@ -138,6 +146,7 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled Bag of Drugs Dropped on Death.");
                 }
+                break;
             case "§6§lKeep Bag on Respawn":
                 s.BagOfDrugs_GiveOnRespawn(!isEnabled);
                 if(isEnabled) {
@@ -145,10 +154,12 @@ public class SettingsGUI {
                 } else {
                     p.sendMessage(Main.prefix + "§aEnabled giving Bag of Drugs on Respawn.");
                 }
+                break;
             default:
                 event.setCancelled(true);
                 return;
         }
+        p.openInventory(create());
     }
 
     private ItemStack stack(Material mat, boolean ench, String name, List<String> lore) {
