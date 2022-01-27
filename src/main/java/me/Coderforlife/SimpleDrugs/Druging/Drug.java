@@ -22,6 +22,14 @@ public class Drug {
     private Recipe seedRecipe = null;
     private Integer harvestAmount = 1;
 
+    public Drug(String name, String displayname, ItemStack item, ArrayList<DrugEffect> effects, String permission) {
+    	this.name = name;
+    	this.displayname = displayname;
+    	this.effects = effects;
+    	this.permission = permission;
+    	this.item = item;
+    }
+    
     public Drug(String name, String displayname, Recipe recipe, ArrayList<DrugEffect> effects, ItemStack item, String permission, boolean crafting) {
         this.name = name;
         this.displayname = displayname;

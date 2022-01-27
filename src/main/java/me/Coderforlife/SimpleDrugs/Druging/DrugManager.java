@@ -1,12 +1,17 @@
 package me.Coderforlife.SimpleDrugs.Druging;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.DrugPlants.DrugPlantItem;
-import net.md_5.bungee.api.ChatColor;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.StringJoiner;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -17,48 +22,152 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 
-import java.io.*;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
+
+import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.DrugPlants.DrugPlantItem;
+import me.Coderforlife.SimpleDrugs.Util.JsonFileInterpretter;
+import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
+import net.md_5.bungee.api.ChatColor;
 
 public class DrugManager {
     Main plugin = Main.plugin;
-    final File folder = new File(plugin.getDataFolder() + File.separator + "Drugs");
+    private final File folder = new File(plugin.getDataFolder() + File.separator + "Drugs");
     private Map<String, Drug> drugs = new HashMap<>();
 
-    public void loadFiles() throws IOException, URISyntaxException {
-        if(!(folder.exists())){
-            folder.mkdir();
-        }
-        if(folder.listFiles().length < 2) {
-            createDrugs();
-            return;
-        }
-        for(File file : folder.listFiles()) {
-            if(file.getName().endsWith(".json")) {
-                JsonObject obj = new Gson().fromJson(new FileReader(file), JsonObject.class);
-                if(obj.get("displayname").getAsString() != null) {
-                    DrugfromJson(obj, file.getName().replace(".json", ""));
-                }
-            }
-        }
-        StringBuilder enabled = new StringBuilder();
-        StringBuilder disabled = new StringBuilder();
-        for(Drug drug : getallDrugs()) {
-            if(drug.isCraftable()) {
-                enabled.append(drug.getName()).append(", ");
-            } else {
-                disabled.append(drug.getName()).append(", ");
-            }
-        }
-        if(enabled.length() > 0)
-            sendConsoleMessage("§6Enabled Drugs: §a" + enabled);
-
-        if(disabled.length() > 0)
-            sendConsoleMessage("§6Disabled Drugs: §c" + disabled);
+    public void loadFiles() {
+    	if(!folder.exists()) folder.mkdir();
+    	// TODO: Create default drugs
+    	for(File f : folder.listFiles()) {
+    		if(f.getName().endsWith(".json")) {
+    			try {
+					JsonObject obj = new Gson().fromJson(new FileReader(f), JsonObject.class);
+					DrugLoadError dle = canDrugLoad(obj);
+					if(!dle.canLoad()) {
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
+						dle.printAllErrors();
+						continue;
+					}
+					drugFromJson(obj, f.getName());
+				} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
+					e.printStackTrace();
+				}
+    		}
+    	}
+    	
+    	StringJoiner enabled = new StringJoiner(", ");
+    	for(Drug d : getallDrugs()) {
+    		enabled.add(d.getName());
+    	}
+    	Bukkit.getConsoleSender().sendMessage("§6Enabled Drugs: §a" + enabled.toString().trim());
+    	
+//    	 StringBuilder enabled = new StringBuilder();
+//         StringBuilder disabled = new StringBuilder();
+//         for(Drug drug : getallDrugs()) {
+//             if(drug.isCraftable()) {
+//                 enabled.append(drug.getName()).append(", ");
+//             } else {
+//                 disabled.append(drug.getName()).append(", ");
+//             }
+//         }
+//         if(enabled.length() > 0)
+//             sendConsoleMessage("§6Enabled Drugs: §a" + enabled);
+//
+//         if(disabled.length() > 0)
+//             sendConsoleMessage("§6Disabled Drugs: §c" + disabled);
+    }
+    
+    private DrugLoadError canDrugLoad(JsonObject jo) {
+    	DrugLoadError dle = new DrugLoadError();
+    	JsonFileInterpretter config = new JsonFileInterpretter(jo);
+    	
+    	if(!config.contains("name")) {
+    		dle.addError("§c[ERROR] JSON File missing 'name'");
+    		dle.unLoad();
+    	}
+    	
+    	if(!config.contains("item")) {
+    		dle.addError("§c[ERROR] JSON File missing 'name'");
+    		dle.unLoad();
+    	}
+    	
+    	return dle;
+    }
+    
+    private void drugFromJson(JsonObject jo, String fileName) {
+    	JsonFileInterpretter config = new JsonFileInterpretter(jo);
+    	
+    	String name = config.getString("name");
+    	String displayName = config.contains("displayname") ? config.getString("displayname").replace("&", "§") : name.replaceAll("_", " ");
+    	Material mat = config.getMaterial("item");
+    	String permission = config.contains("permission") ? config.getString("permission") : "drugs.use." + name.toLowerCase();
+    	ArrayList<DrugEffect> effects = (config.contains("effects") && config.isJsonArray("effects")) ? loadEffectsFromJson(config.getJsonArray("effects"), fileName) : new ArrayList<DrugEffect>();
+    	
+    	ItemStack is = createItem(displayName, mat, effects);
+    	
+    	if(config.getAllError().size() > 0) {
+    		Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+    		config.getAllError().forEach(e -> {
+    			Bukkit.getConsoleSender().sendMessage(e);
+    		});
+			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Drug");
+    		return;
+    	}
+    	
+    	addDrug(new Drug(name, displayName, is, effects, permission), name);
+    }
+    
+    private ItemStack createItem(String s, Material item, ArrayList<DrugEffect> effects) {
+    	ItemStack is = new ItemStack(item);
+    	ItemMeta im = is.getItemMeta();
+    	im.setDisplayName(s);
+    	im.addItemFlags(ItemFlag.HIDE_ENCHANTS , ItemFlag.HIDE_ATTRIBUTES);
+    	List<String> lore = new ArrayList<String>();
+    	if(effects.size() > 0) {
+    		lore.add("§a§lEffects:");
+    		for(DrugEffect de : effects) {
+    			lore.add("§7- §6" + de.getEffect().getName().toUpperCase(Locale.ROOT));
+    		}
+    	}
+    	lore.add("§7Click To Use");
+    	im.setLore(lore);
+    	is.setItemMeta(im);
+    	is.addUnsafeEnchantment(Enchantment.ARROW_FIRE, 1);
+    	return is;
+    }
+    
+    private ArrayList<DrugEffect> loadEffectsFromJson(JsonArray ja, String fileName) {
+    	ArrayList<DrugEffect> de = new ArrayList<DrugEffect>();
+    	
+    	ja.forEach(e -> {
+    		if(!e.isJsonObject()) return;
+    		JsonObject iJO = e.getAsJsonObject();
+    		if(!iJO.has("type")) return;
+    		
+    		JsonFileInterpretter config = new JsonFileInterpretter(iJO);
+    		
+    		PotionEffectType type = config.getPotionEffect("type");
+			Integer time = config.contains("time") ? config.getInteger("time") : 90;
+			Integer intensity = config.contains("intensity") ? config.getInteger("intensity") : 1;
+			
+			if(config.getAllError().size() > 0) {
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+				config.getAllError().forEach(e2 -> {
+	    			Bukkit.getConsoleSender().sendMessage(e2);
+	    		});
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Effect");
+				return;
+			}
+			
+			de.add(new DrugEffect(type, time, intensity));
+    	});
+    	
+    	return de;
     }
 
     /* Grabbing and Setting Drug Data */
@@ -180,67 +289,6 @@ public class DrugManager {
         addDrug(d, name);
     }
 
-    private void DrugtoJson(Drug drug) {
-        File file = new File(folder, drug.getName() + ".json");
-        if(file.exists()) {
-            file.delete();
-        }
-        JsonObject obj = new JsonObject();
-        obj.addProperty("displayname", drug.getDisplayname().replace("§", "&"));
-        obj.addProperty("permission", drug.getPermission());
-        obj.addProperty("crafting", drug.isCraftable());
-        obj.addProperty("item", drug.getItem().getType().name());
-        JsonArray effects = new JsonArray();
-        for(DrugEffect effect : drug.getEffects()) {
-            JsonObject effectObject = new JsonObject();
-            effectObject.addProperty("type", effect.getEffect().getName());
-            effectObject.addProperty("time", (effect.getTime() / 20));
-            effectObject.addProperty("intensity", effect.getIntensity());
-            effects.add(effectObject);
-        }
-        obj.add("effects", effects);
-        JsonArray recipe = new JsonArray();
-        ShapedRecipe r = (ShapedRecipe) drug.getRecipe();
-        recipe.add(r.getIngredientMap().get('A').getType().toString());
-        recipe.add(r.getIngredientMap().get('B').getType().toString());
-        recipe.add(r.getIngredientMap().get('C').getType().toString());
-        recipe.add(r.getIngredientMap().get('D').getType().toString());
-        recipe.add(r.getIngredientMap().get('E').getType().toString());
-        recipe.add(r.getIngredientMap().get('F').getType().toString());
-        recipe.add(r.getIngredientMap().get('G').getType().toString());
-        recipe.add(r.getIngredientMap().get('H').getType().toString());
-        recipe.add(r.getIngredientMap().get('I').getType().toString());
-        obj.add("recipe", recipe);
-
-        obj.addProperty("has_seed", drug.hasSeed());
-        obj.addProperty("seed_harvest_amount", drug.getHarvestAmount());
-        obj.addProperty("seed_item", drug.getSeedItem().toString());
-        
-        ShapedRecipe sr = (ShapedRecipe)drug.getSeedRecipe();
-        if(sr != null) {
-	        JsonArray sRec = new JsonArray();
-	        sRec.add(sr.getIngredientMap().get('A').getType().toString());
-	        sRec.add(sr.getIngredientMap().get('B').getType().toString());
-	        sRec.add(sr.getIngredientMap().get('C').getType().toString());
-	        sRec.add(sr.getIngredientMap().get('D').getType().toString());
-	        sRec.add(sr.getIngredientMap().get('E').getType().toString());
-	        sRec.add(sr.getIngredientMap().get('F').getType().toString());
-	        sRec.add(sr.getIngredientMap().get('G').getType().toString());
-	        sRec.add(sr.getIngredientMap().get('H').getType().toString());
-	        sRec.add(sr.getIngredientMap().get('I').getType().toString());
-	        obj.add("seed_recipe", sRec);
-        }
-        
-        try {
-            file.createNewFile();
-            FileWriter writer = new FileWriter(file);
-            writer.write(obj.toString());
-            writer.close();
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void createDrugs() {
         sendConsoleMessage(ChatColor.BLUE + "[INFO] No Drugs where Found in your Folder. Creating Default Drugs!");
         Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/drugs.json"));
@@ -249,13 +297,6 @@ public class DrugManager {
             DrugfromJson(drug.getAsJsonObject(), drug.getAsJsonObject().get("name").getAsString());
         }
         sendConsoleMessage("§aDefault Drugs Created! Enjoy Simple-Drugs :D");
-        saveallDrugs();
-    }
-
-    public void saveallDrugs() {
-        for(Drug drug : getallDrugs()) {
-            DrugtoJson(drug);
-        }
     }
 
     private PotionEffectType getEffectfromJson(JsonObject element) {

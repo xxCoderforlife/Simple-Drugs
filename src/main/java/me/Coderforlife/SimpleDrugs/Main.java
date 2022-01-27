@@ -65,7 +65,6 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         getSettings().save();
-        getDrugManager().saveallDrugs();
     }
 
     private void sendConsoleMessage(String message) {
