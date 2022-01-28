@@ -18,10 +18,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 
@@ -35,6 +32,8 @@ import com.google.gson.JsonSyntaxException;
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent;
 import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.DrugPlants.DrugPlantItem;
 import me.Coderforlife.SimpleDrugs.Util.JsonFileInterpretter;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
@@ -120,12 +119,14 @@ public class DrugManager {
 						continue;
 					}
 					
-					Recipe r = loadCraftingRecipe(f.getName(), d, ja, dct);
-					
-					if(r == null) continue;
+					if(!loadCraftingRecipe(f.getName(), d, ja, dct)) {
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in Recipe");
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+						continue;
+					}
 					
 					d.setCraftable(true);
-					d.setRecipe(r);
 					
 				} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
 					e.printStackTrace();
@@ -155,54 +156,47 @@ public class DrugManager {
     	return dle;
     }
     
-    private Recipe loadCraftingRecipe(String fileName, Drug d, JsonArray ja, DrugCraftingType dct) {
+    private boolean loadCraftingRecipe(String fileName, Drug d, JsonArray ja, DrugCraftingType dct) {
     	switch(dct) {
 		case FURNACE:
-			return null;
+			return false;
 		case SHAPED:
-			ShapedRecipe shaped = new ShapedRecipe(new NamespacedKey(Main.plugin, "drugs_" + d.getName()), d.getItem());
-			shaped.shape("ABC", "DEF", "GHI");
-			List<RecipeChoice> mats = loadMaterialsForCrafting(fileName, ja);
+			SDShaped shaped = new SDShaped(d.getName(), d.getItem());
+			List<ItemStack> mats = loadMaterialsForCrafting(fileName, ja);
 			
 			if(mats == null) {
-				return null;
+				return false;
 			}
 			
-			shaped.setIngredient('A', mats.get(0));
-			shaped.setIngredient('B', mats.get(1));
-			shaped.setIngredient('C', mats.get(2));
-			shaped.setIngredient('D', mats.get(3));
-			shaped.setIngredient('E', mats.get(4));
-			shaped.setIngredient('F', mats.get(5));
-			shaped.setIngredient('G', mats.get(6));
-			shaped.setIngredient('H', mats.get(7));
-			shaped.setIngredient('I', mats.get(8));
+			for(int i = 0; i < mats.size(); i++) {
+				shaped.addItemStack(mats.get(i));
+			}
+
+			shaped.registerRecipe();
 			
-			Bukkit.getServer().addRecipe(shaped);
-			
-			return shaped;
+			return true;
 		case SHAPELESS:
-			ShapelessRecipe shapeless = new ShapelessRecipe(new NamespacedKey(Main.plugin, "drugs_" + d.getName()), d.getItem());
-			List<RecipeChoice> materials = loadMaterialsForCrafting(fileName, ja);
+			SDShapeless shapeless = new SDShapeless(d.getName(), d.getItem());
+			List<ItemStack> materials = loadMaterialsForCrafting(fileName, ja);
 			
 			if(materials == null) {
-				return null;
+				return false;
 			}
 			
 			materials.forEach(e -> {
-				shapeless.addIngredient(e);
+				shapeless.addItemStack(e);
 			});
 			
-			Bukkit.getServer().addRecipe(shapeless);
+			shapeless.registerRecipe();
 			
-			return shapeless;
+			return true;
 		default:
-			return null;
+			return false;
     	}
     }
     
-    private List<RecipeChoice> loadMaterialsForCrafting(String fileName, JsonArray ja) {
-		List<RecipeChoice> materials = new ArrayList<>();
+    private List<ItemStack> loadMaterialsForCrafting(String fileName, JsonArray ja) {
+		List<ItemStack> materials = new ArrayList<>();
 	    
 		for(int i = 0; i < ja.size(); i++) {
     		Material m = Material.getMaterial(ja.get(i).getAsString().toUpperCase());
@@ -215,9 +209,9 @@ public class DrugManager {
     				return null;
     			}
     			
-    			materials.add(new RecipeChoice.ExactChoice(cc.getStack()));
+    			materials.add(cc.getStack());
     		} else {
-    			materials.add(new RecipeChoice.ExactChoice(new ItemStack(m)));
+    			materials.add(new ItemStack(m));
     		}
     	}
 		

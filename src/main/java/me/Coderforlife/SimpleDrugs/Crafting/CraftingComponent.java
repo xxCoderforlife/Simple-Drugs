@@ -5,15 +5,13 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.RecipeChoice;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.ShapelessRecipe;
 
 import com.google.gson.JsonArray;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 
 public class CraftingComponent {
 
@@ -56,45 +54,38 @@ public class CraftingComponent {
 		case FURNACE:
 			break;
 		case SHAPED:
-			ShapedRecipe shaped = new ShapedRecipe(new NamespacedKey(Main.plugin, "drugs_" + name), result);
-			shaped.shape("ABC", "DEF", "GHI");
-			List<RecipeChoice> mats = loadMaterialsForCrafting(fileName, materials);
+			SDShaped shaped = new SDShaped(name, result);
+			List<ItemStack> mats = loadMaterialsForCrafting(fileName, materials);
 			
 			if(mats == null) {
 				return;
 			}
 			
-			shaped.setIngredient('A', mats.get(0));
-			shaped.setIngredient('B', mats.get(1));
-			shaped.setIngredient('C', mats.get(2));
-			shaped.setIngredient('D', mats.get(3));
-			shaped.setIngredient('E', mats.get(4));
-			shaped.setIngredient('F', mats.get(5));
-			shaped.setIngredient('G', mats.get(6));
-			shaped.setIngredient('H', mats.get(7));
-			shaped.setIngredient('I', mats.get(8));
+			for(int i = 0; i < mats.size(); i++) {
+				shaped.addItemStack(mats.get(i));
+			}
 			
-			Bukkit.getServer().addRecipe(shaped);
+			shaped.registerRecipe();
 			break;
 		case SHAPELESS:
-			ShapelessRecipe shapeless = new ShapelessRecipe(new NamespacedKey(Main.plugin, "drugs_" + name), result);
-			List<RecipeChoice> recipeChoices = loadMaterialsForCrafting(fileName, materials);
+			SDShapeless shapeless = new SDShapeless(name, result);
+			List<ItemStack> recipeChoices = loadMaterialsForCrafting(fileName, materials);
 			
 			if(recipeChoices == null) {
 				return;
 			}
 			
 			recipeChoices.forEach(e -> {
-				shapeless.addIngredient(e);
+				shapeless.addItemStack(e);
 			});
 			
-			Bukkit.getServer().addRecipe(shapeless);
+			shapeless.registerRecipe();
 			break;
 		}
 	}
 	
-	private List<RecipeChoice> loadMaterialsForCrafting(String fileName, JsonArray ja) {
-		List<RecipeChoice> materials = new ArrayList<>();
+	private List<ItemStack> loadMaterialsForCrafting(String fileName, JsonArray ja) {
+		List<ItemStack> materials = new ArrayList<>();
 	    
 		for(int i = 0; i < ja.size(); i++) {
     		Material m = Material.getMaterial(ja.get(i).getAsString().toUpperCase());
@@ -107,9 +98,9 @@ public class CraftingComponent {
     				return null;
     			}
     			
-    			materials.add(new RecipeChoice.ExactChoice(cc.getStack()));
+    			materials.add(cc.getStack());
     		} else {
-    			materials.add(new RecipeChoice.ExactChoice(new ItemStack(m)));
+    			materials.add(new ItemStack(m));
     		}
     	}
 		
