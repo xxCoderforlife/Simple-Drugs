@@ -19,6 +19,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -32,6 +33,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent;
 import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
 import me.Coderforlife.SimpleDrugs.DrugPlants.DrugPlantItem;
 import me.Coderforlife.SimpleDrugs.Util.JsonFileInterpretter;
@@ -160,7 +162,7 @@ public class DrugManager {
 		case SHAPED:
 			ShapedRecipe shaped = new ShapedRecipe(new NamespacedKey(Main.plugin, "drugs_" + d.getName()), d.getItem());
 			shaped.shape("ABC", "DEF", "GHI");
-			List<Material> mats = loadMaterialsForShapedCraftingJsonArray(fileName, ja);
+			List<RecipeChoice> mats = loadMaterialsForCrafting(fileName, ja);
 			
 			if(mats == null) {
 				return null;
@@ -181,10 +183,14 @@ public class DrugManager {
 			return shaped;
 		case SHAPELESS:
 			ShapelessRecipe shapeless = new ShapelessRecipe(new NamespacedKey(Main.plugin, "drugs_" + d.getName()), d.getItem());
+			List<RecipeChoice> materials = loadMaterialsForCrafting(fileName, ja);
 			
-			Map<Material, Integer> materials = loadMaterialsForShapelessCraftingJsonArray(fileName, ja);
-			materials.forEach((k, v) -> {
-				shapeless.addIngredient(v, k);
+			if(materials == null) {
+				return null;
+			}
+			
+			materials.forEach(e -> {
+				shapeless.addIngredient(e);
 			});
 			
 			Bukkit.getServer().addRecipe(shapeless);
@@ -195,77 +201,34 @@ public class DrugManager {
     	}
     }
     
-    private List<Material> loadMaterialsForShapedCraftingJsonArray(String fileName, JsonArray ja) {
-    	List<Material> materials = new ArrayList<>();
-    	boolean load = true;
-    	
-    	for(int i = 0; i < 9; i++) {
-    		Material m = Material.valueOf(ja.get(i).getAsString().toUpperCase());
+    private List<RecipeChoice> loadMaterialsForCrafting(String fileName, JsonArray ja) {
+		List<RecipeChoice> materials = new ArrayList<>();
+	    
+		for(int i = 0; i < ja.size(); i++) {
+    		Material m = Material.getMaterial(ja.get(i).getAsString().toUpperCase());
     		if(m == null) {
-    			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Material: §7" + ja.get(i).getAsString().toUpperCase() + " §cdoes not exist");
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
-				load = false;
-    		}
-    		materials.add(m);
-    	}
-    	
-    	if(load) return materials;
-    	return null;
-    }
-    
-    private Map<Material, Integer> loadMaterialsForShapelessCraftingJsonArray(String fileName, JsonArray ja) {
-    	Map<Material, Integer> materials = new HashMap<>();
-    
-    	ja.forEach(e -> {
-    		if(!e.isJsonObject()) {
-    			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Object Must be a JsonObject {}");
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
-    			return;
-    		}
-    		JsonObject jo = e.getAsJsonObject();
-    		if(!jo.has("item")) {
-    			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Missing key §7'item'");
-				return;
-    		}
-    		
-    		if(!jo.has("amount")) {
-    			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Missing key §7'amount'");
-				return;
-    		}
-    		
-    		Material m = Material.valueOf(jo.get("item").getAsString().toUpperCase());
-    		if(m == null) {
-    			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Material is not valid: §7" + jo.get("item").getAsString().toUpperCase());
-				return;
-    		}
-    		Integer amount = jo.get("amount").getAsInt();
-    		
-    		if(materials.containsKey(m)) {
-    			materials.put(m, materials.get(m) + amount);
+    			CraftingComponent cc = Main.plugin.getCraftingManager().getByName(ja.get(i).getAsString().toUpperCase());
+    			if(cc == null) {
+    				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+    				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Material: §7" + ja.get(i).getAsString().toUpperCase() + " §cdoes not exist as a Minecraft Material or Custom Crafting Component");
+    				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+    				return null;
+    			}
+    			
+    			materials.add(new RecipeChoice.ExactChoice(cc.getStack()));
     		} else {
-    			materials.put(m, amount);
+    			materials.add(new RecipeChoice.ExactChoice(new ItemStack(m)));
     		}
-    		
-    	});
-    	
-    	int amount = 0;
-    	for(int i : materials.values()) {
-    		amount += i;
     	}
-    	
-    	if(amount > 9) {
+		
+    	if(materials.size() > 9) {
     		Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
 			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Materials added cannot be above 9");
     		return null;
     	}
     	
     	return materials;
-    }
+	}
     
     private void loadSeedRecipes() {
     	
