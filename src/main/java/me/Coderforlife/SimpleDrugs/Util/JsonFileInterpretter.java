@@ -9,6 +9,10 @@ import org.bukkit.potion.PotionEffectType;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.Druging.DrugCraftingType;
+
 public class JsonFileInterpretter {
 
 	private JsonObject json;
@@ -16,6 +20,14 @@ public class JsonFileInterpretter {
 	
 	public JsonFileInterpretter(JsonObject jo) {
 		json = jo;
+	}
+	
+	public Drug getDrug(String key) {
+		Drug d = Main.plugin.getDrugManager().getDrug(getString(key).toUpperCase());
+		if(d == null) {
+			errorMessages.add("§c[ERROR] JSON Key: §7" + key + " §cMust have a valid Drug Name");
+		}
+		return d;
 	}
 	
 	public JsonObject getJsonObject(String key) {
@@ -35,6 +47,14 @@ public class JsonFileInterpretter {
 			errorMessages.add("§c[ERROR] JSON Key: §7" + key + " §cMust have a valid Minecraft Material");
 		}
 		return m;
+	}
+	
+	public DrugCraftingType getDrugCraftingType(String key) {
+		DrugCraftingType dct = DrugCraftingType.valueOf(getString(key).toUpperCase());
+		if(dct == null) {
+			errorMessages.add("§c[ERROR] JSON Key: §7" + key + " §cMust have a valid Drug Crafting Type");
+		}
+		return dct;
 	}
 	
 	public PotionEffectType getPotionEffect(String key) {
