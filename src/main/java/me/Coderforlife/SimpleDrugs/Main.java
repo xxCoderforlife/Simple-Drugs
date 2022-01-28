@@ -3,6 +3,7 @@ package me.Coderforlife.SimpleDrugs;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.Coderforlife.SimpleDrugs.Crafting.CustomCraftingComponentManager;
 import me.Coderforlife.SimpleDrugs.DrugPlants.PlantItemListener;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
@@ -27,6 +28,7 @@ public class Main extends JavaPlugin {
     private NamespacedKey drugSeedKey;
     
     private DrugManager drugManager;
+    private CustomCraftingComponentManager craftingManager;
     private Settings settings;
     private Messages messages;
     
@@ -41,6 +43,7 @@ public class Main extends JavaPlugin {
         drugSeedKey = new NamespacedKey(plugin, "SimpleDrugs-DrugSeed");
         
         drugManager = new DrugManager();
+        craftingManager = new CustomCraftingComponentManager();
         settings = new Settings();
         messages = new Messages();
         
@@ -48,6 +51,7 @@ public class Main extends JavaPlugin {
         sendConsoleMessage("§aLoading Plugin...");
 
         new Setup();
+        craftingManager.loadAllRecipes();
 
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
         this.getServer().getPluginManager().registerEvents(new BagOfDrugs(), this);
@@ -73,6 +77,10 @@ public class Main extends JavaPlugin {
     
     public DrugManager getDrugManager() {
     	return drugManager;
+    }
+    
+    public CustomCraftingComponentManager getCraftingManager() {
+    	return craftingManager;
     }
     
     public Settings getSettings() {

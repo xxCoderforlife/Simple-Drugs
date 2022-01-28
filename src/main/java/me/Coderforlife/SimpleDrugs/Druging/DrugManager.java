@@ -32,6 +32,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
 import me.Coderforlife.SimpleDrugs.DrugPlants.DrugPlantItem;
 import me.Coderforlife.SimpleDrugs.Util.JsonFileInterpretter;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
@@ -119,7 +120,7 @@ public class DrugManager {
 					JsonArray ja = config.getJsonArray("recipe");
 					if(dct.equals(DrugCraftingType.SHAPED) && ja.size() != 9) {
 						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
-						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Shaped Recipes require 9 items");
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Shaped Recipes require 9 items or air if none");
 						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
 						continue;
 					}
@@ -147,11 +148,10 @@ public class DrugManager {
     		dle.unLoad();
     	}
     	
-    	// TODO: Make this work
-//    	if(!config.contains("type")) {
-//    		dle.addError("§c[ERROR] JSON File missing 'type'");
-//    		dle.unLoad();
-//    	}
+    	if(!config.contains("type")) {
+    		dle.addError("§c[ERROR] JSON File missing 'type'");
+    		dle.unLoad();
+    	}
     	
     	if(!config.contains("recipe")) {
     		dle.addError("§c[ERROR] JSON File missing 'recipe'");
@@ -235,17 +235,20 @@ public class DrugManager {
     		if(!jo.has("item")) {
     			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
 				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Missing key §7'item'");
+				return;
     		}
     		
     		if(!jo.has("amount")) {
     			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
 				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Missing key §7'amount'");
+				return;
     		}
     		
     		Material m = Material.valueOf(jo.get("item").getAsString().toUpperCase());
     		if(m == null) {
     			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
 				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Material is not valid: §7" + jo.get("item").getAsString().toUpperCase());
+				return;
     		}
     		Integer amount = jo.get("amount").getAsInt();
     		
