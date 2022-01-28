@@ -4,6 +4,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Coderforlife.SimpleDrugs.Crafting.CustomCraftingComponentManager;
+import me.Coderforlife.SimpleDrugs.Crafting.RecipeManager;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.RecipeChecker;
 import me.Coderforlife.SimpleDrugs.DrugPlants.PlantItemListener;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
@@ -31,6 +33,7 @@ public class Main extends JavaPlugin {
     private CustomCraftingComponentManager craftingManager;
     private Settings settings;
     private Messages messages;
+    private RecipeManager recipeManager;
     
     @Override
     public void onEnable() {
@@ -49,8 +52,8 @@ public class Main extends JavaPlugin {
         sendConsoleMessage("§aLoading Plugin...");
 
         new Setup();
-        craftingManager.loadAllRecipes();
 
+        this.getServer().getPluginManager().registerEvents(new RecipeChecker(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
         this.getServer().getPluginManager().registerEvents(new BagOfDrugs(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
@@ -71,6 +74,14 @@ public class Main extends JavaPlugin {
 
     private void sendConsoleMessage(String message) {
         this.getServer().getConsoleSender().sendMessage(message);
+    }
+    
+    public RecipeManager getRecipeManager() {
+    	return recipeManager;
+    }
+    
+    public void setRecipeManager(RecipeManager rm) {
+    	recipeManager = rm;
     }
     
     public DrugManager getDrugManager() {

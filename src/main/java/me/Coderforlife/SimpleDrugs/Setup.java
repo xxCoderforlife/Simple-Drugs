@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
 import me.Coderforlife.SimpleDrugs.Crafting.CustomCraftingComponentManager;
+import me.Coderforlife.SimpleDrugs.Crafting.RecipeManager;
 import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
 import me.Coderforlife.SimpleDrugs.PlaceHolder.DrugPlaceHolders;
 import me.Coderforlife.SimpleDrugs.UpdateChecker.Updater;
@@ -21,9 +22,13 @@ public class Setup {
         checkForUpdate();
         loadVault();
 
+        Main.plugin.setRecipeManager(new RecipeManager());
+        
+        Main.plugin.setCraftingManager(new CustomCraftingComponentManager());
+        Main.plugin.getCraftingManager().loadAllRecipes();
+        
         Main.plugin.setDrugManager(new DrugManager());
         Main.plugin.getDrugManager().loadFiles();
-        Main.plugin.setCraftingManager(new CustomCraftingComponentManager());
     }
 
     private void loadPlaceHolders() {
