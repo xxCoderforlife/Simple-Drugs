@@ -42,8 +42,6 @@ public class Main extends JavaPlugin {
         drugHarvestAmount = new NamespacedKey(plugin, "SimpleDrugs-HarvestAmount");
         drugSeedKey = new NamespacedKey(plugin, "SimpleDrugs-DrugSeed");
         
-        drugManager = new DrugManager();
-        craftingManager = new CustomCraftingComponentManager();
         settings = new Settings();
         messages = new Messages();
         
@@ -51,6 +49,8 @@ public class Main extends JavaPlugin {
         sendConsoleMessage("§aLoading Plugin...");
 
         new Setup();
+        drugManager = new DrugManager();
+        craftingManager = new CustomCraftingComponentManager();
         craftingManager.loadAllRecipes();
 
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
