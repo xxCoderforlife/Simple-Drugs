@@ -48,6 +48,7 @@ public class DrugManager {
     private final File drugSFolder = new File(recipeFolder, "Seeds");
     
     private Map<String, Drug> drugs = new HashMap<>();
+    private Map<Drug, ItemStack> drugSeeds = new HashMap<>();
 
     public void loadFiles() {
     	if(!folder.exists()) folder.mkdir();
@@ -86,12 +87,76 @@ public class DrugManager {
     	}
     }
     
+    private void loadSeedRecipes() {
+    	for(File f : drugSFolder.listFiles()) {
+    		if(f.getName().endsWith(".json")) {
+    			JsonObject obj;
+				try {
+					obj = new Gson().fromJson(new FileReader(f), JsonObject.class);
+					DrugLoadError dle = canRecipeLoad(obj, true);
+					if(!dle.canLoad()) {
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
+						dle.printAllErrors();
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Seed Recipe");
+						continue;
+					}
+					
+					JsonFileInterpretter config = new JsonFileInterpretter(obj);
+					
+					Drug d = config.getDrug("drug");
+					
+					if(d == null) {
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Drug not found: §7" + config.getString("drug"));
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+						continue;
+					}
+					
+					DrugCraftingType dct = config.contains("type") ? config.getDrugCraftingType("type") : DrugCraftingType.SHAPED;
+					JsonArray ja = config.getJsonArray("recipe");
+					if(dct.equals(DrugCraftingType.SHAPED) && ja.size() != 9) {
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Shaped Recipes require 9 items or air if none");
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+						continue;
+					}
+					
+					Integer harvestAmount = config.getInteger("harvest-amount");
+					ItemStack seedItem = config.getItem("seed-item");
+					
+					if(config.getAllError().size() > 0) {
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
+			    		config.getAllError().forEach(e -> {
+			    			Bukkit.getConsoleSender().sendMessage(e);
+			    		});
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Drug");
+						continue;
+					}
+					
+					DrugPlantItem dpi = new DrugPlantItem(d, seedItem, Material.FARMLAND, harvestAmount);
+					
+					if(!loadSeedCrafting(f.getName(), dpi, ja, dct)) {
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in Recipe");
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+						continue;
+					}
+					
+					drugSeeds.put(d, seedItem);
+					
+				} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
+					e.printStackTrace();
+				}
+    		}
+    	}
+    }
+    
     private void loadRecipes() {
     	for(File f : drugRFolder.listFiles()) {
     		if(f.getName().endsWith(".json")) {
     			try {
 					JsonObject obj = new Gson().fromJson(new FileReader(f), JsonObject.class);
-					DrugLoadError dle = canRecipeLoad(obj);
+					DrugLoadError dle = canRecipeLoad(obj, false);
 					if(!dle.canLoad()) {
 						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
 						dle.printAllErrors();
@@ -119,6 +184,15 @@ public class DrugManager {
 						continue;
 					}
 					
+					if(config.getAllError().size() > 0) {
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
+			    		config.getAllError().forEach(e -> {
+			    			Bukkit.getConsoleSender().sendMessage(e);
+			    		});
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Drug");
+						continue;
+					}
+					
 					if(!loadCraftingRecipe(f.getName(), d, ja, dct)) {
 						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
 						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in Recipe");
@@ -135,7 +209,7 @@ public class DrugManager {
     	}
     }
     
-    private DrugLoadError canRecipeLoad(JsonObject jo) {
+    private DrugLoadError canRecipeLoad(JsonObject jo, Boolean seed) {
     	DrugLoadError dle = new DrugLoadError();
     	JsonFileInterpretter config = new JsonFileInterpretter(jo);
     	
@@ -153,7 +227,58 @@ public class DrugManager {
     		dle.addError("§c[ERROR] JSON File missing 'recipe'");
     		dle.unLoad();
     	}
+    	
+    	if(seed == true) {
+    		if(!config.contains("harvest-amount")) {
+        		dle.addError("§c[ERROR] JSON File missing 'harvest-amount'");
+        		dle.unLoad();
+        	}
+    		if(!config.contains("seed-item")) {
+    			dle.addError("§c[ERROR] JSON File missing 'seed-item'");
+        		dle.unLoad();
+    		}
+    	}
+    	
     	return dle;
+    }
+    
+    private boolean loadSeedCrafting(String fileName, DrugPlantItem dpi, JsonArray ja, DrugCraftingType dct) {
+    	switch(dct) {
+		case FURNACE:
+			return false;
+		case SHAPED:
+			SDShaped shaped = new SDShaped("DrugSeed_" + dpi.getDrug().getName(), dpi.makeItem());
+			List<ItemStack> mats = loadMaterialsForCrafting(fileName, ja);
+			
+			if(mats == null) {
+				return false;
+			}
+			
+			for(int i = 0; i < mats.size(); i++) {
+				shaped.addItemStack(mats.get(i));
+			}
+
+			shaped.registerRecipe();
+			
+			return true;
+		case SHAPELESS:
+			SDShapeless shapeless = new SDShapeless("DrugSeed_" + dpi.getDrug().getName(), dpi.makeItem());
+			List<ItemStack> materials = loadMaterialsForCrafting(fileName, ja);
+			
+			if(materials == null) {
+				return false;
+			}
+			
+			materials.forEach(e -> {
+				shapeless.addItemStack(e);
+			});
+			
+			shapeless.registerRecipe();
+			
+			return true;
+		default:
+			return false;
+    	}
     }
     
     private boolean loadCraftingRecipe(String fileName, Drug d, JsonArray ja, DrugCraftingType dct) {
@@ -223,10 +348,6 @@ public class DrugManager {
     	
     	return materials;
 	}
-    
-    private void loadSeedRecipes() {
-    	
-    }
     
     private DrugLoadError canDrugLoad(JsonObject jo) {
     	DrugLoadError dle = new DrugLoadError();
@@ -327,6 +448,10 @@ public class DrugManager {
 
     public ArrayList<Drug> getallDrugs() {
         return new ArrayList<>(drugs.values());
+    }
+    
+    public ItemStack getItemStackFromDrug(Drug d) {
+    	return drugSeeds.get(d);
     }
 
     public Drug matchDrug(ItemStack item) {
