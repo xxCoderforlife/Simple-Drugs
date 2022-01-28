@@ -45,7 +45,7 @@ public class JsonFileInterpretter {
 	}
 	
 	public Material getMaterial(String key) {
-		Material m = Material.valueOf(getString(key).toUpperCase());
+		Material m = Material.getMaterial(getString(key).toUpperCase());
 		if(m == null) {
 			errorMessages.add("§c[ERROR] JSON Key: §7" + key + " §cMust have a valid Minecraft Material");
 		}
