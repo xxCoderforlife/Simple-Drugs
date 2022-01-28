@@ -66,44 +66,44 @@ public class JsonFileInterpretter {
 		return null;
 	}
 	
-	public Boolean getBoolean(String key) {
+	public boolean getBoolean(String key) {
 		try {
-			Boolean s = json.get(key).getAsBoolean();
+			boolean s = json.get(key).getAsBoolean();
 			return s;
 		} catch (Exception e) {
 			errorMessages.add("§c[ERROR] JSON Key: §7" + key + " §cMust be a Boolean Value");
 		}
-		return null;
+		return false;
 	}
 	
-	public Double getDouble(String key) {
+	public double getDouble(String key) {
 		try {
-			Double s = json.get(key).getAsDouble();
+			double s = json.get(key).getAsDouble();
 			return s;
 		} catch (Exception e) {
 			errorMessages.add("§c[ERROR] JSON Key: §7" + key + " §cMust be a Double Value");
 		}
-		return null;
+		return -1d;
 	}
 	
-	public Float getFloat(String key) {
+	public float getFloat(String key) {
 		try {
-			Float s = json.get(key).getAsFloat();
+			float s = json.get(key).getAsFloat();
 			return s;
 		} catch (Exception e) {
 			errorMessages.add("§c[ERROR] JSON Key: §7" + key + " §cMust be a Float Value");
 		}
-		return null;
+		return -1f;
 	}
 	
-	public Integer getInteger(String key) {
+	public int getInteger(String key) {
 		try {
-			Integer s = json.get(key).getAsInt();
+			int s = json.get(key).getAsInt();
 			return s;
 		} catch (Exception e) {
 			errorMessages.add("§c[ERROR] JSON Key: §7" + key + " §cMust be an Integer Value");
 		}
-		return null;
+		return -1;
 	}
 	
 	public List<String> getAllError() {
