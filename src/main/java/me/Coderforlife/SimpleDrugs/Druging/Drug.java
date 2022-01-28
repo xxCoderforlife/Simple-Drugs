@@ -8,11 +8,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.potion.PotionEffect;
 
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
+
 public class Drug {
 
     private String name;
     private String displayname;
-    private Recipe recipe;
+    private SDRecipe sdRecipe;
     private ArrayList<DrugEffect> effects;
     private ItemStack item;
     private String permission;
@@ -29,23 +31,13 @@ public class Drug {
     	this.permission = permission;
     	this.item = item;
     }
-    
-    public Drug(String name, String displayname, Recipe recipe, ArrayList<DrugEffect> effects, ItemStack item, String permission, boolean crafting) {
-        this.name = name;
-        this.displayname = displayname;
-        this.recipe = recipe;
-        this.effects = effects;
-        this.item = item;
-        this.permission = permission;
-        this.crafting = crafting;
-    }
 
     public void influencePlayer(Player player) {
         for(DrugEffect effect : this.effects) {
             player.addPotionEffect(new PotionEffect(effect.getEffect(), effect.getTime(), effect.getIntensity()));
         }
     }
-
+    
     public ArrayList<DrugEffect> getEffects() {
         return effects;
     }
@@ -70,12 +62,12 @@ public class Drug {
         this.displayname = displayname;
     }
 
-    public Recipe getRecipe() {
-        return recipe;
+    public SDRecipe getRecipe() {
+    	return sdRecipe;
     }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
+    
+    public void setRecipe(SDRecipe recipe) {
+    	sdRecipe = recipe;
     }
 
     public ItemStack getItem() {
