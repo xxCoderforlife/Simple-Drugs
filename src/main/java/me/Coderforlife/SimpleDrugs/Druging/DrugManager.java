@@ -63,21 +63,6 @@ public class DrugManager {
     		enabled.add(d.getName());
     	}
     	if(enabled.length() > 0) Bukkit.getConsoleSender().sendMessage("§6Enabled Drugs: §a" + enabled.toString().trim());
-    	
-//    	 StringBuilder enabled = new StringBuilder();
-//         StringBuilder disabled = new StringBuilder();
-//         for(Drug drug : getallDrugs()) {
-//             if(drug.isCraftable()) {
-//                 enabled.append(drug.getName()).append(", ");
-//             } else {
-//                 disabled.append(drug.getName()).append(", ");
-//             }
-//         }
-//         if(enabled.length() > 0)
-//             sendConsoleMessage("§6Enabled Drugs: §a" + enabled);
-//
-//         if(disabled.length() > 0)
-//             sendConsoleMessage("§6Disabled Drugs: §c" + disabled);
     }
     
     private void loadDrugs() {
@@ -116,6 +101,14 @@ public class DrugManager {
 					JsonFileInterpretter config = new JsonFileInterpretter(obj);
 					
 					Drug d = config.getDrug("drug");
+					
+					if(d == null) {
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Drug not found: §7" + config.getString("drug"));
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+						continue;
+					}
+					
 					DrugCraftingType dct = config.contains("type") ? config.getDrugCraftingType("type") : DrugCraftingType.SHAPED;
 					JsonArray ja = config.getJsonArray("recipe");
 					if(dct.equals(DrugCraftingType.SHAPED) && ja.size() != 9) {
@@ -304,8 +297,6 @@ public class DrugManager {
     	String permission = config.contains("permission") ? config.getString("permission") : "drugs.use." + name.toLowerCase();
     	ArrayList<DrugEffect> effects = (config.contains("effects") && config.isJsonArray("effects")) ? loadEffectsFromJson(config.getJsonArray("effects"), fileName) : new ArrayList<DrugEffect>();
     	
-    	ItemStack is = createItem(displayName, mat, effects);
-    	
     	if(config.getAllError().size() > 0) {
     		Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
     		config.getAllError().forEach(e -> {
@@ -314,6 +305,8 @@ public class DrugManager {
 			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Drug");
     		return;
     	}
+    	
+    	ItemStack is = createItem(displayName, mat, effects);
     	
     	addDrug(new Drug(name, displayName, is, effects, permission), name.toUpperCase());
     }
