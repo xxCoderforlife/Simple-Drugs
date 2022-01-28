@@ -7,7 +7,7 @@
 
     <groupId>com.Coderforlife</groupId>
     <artifactId>Simple-Drugs</artifactId>
-    <version>2.7.2-DEV</version>
+    <version>2.7.3-DEV</version>
     <build>
         <plugins>
             <plugin>
