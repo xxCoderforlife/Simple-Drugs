@@ -18,7 +18,9 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 
@@ -37,34 +39,29 @@ import net.md_5.bungee.api.ChatColor;
 
 public class DrugManager {
     Main plugin = Main.plugin;
-    private final File folder = new File(plugin.getDataFolder() + File.separator + "Drugs");
+    
+    private final File folder = new File(plugin.getDataFolder(), "Drugs");
+    private final File recipeFolder = new File(plugin.getDataFolder(), "Recipes");
+    private final File drugRFolder = new File(recipeFolder, "Drugs");
+    private final File drugSFolder = new File(recipeFolder, "Seeds");
+    
     private Map<String, Drug> drugs = new HashMap<>();
 
     public void loadFiles() {
     	if(!folder.exists()) folder.mkdir();
-    	// TODO: Create default drugs
-    	for(File f : folder.listFiles()) {
-    		if(f.getName().endsWith(".json")) {
-    			try {
-					JsonObject obj = new Gson().fromJson(new FileReader(f), JsonObject.class);
-					DrugLoadError dle = canDrugLoad(obj);
-					if(!dle.canLoad()) {
-						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
-						dle.printAllErrors();
-						continue;
-					}
-					drugFromJson(obj, f.getName());
-				} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
-					e.printStackTrace();
-				}
-    		}
-    	}
+    	if(!recipeFolder.exists()) recipeFolder.mkdir();
+    	if(!drugRFolder.exists()) drugRFolder.mkdir();
+    	if(!drugSFolder.exists()) drugSFolder.mkdir();
+    	
+    	loadDrugs();
+    	loadRecipes();
+    	loadSeedRecipes();
     	
     	StringJoiner enabled = new StringJoiner(", ");
     	for(Drug d : getallDrugs()) {
     		enabled.add(d.getName());
     	}
-    	Bukkit.getConsoleSender().sendMessage("§6Enabled Drugs: §a" + enabled.toString().trim());
+    	if(enabled.length() > 0) Bukkit.getConsoleSender().sendMessage("§6Enabled Drugs: §a" + enabled.toString().trim());
     	
 //    	 StringBuilder enabled = new StringBuilder();
 //         StringBuilder disabled = new StringBuilder();
@@ -80,6 +77,202 @@ public class DrugManager {
 //
 //         if(disabled.length() > 0)
 //             sendConsoleMessage("§6Disabled Drugs: §c" + disabled);
+    }
+    
+    private void loadDrugs() {
+    	for(File f : folder.listFiles()) {
+    		if(f.getName().endsWith(".json")) {
+    			try {
+					JsonObject obj = new Gson().fromJson(new FileReader(f), JsonObject.class);
+					DrugLoadError dle = canDrugLoad(obj);
+					if(!dle.canLoad()) {
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
+						dle.printAllErrors();
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Drug");
+						continue;
+					}
+					drugFromJson(obj, f.getName());
+				} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
+					e.printStackTrace();
+				}
+    		}
+    	}
+    }
+    
+    private void loadRecipes() {
+    	for(File f : drugRFolder.listFiles()) {
+    		if(f.getName().endsWith(".json")) {
+    			try {
+					JsonObject obj = new Gson().fromJson(new FileReader(f), JsonObject.class);
+					DrugLoadError dle = canRecipeLoad(obj);
+					if(!dle.canLoad()) {
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
+						dle.printAllErrors();
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+						continue;
+					}
+					
+					JsonFileInterpretter config = new JsonFileInterpretter(obj);
+					
+					Drug d = config.getDrug("drug");
+					DrugCraftingType dct = config.contains("type") ? config.getDrugCraftingType("type") : DrugCraftingType.SHAPED;
+					JsonArray ja = config.getJsonArray("recipe");
+					if(dct.equals(DrugCraftingType.SHAPED) && ja.size() != 9) {
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + f.getName());
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Shaped Recipes require 9 items");
+						Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+						continue;
+					}
+					
+					Recipe r = loadCraftingRecipe(f.getName(), d, ja, dct);
+					
+					if(r == null) continue;
+					
+					d.setCraftable(true);
+					d.setRecipe(r);
+					
+				} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
+					e.printStackTrace();
+				}
+    		}
+    	}
+    }
+    
+    private DrugLoadError canRecipeLoad(JsonObject jo) {
+    	DrugLoadError dle = new DrugLoadError();
+    	JsonFileInterpretter config = new JsonFileInterpretter(jo);
+    	
+    	if(!config.contains("drug")) {
+    		dle.addError("§c[ERROR] JSON File missing 'drug'");
+    		dle.unLoad();
+    	}
+    	
+    	// TODO: Make this work
+//    	if(!config.contains("type")) {
+//    		dle.addError("§c[ERROR] JSON File missing 'type'");
+//    		dle.unLoad();
+//    	}
+    	
+    	if(!config.contains("recipe")) {
+    		dle.addError("§c[ERROR] JSON File missing 'recipe'");
+    		dle.unLoad();
+    	}
+    	return dle;
+    }
+    
+    private Recipe loadCraftingRecipe(String fileName, Drug d, JsonArray ja, DrugCraftingType dct) {
+    	switch(dct) {
+		case FURNACE:
+			return null;
+		case SHAPED:
+			ShapedRecipe shaped = new ShapedRecipe(new NamespacedKey(Main.plugin, "drugs_" + d.getName()), d.getItem());
+			shaped.shape("ABC", "DEF", "GHI");
+			List<Material> mats = loadMaterialsForShapedCraftingJsonArray(fileName, ja);
+			
+			if(mats == null) {
+				return null;
+			}
+			
+			shaped.setIngredient('A', mats.get(0));
+			shaped.setIngredient('B', mats.get(1));
+			shaped.setIngredient('C', mats.get(2));
+			shaped.setIngredient('D', mats.get(3));
+			shaped.setIngredient('E', mats.get(4));
+			shaped.setIngredient('F', mats.get(5));
+			shaped.setIngredient('G', mats.get(6));
+			shaped.setIngredient('H', mats.get(7));
+			shaped.setIngredient('I', mats.get(8));
+			
+			Bukkit.getServer().addRecipe(shaped);
+			
+			return shaped;
+		case SHAPELESS:
+			ShapelessRecipe shapeless = new ShapelessRecipe(new NamespacedKey(Main.plugin, "drugs_" + d.getName()), d.getItem());
+			
+			Map<Material, Integer> materials = loadMaterialsForShapelessCraftingJsonArray(fileName, ja);
+			materials.forEach((k, v) -> {
+				shapeless.addIngredient(v, k);
+			});
+			
+			Bukkit.getServer().addRecipe(shapeless);
+			
+			return shapeless;
+		default:
+			return null;
+    	}
+    }
+    
+    private List<Material> loadMaterialsForShapedCraftingJsonArray(String fileName, JsonArray ja) {
+    	List<Material> materials = new ArrayList<>();
+    	boolean load = true;
+    	
+    	for(int i = 0; i < 9; i++) {
+    		Material m = Material.valueOf(ja.get(i).getAsString().toUpperCase());
+    		if(m == null) {
+    			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Material: §7" + ja.get(i).getAsString().toUpperCase() + " §cdoes not exist");
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+				load = false;
+    		}
+    		materials.add(m);
+    	}
+    	
+    	if(load) return materials;
+    	return null;
+    }
+    
+    private Map<Material, Integer> loadMaterialsForShapelessCraftingJsonArray(String fileName, JsonArray ja) {
+    	Map<Material, Integer> materials = new HashMap<>();
+    
+    	ja.forEach(e -> {
+    		if(!e.isJsonObject()) {
+    			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Object Must be a JsonObject {}");
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+    			return;
+    		}
+    		JsonObject jo = e.getAsJsonObject();
+    		if(!jo.has("item")) {
+    			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Missing key §7'item'");
+    		}
+    		
+    		if(!jo.has("amount")) {
+    			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Missing key §7'amount'");
+    		}
+    		
+    		Material m = Material.valueOf(jo.get("item").getAsString().toUpperCase());
+    		if(m == null) {
+    			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Material is not valid: §7" + jo.get("item").getAsString().toUpperCase());
+    		}
+    		Integer amount = jo.get("amount").getAsInt();
+    		
+    		if(materials.containsKey(m)) {
+    			materials.put(m, materials.get(m) + amount);
+    		} else {
+    			materials.put(m, amount);
+    		}
+    		
+    	});
+    	
+    	int amount = 0;
+    	for(int i : materials.values()) {
+    		amount += i;
+    	}
+    	
+    	if(amount > 9) {
+    		Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Materials added cannot be above 9");
+    		return null;
+    	}
+    	
+    	return materials;
+    }
+    
+    private void loadSeedRecipes() {
+    	
     }
     
     private DrugLoadError canDrugLoad(JsonObject jo) {
@@ -119,7 +312,7 @@ public class DrugManager {
     		return;
     	}
     	
-    	addDrug(new Drug(name, displayName, is, effects, permission), name);
+    	addDrug(new Drug(name, displayName, is, effects, permission), name.toUpperCase());
     }
     
     private ItemStack createItem(String s, Material item, ArrayList<DrugEffect> effects) {
@@ -152,8 +345,8 @@ public class DrugManager {
     		JsonFileInterpretter config = new JsonFileInterpretter(iJO);
     		
     		PotionEffectType type = config.getPotionEffect("type");
-			Integer time = config.contains("time") ? config.getInteger("time") : 90;
-			Integer intensity = config.contains("intensity") ? config.getInteger("intensity") : 1;
+			int time = config.contains("time") ? config.getInteger("time") : 90;
+			int intensity = config.contains("intensity") ? config.getInteger("intensity") : 1;
 			
 			if(config.getAllError().size() > 0) {
 				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
@@ -335,6 +528,5 @@ public class DrugManager {
     private void sendConsoleMessage(String message) {
         Bukkit.getConsoleSender().sendMessage(message);
     }
-
 
 }
