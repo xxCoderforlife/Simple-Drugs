@@ -1,6 +1,5 @@
 package me.Coderforlife.SimpleDrugs.Crafting.Recipes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -12,8 +11,6 @@ import org.bukkit.inventory.ShapelessRecipe;
 import me.Coderforlife.SimpleDrugs.Main;
 
 public class SDShapeless extends SDRecipe {
-
-	private List<ItemStack> items = new ArrayList<>();
 	
 	public SDShapeless(String name, ItemStack result) {
 		super(name, result);
