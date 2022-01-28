@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginBase;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -25,7 +26,7 @@ import java.util.zip.GZIPOutputStream;
 
 public class Metrics {
 
-	private Main plugin = Main.plugin;
+	private Plugin plugin;
 	private final MetricsBase metricsBase;
 
 	/**
@@ -36,7 +37,8 @@ public class Metrics {
 	 *                  <a href="https://bstats.org/what-is-my-plugin-id">What is my
 	 *                  plugin id?</a>
 	 */
-	public Metrics(int serviceId) {
+	public Metrics(JavaPlugin plugin, int serviceId) {
+		this.plugin = plugin;
 		// Get the config file
 		File bStatsFolder = new File(plugin.getDataFolder().getParentFile(), "bStats");
 		File configFile = new File(bStatsFolder, "config.yml");

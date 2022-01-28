@@ -13,7 +13,7 @@ public class Setup {
     private Main plugin = Main.plugin;
 
     public Setup() {
-        new Metrics(13155);
+        new Metrics(plugin,13155);
         plugin.getSettings().setup();
         loadPlaceHolders();
         checkForUpdate();
