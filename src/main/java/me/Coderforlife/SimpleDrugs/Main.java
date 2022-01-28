@@ -49,8 +49,6 @@ public class Main extends JavaPlugin {
         sendConsoleMessage("§aLoading Plugin...");
 
         new Setup();
-        drugManager = new DrugManager();
-        craftingManager = new CustomCraftingComponentManager();
         craftingManager.loadAllRecipes();
 
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
@@ -79,8 +77,16 @@ public class Main extends JavaPlugin {
     	return drugManager;
     }
     
+    public void setDrugManager(DrugManager dm) {
+    	drugManager = dm;
+    }
+    
     public CustomCraftingComponentManager getCraftingManager() {
     	return craftingManager;
+    }
+    
+    public void setCraftingManager(CustomCraftingComponentManager cccm) {
+    	craftingManager = cccm;
     }
     
     public Settings getSettings() {
