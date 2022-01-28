@@ -22,9 +22,12 @@ public class DrugPlantItem {
 		amount = i;
 	}
 	
-	public ItemStack makeItem(Integer i) {
+	public Drug getDrug() {
+		return drugToBePlaced;
+	}
+	
+	public ItemStack makeItem() {
 		ItemMeta im = plantableItem.getItemMeta();
-		im.setDisplayName("Plant " + drugToBePlaced.getDisplayname());
 		
 		im.getPersistentDataContainer().set(Main.plugin.getDrugMain(), PersistentDataType.BYTE, (byte)1);
 		im.getPersistentDataContainer().set(Main.plugin.getDrugKey(), PersistentDataType.STRING, drugToBePlaced.getName());
@@ -33,12 +36,7 @@ public class DrugPlantItem {
 		im.getPersistentDataContainer().set(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING, plantableItem.getType().toString());
 		
 		plantableItem.setItemMeta(im);
-		plantableItem.setAmount(i);
 		return plantableItem;
-	}
-	
-	public ItemStack makeItem() {
-		return makeItem(1);
 	}
 	
 }
