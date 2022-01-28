@@ -31,8 +31,12 @@ private List<SDRecipe> recipes = new ArrayList<>();
 	public boolean itemsMatch(ItemStack[] items, SDShapeless shapeless) {
 		List<ItemStack> sdItems = new ArrayList<>(shapeless.getItems());
 		for(ItemStack i : items) {
-			if(shapeless.getItems().contains(i)) {
-				sdItems.remove(i);
+			if(i == null) continue;
+			ItemStack newI = i.clone();
+			if(newI == null) continue;
+			newI.setAmount(1);
+			if(shapeless.getItems().contains(newI)) {
+				sdItems.remove(newI);
 			}
 		}
 		if(sdItems.size() == 0) {
