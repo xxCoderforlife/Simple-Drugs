@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
@@ -111,11 +112,22 @@ public class Commands implements CommandExecutor {
                     }
                 } else if(args.length == 2) {
                     if(args[0].equalsIgnoreCase("recipe")) {
-                        Drug drug = Main.plugin.getDrugManager().getDrug(args[1]);
+                        Drug drug = Main.plugin.getDrugManager().getDrug(args[1].toUpperCase());
                         if(drug == null) {
                             p.sendMessage(plugin.getMessages().getPrefix() + "§e" + args[1] + " §cdoes not exist.");
                             return true;
                         }
+                        
+                        if(drug.getRecipe() == null) {
+                        	p.sendMessage(plugin.getMessages().getPrefix() + "§e" + args[1] + " §cdoes not have a recipe.");
+                        	return true;
+                        }
+                        
+                        if(drug.getRecipe() instanceof SDShapeless) {
+                        	p.sendMessage(plugin.getMessages().getPrefix() + "§e" + args[1] + " §cdoes not have support for shapeless.");
+                        	return true;
+                        }
+                        
                         p.openInventory(new RecipeGUI().create(drug));
                     } else if(args[0].equalsIgnoreCase("bagofdrugs")) {
                         if(p.hasPermission("drugs.command.bagofdrugs.others")) {
