@@ -3,6 +3,8 @@ package me.Coderforlife.SimpleDrugs.Druging;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
@@ -58,6 +61,10 @@ public class DrugManager {
     	loadDrugs();
     	loadRecipes();
     	loadSeedRecipes();
+    	
+    	if(drugs.size() == 0) {
+    		createDrugs();
+    	}
     	
     	StringJoiner enabled = new StringJoiner(", ");
     	for(Drug d : getallDrugs()) {
@@ -480,8 +487,16 @@ public class DrugManager {
         JsonArray drugs = new Gson().fromJson(reader, JsonArray.class);
         for(JsonElement drug : drugs) {
             drugFromJson(drug.getAsJsonObject(), drug.getAsJsonObject().get("name").getAsString());
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            try {
+            	FileWriter writer = new FileWriter(new File(folder, drug.getAsJsonObject().get("name").getAsString() + ".json"));
+				gson.toJson(drug, writer);
+				writer.close();
+			} catch (JsonIOException | IOException e) {
+				e.printStackTrace();
+			}
         }
-        // TODO: Save them
+        
         sendConsoleMessage("§aDefault Drugs Created! Enjoy Simple-Drugs :D");
     }
 
