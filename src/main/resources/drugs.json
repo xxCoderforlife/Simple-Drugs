@@ -27,20 +27,7 @@
       "item":"GREEN_DYE",
       "permission":"drugs.use.weed",
       "crafting":true,
-      "has_seed": true,
-      "seed_item": "STICK",
-      "seed_harvest_amount": 1,
-      "seed_recipe": [
-      	 "WHEAT",
-      	 "DIAMOND",
-      	 "WHEAT",
-      	 "WHEAT",
-      	 "DIAMOND",
-      	 "WHEAT",
-      	 "WHEAT",
-      	 "DIAMOND",
-      	 "WHEAT"
-      ]
+      "has_seed": true
    },
    {
       "name":"Percocet",
@@ -68,7 +55,9 @@
          }
       ],
       "item":"PUMPKIN_SEEDS",
-      "permission":"drugs.use.percocet"
+      "permission":"drugs.use.percocet",
+      "crafting": true,
+      "has_seed": true
    },
    {
       "name":"Acid",
@@ -95,8 +84,10 @@
             "intensity":1
          }
       ],
-      "item":"PUMPKIN_SEEDS",
-      "permission":"drugs.use.acid"
+      "item":"PAPER",
+      "permission":"drugs.use.acid",
+      "crafting": true,
+      "has_seed":true
    },
    {
       "name":"Coke",
@@ -124,7 +115,9 @@
          }
       ],
       "item":"SUGAR",
-      "permission":"drugs.use.coke"
+      "permission":"drugs.use.coke",
+      "crafting": true,
+      "has_seed": true
    },
    {
       "name":"Heroin",
@@ -152,7 +145,9 @@
          }
       ],
       "item":"WITHER_ROSE",
-      "permission":"drugs.use.heroin"
+      "permission":"drugs.use.heroin",
+      "crafting": true,
+      "has_seed": true
    },
    {
       "name":"Molly",
@@ -185,7 +180,9 @@
          }
       ],
       "item":"IRON_NUGGET",
-      "permission":"drugs.use.molly"
+      "permission":"drugs.use.molly",
+      "crafting": true,
+      "has_seed": true
    },
    {
       "name":"Ciggy",
@@ -213,7 +210,9 @@
          }
       ],
       "item":"REDSTONE_TORCH",
-      "permission":"drugs.use.ciggy"
+      "permission":"drugs.use.ciggy",
+      "crafting": true,
+      "has_seed": true
    },
    {
       "name":"Shrooms",
@@ -269,7 +268,9 @@
          }
       ],
       "item":"DRIED_KELP",
-      "permission":"drugs.use.salvia"
+      "permission":"drugs.use.salvia",
+      "crafting": true,
+      "has_seed": true
    },
    {
       "name":"PCP",
@@ -292,7 +293,9 @@
          }
       ],
       "item":"SPORE_BLOSSOM",
-      "permission":"drugs.use.pcp"
+      "permission":"drugs.use.pcp",
+      "crafting": true,
+      "has_seed": true
    },
    {
       "name":"DMT",
@@ -320,7 +323,9 @@
          }
       ],
       "item":"GLOWSTONE_DUST",
-      "permission":"drugs.use.dmt"
+      "permission":"drugs.use.dmt",
+      "crafting": true,
+      "has_seed": true
    },
    {
       "name":"Alcohol",
@@ -348,7 +353,9 @@
          }
       ],
       "item":"WATER_BUCKET",
-      "permission":"drugs.use.alcohol"
+      "permission":"drugs.use.alcohol",
+      "crafting": true,
+      "has_seed": true
    },
    {
       "name":"Flakka",
@@ -376,7 +383,9 @@
          }
       ],
       "item":"QUARTZ",
-      "permission":"drugs.use.flakka"
+      "permission":"drugs.use.flakka",
+      "crafting": true,
+      "has_seed":true
    },
    {
       "name":"Meth",
@@ -404,7 +413,9 @@
          }
       ],
       "item":"PRISMARINE_SHARD",
-      "permission":"drugs.use.meth"
+      "permission":"drugs.use.meth",
+      "crafting": true,
+      "has_seed": true
    },
    {
       "name":"Ketamine",
@@ -437,7 +448,9 @@
          }
       ],
       "item":"POWDER_SNOW_BUCKET",
-      "permission":"drugs.use.ketamine"
+      "permission":"drugs.use.ketamine",
+      "crafting": true,
+      "has_seed": true
    },
    {
       "name":"Oxy",
@@ -465,7 +478,9 @@
          }
       ],
       "item":"WHITE_DYE",
-      "permission":"drugs.use.oxy"
+      "permission":"drugs.use.oxy",
+      "crafting": true,
+      "has_seed": true
    },
    {
       "name":"Tussin",
@@ -493,7 +508,9 @@
          }
       ],
       "item":"PURPLE_CANDLE",
-      "permission":"drugs.use.tussin"
+      "permission":"drugs.use.tussin",
+      "crafting": true,
+      "has_seed": true
    },
    {
       "name":"Xannx",
@@ -521,6 +538,8 @@
          }
       ],
       "item":"GREEN_CANDLE",
-      "permission":"drugs.use.xannx"
+      "permission":"drugs.use.xannx",
+      "crafting": true,
+      "has_seed": true
    }
 ]

@@ -1,0 +1,323 @@
+[
+    {
+      "drug": "Weed",
+      "type": "shapeless",
+      "recipe": [
+        "WHEAT_SEEDS",
+        "WHEAT_SEEDS",
+        "WHEAT_SEEDS",
+        "GLOWSTONE_DUST"
+      ],
+      "seed-item": {
+        "displayname": "&2&oWeed Seeds",
+        "material": "wheat_seeds",
+        "lore": [
+          "&7- &ePlant these to make a &2&oWeed Plant"
+        ]
+      },
+      "harvest-amount": 1
+    },
+    {
+        "drug": "Percocet",
+        "type": "shapeless",
+        "recipe": [
+          "PUMPKIN_SEEDS",
+          "PUMPKIN_SEEDS",
+          "PUMPKIN_SEEDS",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&f&oPercocet Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &f&oPercocet Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Acid",
+        "type": "shapeless",
+        "recipe": [
+          "PAPER",
+          "PAPER",
+          "PAPER",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&b&oAcid Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &2&oAcid Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Coke",
+        "type": "shapeless",
+        "recipe": [
+          "SUGAR",
+          "SUGAR",
+          "SUGAR",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&b&oCoke Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &b&oCoke Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Heroin",
+        "type": "shapeless",
+        "recipe": [
+          "OAK_PLANKS",
+          "STICK",
+          "DIRT",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&4&oHeroin Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &4&oHeroin Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Molly",
+        "type": "shapeless",
+        "recipe": [
+          "IRON_NUGGET",
+          "IRON_NUGGET",
+          "IRON_NUGGET",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&b&oMolly Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &b&oMolly Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Ciggy",
+        "type": "shapeless",
+        "recipe": [
+          "REDSTONE_TORCH",
+          "REDSTONE_TORCH",
+          "REDSTONE_TORCH",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&6&oCiggy Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &b&oCiggy Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Shrooms",
+        "type": "shapeless",
+        "recipe": [
+          "BROWN_MUSHROOM",
+          "BROWN_MUSHROOM",
+          "BROWN_MUSHROOM",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&7&oShroom Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &7&oShroom Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Salvia",
+        "type": "shapeless",
+        "recipe": [
+          "DRIED_KELP",
+          "DRIED_KELP",
+          "DRIED_KELP",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&2&oSalvia Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &7&oSalvia Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "PCP",
+        "type": "shapeless",
+        "recipe": [
+          "PAPER",
+          "BROWN_MUSHROOM",
+          "WATER_BUCKET",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&5&oPCP Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &5&oPCP Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "DMT",
+        "type": "shapeless",
+        "recipe": [
+          "GLOWSTONE_DUST",
+          "GLOWSTONE_DUST",
+          "WATER_BUCKET",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&3&oDMT Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &3&oDMT Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Alcohol",
+        "type": "shapeless",
+        "recipe": [
+          "WATER_BUCKET",
+          "BROWN_MUSHROOM",
+          "RED_MUSHROOM",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&6&oAlcohol Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &6&oAlcohol Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Flakka",
+        "type": "shapeless",
+        "recipe": [
+          "WHEAT_SEEDS",
+          "BROWN_MUSHROOM",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&e&oFlakka Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &e&oFlakka Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Meth",
+        "type": "shapeless",
+        "recipe": [
+          "PRISMARINE_SHARD",
+          "GLOWSTONE_DUST",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&b&oMeth Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &b&oMeth Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Ketamine",
+        "type": "shapeless",
+        "recipe": [
+          "POWDER_SNOW_BUCKET",
+          "POWDER_SNOW_BUCKET",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&4&oKetamine Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &4&oKetamine Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Oxy",
+        "type": "shapeless",
+        "recipe": [
+          "WHITE_DYE",
+          "WHITE_DYE",
+          "WHITE_DYE",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&b&oOxy Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &b&oOxy Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Tussin",
+        "type": "shapeless",
+        "recipe": [
+          "PURPLE_CANDLE",
+          "PURPLE_CANDLE",
+          "PURPLE_CANDLE",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&5&oTussin Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &5&oTussin Plant"
+          ]
+        },
+        "harvest-amount": 1
+      },
+      {
+        "drug": "Xannx",
+        "type": "shapeless",
+        "recipe": [
+          "GREEN_CANDLE",
+          "GREEN_CANDLE",
+          "GREEN_CANDLE",
+          "GLOWSTONE_DUST"
+        ],
+        "seed-item": {
+          "displayname": "&2&oXannx Seeds",
+          "material": "wheat_seeds",
+          "lore": [
+            "&7- &ePlant these to make a &2&oXannx Plant"
+          ]
+        },
+        "harvest-amount": 1
+      }    
+  ]
