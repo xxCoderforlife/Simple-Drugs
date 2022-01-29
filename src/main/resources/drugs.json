@@ -2,17 +2,6 @@
    {
       "name":"Weed",
       "displayname":"&2Weed",
-      "recipe":[
-         "WHEAT",
-         "DIAMOND",
-         "WHEAT",
-         "AIR",
-         "DIAMOND",
-         "AIR",
-         "WHEAT",
-         "WHEAT",
-         "WHEAT"
-      ],
       "effects":[
          {
             "type":"SLOW",
@@ -56,17 +45,6 @@
    {
       "name":"Percocet",
       "displayname":"&f&lPERCOCET",
-      "recipe":[
-         "ARROW",
-         "ARROW",
-         "ARROW",
-         "MILK_BUCKET",
-         "WHITE_DYE",
-         "MILK_BUCKET",
-         "MILK_BUCKET",
-         "MILK_BUCKET",
-         "MILK_BUCKET"
-      ],
       "effects":[
          {
             "type":"CONFUSION",
@@ -90,23 +68,11 @@
          }
       ],
       "item":"PUMPKIN_SEEDS",
-      "permission":"drugs.use.percocet",
-      "crafting":true
+      "permission":"drugs.use.percocet"
    },
    {
       "name":"Acid",
       "displayname":"&b&lACID",
-      "recipe":[
-         "SPIDER_EYE",
-         "PAPER",
-         "SPIDER_EYE",
-         "PAPER",
-         "WATER_BUCKET",
-         "PAPER",
-         "SPIDER_EYE",
-         "PAPER",
-         "SPIDER_EYE"
-      ],
       "effects":[
          {
             "type":"CONFUSION",
@@ -130,23 +96,11 @@
          }
       ],
       "item":"PUMPKIN_SEEDS",
-      "permission":"drugs.use.acid",
-      "crafting":true
+      "permission":"drugs.use.acid"
    },
    {
       "name":"Coke",
       "displayname":"&b&lCOKE",
-      "recipe":[
-         "SUGAR",
-         "SUGAR",
-         "SUGAR",
-         "SUGAR",
-         "WATER_BUCKET",
-         "SUGAR",
-         "SUGAR",
-         "SUGAR",
-         "SUGAR"
-      ],
       "effects":[
          {
             "type":"INCREASE_DAMAGE",
@@ -170,23 +124,11 @@
          }
       ],
       "item":"SUGAR",
-      "permission":"drugs.use.coke",
-      "crafting":true
+      "permission":"drugs.use.coke"
    },
    {
       "name":"Heroin",
       "displayname":"&4&lHEROIN",
-      "recipe":[
-         "DIRT",
-         "RED_MUSHROOM",
-         "RED_MUSHROOM",
-         "AIR",
-         "DIRT",
-         "WOODEN_SWORD",
-         "AIR",
-         "DIRT",
-         "AIR"
-      ],
       "effects":[
          {
             "type":"WEAKNESS",
@@ -210,23 +152,11 @@
          }
       ],
       "item":"WITHER_ROSE",
-      "permission":"drugs.use.heroin",
-      "crafting":true
+      "permission":"drugs.use.heroin"
    },
    {
       "name":"Molly",
       "displayname":"&b&lMOLLY",
-      "recipe":[
-         "IRON_INGOT",
-         "IRON_INGOT",
-         "IRON_INGOT",
-         "GUNPOWDER",
-         "WATER_BUCKET",
-         "GUNPOWDER",
-         "IRON_INGOT",
-         "IRON_INGOT",
-         "IRON_INGOT"
-      ],
       "effects":[
          {
             "type":"CONFUSION",
@@ -255,23 +185,11 @@
          }
       ],
       "item":"IRON_NUGGET",
-      "permission":"drugs.use.molly",
-      "crafting":true
+      "permission":"drugs.use.molly"
    },
    {
       "name":"Ciggy",
       "displayname":"&6&lCIGGY",
-      "recipe":[
-         "AIR",
-         "GUNPOWDER",
-         "AIR",
-         "PAPER",
-         "STICK",
-         "PAPER",
-         "PAPER",
-         "PAPER",
-         "PAPER"
-      ],
       "effects":[
          {
             "type":"SATURATION",
@@ -295,23 +213,11 @@
          }
       ],
       "item":"REDSTONE_TORCH",
-      "permission":"drugs.use.ciggy",
-      "crafting":true
+      "permission":"drugs.use.ciggy"
    },
    {
       "name":"Shrooms",
       "displayname":"&7&lSHROOMS",
-      "recipe":[
-         "DIRT",
-         "DIRT",
-         "DIRT",
-         "STICK",
-         "AIR",
-         "STICK",
-         "AIR",
-         "BROWN_MUSHROOM",
-         "AIR"
-      ],
       "effects":[
          {
             "type":"LUCK",
@@ -335,23 +241,11 @@
          }
       ],
       "item":"CRIMSON_FUNGUS",
-      "permission":"drugs.use.shrooms",
-      "crafting":true
+      "permission":"drugs.use.shrooms"
    },
    {
       "name":"Salvia",
       "displayname":"&2&lSALVIA",
-      "recipe":[
-         "AIR",
-         "GREEN_BED",
-         "AIR",
-         "GREEN_CANDLE",
-         "GREEN_CANDLE",
-         "GREEN_CANDLE",
-         "GREEN_DYE",
-         "AIR",
-         "GREEN_DYE"
-      ],
       "effects":[
          {
             "type":"NIGHT_VISION",
@@ -375,23 +269,11 @@
          }
       ],
       "item":"DRIED_KELP",
-      "permission":"drugs.use.salvia",
-      "crafting":true
+      "permission":"drugs.use.salvia"
    },
    {
       "name":"PCP",
       "displayname":"&5&lPCP",
-      "recipe":[
-         "WHEAT_SEEDS",
-         "MELON_SEEDS",
-         "PUMPKIN_SEEDS",
-         "PUMPKIN_SEEDS",
-         "MELON_SEEDS",
-         "WHEAT_SEEDS",
-         "WHEAT_SEEDS",
-         "MELON_SEEDS",
-         "PUMPKIN_SEEDS"
-      ],
       "effects":[
          {
             "type":"DAMAGE_RESISTANCE",
@@ -410,23 +292,11 @@
          }
       ],
       "item":"SPORE_BLOSSOM",
-      "permission":"drugs.use.pcp",
-      "crafting":true
+      "permission":"drugs.use.pcp"
    },
    {
       "name":"DMT",
       "displayname":"&3&lDMT",
-      "recipe":[
-         "SUGAR",
-         "SUGAR",
-         "SUGAR",
-         "SUGAR",
-         "GLOWSTONE_DUST",
-         "SUGAR",
-         "SUGAR",
-         "GLOWSTONE_DUST",
-         "SUGAR"
-      ],
       "effects":[
          {
             "type":"DAMAGE_RESISTANCE",
@@ -450,23 +320,11 @@
          }
       ],
       "item":"GLOWSTONE_DUST",
-      "permission":"drugs.use.dmt",
-      "crafting":true
+      "permission":"drugs.use.dmt"
    },
    {
       "name":"Alcohol",
       "displayname":"&6&lALCOHOL",
-      "recipe":[
-         "AIR",
-         "PAPER",
-         "AIR",
-         "GUNPOWDER",
-         "GUNPOWDER",
-         "GUNPOWDER",
-         "WATER_BUCKET",
-         "WATER_BUCKET",
-         "WATER_BUCKET"
-      ],
       "effects":[
          {
             "type":"SPEED",
@@ -490,23 +348,11 @@
          }
       ],
       "item":"WATER_BUCKET",
-      "permission":"drugs.use.alcohol",
-      "crafting":true
+      "permission":"drugs.use.alcohol"
    },
    {
       "name":"Flakka",
       "displayname":"&e&lFLAKKA",
-      "recipe":[
-         "AIR",
-         "BIRCH_DOOR",
-         "AIR",
-         "SWEET_BERRIES",
-         "SWEET_BERRIES",
-         "SWEET_BERRIES",
-         "WATER_BUCKET",
-         "AIR",
-         "WATER_BUCKET"
-      ],
       "effects":[
          {
             "type":"SPEED",
@@ -530,23 +376,11 @@
          }
       ],
       "item":"QUARTZ",
-      "permission":"drugs.use.flakka",
-      "crafting":true
+      "permission":"drugs.use.flakka"
    },
    {
       "name":"Meth",
       "displayname":"&b&lMETH",
-      "recipe":[
-         "AIR",
-         "DIRT",
-         "AIR",
-         "AIR",
-         "PAPER",
-         "AIR",
-         "AIR",
-         "GUNPOWDER",
-         "AIR"
-      ],
       "effects":[
          {
             "type":"ABSORPTION",
@@ -570,23 +404,11 @@
          }
       ],
       "item":"PRISMARINE_SHARD",
-      "permission":"drugs.use.meth",
-      "crafting":true
+      "permission":"drugs.use.meth"
    },
    {
       "name":"Ketamine",
       "displayname":"&4&lKETAMINE",
-      "recipe":[
-         "SNOWBALL",
-         "SNOWBALL",
-         "SNOWBALL",
-         "SNOWBALL",
-         "LAVA_BUCKET",
-         "SNOWBALL",
-         "SNOWBALL",
-         "SNOWBALL",
-         "SNOWBALL"
-      ],
       "effects":[
          {
             "type":"NIGHT_VISION",
@@ -615,23 +437,11 @@
          }
       ],
       "item":"POWDER_SNOW_BUCKET",
-      "permission":"drugs.use.ketamine",
-      "crafting":true
+      "permission":"drugs.use.ketamine"
    },
    {
       "name":"Oxy",
       "displayname":"&b&lOXY",
-      "recipe":[
-         "WHITE_WOOL",
-         "WHITE_WOOL",
-         "WHITE_WOOL",
-         "WATER_BUCKET",
-         "AIR",
-         "WATER_BUCKET",
-         "AIR",
-         "LAVA_BUCKET",
-         "AIR"
-      ],
       "effects":[
          {
             "type":"ABSORPTION",
@@ -655,23 +465,11 @@
          }
       ],
       "item":"WHITE_DYE",
-      "permission":"drugs.use.oxy",
-      "crafting":true
+      "permission":"drugs.use.oxy"
    },
    {
       "name":"Tussin",
       "displayname":"&5&lTUSSIN",
-      "recipe":[
-         "WATER_BUCKET",
-         "AIR",
-         "WATER_BUCKET",
-         "GLASS_BOTTLE",
-         "AIR",
-         "GLASS_BOTTLE",
-         "WATER_BUCKET",
-         "GLASS_BOTTLE",
-         "WATER_BUCKET"
-      ],
       "effects":[
          {
             "type":"INCREASE_DAMAGE",
@@ -695,23 +493,11 @@
          }
       ],
       "item":"PURPLE_CANDLE",
-      "permission":"drugs.use.tussin",
-      "crafting":true
+      "permission":"drugs.use.tussin"
    },
    {
       "name":"Xannx",
       "displayname":"&2&lXANAX",
-      "recipe":[
-         "AIR",
-         "GREEN_BED",
-         "AIR",
-         "WHITE_TULIP",
-         "AIR",
-         "WHITE_TULIP",
-         "AIR",
-         "GUNPOWDER",
-         "AIR"
-      ],
       "effects":[
          {
             "type":"SLOW",
@@ -735,7 +521,6 @@
          }
       ],
       "item":"GREEN_CANDLE",
-      "permission":"drugs.use.xannx",
-      "crafting":true
+      "permission":"drugs.use.xannx"
    }
 ]

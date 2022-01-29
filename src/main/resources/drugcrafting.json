@@ -1,0 +1,272 @@
+[
+	{
+		"drug":"Weed",
+		"type": "shaped",
+		"recipe": [
+        	"WHEAT",
+         	"DIAMOND",
+         	"WHEAT",
+         	"AIR",
+         	"DIAMOND",
+         	"AIR",
+         	"WHEAT",
+         	"WHEAT",
+         	"WHEAT"
+       	]
+	},
+	{
+		"drug":"Percocet",
+		"type": "shaped",
+		"recipe": [
+         	"ARROW",
+         	"ARROW",
+         	"ARROW",
+         	"MILK_BUCKET",
+         	"WHITE_DYE",
+         	"MILK_BUCKET",
+         	"MILK_BUCKET",
+        	"MILK_BUCKET",
+         	"MILK_BUCKET"
+    	]
+	},
+	{
+		"drug":"Acid",
+		"type": "shaped",
+		"recipe": [
+         	"SPIDER_EYE",
+         	"PAPER",
+         	"SPIDER_EYE",
+         	"PAPER",
+         	"WATER_BUCKET",
+         	"PAPER",
+         	"SPIDER_EYE",
+         	"PAPER",
+         	"SPIDER_EYE"
+    	]
+	},
+	{
+		"drug":"Coke",
+		"type": "shaped",
+		"recipe": [
+         	"SUGAR",
+         	"SUGAR",
+         	"SUGAR",
+         	"SUGAR",
+         	"WATER_BUCKET",
+         	"SUGAR",
+         	"SUGAR",
+         	"SUGAR",
+         	"SUGAR"
+    	]
+	},
+	{
+		"drug":"Heroin",
+		"type": "shaped",
+		"recipe": [
+         	"DIRT",
+         	"RED_MUSHROOM",
+         	"RED_MUSHROOM",
+         	"AIR",
+         	"DIRT",
+         	"WOODEN_SWORD",
+         	"AIR",
+         	"DIRT",
+         	"AIR"
+    	]
+	},
+	{
+		"drug":"Molly",
+		"type": "shaped",
+		"recipe": [
+         	"IRON_INGOT",
+         	"IRON_INGOT",
+         	"IRON_INGOT",
+         	"GUNPOWDER",
+         	"WATER_BUCKET",
+         	"GUNPOWDER",
+         	"IRON_INGOT",
+         	"IRON_INGOT",
+         	"IRON_INGOT"
+    	]
+	},
+	{
+		"drug":"Ciggy",
+		"type": "shaped",
+		"recipe": [
+         	"AIR",
+         	"GUNPOWDER",
+         	"AIR",
+         	"PAPER",
+         	"STICK",
+         	"PAPER",
+         	"PAPER",
+         	"PAPER",
+         	"PAPER"
+    	]
+	},
+	{
+		"drug":"Shrooms",
+		"type": "shaped",
+		"recipe": [
+         	"DIRT",
+         	"DIRT",
+         	"DIRT",
+         	"STICK",
+         	"AIR",
+         	"STICK",
+         	"AIR",
+         	"BROWN_MUSHROOM",
+         	"AIR"
+    	]
+	},
+	{
+		"drug":"Salvia",
+		"type": "shaped",
+		"recipe": [
+         	"AIR",
+         	"GREEN_BED",
+         	"AIR",
+         	"GREEN_CANDLE",
+         	"GREEN_CANDLE",
+         	"GREEN_CANDLE",
+         	"GREEN_DYE",
+         	"AIR",
+         	"GREEN_DYE"
+    	]
+	},
+	{
+		"drug":"PCP",
+		"type": "shaped",
+		"recipe": [
+         	"WHEAT_SEEDS",
+         	"MELON_SEEDS",
+         	"PUMPKIN_SEEDS",
+         	"PUMPKIN_SEEDS",
+         	"MELON_SEEDS",
+        	"WHEAT_SEEDS",
+         	"WHEAT_SEEDS",
+         	"MELON_SEEDS",
+         	"PUMPKIN_SEEDS"
+    	]
+	},
+	{
+		"drug":"DMT",
+		"type": "shaped",
+		"recipe": [
+         	"SUGAR",
+         	"SUGAR",
+         	"SUGAR",
+         	"SUGAR",
+         	"GLOWSTONE_DUST",
+         	"SUGAR",
+         	"SUGAR",
+         	"GLOWSTONE_DUST",
+         	"SUGAR"
+    	]
+	},
+	{
+		"drug":"Alcohol",
+		"type": "shaped",
+		"recipe": [
+         	"AIR",
+         	"PAPER",
+         	"AIR",
+         	"GUNPOWDER",
+         	"GUNPOWDER",
+         	"GUNPOWDER",
+         	"WATER_BUCKET",
+         	"WATER_BUCKET",
+         	"WATER_BUCKET"
+    	]
+	},
+	{
+		"drug":"Flakka",
+		"type": "shaped",
+		"recipe": [
+         	"AIR",
+         	"BIRCH_DOOR",
+         	"AIR",
+         	"SWEET_BERRIES",
+         	"SWEET_BERRIES",
+         	"SWEET_BERRIES",
+         	"WATER_BUCKET",
+         	"AIR",
+         	"WATER_BUCKET"
+    	]
+	},
+	{
+		"drug":"Meth",
+		"type": "shaped",
+		"recipe": [
+         	"AIR",
+         	"DIRT",
+         	"AIR",
+         	"AIR",
+         	"PAPER",
+         	"AIR",
+         	"AIR",
+         	"GUNPOWDER",
+         	"AIR"
+    	]
+	},
+	{
+		"drug":"Ketamine",
+		"type": "shaped",
+		"recipe": [
+         	"SNOWBALL",
+         	"SNOWBALL",
+         	"SNOWBALL",
+         	"SNOWBALL",
+         	"LAVA_BUCKET",
+         	"SNOWBALL",
+         	"SNOWBALL",
+         	"SNOWBALL",
+         	"SNOWBALL"
+    	]
+	},
+	{
+		"drug":"Oxy",
+		"type": "shaped",
+		"recipe": [
+         	"WHITE_WOOL",
+         	"WHITE_WOOL",
+         	"WHITE_WOOL",
+         	"WATER_BUCKET",
+         	"AIR",
+         	"WATER_BUCKET",
+         	"AIR",
+         	"LAVA_BUCKET",
+         	"AIR"
+    	]
+	},
+	{
+		"drug":"Tussin",
+		"type": "shaped",
+		"recipe": [
+         	"WATER_BUCKET",
+         	"AIR",
+         	"WATER_BUCKET",
+         	"GLASS_BOTTLE",
+         	"AIR",
+         	"GLASS_BOTTLE",
+         	"WATER_BUCKET",
+         	"GLASS_BOTTLE",
+         	"WATER_BUCKET"
+    	]
+	},
+	{
+		"drug":"Xannx",
+		"type": "shaped",
+		"recipe": [
+         	"AIR",
+         	"GREEN_BED",
+         	"AIR",
+         	"WHITE_TULIP",
+         	"AIR",
+         	"WHITE_TULIP",
+         	"AIR",
+         	"GUNPOWDER",
+         	"AIR"
+    	]
+	}
+]
