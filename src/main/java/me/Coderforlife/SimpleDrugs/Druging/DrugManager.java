@@ -483,6 +483,8 @@ public class DrugManager {
 
     public void createDrugs() {
         sendConsoleMessage(ChatColor.BLUE + "[INFO] No Drugs where Found in your Folder. Creating Default Drugs!");
+        
+        // Create default drugs
         Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/drugs.json"));
         JsonArray drugs = new Gson().fromJson(reader, JsonArray.class);
         for(JsonElement drug : drugs) {
@@ -496,6 +498,21 @@ public class DrugManager {
 				e.printStackTrace();
 			}
         }
+        
+        // Create default drug crafting
+        Reader dReader = new InputStreamReader(this.getClass().getResourceAsStream("/drugcrafting.json"));
+        JsonArray drugRecipes = new Gson().fromJson(dReader, JsonArray.class);
+        for(JsonElement dRec : drugRecipes) {
+        	Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            try {
+            	FileWriter writer = new FileWriter(new File(drugRFolder, dRec.getAsJsonObject().get("drug").getAsString() + ".json"));
+				gson.toJson(dRec, writer);
+				writer.close();
+			} catch (JsonIOException | IOException e) {
+				e.printStackTrace();
+			}
+        }
+        loadRecipes();
         
         sendConsoleMessage("§aDefault Drugs Created! Enjoy Simple-Drugs :D");
     }
