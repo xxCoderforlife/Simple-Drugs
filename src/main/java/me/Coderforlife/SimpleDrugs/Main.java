@@ -45,10 +45,8 @@ public class Main extends JavaPlugin {
         drugHarvestAmount = new NamespacedKey(plugin, "SimpleDrugs-HarvestAmount");
         drugSeedKey = new NamespacedKey(plugin, "SimpleDrugs-DrugSeed");
         
-        drugManager = new DrugManager();
         settings = new Settings();
         messages = new Messages();
-        getDrugManager().loadFiles();
         
         sendConsoleMessage(header1);
         sendConsoleMessage("§aLoading Plugin...");
