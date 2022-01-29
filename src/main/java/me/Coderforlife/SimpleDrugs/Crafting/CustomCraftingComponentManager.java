@@ -27,7 +27,7 @@ public class CustomCraftingComponentManager {
 	
 	public CustomCraftingComponentManager() {
 		craftingComponents = new HashMap<>();
-    	if(!drugCFolder.exists()) drugCFolder.mkdir();
+    	if(!drugCFolder.exists()) drugCFolder.mkdirs();
 		
 		for(File f : drugCFolder.listFiles()) {
 			if(f.getName().endsWith(".json")) {
