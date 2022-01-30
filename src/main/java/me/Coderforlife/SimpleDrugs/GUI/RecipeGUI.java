@@ -2,8 +2,10 @@ package me.Coderforlife.SimpleDrugs.GUI;
 
 import java.util.ArrayList;
 
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -11,15 +13,27 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import net.md_5.bungee.api.ChatColor;
 
 public class RecipeGUI {
 
+    public RecipeGUI(){
+
+    }
+    private Drug drug;
+    public RecipeGUI(Drug d){
+        this.drug = d;
+
+    }
+    private Main plugin = Main.plugin;
 	// TODO: Recreate
 	
-    public Inventory create(Drug drug) {
-        Inventory inv = Bukkit.createInventory(null, 45, "§6§l" + drug.getName() + " Recipe");
+    public Inventory create() {
+        Inventory inv = Bukkit.createInventory(null, 45, drug.getDisplayname() + 
+        ChatColor.translateAlternateColorCodes('&', " &6&lRecipe"));
         ArrayList<ItemStack> stack = new ArrayList<>();
         // ShapedRecipe recipe = (ShapedRecipe) drug.getRecipe();
 
@@ -58,10 +72,10 @@ public class RecipeGUI {
         stack.add(recipe.getItems().get(7));
         stack.add(recipe.getItems().get(8));
 
-        for(int i = 0; i < 14; i++) {
+        for(int i = 0; i < 13; i++) {
             stack.add(blackglass());
         }
-
+        stack.add(craftingTable());
         inv.setContents(stack.toArray(new ItemStack[45]));
         return inv;
     }
@@ -72,6 +86,11 @@ public class RecipeGUI {
             return;
         }
         if(ev.getClickedInventory() != null && !ev.getClickedInventory().getType().equals(InventoryType.PLAYER)) {
+            if(ev.getCurrentItem().equals(craftingTable())){
+                ev.setCancelled(true);
+                Player p = (Player) ev.getWhoClicked();
+                p.sendMessage(drug.getDisplayname());
+            }
             ev.setCancelled(true);
         }
     }
@@ -88,6 +107,14 @@ public class RecipeGUI {
         meta.setDisplayName(" ");
         stack.setItemMeta(meta);
         return stack;
+    }
+
+    private ItemStack craftingTable(){
+        ItemStack craft = new ItemStack(Material.CRAFTING_TABLE);
+        ItemMeta im = craft.getItemMeta();
+        im.setDisplayName("§3§lClick Me To Craft The Drug");
+        craft.setItemMeta(im);
+        return craft;
     }
 
 }

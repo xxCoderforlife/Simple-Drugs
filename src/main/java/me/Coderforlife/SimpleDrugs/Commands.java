@@ -109,6 +109,20 @@ public class Commands implements CommandExecutor {
                             p.sendMessage(plugin.getMessages().getHeader());
                             p.sendMessage(plugin.getMessages().getPrefix() + "§4§oYou are running version:§f " + Main.plugin.getDescription().getVersion());
                         }
+                    }else if(args[0].equalsIgnoreCase("give")){
+                        if(p.hasPermission("drugs.give")){
+                            p.sendMessage(plugin.getMessages().getPrefix() + 
+                            ChatColor.translateAlternateColorCodes('&', "&f&oUse &a&o/drugs give &c&o<drug>"));
+                        }else{
+                            p.sendMessage(plugin.getMessages().getPermission());
+                        }
+                    }else if(args[0].equalsIgnoreCase("recipe")){
+                        if(p.hasPermission("drugs.give")){
+                            p.sendMessage(plugin.getMessages().getPrefix() + 
+                           ChatColor.translateAlternateColorCodes('&', "&f&lUse &a&o/drugs recipe &c&o<drug>"));
+                        }else{
+                            p.sendMessage(plugin.getMessages().getPermission());
+                        }
                     }
                 } else if(args.length == 2) {
                     if(args[0].equalsIgnoreCase("recipe")) {
@@ -128,7 +142,7 @@ public class Commands implements CommandExecutor {
                         	return true;
                         }
                         
-                        p.openInventory(new RecipeGUI().create(drug));
+                        p.openInventory(new RecipeGUI(drug).create());
                     } else if(args[0].equalsIgnoreCase("bagofdrugs")) {
                         if(p.hasPermission("drugs.command.bagofdrugs.others")) {
                             for(Player players : Bukkit.getOnlinePlayers()) {

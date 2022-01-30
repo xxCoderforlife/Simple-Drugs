@@ -11,22 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TabCommands implements TabCompleter {
+    private String[] commands = {"help","recipe","list","bagofdrugs","soberup","give","version","settings"};
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> tab = new ArrayList<>();
         if(args.length == 0) {
             tab.add("drugs");
         } else if(args.length == 1) {
-            tab.add("help");
-            tab.add("recipe");
-            tab.add("list");
-            tab.add("bagofdrugs");
-            tab.add("soberup");
-            tab.add("give");
-            tab.add("version");
-            tab.add("settings");
-            //tab.add("sell");
-            //tab.add("reload");
+            for(String s : commands){
+                tab.add(s);
+            }
         } else if(args.length == 2) {
             if(args[0].equalsIgnoreCase("bagofdrugs") || args[0].equalsIgnoreCase("soberup")) {
                 for(Player p : Bukkit.getOnlinePlayers()) {
