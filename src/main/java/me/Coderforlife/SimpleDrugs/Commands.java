@@ -1,7 +1,11 @@
 package me.Coderforlife.SimpleDrugs;
 
-import java.util.Arrays;
-
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
+import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
+import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
+import me.Coderforlife.SimpleDrugs.GUI.RecipeGUI;
+import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -11,12 +15,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
-import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
-import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
-import me.Coderforlife.SimpleDrugs.Druging.Drug;
-import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
-import me.Coderforlife.SimpleDrugs.GUI.RecipeGUI;
-import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
+import java.util.Arrays;
 
 public class Commands implements CommandExecutor {
     private Main plugin = Main.plugin;
@@ -29,7 +28,7 @@ public class Commands implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String Commandlabel, String[] args) {
         if(sender instanceof Player) {
-        	Player p = (Player)sender;
+            Player p = (Player) sender;
             if(p.hasPermission("drugs.main")) {
                 if(args.length == 0) {
                     p.sendMessage(plugin.getMessages().getHeader());
@@ -109,18 +108,16 @@ public class Commands implements CommandExecutor {
                             p.sendMessage(plugin.getMessages().getHeader());
                             p.sendMessage(plugin.getMessages().getPrefix() + "§4§oYou are running version:§f " + Main.plugin.getDescription().getVersion());
                         }
-                    }else if(args[0].equalsIgnoreCase("give")){
-                        if(p.hasPermission("drugs.give")){
-                            p.sendMessage(plugin.getMessages().getPrefix() + 
-                            ChatColor.translateAlternateColorCodes('&', "&f&oUse &a&o/drugs give &c&o<drug>"));
-                        }else{
+                    } else if(args[0].equalsIgnoreCase("give")) {
+                        if(p.hasPermission("drugs.give")) {
+                            p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', "&f&oUse &a&o/drugs give &c&o<drug>"));
+                        } else {
                             p.sendMessage(plugin.getMessages().getPermission());
                         }
-                    }else if(args[0].equalsIgnoreCase("recipe")){
-                        if(p.hasPermission("drugs.give")){
-                            p.sendMessage(plugin.getMessages().getPrefix() + 
-                           ChatColor.translateAlternateColorCodes('&', "&f&lUse &a&o/drugs recipe &c&o<drug>"));
-                        }else{
+                    } else if(args[0].equalsIgnoreCase("recipe")) {
+                        if(p.hasPermission("drugs.give")) {
+                            p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', "&f&lUse &a&o/drugs recipe &c&o<drug>"));
+                        } else {
                             p.sendMessage(plugin.getMessages().getPermission());
                         }
                     }
@@ -131,18 +128,18 @@ public class Commands implements CommandExecutor {
                             p.sendMessage(plugin.getMessages().getPrefix() + "§e" + args[1] + " §cdoes not exist.");
                             return true;
                         }
-                        
+
                         if(drug.getRecipe() == null) {
-                        	p.sendMessage(plugin.getMessages().getPrefix() + "§e" + args[1] + " §cdoes not have a recipe.");
-                        	return true;
+                            p.sendMessage(plugin.getMessages().getPrefix() + "§e" + args[1] + " §cdoes not have a recipe.");
+                            return true;
                         }
-                        
+
                         if(drug.getRecipe() instanceof SDShapeless) {
-                        	p.sendMessage(plugin.getMessages().getPrefix() + "§e" + args[1] + " §cdoes not have support for shapeless.");
-                        	return true;
+                            p.sendMessage(plugin.getMessages().getPrefix() + "§e" + args[1] + " §cdoes not have support for shapeless.");
+                            return true;
                         }
-                        
-                        p.openInventory(new RecipeGUI(drug).create());
+
+                        p.openInventory(new RecipeGUI(drug).create(p));
                     } else if(args[0].equalsIgnoreCase("bagofdrugs")) {
                         if(p.hasPermission("drugs.command.bagofdrugs.others")) {
                             for(Player players : Bukkit.getOnlinePlayers()) {
