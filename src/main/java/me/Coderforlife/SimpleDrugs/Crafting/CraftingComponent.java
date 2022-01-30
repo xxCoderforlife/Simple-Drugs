@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import com.google.gson.JsonArray;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 
@@ -52,6 +53,16 @@ public class CraftingComponent {
 	public void registerRecipe() {
 		switch(type) {
 		case FURNACE:
+			List<ItemStack> furnaceMats = loadMaterialsForCrafting(fileName, materials);
+			
+			if(furnaceMats.size() > 1 || furnaceMats.size() == 0) {
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Can only have one input for Recipe using FURNACE type");
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+			}
+			
+			SDFurnace furnace = new SDFurnace(name, result, furnaceMats.get(0), 0f, 90);
+			furnace.registerRecipe();
 			break;
 		case SHAPED:
 			SDShaped shaped = new SDShaped(name, result);

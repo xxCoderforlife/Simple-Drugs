@@ -33,6 +33,7 @@ import com.google.gson.JsonSyntaxException;
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent;
 import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
@@ -254,7 +255,18 @@ public class DrugManager {
     private boolean loadSeedCrafting(String fileName, DrugPlantItem dpi, JsonArray ja, DrugCraftingType dct) {
     	switch(dct) {
 		case FURNACE:
-			return false;
+			List<ItemStack> furnaceMats = loadMaterialsForCrafting(fileName, ja);
+			
+			if(furnaceMats.size() > 1 || furnaceMats.size() == 0) {
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Can only have one input for Recipe using FURNACE type");
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+			}
+			
+			SDFurnace furnace = new SDFurnace("DrugSeed_" + dpi.getDrug().getName(), dpi.makeItem(), furnaceMats.get(0), 0f, 90);
+			furnace.registerRecipe();
+			
+			return true;
 		case SHAPED:
 			SDShaped shaped = new SDShaped("DrugSeed_" + dpi.getDrug().getName(), dpi.makeItem());
 			List<ItemStack> mats = loadMaterialsForCrafting(fileName, ja);
@@ -293,6 +305,16 @@ public class DrugManager {
     private SDRecipe loadCraftingRecipe(String fileName, Drug d, JsonArray ja, DrugCraftingType dct) {
     	switch(dct) {
 		case FURNACE:
+			List<ItemStack> furnaceMats = loadMaterialsForCrafting(fileName, ja);
+			
+			if(furnaceMats.size() > 1 || furnaceMats.size() == 0) {
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Can only have one input for Recipe using FURNACE type");
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+			}
+			
+			SDFurnace furnace = new SDFurnace(d.getName(), d.getItem(), furnaceMats.get(0), 0f, 90);
+			furnace.registerRecipe();
 			return null;
 		case SHAPED:
 			SDShaped shaped = new SDShaped(d.getName(), d.getItem());
@@ -513,6 +535,20 @@ public class DrugManager {
 			}
         }
         loadRecipes();
+        
+        Reader sReader = new InputStreamReader(getClass().getResourceAsStream("/seedcrafting.json"));
+        JsonArray seedRecipes = new Gson().fromJson(sReader, JsonArray.class);
+        for(JsonElement sRec : seedRecipes) {
+        	Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            try {
+            	FileWriter writer = new FileWriter(new File(drugSFolder, sRec.getAsJsonObject().get("drug").getAsString() + ".json"));
+				gson.toJson(sRec, writer);
+				writer.close();
+			} catch (JsonIOException | IOException e) {
+				e.printStackTrace();
+			}
+        }
+        loadSeedRecipes();
         
         sendConsoleMessage("§aDefault Drugs Created! Enjoy Simple-Drugs :D");
     }
