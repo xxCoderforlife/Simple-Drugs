@@ -3,15 +3,18 @@ package me.Coderforlife.SimpleDrugs.Crafting;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 
 public class RecipeManager {
 
-private List<SDRecipe> recipes = new ArrayList<>();
+	private List<SDRecipe> recipes = new ArrayList<>();
+	private List<NamespacedKey> keys = new ArrayList<>();
 	
 	public void addRecipe(SDShapeless r) {
 		recipes.add(r);
@@ -21,11 +24,23 @@ private List<SDRecipe> recipes = new ArrayList<>();
 		recipes.add(r);
 	}
 	
+	public void addRecipe(SDFurnace r) {
+		recipes.add(r);
+	}
+	
+	public void addKey(NamespacedKey key) {
+		keys.add(key);
+	}
+	
 	public SDRecipe getRecipeFromResult(ItemStack result) {
 		for(SDRecipe r : recipes) {
 			if(r.getResult().equals(result)) return r;
 		}
 		return null;
+	}
+	
+	public List<NamespacedKey> getKeys() {
+		return keys;
 	}
 	
 	public boolean itemsMatch(ItemStack[] items, SDShapeless shapeless) {

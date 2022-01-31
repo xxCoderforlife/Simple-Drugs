@@ -20,7 +20,8 @@ public class SDShaped extends SDRecipe {
 
 	@Override
 	public void registerRecipe() {
-		ShapedRecipe r = new ShapedRecipe(new NamespacedKey(Main.plugin, "drugs_crafting_" + getName()), getResult());
+		NamespacedKey nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + getName());
+		ShapedRecipe r = new ShapedRecipe(nk, getResult());
 		r.shape("ABC", "DEF", "GHI");
 		r.setIngredient('A', new RecipeChoice.ExactChoice(items.get(0)));
 		r.setIngredient('B', new RecipeChoice.ExactChoice(items.get(1)));
@@ -31,7 +32,7 @@ public class SDShaped extends SDRecipe {
 		r.setIngredient('G', new RecipeChoice.ExactChoice(items.get(6)));
 		r.setIngredient('H', new RecipeChoice.ExactChoice(items.get(7)));
 		r.setIngredient('I', new RecipeChoice.ExactChoice(items.get(8)));
-		
+		registerNamespacedKey(nk);
 		Bukkit.getServer().addRecipe(r);
 		Main.plugin.getRecipeManager().addRecipe(this);
 	}
