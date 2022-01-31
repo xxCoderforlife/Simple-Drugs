@@ -1,60 +1,36 @@
 package me.Coderforlife.SimpleDrugs.Druging;
 
-import org.bukkit.Effect;
-import org.bukkit.Location;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.CraftingInventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Settings;
-import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
+import net.md_5.bungee.api.ChatColor;
 
 public class BagOfDrugs implements Listener {
 
     private final String bagName = "§6§lBag Of Drugs";
     private final String invName = "§6§l§oBag Of Drugs";
+    private ItemStack bagofdrugs = BagOfDrugsStack();
     private Main plugin = Main.plugin;
     Settings s = plugin.getSettings();
 
-    @EventHandler
-    public void BagOpen(PlayerInteractEvent ev) {
-        Player p = ev.getPlayer();
-        Action pa = ev.getAction();
 
-        if(pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
-            if(p.getInventory().getItemInMainHand().hasItemMeta()) {
-                if(p.hasPermission("drugs.use.bagofdrugs")) {
-                    if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(bagName)) {
-                        Location loc = p.getLocation();
-                        for(int degree = 0; degree < 360; degree++) {
-                            double radians = Math.toRadians(degree);
-                            double x = Math.cos(radians);
-                            double z = Math.sin(radians);
-                            loc.add(x, 0, z);
-                            loc.getWorld().playEffect(loc, Effect.SMOKE, degree);
-                            loc.subtract(x, 0, z);
-                        }
-                        p.playSound(p.getLocation(), Sound.AMBIENT_CRIMSON_FOREST_ADDITIONS, 1, (float) 0.4);
-                        BagOfDrugsGUI bag = new BagOfDrugsGUI();
-                        p.openInventory(bag.create());
-                    }
-                }
-
-            }
-        }
-    }
 
     @EventHandler
     public void onDragEvent(InventoryDragEvent ev) {
@@ -100,6 +76,24 @@ public class BagOfDrugs implements Listener {
 
     public String getBagName(){
         return bagName;
+    }
+    private ItemStack BagOfDrugsStack() {
+        ItemStack stack = new ItemStack(Material.NETHER_STAR);
+        ItemMeta meta = stack.getItemMeta();
+        meta.setDisplayName(this.bagName);
+        List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.DARK_GRAY + "---------------------");
+        lore.add(ChatColor.RED + "A Bag Full Of Drugs :)");
+        lore.add("Enjoy.");
+        lore.add(ChatColor.ITALIC + "Simple-Drugs®");
+        meta.setLore(lore);
+        meta.addEnchant(Enchantment.BINDING_CURSE, 7766, true);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
+        stack.setItemMeta(meta);
+        return stack;
+    }
+    public ItemStack getBagOfDrugs(){
+        return this.bagofdrugs;
     }
 
 }

@@ -20,6 +20,8 @@ import me.Coderforlife.SimpleDrugs.Events.DrugUseListener;
 import me.Coderforlife.SimpleDrugs.Events.InventoryListener;
 import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
 import me.Coderforlife.SimpleDrugs.Events.PlayerRespawn;
+import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
+import me.Coderforlife.SimpleDrugs.GUI.RecipeGUI;
 import me.Coderforlife.SimpleDrugs.Util.Messages;
 import net.md_5.bungee.api.ChatColor;
 
@@ -80,6 +82,8 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new RecipeChecker(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
         this.getServer().getPluginManager().registerEvents(new BagOfDrugs(), this);
+        this.getServer().getPluginManager().registerEvents(new BagOfDrugsGUI(), this);
+        this.getServer().getPluginManager().registerEvents(new RecipeGUI(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         this.getServer().getPluginManager().registerEvents(new DrugUseListener(), this);
         this.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
