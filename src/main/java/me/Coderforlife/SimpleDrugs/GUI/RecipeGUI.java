@@ -18,8 +18,6 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 
@@ -32,11 +30,9 @@ public class RecipeGUI implements Listener{
     private Drug drug;
     private Main plugin = Main.plugin;
     private Inventory inv;
-    private HashMap<ItemStack, Integer> needed = new HashMap<>();
 
 
     public RecipeGUI(Drug d) {
-        Bukkit.getPluginManager().registerEvents(this, plugin);
         this.drug = d;
 
     }
@@ -46,8 +42,6 @@ public class RecipeGUI implements Listener{
     public Inventory create(Player p) {
         if(drug.getRecipe() instanceof SDShapeless){
             inv = Bukkit.createInventory(null, InventoryType.WORKBENCH);
-           // ArrayList<ItemStack> stack = new ArrayList<>();
-            // ShapedRecipe recipe = (ShapedRecipe) drug.getRecipe();
     
             SDShapeless recipe = (SDShapeless) drug.getRecipe();
             inv.setItem(0, drug.getItem());
@@ -66,8 +60,7 @@ public class RecipeGUI implements Listener{
         if(drug.getRecipe() instanceof SDShaped){
             inv = Bukkit.createInventory(p, InventoryType.WORKBENCH);
            // ArrayList<ItemStack> stack = new ArrayList<>();
-            // ShapedRecipe recipe = (ShapedRecipe) drug.getRecipe();
-    
+
             SDShaped recipe1 = (SDShaped) drug.getRecipe();
             inv.setItem(0, drug.getItem());
             inv.setItem(1, recipe1.getItems().get(0));
@@ -83,6 +76,7 @@ public class RecipeGUI implements Listener{
         if(drug.getRecipe() instanceof SDFurnace){
              inv = Bukkit.createInventory(null, InventoryType.FURNACE, drug.getDisplayname() + 
             ChatColor.translateAlternateColorCodes('&', " &6&lRecipe"));
+            //TODO Add Furnace Inventory
         }
         return inv;
 
@@ -147,6 +141,7 @@ public class RecipeGUI implements Listener{
                     p.closeInventory();
                 }else{
                     p.sendMessage(plugin.getMessages().getPrefix() + "You can't craft " + drug.getDisplayname());
+
                 }
             }
             ev.setCancelled(true);
@@ -161,7 +156,7 @@ public class RecipeGUI implements Listener{
         }
     }
 }
-  public void removeInventoryItems(PlayerInventory inv, Material type, int amount) {
+  public void removeInventoryItems(PlayerInventory inv, Material drug, int amount) {
     for (ItemStack is : inv.getContents()) {
         if(is == null){return;}
         for(Drug d : plugin.getDrugManager().getallDrugs()){
@@ -169,7 +164,7 @@ public class RecipeGUI implements Listener{
                 return;
             }
         }
-        if (is != null && is.getType() == type) {
+        if (is != null && is.getType() == drug) {
             int newamount = is.getAmount() - amount;
             if (newamount > 0) {
                 is.setAmount(newamount);
@@ -183,30 +178,8 @@ public class RecipeGUI implements Listener{
     }
 }
 
-    private ItemStack blackglass() {
-        ItemStack stack = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
-        ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName(" ");
-        stack.setItemMeta(meta);
-        return stack;
-    }
-
-    private ItemStack craftingTable() {
-        ItemStack craft = new ItemStack(Material.CRAFTING_TABLE);
-        ItemMeta im = craft.getItemMeta();
-        im.setDisplayName("§3§lClick Me To Craft The Drug");
-        craft.setItemMeta(im);
-        return craft;
-    }
-    private ItemStack noItems(){
-        ItemStack bar = new ItemStack(Material.BARRIER);
-        ItemMeta im = bar.getItemMeta();
-        im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&4&o&lYou don't have enough items to make " + drug.getDisplayname()));
-        bar.setItemMeta(im);
-        return bar;
-    }
-
     private boolean cancraft(Player p, SDRecipe recipe) {
+         HashMap<ItemStack, Integer> needed = new HashMap<>();
         for(ItemStack stack : recipe.getItems()) {
             if(stack.getType().equals(Material.AIR)) {
                 continue;

@@ -19,10 +19,6 @@ public class InventoryListener implements Listener {
             SettingsGUI.handleClick(event);
             return;
         }
-
-        if(name.equalsIgnoreCase(BagOfDrugsGUI.invName)) {
-            BagOfDrugsGUI.handleInventoryClick(event);
-        }
     }
 
 }

@@ -1,35 +1,26 @@
 package me.Coderforlife.SimpleDrugs.Events;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
-import net.md_5.bungee.api.ChatColor;
 
 public class PlayerJoin implements Listener {
 
-    public ItemStack bag = HELLO();
     private Main plugin = Main.plugin;
+    BagOfDrugs bd = new BagOfDrugs();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent ev) {
         Player p = ev.getPlayer();
         p.discoverRecipes(Main.plugin.getRecipeManager().getKeys());
         if(plugin.getSettings().isBagOfDrugs_GiveOnJoin()) {
-            if(!p.getInventory().contains(bag)) {
-                p.getInventory().addItem(bag);
+            if(!p.getInventory().contains(bd.getBagOfDrugs())) {
+                p.getInventory().addItem(bd.getBagOfDrugs());
             }
         }
         if(plugin.getSettings().isJoinMessage()) {
@@ -42,20 +33,5 @@ public class PlayerJoin implements Listener {
         }
     }
 
-    private ItemStack HELLO() {
-        ItemStack stack = new ItemStack(Material.NETHER_STAR);
-        ItemMeta meta = stack.getItemMeta();
-        BagOfDrugs bd = new BagOfDrugs();
-        meta.setDisplayName(bd.getBagName());
-        List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.DARK_GRAY + "---------------------");
-        lore.add(ChatColor.RED + "A Bag Full Of Drugs :)");
-        lore.add("Enjoy.");
-        lore.add(ChatColor.ITALIC + "Simple-Drugs®");
-        meta.setLore(lore);
-        meta.addEnchant(Enchantment.BINDING_CURSE, 7766, true);
-        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
-        stack.setItemMeta(meta);
-        return stack;
-    }
+    
 }

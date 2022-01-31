@@ -3,7 +3,6 @@ package me.Coderforlife.SimpleDrugs;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
-import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
 import me.Coderforlife.SimpleDrugs.GUI.RecipeGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
 import org.bukkit.Bukkit;
@@ -19,7 +18,7 @@ import java.util.Arrays;
 
 public class Commands implements CommandExecutor {
     private Main plugin = Main.plugin;
-    private PlayerJoin pj = new PlayerJoin();
+    BagOfDrugs bd = new BagOfDrugs();
 
     public String dash = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "- ";
 
@@ -89,9 +88,9 @@ public class Commands implements CommandExecutor {
                         }
                     } else if(args[0].equalsIgnoreCase("bagofdrugs")) {
                         if(p.hasPermission("drugs.command.bagofdrugs")) {
-                            if(!p.getInventory().contains(pj.bag)) {
+                            if(!p.getInventory().contains(bd.getBagOfDrugs())) {
                                 p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.GRAY + "You've Been Given The Bag Of Drugs");
-                                p.getInventory().addItem(pj.bag);
+                                p.getInventory().addItem(bd.getBagOfDrugs());
                             } else {
                                 p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED + "You already have the bag");
                             }
@@ -145,12 +144,12 @@ public class Commands implements CommandExecutor {
                             for(Player players : Bukkit.getOnlinePlayers()) {
                                 if(args[1].equalsIgnoreCase(players.getName())) {
                                     if(players.isOnline()) {
-                                        if(players.getInventory().contains(pj.bag)) {
+                                        if(players.getInventory().contains(bd.getBagOfDrugs())) {
                                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.GRAY + players.getDisplayName() + " Already has a bag");
                                         } else {
                                             BagOfDrugs bd = new BagOfDrugs();
                                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.GRAY + "You sent " + players.getDisplayName() + " a " + bd.getBagName());
-                                            players.getInventory().addItem(pj.bag);
+                                            players.getInventory().addItem(bd.getBagOfDrugs());
                                             players.sendMessage(plugin.getMessages().getPrefix() + ChatColor.GRAY + p.getDisplayName() + " Sent you a " + bd.getBagName());
                                         }
                                     } else {

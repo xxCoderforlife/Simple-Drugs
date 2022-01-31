@@ -14,6 +14,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.StringJoiner;
 
+import javax.annotation.Nullable;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -485,12 +487,14 @@ public class DrugManager {
     	return drugSeeds.get(d);
     }
 
-    public Drug matchDrug(ItemStack item) {
-        for(Drug drug : drugs.values()) {
-            if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(drug.getDisplayname())) {
-                return drug;
-            }
-        }
+    public Drug matchDrug(@Nullable ItemStack item) {
+		if(isDrugItem(item)){
+			for(Drug drug : drugs.values()) {
+				if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(drug.getDisplayname())) {
+					return drug;
+				}
+			}
+		}
         return null;
     }
 

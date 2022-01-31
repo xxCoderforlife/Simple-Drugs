@@ -6,20 +6,21 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 
 public class PlayerRespawn implements Listener {
 
-    private PlayerJoin pj = new PlayerJoin();
     private Main plugin = Main.plugin;
+    BagOfDrugs bd = new BagOfDrugs();
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent ev) {
         Player p = ev.getPlayer();
         if(plugin.getSettings().isBagOfDrugs_GiveOnRespawn()) {
-            if(p.getInventory().contains(pj.bag))
+            if(p.getInventory().contains(bd.getBagOfDrugs()))
                 return;
 
-            p.getInventory().addItem(pj.bag);
+            p.getInventory().addItem(bd.getBagOfDrugs());
         }
     }
 }
