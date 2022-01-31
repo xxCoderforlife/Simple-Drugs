@@ -1,11 +1,17 @@
 package me.Coderforlife.SimpleDrugs;
 
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.BrewerInventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Coderforlife.SimpleDrugs.Crafting.CustomCraftingComponentManager;
 import me.Coderforlife.SimpleDrugs.Crafting.RecipeManager;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.RecipeChecker;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.BrewAction;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.BrewingRecipe;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.BrewingRecipeListener;
 import me.Coderforlife.SimpleDrugs.DrugPlants.PlantItemListener;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
@@ -52,6 +58,24 @@ public class Main extends JavaPlugin {
         sendConsoleMessage("§aLoading Plugin...");
 
         new Setup();
+        
+        ItemStack result = new ItemStack(Material.DIAMOND);
+        ItemStack ing = new ItemStack(Material.COAL);
+        ItemStack fuel = new ItemStack(Material.GOLD_INGOT);
+        
+        BrewingRecipe br = new BrewingRecipe("TestThing", result, ing, fuel, new BrewAction() {
+
+			@Override
+			public void Brew(BrewerInventory inv, ItemStack stack, ItemStack ingredient) {
+				if(!stack.getType().equals(Material.DIAMOND)) return;
+				if(ingredient.getType().equals(Material.COAL)) {
+					stack.setType(Material.EMERALD);
+				}
+			}
+        	
+        }, 25, 25);
+        
+        br.registerRecipe();
 
         this.getServer().getPluginManager().registerEvents(new RecipeChecker(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
@@ -61,6 +85,7 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
         this.getServer().getPluginManager().registerEvents(new CraftingEvent(), this);
         this.getServer().getPluginManager().registerEvents(new PlantItemListener(), this);
+        this.getServer().getPluginManager().registerEvents(new BrewingRecipeListener(), this);
         this.getCommand("drugs").setExecutor(new Commands());
         this.getCommand("drugs").setTabCompleter(new TabCommands());
 
