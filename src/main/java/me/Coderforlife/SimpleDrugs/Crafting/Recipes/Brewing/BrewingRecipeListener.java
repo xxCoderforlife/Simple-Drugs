@@ -75,46 +75,39 @@ public class BrewingRecipeListener implements Listener {
 					p.setItemOnCursor(item);
 				}
 			}
+		} else if(ct.equals(ClickType.RIGHT)) {
+			if(clickedSlot == 0 || clickedSlot == 1 || clickedSlot == 2) {
+				if(item == null || (item != null && item.getType().equals(Material.AIR))) {
+					ItemStack copy = item2.clone();
+					copy.setAmount(1);
+					i.setItem(clickedSlot, copy);
+					item2.setAmount(item2.getAmount() - 1);
+				}
+				if(item2 == null || (item2 != null && item2.getType().equals(Material.AIR))) {
+					if(item.getType().equals(Material.AIR)) return;
+					p.setItemOnCursor(item);
+					i.setItem(clickedSlot, null);
+				}
+			} else {
+				if(item == null || (item != null && item.getType().equals(Material.AIR))) {
+					p.setItemOnCursor(item);
+					i.setItem(clickedSlot, item2);
+				} else if((item != null && item.getType() != Material.AIR) && (item2 == null || (item2 != null && item2.getType().equals(Material.AIR)))) {
+					ItemStack clone = item.clone();
+					clone.setAmount(item.getAmount() % 2 == 0 ? firstAmount - half : firstAmount - half - 1);
+					p.setItemOnCursor(clone);
+					item.setAmount(firstAmount - half);
+				} else if(areItemsSame) {
+					if((firstAmount + 1) <= stack) {
+						item2.setAmount(secondAmount - 1);
+						item.setAmount(firstAmount + 1);
+					}
+				} else if(!areItemsSame) {
+					i.setItem(clickedSlot, item2);
+					p.setItemOnCursor(item);
+				}
+			}
 		}
-		
-//		if(ct.equals(ClickType.LEFT)) {
-//			if(item == null || (item != null && item.getType().equals(Material.AIR))) {
-//				p.setItemOnCursor(item);
-//				i.setItem(clickedSlot, item2);
-//			} else if(areItemsSame) {
-//				int used = stack - firstAmount;
-//				if(secondAmount <= used) {
-//					item.setAmount(firstAmount + secondAmount);
-//					p.setItemOnCursor(null);
-//				} else {
-//					item2.setAmount(secondAmount - used);
-//					item.setAmount(firstAmount + used);
-//					p.setItemOnCursor(item2);
-//				}
-//			} else if (!areItemsSame) {
-//				i.setItem(clickedSlot, item2);
-//				p.setItemOnCursor(item);
-//			}
-//		} else if(ct.equals(ClickType.RIGHT)) {
-//			if(item == null || (item != null && item.getType().equals(Material.AIR))) {
-//				p.setItemOnCursor(item);
-//				i.setItem(clickedSlot, item2);
-//			} else if((item != null && item.getType() != Material.AIR) && (item2 != null || (item2 != null && item2.getType().equals(Material.AIR)))) {
-//				ItemStack clone = item.clone();
-//				clone.setAmount(item.getAmount() % 2 == 0 ? firstAmount - half : firstAmount - half - 1);
-//				p.setItemOnCursor(clone);
-//				
-//				item.setAmount(firstAmount - half);
-//			} else if(areItemsSame) {
-//				if((firstAmount + 1) <= stack) {
-//					item2.setAmount(secondAmount - 1);
-//					item.setAmount(firstAmount + 1);
-//				}
-//			} else if(!areItemsSame) {
-//				i.setItem(clickedSlot, item2);
-//				p.setItemOnCursor(item);
-//			}
-//		}
 		
 		if(((BrewerInventory)i).getIngredient() == null) return;
 		
