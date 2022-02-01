@@ -4,17 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
 
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.BrewingRecipe;
 
 public class RecipeManager {
 
 	private List<SDRecipe> recipes = new ArrayList<>();
 	private List<NamespacedKey> keys = new ArrayList<>();
+	private List<BrewingRecipe> brewingRecipes = new ArrayList<>();
 	
 	public void addRecipe(SDShapeless r) {
 		recipes.add(r);
@@ -36,6 +39,27 @@ public class RecipeManager {
 		for(SDRecipe r : recipes) {
 			if(r.getResult().equals(result)) return r;
 		}
+		return null;
+	}
+	
+	public void addBrewingRecipe(BrewingRecipe br) {
+		brewingRecipes.add(br);
+	}
+	
+	public List<BrewingRecipe> getBrewingRecipes() {
+		return brewingRecipes;
+	}
+	
+	public BrewingRecipe getBrewingRecipe(BrewerInventory inv) {
+		if(inv.getFuel() == null) return null;
+		if(inv.getIngredient() == null) return null;
+		
+		for(BrewingRecipe br : brewingRecipes) {
+			if(inv.getIngredient().isSimilar(br.getIngredient()) && inv.getFuel().isSimilar(br.getFuel())) {
+				return br;
+			}
+		}
+		
 		return null;
 	}
 	

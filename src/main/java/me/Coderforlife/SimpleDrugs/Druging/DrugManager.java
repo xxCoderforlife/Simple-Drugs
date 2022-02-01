@@ -575,6 +575,7 @@ public class DrugManager {
         }
         loadRecipes();
         
+        // Create default seed crafting
         Reader sReader = new InputStreamReader(getClass().getResourceAsStream("/seedcrafting.json"));
         JsonArray seedRecipes = new Gson().fromJson(sReader, JsonArray.class);
         for(JsonElement sRec : seedRecipes) {
