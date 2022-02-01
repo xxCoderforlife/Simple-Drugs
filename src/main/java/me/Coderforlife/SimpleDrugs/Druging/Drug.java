@@ -38,7 +38,14 @@ public class Drug {
      */
     public void influencePlayer(Player p) {
         for(DrugEffect effect : this.effects) {
-            p.addPotionEffect(new PotionEffect(effect.getEffect(), effect.getTime(), effect.getIntensity()));
+            if(p.hasPotionEffect(effect.getEffect())){
+                int more = effect.getTime() * 2;
+                p.addPotionEffect(new PotionEffect(effect.getEffect(), more, effect.getIntensity()));
+            }
+            if(!(p.hasPotionEffect(effect.getEffect()))){
+                p.addPotionEffect(new PotionEffect(effect.getEffect(), effect.getTime(), effect.getIntensity()));
+
+            }
         }
     }
 

@@ -20,10 +20,9 @@ public class CraftingEvent implements Listener {
                 if(e.getInventory().getResult().equals(drugs.getItem())) {
                     if(!p.hasPermission("drugs.craft" + drugs.getName().toLowerCase())) {
                         e.setCancelled(true);
-                    } else {
                         p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED + "You don't have permission to use that command.");
                         p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.craft." + drugs.getName());
-                    }
+                    }  
                 }
             }
         }
