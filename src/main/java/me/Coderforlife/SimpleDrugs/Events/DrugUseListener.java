@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -65,6 +66,21 @@ public class DrugUseListener implements Listener {
         boolean isDrug = plugin.getDrugManager().matchDrug(stack) != null;
         if(isDrug) {
             ev.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void HitPlayerWithDrug(EntityDamageByEntityEvent ev){
+        if(!(ev.getDamager() instanceof Player)){
+            return;
+        }
+        Player hitter = (Player) ev.getDamager();
+        Player victim = (Player) ev.getEntity();
+        ItemStack hand = hitter.getInventory().getItemInMainHand();
+        if(plugin.getDrugManager().isDrugItem(hand)){
+            Drug d = plugin.getDrugManager().matchDrug(hand);
+            hand.setAmount(0);
+            d.influencePlayer(victim);
         }
     }
 }

@@ -11,8 +11,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -20,6 +22,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.GUI.Framework.SDRecipeInventory;
 import net.md_5.bungee.api.ChatColor;
 
 public class BagOfDrugsGUI implements Listener {
@@ -34,6 +37,9 @@ public class BagOfDrugsGUI implements Listener {
 
     @EventHandler
     public void BagOpen(PlayerInteractEvent ev) {
+        if(ev.getHand().equals(EquipmentSlot.OFF_HAND)){
+            return;
+        }
         Player p = ev.getPlayer();
         Action pa = ev.getAction();
 
@@ -49,7 +55,7 @@ public class BagOfDrugsGUI implements Listener {
                         loc.getWorld().playEffect(loc, Effect.SMOKE, degree);
                         loc.subtract(x, 0, z);
                     }
-                    p.playSound(p.getLocation(), Sound.AMBIENT_CRIMSON_FOREST_ADDITIONS, 1, (float) 0.4);
+                    p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP ,1, (float) 0.4);
                     p.openInventory(create());
                 }
             }else{
@@ -90,20 +96,24 @@ public class BagOfDrugsGUI implements Listener {
             return;
         }
         if(plugin.getDrugManager().isDrugItem(clickedItem)){
-            Drug d = plugin.getDrugManager().matchDrug(clickedItem);
-            if(ev.isShiftClick()){
-                ItemStack d64 = d.getItem();
-                d64.setAmount(64);
-                p.getInventory().addItem(d64);
-            }   
+            Drug d = plugin.getDrugManager().matchDrug(clickedItem);   
             if(ev.isLeftClick()){
+                if(ev.getClick() == ClickType.SHIFT_LEFT){
+                    p.playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, (float) 1.0, (float) 1.0);
+                    ItemStack d64 = d.getItem();
+                    d64.setAmount(64);
+                    p.getInventory().addItem(d64);
+                    return;
+                }
                 p.getInventory().addItem(d.getItem());
+                p.playSound(p.getLocation(), Sound.ITEM_FLINTANDSTEEL_USE, (float) 1.0, (float) 1.0);
                 p.sendMessage(plugin.getMessages().getPrefix() + 
                 ChatColor.translateAlternateColorCodes('&', "You've been given " + d.getDisplayname()));
             }
             if(ev.isRightClick()){
-                p.closeInventory();;
-                p.openInventory(new RecipeGUI(d).create(p));
+                p.playSound(p.getLocation(), Sound.ITEM_FIRECHARGE_USE, (float) 1.0, (float) 1.0);
+                p.closeInventory();
+                new SDRecipeInventory(d).createSDRecipeInventory(p);
             }
         }
     }

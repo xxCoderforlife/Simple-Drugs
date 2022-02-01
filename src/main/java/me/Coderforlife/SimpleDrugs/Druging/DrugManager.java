@@ -470,23 +470,47 @@ public class DrugManager {
     	return de;
     }
 
-    /* Grabbing and Setting Drug Data */
+    /**
+	 * Adds the Drug and it's file name the Map
+	 * @param drug Drug
+	 * @param name String
+	 */
     public void addDrug(Drug drug, String name) {
         drugs.put(name, drug);
     }
 
+	/**
+	 * Compare a string to a Drug
+	 * @param name Name of the Drug
+	 * @return Drug Object
+	 */
     public Drug getDrug(String name) {
         return drugs.getOrDefault(name, null);
     }
 
+	/**
+	 * Used to get all Drugs loaded
+	 * @return Array of all Drug
+	 */
     public ArrayList<Drug> getallDrugs() {
         return new ArrayList<>(drugs.values());
     }
     
+	//TODO Edit Doc
+	/**
+	 * Not too sure what this does
+0	 * @param d Drug
+	 * @return Drug 
+	 */
     public ItemStack getItemStackFromDrug(Drug d) {
     	return drugSeeds.get(d);
     }
 
+	/**
+	 * Converts the current ItemStack into a DrugItemStack
+	 * @param item ItemStack
+	 * @return An ItemStack that is now considered a Drug
+	 */
     public Drug matchDrug(@Nullable ItemStack item) {
 		if(isDrugItem(item)){
 			for(Drug drug : drugs.values()) {
@@ -498,7 +522,15 @@ public class DrugManager {
         return null;
     }
 
+	/**
+	 * Checks if current item is a drug.
+	 * @param item
+	 * @return true if a drug 
+	 */
     public boolean isDrugItem(ItemStack item) {
+		if(item == null){
+			return false;
+		}
         for(Drug d : getallDrugs()) {
             if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(d.getDisplayname())) {
                 return true;
@@ -507,6 +539,9 @@ public class DrugManager {
         return false;
     }
 
+	/** 
+	* Default method for loading and creating default drug files.
+	*/
     public void createDrugs() {
         sendConsoleMessage(ChatColor.BLUE + "[INFO] No Drugs where Found in your Folder. Creating Default Drugs!");
         
