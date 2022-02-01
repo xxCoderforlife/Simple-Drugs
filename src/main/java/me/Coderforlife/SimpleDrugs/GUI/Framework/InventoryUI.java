@@ -204,6 +204,7 @@ public class InventoryUI implements Listener {
 		 * @param p Player that will handle the closing
 		 */
 		public void onClose(Player p) {
+			
 		}
 	
 		/**

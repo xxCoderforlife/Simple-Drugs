@@ -3,8 +3,9 @@ package me.Coderforlife.SimpleDrugs;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
-import me.Coderforlife.SimpleDrugs.GUI.RecipeGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
+import me.Coderforlife.SimpleDrugs.GUI.Framework.SDRecipeInventory;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -138,7 +139,7 @@ public class Commands implements CommandExecutor {
                             return true;
                         }
 
-                        p.openInventory(new RecipeGUI(drug).create(p));
+                        new SDRecipeInventory(drug).createSDRecipeInventory(p);
                     } else if(args[0].equalsIgnoreCase("bagofdrugs")) {
                         if(p.hasPermission("drugs.command.bagofdrugs.others")) {
                             for(Player players : Bukkit.getOnlinePlayers()) {
