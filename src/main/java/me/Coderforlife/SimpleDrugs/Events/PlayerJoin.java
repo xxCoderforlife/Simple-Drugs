@@ -7,12 +7,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
+import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 
 public class PlayerJoin implements Listener {
 
     private Main plugin = Main.plugin;
-    BagOfDrugs bd = new BagOfDrugs();
+    BagOfDrugsGUI bd = new BagOfDrugsGUI();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent ev) {

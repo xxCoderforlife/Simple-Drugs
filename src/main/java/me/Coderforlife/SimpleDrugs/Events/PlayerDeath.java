@@ -1,7 +1,7 @@
 package me.Coderforlife.SimpleDrugs.Events;
 
 import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
+import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,7 +9,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 public class PlayerDeath implements Listener {   
 
     private Main plugin = Main.plugin;
-    BagOfDrugs bd = new BagOfDrugs();
+    BagOfDrugsGUI  bd = new BagOfDrugsGUI();
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent ev) {
         if(!(plugin.getSettings().isBagOfDrugs_DropOnDeath())) {

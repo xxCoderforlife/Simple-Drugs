@@ -11,10 +11,12 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -99,6 +101,18 @@ public class SDRecipeInventory implements Listener {
             p.openInventory(inv);
             // TODO Add Furnace Inventory
         }
+        /*if(drug.getRecipe() instanceof SDBrewingStand){
+            inv = Bukkit.createInventory(null, InventoryType.BREWING,drug.getDisplayname() + 
+            ChatColor.translateAlternateColorCodes('&', "&6&l Recipe"));
+            if (players.contains(p.getUniqueId()))
+                return;
+            players.add(p.getUniqueId());
+            if (players.size() == 1 && !registered)
+                Main.plugin.getServer().getPluginManager().registerEvents(this, Main.plugin);
+            registered = true;
+            p.openInventory(inv);
+            // TODO Add Brewing Recipe
+        }*/
 
     }
 
@@ -184,4 +198,10 @@ public class SDRecipeInventory implements Listener {
        }
        return true;
    }
+   @EventHandler(priority = EventPriority.HIGH)
+		public final void onPlayerLeave(PlayerQuitEvent e) {
+			Player p = e.getPlayer();
+			if (players.contains(p.getUniqueId()))
+				players.remove(p.getUniqueId());
+		}
 }

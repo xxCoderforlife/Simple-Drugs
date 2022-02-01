@@ -13,7 +13,6 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.BrewAction;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.BrewingRecipe;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.BrewingRecipeListener;
 import me.Coderforlife.SimpleDrugs.DrugPlants.PlantItemListener;
-import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
 import me.Coderforlife.SimpleDrugs.Events.CraftingEvent;
 import me.Coderforlife.SimpleDrugs.Events.DrugUseListener;
@@ -80,7 +79,6 @@ public class Main extends JavaPlugin {
 
         this.getServer().getPluginManager().registerEvents(new RecipeChecker(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
-        this.getServer().getPluginManager().registerEvents(new BagOfDrugs(), this);
         this.getServer().getPluginManager().registerEvents(new BagOfDrugsGUI(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         this.getServer().getPluginManager().registerEvents(new DrugUseListener(), this);

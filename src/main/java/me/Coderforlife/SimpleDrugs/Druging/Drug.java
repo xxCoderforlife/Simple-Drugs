@@ -32,9 +32,24 @@ public class Drug {
     	this.item = item;
     }
 
-    public void influencePlayer(Player player) {
+    /**
+     * Default influence method for the player
+     * @param p The Player to influence
+     */
+    public void influencePlayer(Player p) {
         for(DrugEffect effect : this.effects) {
-            player.addPotionEffect(new PotionEffect(effect.getEffect(), effect.getTime(), effect.getIntensity()));
+            p.addPotionEffect(new PotionEffect(effect.getEffect(), effect.getTime(), effect.getIntensity()));
+        }
+    }
+
+    /**
+     * A method to influence other players via command or event
+     * @param d The Drug you want to influence the another Player
+     * @param p The player to influence
+     */
+    public void influenceOtherPlayers(Drug d, Player p){
+        for(DrugEffect effect : d.getEffects()) {
+            p.addPotionEffect(new PotionEffect(effect.getEffect(), effect.getTime(), effect.getIntensity()));
         }
     }
     

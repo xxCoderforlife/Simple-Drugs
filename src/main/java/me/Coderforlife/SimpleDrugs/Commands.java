@@ -1,8 +1,8 @@
 package me.Coderforlife.SimpleDrugs;
 
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
-import me.Coderforlife.SimpleDrugs.Druging.BagOfDrugs;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.SDRecipeInventory;
 
@@ -19,9 +19,9 @@ import java.util.Arrays;
 
 public class Commands implements CommandExecutor {
     private Main plugin = Main.plugin;
-    BagOfDrugs bd = new BagOfDrugs();
 
     public String dash = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "- ";
+    private BagOfDrugsGUI bd = new BagOfDrugsGUI();
 
     public Commands() {
     }
@@ -148,7 +148,6 @@ public class Commands implements CommandExecutor {
                                         if(players.getInventory().contains(bd.getBagOfDrugs())) {
                                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.GRAY + players.getDisplayName() + " Already has a bag");
                                         } else {
-                                            BagOfDrugs bd = new BagOfDrugs();
                                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.GRAY + "You sent " + players.getDisplayName() + " a " + bd.getBagName());
                                             players.getInventory().addItem(bd.getBagOfDrugs());
                                             players.sendMessage(plugin.getMessages().getPrefix() + ChatColor.GRAY + p.getDisplayName() + " Sent you a " + bd.getBagName());
