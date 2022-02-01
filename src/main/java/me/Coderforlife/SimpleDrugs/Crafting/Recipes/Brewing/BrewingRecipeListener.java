@@ -1,6 +1,5 @@
 package me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -40,8 +39,6 @@ public class BrewingRecipeListener implements Listener {
 		int half = firstAmount / 2;
 		
 		int clickedSlot = e.getSlot();
-		
-		Bukkit.getConsoleSender().sendMessage(String.valueOf(clickedSlot));
 		
 		if(ct.equals(ClickType.LEFT)) {
 			if(clickedSlot == 0 || clickedSlot == 1 || clickedSlot == 2) {
@@ -112,10 +109,8 @@ public class BrewingRecipeListener implements Listener {
 		if(((BrewerInventory)i).getIngredient() == null) return;
 		
 		BrewingRecipe recipe = Main.plugin.getRecipeManager().getBrewingRecipe((BrewerInventory) i);
-		if(recipe == null) {
-			Bukkit.getConsoleSender().sendMessage("No found recipes");
-			return;
-		}
+		if(recipe == null) return;
+		
 		recipe.startBrewing((BrewerInventory) i, 100);
 	}
 	

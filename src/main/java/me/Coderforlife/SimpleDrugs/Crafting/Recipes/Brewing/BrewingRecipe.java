@@ -129,14 +129,21 @@ public class BrewingRecipe extends SDRecipe {
 				return;
 			}
 			
-			if(!searchedChanged(before, inventory.getContents())) {
+			// TODO: Check that the items are not the correct one for the brewing recipe!
+			
+			if(inventory.getItem(0) == null && inventory.getItem(1) == null && inventory.getItem(2) == null) {
+				cancel();
+				return;
+			}
+			
+			if(searchedChanged(before, inventory.getContents())) {
 				cancel();
 				return;
 			}
 			
 			timeToCook--;
 			stand.setBrewingTime(timeToCook);
-			stand.update();
+			stand.update(true);
 			
 		}
 		
@@ -149,16 +156,28 @@ public class BrewingRecipe extends SDRecipe {
 		}
 		
 		private boolean searchedChanged(ItemStack[] before, ItemStack[] after) {
-			for(int i = 0; i < before.length; i++) {
-				if((before[i] != null && after[i] == null) || (before[i] == null && after[i] != null)) {
-					return false;
-				} else {
-					if(!before[i].isSimilar(after[i])) {
-						return false;
-					}
+			for(int i = 0; i < 5; i++) {
+				// Checking if item was null and added an item after
+				if(before[i] == null && after[i] != null) {
+					return true;
 				}
+				
+				// Checking if item was not null and become null
+				if(before[i] != null && after[i] == null) {
+					return true;
+				}
+				
 			}
-			return true;
+			
+			if(!before[3].isSimilar(after[3])) {
+				return true;
+			}
+			
+			if(!before[4].isSimilar(after[4])) {
+				return false;
+			}
+			
+			return false;
 		}
 		
 	}
