@@ -53,9 +53,10 @@ public class RecipeManager {
 	public BrewingRecipe getBrewingRecipe(BrewerInventory inv) {
 		if(inv.getFuel() == null) return null;
 		if(inv.getIngredient() == null) return null;
+		if(inv.getItem(0) == null && inv.getItem(1) == null && inv.getItem(2) == null) return null;
 		
 		for(BrewingRecipe br : brewingRecipes) {
-			if(inv.getIngredient().isSimilar(br.getIngredient()) && inv.getFuel().isSimilar(br.getFuel())) {
+			if(inv.getIngredient().isSimilar(br.getIngredient()) && inv.getFuel().isSimilar(br.getFuel()) && inv.containsAtLeast(br.getInput(), 1)) {
 				return br;
 			}
 		}

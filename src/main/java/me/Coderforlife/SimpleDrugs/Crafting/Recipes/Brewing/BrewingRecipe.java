@@ -12,24 +12,38 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 public class BrewingRecipe extends SDRecipe {
 	
 	private ItemStack ingredient;
+	private ItemStack input;
 	private ItemStack fuel;
 	private int fuelSet;
 	private int fuelCharge;
 	private BrewAction action;
 	private BrewClock clock;
 	
-	public BrewingRecipe(String n, ItemStack r, ItemStack in, ItemStack f, BrewAction ba, int fs, int fc) {
-		super(n, r);
+	public BrewingRecipe(String n, ItemStack result, ItemStack in, ItemStack f, ItemStack inp, int fs, int fc) {
+		super(n, result);
 		ingredient = in;
-		// Make sure it is not air
+		input = inp;
 		fuel = f;
-		action = ba;
 		fuelSet = fs;
 		fuelCharge = fc;
+		
+		action = new BrewAction() {
+			@Override
+			public void Brew(BrewerInventory inv, int slot, ItemStack stack, ItemStack ing) {
+				if(!stack.isSimilar(input)) return;
+				if(ing.isSimilar(ingredient)) {
+					inv.setItem(slot, getResult());
+				}
+			}
+        };
 	}
 	
 	public void startBrewing(BrewerInventory inv, int time) {
 		clock = new BrewClock(this, inv, time);
+	}
+	
+	public ItemStack getInput() {
+		return input;
 	}
 	
 	@Override
@@ -121,7 +135,7 @@ public class BrewingRecipe extends SDRecipe {
 				// Brew each item individually
 				for(int i = 0; i < 3; i++) {
 					if(inventory.getItem(i) == null || inventory.getItem(i).getType() == Material.AIR) continue;
-					brewingRecipe.getAction().Brew(inventory, inventory.getItem(i), ingredient);
+					brewingRecipe.getAction().Brew(inventory, i, inventory.getItem(i), ingredient);
 				}
 				
 				stand.setFuelLevel(stand.getFuelLevel() - brewingRecipe.getFuelCharge());
