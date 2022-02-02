@@ -1,14 +1,11 @@
 package me.Coderforlife.SimpleDrugs;
 
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Coderforlife.SimpleDrugs.Crafting.CustomCraftingComponentManager;
 import me.Coderforlife.SimpleDrugs.Crafting.RecipeManager;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.RecipeChecker;
-import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.BrewingRecipe;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.BrewingRecipeListener;
 import me.Coderforlife.SimpleDrugs.DrugPlants.PlantItemListener;
 import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
@@ -57,14 +54,12 @@ public class Main extends JavaPlugin {
 
         new Setup();
         
-        ItemStack result = new ItemStack(Material.DIAMOND);
-        ItemStack ing = new ItemStack(Material.COAL);
-        ItemStack fuel = new ItemStack(Material.GOLD_INGOT);
-        ItemStack input = new ItemStack(Material.EMERALD);
-        
-        BrewingRecipe br = new BrewingRecipe("TestThing", result, ing, fuel, input, 25, 25);
-        
-        br.registerRecipe();
+//        ItemStack result = new ItemStack(Material.DIAMOND);
+//        ItemStack ing = new ItemStack(Material.COAL);
+//        ItemStack fuel = new ItemStack(Material.GOLD_INGOT);
+//        ItemStack input = craftingManager.getByName("WeedComponentNew".toUpperCase()).getStack();
+//        BrewingRecipe br = new BrewingRecipe("TestThing", result, ing, fuel, input, 25, 25, 100);
+//        br.registerRecipe();
 
         this.getServer().getPluginManager().registerEvents(new RecipeChecker(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
