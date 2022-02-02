@@ -18,14 +18,16 @@ public class BrewingRecipe extends SDRecipe {
 	private int fuelCharge;
 	private BrewAction action;
 	private BrewClock clock;
+	private int timeToBrew;
 	
-	public BrewingRecipe(String n, ItemStack result, ItemStack in, ItemStack f, ItemStack inp, int fs, int fc) {
+	public BrewingRecipe(String n, ItemStack result, ItemStack in, ItemStack f, ItemStack inp, int fs, int fc, int fuelTime) {
 		super(n, result);
 		ingredient = in;
 		input = inp;
 		fuel = f;
 		fuelSet = fs;
 		fuelCharge = fc;
+		timeToBrew = fuelTime;
 		
 		action = new BrewAction() {
 			@Override
@@ -53,6 +55,10 @@ public class BrewingRecipe extends SDRecipe {
 	
 	public ItemStack getIngredient() {
 		return ingredient;
+	}
+	
+	public int getTimeToBrew() {
+		return timeToBrew;
 	}
 	
 	public ItemStack getFuel() {
