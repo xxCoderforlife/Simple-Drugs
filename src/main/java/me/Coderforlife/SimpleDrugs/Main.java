@@ -56,20 +56,21 @@ public class Main extends JavaPlugin {
         sendConsoleMessage("§aLoading Plugin...");
 
         new Setup();
-        
-//        ItemStack result = new ItemStack(Material.DIAMOND);
-//        ItemStack ing = new ItemStack(Material.COAL);
-//        ItemStack fuel = new ItemStack(Material.GOLD_INGOT);
-//        ItemStack input = craftingManager.getByName("WeedComponentNew".toUpperCase()).getStack();
-//        BrewingRecipe br = new BrewingRecipe("TestThing", result, ing, fuel, input, 25, 25, 100);
-//        br.registerRecipe();
-
+/** TODO
+        ItemStack result = new ItemStack(Material.DIAMOND);
+        ItemStack ing = new ItemStack(Material.COAL);
+        ItemStack fuel = new ItemStack(Material.GOLD_INGOT);
+        ItemStack input = craftingManager.getByName("WeedComponentNew".toUpperCase()).getStack();
+        BrewingRecipe br = new BrewingRecipe("TestThing", result, ing, fuel, input, 25, 25, 100);
+        br.registerRecipe();
+*/
         this.getServer().getPluginManager().registerEvents(new RecipeChecker(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
         this.getServer().getPluginManager().registerEvents(new BagOfDrugsGUI(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         this.getServer().getPluginManager().registerEvents(new DrugUseListener(), this);
         this.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
+        //TODO this.getServer().getPluginManager().registerEvents(new AddictionListener(), this);
         this.getServer().getPluginManager().registerEvents(new CraftingEvent(), this);
         this.getServer().getPluginManager().registerEvents(new PlantItemListener(), this);
         this.getServer().getPluginManager().registerEvents(new BrewingRecipeListener(), this);

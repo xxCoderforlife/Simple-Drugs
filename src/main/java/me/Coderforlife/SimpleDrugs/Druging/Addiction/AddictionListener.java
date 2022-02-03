@@ -18,7 +18,7 @@ public class AddictionListener implements Listener{
     public void onPlayerJoin(PlayerJoinEvent ev){
         Player p = (Player) ev.getPlayer();
         if(!am.addictionMap().containsKey(p.getUniqueId())){
-            am.addictionMap().put(p.getUniqueId(), 0);
+            am.addictionMap().put(p.getUniqueId(), 0.0);
 
         }
     }

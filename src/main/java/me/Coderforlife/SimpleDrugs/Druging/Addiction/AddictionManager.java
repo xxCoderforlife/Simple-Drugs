@@ -8,13 +8,13 @@ public class AddictionManager {
     public AddictionManager(){
 
     }
-    private HashMap<UUID,Integer> addiction = new HashMap<>();
+    private HashMap<UUID,Double> addiction = new HashMap<>();
 
     /**
-     * 
+     * @apiNote Uses Wrapper for Double
      * @return Player and Addiction Level
      */
-    public HashMap<UUID,Integer> addictionMap(){
+    public HashMap<UUID,Double> addictionMap(){
         return addiction;
     }
 }

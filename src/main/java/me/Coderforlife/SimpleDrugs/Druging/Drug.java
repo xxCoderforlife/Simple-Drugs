@@ -10,10 +10,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.potion.PotionEffect;
 
+import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
+import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 
 public class Drug {
 
+    private Main plugin = Main.plugin;
+    private AddictionManager am = plugin.gAddictionManager();
     private String name;
     private String displayname;
     private SDRecipe sdRecipe;
@@ -25,7 +29,6 @@ public class Drug {
     private Material seedItem = Material.WHEAT_SEEDS;
     private Recipe seedRecipe = null;
     private Integer harvestAmount = 1;
-    private HashMap<UUID, Integer> addiction = new HashMap<>();
 
     public Drug(String name, String displayname, ItemStack item, ArrayList<DrugEffect> effects, String permission) {
         this.name = name;
@@ -41,28 +44,24 @@ public class Drug {
      * @param p The Player to influence
      */
     public void influencePlayer(Player p) {
-        int addLvl = 1;
-        if (!addiction.containsKey(p.getUniqueId())) {
-            addiction.put(p.getUniqueId(), addLvl);
+        HashMap<UUID,Double> addic = am.addictionMap();
+        Double addLvl = am.addictionMap().get(p.getUniqueId());
+        if(addLvl < 3){
             for (DrugEffect effect : this.effects) {
                 if (!(p.hasPotionEffect(effect.getEffect()))) {
+                    addic.put(p.getUniqueId(), addLvl + 0.3);
                     p.addPotionEffect(new PotionEffect(effect.getEffect(), effect.getTime(), effect.getIntensity()));
                 } else {
                     for (PotionEffect effects : p.getActivePotionEffects()) {
+                        addic.put(p.getUniqueId(), addLvl + 0.1);
                         p.sendMessage(effects.getType() + ": " + Integer.toString(effects.getDuration()));
                         p.addPotionEffect(new PotionEffect(effect.getEffect(), effects.getDuration() + 20,
                                 effect.getIntensity()));
                     }
                 }
             }
-        }else{
-            for (DrugEffect effect : this.effects) {
-                for (PotionEffect effects : p.getActivePotionEffects()) {
-                    p.sendMessage(effects.getType() + ": " + Integer.toString(effects.getDuration()));
-                    p.addPotionEffect(
-                            new PotionEffect(effect.getEffect(), effects.getDuration() + 20, effect.getIntensity()));
-                }
-            }
+        }else if(addLvl >= 3){
+
         }
     }
 
