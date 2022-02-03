@@ -313,11 +313,12 @@ public class DrugManager {
 				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
 				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Can only have one input for Recipe using FURNACE type");
 				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+				return null;
 			}
 			
 			SDFurnace furnace = new SDFurnace(d.getName(), d.getItem(), furnaceMats.get(0), 0f, 90);
 			furnace.registerRecipe();
-			return null;
+			return furnace;
 		case SHAPED:
 			SDShaped shaped = new SDShaped(d.getName(), d.getItem());
 			List<ItemStack> mats = loadMaterialsForCrafting(fileName, ja);
