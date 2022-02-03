@@ -10,12 +10,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 
 
 public class DrugUseListener implements Listener {
@@ -82,5 +85,12 @@ public class DrugUseListener implements Listener {
             hand.setAmount(0);
             d.influencePlayer(victim);
         }
+    }
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent ev){
+        Player p = (Player) ev.getPlayer();
+        AddictionManager am = new AddictionManager();
+        am.addictionMap().put(p.getUniqueId(), 0);
+
     }
 }

@@ -55,6 +55,7 @@ public class DrugManager {
     private Map<String, Drug> drugs = new HashMap<>();
     private Map<Drug, ItemStack> drugSeeds = new HashMap<>();
 
+
     public void loadFiles() {
     	if(!folder.exists()) folder.mkdir();
     	if(!recipeFolder.exists()) recipeFolder.mkdir();

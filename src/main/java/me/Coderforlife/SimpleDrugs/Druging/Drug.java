@@ -1,6 +1,8 @@
 package me.Coderforlife.SimpleDrugs.Druging;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -23,43 +25,59 @@ public class Drug {
     private Material seedItem = Material.WHEAT_SEEDS;
     private Recipe seedRecipe = null;
     private Integer harvestAmount = 1;
+    private HashMap<UUID, Integer> addiction = new HashMap<>();
 
     public Drug(String name, String displayname, ItemStack item, ArrayList<DrugEffect> effects, String permission) {
-    	this.name = name;
-    	this.displayname = displayname;
-    	this.effects = effects;
-    	this.permission = permission;
-    	this.item = item;
+        this.name = name;
+        this.displayname = displayname;
+        this.effects = effects;
+        this.permission = permission;
+        this.item = item;
     }
 
     /**
      * Default influence method for the player
+     * 
      * @param p The Player to influence
      */
     public void influencePlayer(Player p) {
-        for(DrugEffect effect : this.effects) {
-            if(p.hasPotionEffect(effect.getEffect())){
-                int more = effect.getTime() * 2;
-                p.addPotionEffect(new PotionEffect(effect.getEffect(), more, effect.getIntensity()));
+        int addLvl = 1;
+        if (!addiction.containsKey(p.getUniqueId())) {
+            addiction.put(p.getUniqueId(), addLvl);
+            for (DrugEffect effect : this.effects) {
+                if (!(p.hasPotionEffect(effect.getEffect()))) {
+                    p.addPotionEffect(new PotionEffect(effect.getEffect(), effect.getTime(), effect.getIntensity()));
+                } else {
+                    for (PotionEffect effects : p.getActivePotionEffects()) {
+                        p.sendMessage(effects.getType() + ": " + Integer.toString(effects.getDuration()));
+                        p.addPotionEffect(new PotionEffect(effect.getEffect(), effects.getDuration() + 20,
+                                effect.getIntensity()));
+                    }
+                }
             }
-            if(!(p.hasPotionEffect(effect.getEffect()))){
-                p.addPotionEffect(new PotionEffect(effect.getEffect(), effect.getTime(), effect.getIntensity()));
-
+        }else{
+            for (DrugEffect effect : this.effects) {
+                for (PotionEffect effects : p.getActivePotionEffects()) {
+                    p.sendMessage(effects.getType() + ": " + Integer.toString(effects.getDuration()));
+                    p.addPotionEffect(
+                            new PotionEffect(effect.getEffect(), effects.getDuration() + 20, effect.getIntensity()));
+                }
             }
         }
     }
 
     /**
      * A method to influence other players via command or event
+     * 
      * @param d The Drug you want to influence the another Player
      * @param p The player to influence
      */
-    public void influenceOtherPlayers(Drug d, Player p){
-        for(DrugEffect effect : d.getEffects()) {
+    public void influenceOtherPlayers(Drug d, Player p) {
+        for (DrugEffect effect : d.getEffects()) {
             p.addPotionEffect(new PotionEffect(effect.getEffect(), effect.getTime(), effect.getIntensity()));
         }
     }
-    
+
     public ArrayList<DrugEffect> getEffects() {
         return effects;
     }
@@ -85,11 +103,11 @@ public class Drug {
     }
 
     public SDRecipe getRecipe() {
-    	return sdRecipe;
+        return sdRecipe;
     }
-    
+
     public void setRecipe(SDRecipe recipe) {
-    	sdRecipe = recipe;
+        sdRecipe = recipe;
     }
 
     public ItemStack getItem() {
@@ -115,37 +133,37 @@ public class Drug {
     public void setCraftable(boolean crafting) {
         this.crafting = crafting;
     }
-    
+
     public void setHasSeed(boolean b) {
-    	hasSeed = b;
+        hasSeed = b;
     }
-    
+
     public boolean hasSeed() {
-    	return hasSeed;
+        return hasSeed;
     }
-    
+
     public void setSeedRecipe(Recipe r) {
-    	seedRecipe = r;
+        seedRecipe = r;
     }
-    
+
     public Recipe getSeedRecipe() {
-    	return seedRecipe;
+        return seedRecipe;
     }
-    
+
     public Material getSeedItem() {
-    	return seedItem;
+        return seedItem;
     }
-    
+
     public void setSeedItem(Material m) {
-    	seedItem = m;
+        seedItem = m;
     }
-    
+
     public Integer getHarvestAmount() {
-    	return harvestAmount;
+        return harvestAmount;
     }
-    
+
     public void setHarvestAmount(int i) {
-    	harvestAmount = i;
+        harvestAmount = i;
     }
-    
+
 }

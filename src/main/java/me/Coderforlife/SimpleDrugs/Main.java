@@ -9,6 +9,7 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.RecipeChecker;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.BrewingRecipeListener;
 import me.Coderforlife.SimpleDrugs.DrugPlants.PlantItemListener;
 import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
+import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 import me.Coderforlife.SimpleDrugs.Events.CraftingEvent;
 import me.Coderforlife.SimpleDrugs.Events.DrugUseListener;
 import me.Coderforlife.SimpleDrugs.Events.InventoryListener;
@@ -35,6 +36,7 @@ public class Main extends JavaPlugin {
     private Settings settings;
     private Messages messages;
     private RecipeManager recipeManager;
+    private AddictionManager addictionManager;
     
     @Override
     public void onEnable() {
@@ -48,6 +50,7 @@ public class Main extends JavaPlugin {
         
         settings = new Settings();
         messages = new Messages();
+        addictionManager = new AddictionManager();
         
         sendConsoleMessage(header1);
         sendConsoleMessage("§aLoading Plugin...");
@@ -135,5 +138,9 @@ public class Main extends JavaPlugin {
     
     public Messages getMessages(){
         return messages;
+    }
+
+    public AddictionManager gAddictionManager(){
+        return addictionManager;
     }
 }
