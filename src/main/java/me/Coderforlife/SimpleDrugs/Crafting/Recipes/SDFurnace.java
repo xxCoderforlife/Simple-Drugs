@@ -17,6 +17,7 @@ public class SDFurnace extends SDRecipe {
 	public SDFurnace(String n, ItemStack result, ItemStack inputItem, Float xpToGive, Integer timeToCook) {
 		super(n, result);
 		input = inputItem;
+		getItems().add(input);
 		xp = xpToGive;
 		time = timeToCook;
 	}

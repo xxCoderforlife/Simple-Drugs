@@ -108,7 +108,7 @@ public class BrewingRecipeListener implements Listener {
 		
 		if(((BrewerInventory)i).getIngredient() == null) return;
 		
-		BrewingRecipe recipe = Main.plugin.getRecipeManager().getBrewingRecipe((BrewerInventory) i);
+		SDBrewingRecipe recipe = Main.plugin.getRecipeManager().getBrewingRecipe((BrewerInventory) i);
 		if(recipe == null) return;
 		
 		recipe.startBrewing((BrewerInventory) i, recipe.getTimeToBrew());

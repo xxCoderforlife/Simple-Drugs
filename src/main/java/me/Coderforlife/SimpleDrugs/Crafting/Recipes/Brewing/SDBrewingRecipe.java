@@ -9,7 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 
-public class BrewingRecipe extends SDRecipe {
+public class SDBrewingRecipe extends SDRecipe {
 	
 	private ItemStack ingredient;
 	private ItemStack input;
@@ -20,7 +20,7 @@ public class BrewingRecipe extends SDRecipe {
 	private BrewClock clock;
 	private int timeToBrew;
 	
-	public BrewingRecipe(String n, ItemStack result, ItemStack in, ItemStack f, ItemStack inp, int fs, int fc, int fuelTime) {
+	public SDBrewingRecipe(String n, ItemStack result, ItemStack in, ItemStack f, ItemStack inp, int fs, int fc, int fuelTime) {
 		super(n, result);
 		ingredient = in;
 		input = inp;
@@ -83,7 +83,7 @@ public class BrewingRecipe extends SDRecipe {
 	
 	public class BrewClock extends BukkitRunnable {
 		
-		private BrewingRecipe brewingRecipe;
+		private SDBrewingRecipe brewingRecipe;
 		private BrewerInventory inventory;
 		private int timeToCook;
 		private ItemStack[] before;
@@ -91,7 +91,7 @@ public class BrewingRecipe extends SDRecipe {
 		private BrewingStand stand;
 		
 		// Create constructor
-		public BrewClock(BrewingRecipe br, BrewerInventory bi, int time) {
+		public BrewClock(SDBrewingRecipe br, BrewerInventory bi, int time) {
 			brewingRecipe = br;
 			inventory = bi;
 			timeToCook = time;

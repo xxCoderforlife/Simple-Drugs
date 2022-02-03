@@ -2,6 +2,7 @@ package me.Coderforlife.SimpleDrugs.GUI.Framework;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,12 +21,14 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.SDBrewingRecipe;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import net.md_5.bungee.api.ChatColor;
 
@@ -90,8 +93,39 @@ public class SDRecipeInventory implements Listener {
             p.openInventory(inv);
         }
         if (drug.getRecipe() instanceof SDFurnace) {
-            inv = Bukkit.createInventory(null, InventoryType.FURNACE,
+            ItemStack coal = new ItemStack(Material.COAL);
+            ItemStack charcoal = new ItemStack(Material.CHARCOAL);
+            ItemStack blaze = new ItemStack(Material.BLAZE_POWDER);
+            ItemStack tool = new ItemStack(Material.WOODEN_PICKAXE);
+            inv = Bukkit.createInventory(null, InventoryType.FURNACE, drug.getDisplayname() + 
                     ChatColor.translateAlternateColorCodes('&', " &6&lRecipe"));
+            SDFurnace recipe = (SDFurnace) drug.getRecipe();
+            inv.setItem(0, recipe.getItems().get(0));
+            inv.setItem(2, drug.getItem());
+            inv.setItem(1, new ItemStack(Material.FIRE));
+            new BukkitRunnable() {
+                @Override
+                public void run(){
+                    int chance = new Random().nextInt(11);
+                    if(chance < 3){
+                        inv.setItem(1, coal);
+                        p.updateInventory();
+                    }else
+                    if(chance < 6){
+                        inv.setItem(1, charcoal);
+                        p.updateInventory();
+                    }else
+                    if(chance < 9){
+                        inv.setItem(1, blaze);
+                        p.updateInventory();
+                    }else{
+                        inv.setItem(1, tool);
+                        p.updateInventory();
+                    }
+                    p.updateInventory();
+
+                }
+            }.runTaskTimer(plugin, 20 * 1, 20 * 1);
             if (players.contains(p.getUniqueId()))
                 return;
             players.add(p.getUniqueId());
@@ -99,9 +133,8 @@ public class SDRecipeInventory implements Listener {
                 Main.plugin.getServer().getPluginManager().registerEvents(this, Main.plugin);
             registered = true;
             p.openInventory(inv);
-            // TODO Add Furnace Inventory
         }
-        /*if(drug.getRecipe() instanceof SDBrewingStand){
+        if(drug.getRecipe() instanceof SDBrewingRecipe){
             inv = Bukkit.createInventory(null, InventoryType.BREWING,drug.getDisplayname() + 
             ChatColor.translateAlternateColorCodes('&', "&6&l Recipe"));
             if (players.contains(p.getUniqueId()))
@@ -112,7 +145,7 @@ public class SDRecipeInventory implements Listener {
             registered = true;
             p.openInventory(inv);
             // TODO Add Brewing Recipe
-        }*/
+        }
 
     }
 
