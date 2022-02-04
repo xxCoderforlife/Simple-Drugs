@@ -121,10 +121,17 @@ public class Commands implements CommandExecutor {
                             p.sendMessage(plugin.getMessages().getPermission());
                         }
                     } else if(args[0].equalsIgnoreCase("recipe")) {
-                        if(p.hasPermission("drugs.give")) {
+                        if(p.hasPermission("drugs.recipe")) {
                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', "&f&lUse &a&o/drugs recipe &c&o<drug>"));
                         } else {
                             p.sendMessage(plugin.getMessages().getPermission());
+                        }
+                    }else if(args[0].equalsIgnoreCase("addiction")){
+                        if(p.hasPermission("drugs.addiction")){
+                            HashMap<UUID,Double> addic = am.addictionMap();
+                            Double addLvl = addic.get(p.getUniqueId());
+                            p.sendMessage(plugin.getMessages().getPrefix() + 
+                            ChatColor.translateAlternateColorCodes('&', "&3Addiction Level:&r&o ") + Double.toString(addLvl));
                         }
                     }
                 } else if(args.length == 2) {
@@ -211,7 +218,7 @@ public class Commands implements CommandExecutor {
                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: " + ChatColor.DARK_GRAY + "drugs.give");
                         }
                     }
-                } else if(args.length == 3) {
+                } else if(args.length == 3) {//TODO Fix spam
                     if(args[0].equalsIgnoreCase("give")) {
                         if(p.hasPermission("durgs.give.others")) {
                             for(Drug drugs : Main.plugin.getDrugManager().getallDrugs()) {

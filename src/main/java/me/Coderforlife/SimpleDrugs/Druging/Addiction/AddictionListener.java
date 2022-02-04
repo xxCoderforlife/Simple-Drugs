@@ -3,7 +3,6 @@ package me.Coderforlife.SimpleDrugs.Druging.Addiction;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,7 +26,7 @@ public class AddictionListener implements Listener{
     public void onPlayerJoin(PlayerJoinEvent ev){
         Player p = (Player) ev.getPlayer();
         if(!am.addictionMap().containsKey(p.getUniqueId())){
-            am.addictionMap().put(p.getUniqueId(), 0.0);
+            am.addictionMap().put(p.getUniqueId(), 0.1);
 
         }
     }
@@ -42,9 +41,6 @@ public class AddictionListener implements Listener{
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent ev){
-        if(!(ev.getEntity() instanceof Player)){
-            return;
-        }
         Player p = (Player) ev.getEntity();
         if(am.addictionMap().containsKey(p.getUniqueId())){
             Double addLvl = addic.get(p.getUniqueId());
@@ -59,7 +55,7 @@ public class AddictionListener implements Listener{
     public void onPlayerRespawn(PlayerRespawnEvent ev){
         Player p = (Player) ev.getPlayer();
         if(!am.addictionMap().containsKey(p.getUniqueId())){
-            am.addictionMap().put(p.getUniqueId(), 0.0);
+            am.addictionMap().put(p.getUniqueId(), 0.1);
 
         }
     }

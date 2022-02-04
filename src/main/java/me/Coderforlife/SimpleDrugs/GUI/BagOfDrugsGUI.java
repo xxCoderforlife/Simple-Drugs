@@ -2,6 +2,7 @@ package me.Coderforlife.SimpleDrugs.GUI;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -52,10 +53,14 @@ public class BagOfDrugsGUI implements Listener {
         }
         Player p = ev.getPlayer();
         Action pa = ev.getAction();
+        if(p.getInventory().getItemInMainHand().getItemMeta() == null){
+            return;
+        }
 
         if (pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
             if (p.hasPermission("drugs.use.bagofdrugs")) {
-                if (p.getInventory().getItemInMainHand().equals(bag)) {
+                if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(bagName) 
+                && p.getInventory().getItemInMainHand().hasItemMeta()) {
                     Location loc = p.getLocation();
                     for (int degree = 0; degree < 360; degree++) {
                         double radians = Math.toRadians(degree);
@@ -276,7 +281,7 @@ public class BagOfDrugsGUI implements Listener {
         lore.add("Enjoy.");
         lore.add(ChatColor.ITALIC + "Simple-Drugs®");
         meta.setLore(lore);
-        meta.addEnchant(Enchantment.BINDING_CURSE, 7766, true);
+        meta.addEnchant(Enchantment.BINDING_CURSE, 100, true);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
         stack.setItemMeta(meta);
         return stack;

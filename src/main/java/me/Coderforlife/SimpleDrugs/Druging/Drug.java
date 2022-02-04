@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -48,7 +46,7 @@ public class Drug {
      */
     public void influencePlayer(Player p) {
         HashMap<UUID,Double> addic = am.addictionMap();
-        Double addLvl = am.addictionMap().get(p.getUniqueId());
+        Double addLvl = addic.get(p.getUniqueId());
         if(addLvl < 3){
             for (DrugEffect effect : this.effects) {
                 if (!(p.hasPotionEffect(effect.getEffect()))) {
