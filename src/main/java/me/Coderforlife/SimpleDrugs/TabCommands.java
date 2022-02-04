@@ -22,7 +22,7 @@ public class TabCommands implements TabCompleter {
                 tab.add(s);
             }
         } else if(args.length == 2) {
-            if(args[0].equalsIgnoreCase("bagofdrugs") || args[0].equalsIgnoreCase("soberup")) {
+            if(args[0].equalsIgnoreCase("bagofdrugs") || args[0].equalsIgnoreCase("soberup") || args[0].equalsIgnoreCase("addiction")) {
                 for(Player p : Bukkit.getOnlinePlayers()) {
                     tab.add(p.getName());
                 }

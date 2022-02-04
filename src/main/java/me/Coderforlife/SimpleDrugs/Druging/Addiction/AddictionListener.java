@@ -18,7 +18,7 @@ import net.md_5.bungee.api.ChatColor;
 public class AddictionListener implements Listener{
 
     private Main plugin = Main.plugin;
-    private AddictionManager am = plugin.gAddictionManager();
+    private AddictionManager am = plugin.getAddictionManager();
     private HashMap<UUID,Double> addic = am.addictionMap();
     private Messages m = plugin.getMessages();
 
@@ -26,7 +26,7 @@ public class AddictionListener implements Listener{
     public void onPlayerJoin(PlayerJoinEvent ev){
         Player p = (Player) ev.getPlayer();
         if(!am.addictionMap().containsKey(p.getUniqueId())){
-            am.addictionMap().put(p.getUniqueId(), 0.1);
+            am.addictionMap().put(p.getUniqueId(), 0.0);
 
         }
     }
@@ -55,7 +55,7 @@ public class AddictionListener implements Listener{
     public void onPlayerRespawn(PlayerRespawnEvent ev){
         Player p = (Player) ev.getPlayer();
         if(!am.addictionMap().containsKey(p.getUniqueId())){
-            am.addictionMap().put(p.getUniqueId(), 0.1);
+            am.addictionMap().put(p.getUniqueId(), 0.0);
 
         }
     }

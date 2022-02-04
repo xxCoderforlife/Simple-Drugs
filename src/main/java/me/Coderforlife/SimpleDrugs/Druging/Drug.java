@@ -18,7 +18,7 @@ import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 public class Drug {
 
     private Main plugin = Main.plugin;
-    private AddictionManager am = plugin.gAddictionManager();
+    private AddictionManager am = plugin.getAddictionManager();
     private String name;
     private String displayname;
     private SDRecipe sdRecipe;
@@ -57,7 +57,6 @@ public class Drug {
                         p.addPotionEffect(new PotionEffect(effect.getEffect(), effects.getDuration() + 20, effect.getIntensity()));
                     }
                     addic.put(p.getUniqueId(), addLvl + 0.1);
-                    p.sendMessage(Double.toString(addLvl));
                 }
             }
         }else if(addLvl >= 3){

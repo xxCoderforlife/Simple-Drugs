@@ -131,7 +131,7 @@ public class Main extends JavaPlugin {
         return messages;
     }
 
-    public AddictionManager gAddictionManager(){
+    public AddictionManager getAddictionManager(){
         return addictionManager;
     }
 

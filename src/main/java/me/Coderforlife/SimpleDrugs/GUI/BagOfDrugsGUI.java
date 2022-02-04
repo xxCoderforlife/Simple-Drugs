@@ -111,27 +111,24 @@ public class BagOfDrugsGUI implements Listener {
         }
         if(plugin.getDrugManager().isDrugItem(clickedItem)){
             Drug d = plugin.getDrugManager().matchDrug(clickedItem);   
-            if(ev.isLeftClick()){
-                if(ev.getClick() == ClickType.SHIFT_LEFT){
-                    p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
-                    ItemStack d64 = d.getItem();
-                    clickedItem.setAmount(1);
-                    d64.setAmount(64);
-                    p.getInventory().addItem(d64);
-                    return;
-                }
-                p.getInventory().addItem(d.getItem());
+            if(ev.getClick() == ClickType.LEFT){
+                ItemStack drug = d.getItem();
+                drug.setAmount(1);
+                p.getInventory().addItem(drug);
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
                 p.sendMessage(plugin.getMessages().getPrefix() + 
                 ChatColor.translateAlternateColorCodes('&', "You've been given " + d.getDisplayname()));
-            }
-            if(ev.isRightClick()){
-                if(ev.getClick() == ClickType.SHIFT_RIGHT){
-                    d.influencePlayer(p);
+                
+            }else if(ev.getClick() == ClickType.SHIFT_LEFT){
                     p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
-                    p.closeInventory();
-                    return;
-                }
+                    ItemStack d64 = d.getItem();
+                    d64.setAmount(64);
+                    p.getInventory().addItem(d64);
+            }else if (ev.getClick() == ClickType.RIGHT){
+                d.influencePlayer(p);
+                p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
+                p.closeInventory();
+            }else if(ev.getClick() == ClickType.SHIFT_RIGHT){
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
                 p.closeInventory();
                 new SDRecipeInventory(d).createSDRecipeInventory(p);

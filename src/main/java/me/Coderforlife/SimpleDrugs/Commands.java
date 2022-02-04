@@ -22,7 +22,7 @@ import java.util.UUID;
 
 public class Commands implements CommandExecutor {
     private Main plugin = Main.plugin;
-    private AddictionManager am = new AddictionManager();
+    private AddictionManager am = plugin.getAddictionManager();
     private HashMap<UUID,Double> addic = am.addictionMap();
 
 
@@ -132,7 +132,7 @@ public class Commands implements CommandExecutor {
                         if(p.hasPermission("drugs.addiction")){
                             Double addLvl = addic.get(p.getUniqueId());
                             p.sendMessage(plugin.getMessages().getPrefix() + 
-                            ChatColor.translateAlternateColorCodes('&', "&3Addiction Level:&r&o ") + Double.toString(addLvl));
+                            ChatColor.translateAlternateColorCodes('&', "&3Addiction Level:&r&l ") + Double.toString(addLvl));
                         }
                     }
                 } else if(args.length == 2) {
@@ -218,8 +218,24 @@ public class Commands implements CommandExecutor {
                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: " + ChatColor.DARK_GRAY + "drugs.give");
                         }
+                    }else if(args[0].equalsIgnoreCase("addiction")){
+                        if(p.hasPermission("drugs.addiction.others")){
+                            for(Player target : Bukkit.getOnlinePlayers()){
+                                Double addLvl = addic.get(target.getUniqueId());
+                                p.sendMessage(plugin.getMessages().getPrefix() + 
+                                ChatColor.translateAlternateColorCodes('&', " &3&lAddiction Level For &f&o") + target.getDisplayName() + 
+                                ChatColor.translateAlternateColorCodes('&', "&f: &l") +  
+                                Double.toString(addLvl));
+                                return true;
+                            }
+                            p.sendMessage(plugin.getMessages().getPrefix() + 
+                            ChatColor.translateAlternateColorCodes('&', "&c&o" + args[1] + "&r is not a player"));
+                            return true;
+                        }else{
+                            p.sendMessage(plugin.getMessages().getPermission());
+                        }
                     }
-                } else if(args.length == 3) {//TODO Fix spam
+                } else if(args.length == 3) {
                     if(args[0].equalsIgnoreCase("give")) {
                         if(p.hasPermission("durgs.give.others")) {
                             for(Drug drugs : Main.plugin.getDrugManager().getallDrugs()) {
@@ -229,14 +245,14 @@ public class Commands implements CommandExecutor {
                                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', "You sent " + players.getName() + " " + drugs.getDisplayname()));
                                             players.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', p.getDisplayName() + " Sent you some " + drugs.getDisplayname()));
                                             players.getInventory().addItem(drugs.getItem());
-                                        } else {
-                                            p.sendMessage(plugin.getMessages().getPrefix() + args[2] + " §cis not a " + "player");
+                                            return true;
                                         }
                                     }
-                                } else {
-                                    p.sendMessage(plugin.getMessages().getPrefix() + "§c§o" + args[1] + "§f is not a " + "drug");
+                                    p.sendMessage(plugin.getMessages().getPrefix() + args[2] + " §cis not a " + "player");
+                                    return true;
                                 }
                             }
+                            p.sendMessage(plugin.getMessages().getPrefix() + "§c§o" + args[1] + "§f is not a " + "drug");
                         } else {
                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: " + ChatColor.DARK_GRAY + "drugs.give.others");
