@@ -23,6 +23,8 @@ import java.util.UUID;
 public class Commands implements CommandExecutor {
     private Main plugin = Main.plugin;
     private AddictionManager am = new AddictionManager();
+    private HashMap<UUID,Double> addic = am.addictionMap();
+
 
     public String dash = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "- ";
     private BagOfDrugsGUI bd = new BagOfDrugsGUI();
@@ -128,7 +130,6 @@ public class Commands implements CommandExecutor {
                         }
                     }else if(args[0].equalsIgnoreCase("addiction")){
                         if(p.hasPermission("drugs.addiction")){
-                            HashMap<UUID,Double> addic = am.addictionMap();
                             Double addLvl = addic.get(p.getUniqueId());
                             p.sendMessage(plugin.getMessages().getPrefix() + 
                             ChatColor.translateAlternateColorCodes('&', "&3Addiction Level:&r&o ") + Double.toString(addLvl));

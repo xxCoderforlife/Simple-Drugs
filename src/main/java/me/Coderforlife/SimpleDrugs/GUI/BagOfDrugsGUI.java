@@ -2,7 +2,6 @@ package me.Coderforlife.SimpleDrugs.GUI;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -116,6 +115,7 @@ public class BagOfDrugsGUI implements Listener {
                 if(ev.getClick() == ClickType.SHIFT_LEFT){
                     p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
                     ItemStack d64 = d.getItem();
+                    clickedItem.setAmount(1);
                     d64.setAmount(64);
                     p.getInventory().addItem(d64);
                     return;
@@ -128,6 +128,7 @@ public class BagOfDrugsGUI implements Listener {
             if(ev.isRightClick()){
                 if(ev.getClick() == ClickType.SHIFT_RIGHT){
                     d.influencePlayer(p);
+                    p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
                     p.closeInventory();
                     return;
                 }
@@ -161,6 +162,9 @@ public class BagOfDrugsGUI implements Listener {
         Inventory inv = Bukkit.createInventory(null, stack.size(), invName);
 
         inv.setContents(stack.toArray(new ItemStack[0]));
+        for(ItemStack s :inv.getContents()){
+            s.setAmount(1);
+        }
         return inv;
     }
 
