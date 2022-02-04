@@ -27,7 +27,8 @@
       "item":"GREEN_DYE",
       "permission":"drugs.use.weed",
       "crafting":true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.1
    },
    {
       "name":"Percocet",
@@ -57,7 +58,8 @@
       "item":"PUMPKIN_SEEDS",
       "permission":"drugs.use.percocet",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.3
    },
    {
       "name":"Acid",
@@ -87,7 +89,8 @@
       "item":"PAPER",
       "permission":"drugs.use.acid",
       "crafting": true,
-      "has_seed":true
+      "has_seed":true,
+      "addictionLevel": 0.4
    },
    {
       "name":"Coke",
@@ -117,7 +120,8 @@
       "item":"SUGAR",
       "permission":"drugs.use.coke",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.5
    },
    {
       "name":"Heroin",
@@ -147,7 +151,8 @@
       "item":"WITHER_ROSE",
       "permission":"drugs.use.heroin",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.8
    },
    {
       "name":"Molly",
@@ -182,7 +187,8 @@
       "item":"IRON_NUGGET",
       "permission":"drugs.use.molly",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.2
    },
    {
       "name":"Ciggy",
@@ -212,7 +218,8 @@
       "item":"REDSTONE_TORCH",
       "permission":"drugs.use.ciggy",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.3
    },
    {
       "name":"Shrooms",
@@ -240,7 +247,10 @@
          }
       ],
       "item":"CRIMSON_FUNGUS",
-      "permission":"drugs.use.shrooms"
+      "permission":"drugs.use.shrooms",
+      "crafting":true,
+      "has_seed": true,
+      "addictionLevel": 0.3
    },
    {
       "name":"Salvia",
@@ -270,7 +280,8 @@
       "item":"DRIED_KELP",
       "permission":"drugs.use.salvia",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.2
    },
    {
       "name":"PCP",
@@ -295,7 +306,8 @@
       "item":"SPORE_BLOSSOM",
       "permission":"drugs.use.pcp",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.6
    },
    {
       "name":"DMT",
@@ -325,7 +337,8 @@
       "item":"GLOWSTONE_DUST",
       "permission":"drugs.use.dmt",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.3
    },
    {
       "name":"Alcohol",
@@ -355,7 +368,8 @@
       "item":"WATER_BUCKET",
       "permission":"drugs.use.alcohol",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.5
    },
    {
       "name":"Flakka",
@@ -385,7 +399,8 @@
       "item":"QUARTZ",
       "permission":"drugs.use.flakka",
       "crafting": true,
-      "has_seed":true
+      "has_seed":true,
+      "addictionLevel": 0.4
    },
    {
       "name":"Meth",
@@ -415,7 +430,8 @@
       "item":"PRISMARINE_SHARD",
       "permission":"drugs.use.meth",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.3
    },
    {
       "name":"Ketamine",
@@ -450,7 +466,8 @@
       "item":"POWDER_SNOW_BUCKET",
       "permission":"drugs.use.ketamine",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.3
    },
    {
       "name":"Oxy",
@@ -480,7 +497,8 @@
       "item":"WHITE_DYE",
       "permission":"drugs.use.oxy",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.2
    },
    {
       "name":"Tussin",
@@ -510,7 +528,8 @@
       "item":"PURPLE_CANDLE",
       "permission":"drugs.use.tussin",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.4
    },
    {
       "name":"Xannx",
@@ -540,6 +559,7 @@
       "item":"GREEN_CANDLE",
       "permission":"drugs.use.xannx",
       "crafting": true,
-      "has_seed": true
+      "has_seed": true,
+      "addictionLevel": 0.7
    }
 ]

@@ -407,6 +407,7 @@ public class DrugManager {
     	String name = config.getString("name");
     	String displayName = config.contains("displayname") ? config.getString("displayname").replace("&", "§") : name.replaceAll("_", " ");
     	Material mat = config.getMaterial("item");
+		Double addLvl = config.getDouble("addictionLevel");
     	String permission = config.contains("permission") ? config.getString("permission") : "drugs.use." + name.toLowerCase();
     	ArrayList<DrugEffect> effects = (config.contains("effects") && config.isJsonArray("effects")) ? loadEffectsFromJson(config.getJsonArray("effects"), fileName) : new ArrayList<DrugEffect>();
     	
@@ -421,7 +422,7 @@ public class DrugManager {
     	
     	ItemStack is = createItem(displayName, mat, effects);
     	
-    	addDrug(new Drug(name, displayName, is, effects, permission), name.toUpperCase());
+    	addDrug(new Drug(name, displayName, is, effects, permission,addLvl), name.toUpperCase());
     }
     
     private ItemStack createItem(String s, Material item, ArrayList<DrugEffect> effects) {

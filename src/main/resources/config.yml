@@ -27,4 +27,6 @@ Drugs:
     DropOnDeath: false
     #If the player Keeps the Bag when they Respawn
     GiveOnRespawn: true
+  Addiction:
+    OverDose-Limit: 10.0
 #Yeah that's the end of the Config, You can find Drugs Settings in Drugs.json :)

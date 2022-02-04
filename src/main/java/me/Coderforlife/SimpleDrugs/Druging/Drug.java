@@ -21,6 +21,7 @@ public class Drug {
     private AddictionManager am = plugin.getAddictionManager();
     private String name;
     private String displayname;
+    private Double addictionLevel;
     private SDRecipe sdRecipe;
     private ArrayList<DrugEffect> effects;
     private ItemStack item;
@@ -31,12 +32,13 @@ public class Drug {
     private Recipe seedRecipe = null;
     private Integer harvestAmount = 1;
 
-    public Drug(String name, String displayname, ItemStack item, ArrayList<DrugEffect> effects, String permission) {
+    public Drug(String name, String displayname, ItemStack item, ArrayList<DrugEffect> effects, String permission,Double addlvl) {
         this.name = name;
         this.displayname = displayname;
         this.effects = effects;
         this.permission = permission;
         this.item = item;
+        this.addictionLevel = addlvl;
     }
 
     /**
@@ -47,19 +49,19 @@ public class Drug {
     public void influencePlayer(Player p) {
         HashMap<UUID,Double> addic = am.addictionMap();
         Double addLvl = addic.get(p.getUniqueId());
-        if(addLvl < 3){
+        if(addLvl < plugin.getConfig().getDouble("Drugs.Addiction.OverDose-Limit")){
             for (DrugEffect effect : this.effects) {
                 if (!(p.hasPotionEffect(effect.getEffect()))) {
-                    addic.put(p.getUniqueId(), addLvl + 0.3);
+                    addic.put(p.getUniqueId(), addLvl + addictionLevel);
                     p.addPotionEffect(new PotionEffect(effect.getEffect(), effect.getTime(), effect.getIntensity()));
                 } else {
                     for (PotionEffect effects : p.getActivePotionEffects()) {
                         p.addPotionEffect(new PotionEffect(effect.getEffect(), effects.getDuration() + 20, effect.getIntensity()));
                     }
-                    addic.put(p.getUniqueId(), addLvl + 0.1);
+                    addic.put(p.getUniqueId(), addLvl + addictionLevel);
                 }
             }
-        }else if(addLvl >= 3){
+        }else if(addLvl >= plugin.getConfig().getDouble("Drugs.Addiction.OverDose-Limit")){
             p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_HURT, 1.0f, 1.0f);
             p.setHealth(0.0);
         }
