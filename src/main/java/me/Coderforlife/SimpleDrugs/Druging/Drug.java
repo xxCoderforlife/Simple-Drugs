@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -53,15 +56,15 @@ public class Drug {
                     p.addPotionEffect(new PotionEffect(effect.getEffect(), effect.getTime(), effect.getIntensity()));
                 } else {
                     for (PotionEffect effects : p.getActivePotionEffects()) {
-                        addic.put(p.getUniqueId(), addLvl + 0.1);
-                        p.sendMessage(effects.getType() + ": " + Integer.toString(effects.getDuration()));
-                        p.addPotionEffect(new PotionEffect(effect.getEffect(), effects.getDuration() + 20,
-                                effect.getIntensity()));
+                        p.addPotionEffect(new PotionEffect(effect.getEffect(), effects.getDuration() + 20, effect.getIntensity()));
                     }
+                    addic.put(p.getUniqueId(), addLvl + 0.1);
+                    p.sendMessage(Double.toString(addLvl));
                 }
             }
         }else if(addLvl >= 3){
-
+            p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_HURT, 1.0f, 1.0f);
+            p.setHealth(0.0);
         }
     }
 

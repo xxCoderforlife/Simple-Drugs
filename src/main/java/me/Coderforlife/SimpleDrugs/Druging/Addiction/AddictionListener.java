@@ -1,18 +1,27 @@
 package me.Coderforlife.SimpleDrugs.Druging.Addiction;
 
+import java.util.HashMap;
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Util.Messages;
+import net.md_5.bungee.api.ChatColor;
 
 public class AddictionListener implements Listener{
 
     private Main plugin = Main.plugin;
     private AddictionManager am = plugin.gAddictionManager();
+    private HashMap<UUID,Double> addic = am.addictionMap();
+    private Messages m = plugin.getMessages();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent ev){
@@ -38,7 +47,20 @@ public class AddictionListener implements Listener{
         }
         Player p = (Player) ev.getEntity();
         if(am.addictionMap().containsKey(p.getUniqueId())){
+            Double addLvl = addic.get(p.getUniqueId());
+            if(addLvl >= 3){
+                ev.setDeathMessage(m.getPrefix() + p.getDisplayName() + 
+                ChatColor.translateAlternateColorCodes('&', " &f&ljust ODed."));
+            }
             am.addictionMap().remove(p.getUniqueId());
+        }
+    }
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent ev){
+        Player p = (Player) ev.getPlayer();
+        if(!am.addictionMap().containsKey(p.getUniqueId())){
+            am.addictionMap().put(p.getUniqueId(), 0.0);
+
         }
     }
 }

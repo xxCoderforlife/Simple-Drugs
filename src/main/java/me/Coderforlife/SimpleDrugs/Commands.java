@@ -2,6 +2,7 @@ package me.Coderforlife.SimpleDrugs;
 
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.SDRecipeInventory;
@@ -16,9 +17,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class Commands implements CommandExecutor {
     private Main plugin = Main.plugin;
+    private AddictionManager am = new AddictionManager();
 
     public String dash = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "- ";
     private BagOfDrugsGUI bd = new BagOfDrugsGUI();
@@ -64,10 +68,12 @@ public class Commands implements CommandExecutor {
                         if(p.hasPermission("drugs.soberup")) {
                             if(!p.getActivePotionEffects().isEmpty()) {
                                 for(PotionEffect effect : p.getActivePotionEffects()) {
-                                    p.sendTitle("§a§lSOBERED UP", "§l§egood job.", 10, 4 * 20, 10);
-                                    p.playSound(p.getLocation(), Sound.BLOCK_BELL_RESONATE, 1, 2);
                                     p.removePotionEffect(effect.getType());
                                 }
+                                p.sendTitle("§a§lSOBERED UP", "§l§egood job.", 10, 4 * 20, 10);
+                                p.playSound(p.getLocation(), Sound.BLOCK_BELL_RESONATE, 1, 2);
+                                HashMap<UUID,Double> addic = am.addictionMap();
+                                addic.replace(p.getUniqueId(), 0.0);
                             } else {
                                 p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1, (float) 0.2);
                                 // Text | SubText | FadeIn | Stay | FadeOut

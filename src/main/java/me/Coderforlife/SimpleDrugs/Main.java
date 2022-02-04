@@ -9,6 +9,7 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.RecipeChecker;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.BrewingRecipeListener;
 import me.Coderforlife.SimpleDrugs.DrugPlants.PlantItemListener;
 import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
+import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionListener;
 import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 import me.Coderforlife.SimpleDrugs.Events.CraftingEvent;
 import me.Coderforlife.SimpleDrugs.Events.DrugUseListener;
@@ -51,6 +52,7 @@ public class Main extends JavaPlugin {
         settings = new Settings();
         messages = new Messages();
         addictionManager = new AddictionManager();
+        registerListeners();
         
         sendConsoleMessage(header1);
         sendConsoleMessage("§aLoading Plugin...");
@@ -64,18 +66,6 @@ public class Main extends JavaPlugin {
         BrewingRecipe br = new BrewingRecipe("TestThing", result, ing, fuel, input, 25, 25, 100);
         br.registerRecipe();
 */
-        this.getServer().getPluginManager().registerEvents(new RecipeChecker(), this);
-        this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
-        this.getServer().getPluginManager().registerEvents(new BagOfDrugsGUI(), this);
-        this.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
-        this.getServer().getPluginManager().registerEvents(new DrugUseListener(), this);
-        this.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
-        //TODO this.getServer().getPluginManager().registerEvents(new AddictionListener(), this);
-        this.getServer().getPluginManager().registerEvents(new CraftingEvent(), this);
-        this.getServer().getPluginManager().registerEvents(new PlantItemListener(), this);
-        this.getServer().getPluginManager().registerEvents(new BrewingRecipeListener(), this);
-        this.getCommand("drugs").setExecutor(new Commands());
-        this.getCommand("drugs").setTabCompleter(new TabCommands());
 
         sendConsoleMessage("§aLoaded without Errors. Plugin is ready to Use :D");
     }
@@ -143,5 +133,20 @@ public class Main extends JavaPlugin {
 
     public AddictionManager gAddictionManager(){
         return addictionManager;
+    }
+
+    private void registerListeners(){
+        this.getServer().getPluginManager().registerEvents(new RecipeChecker(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
+        this.getServer().getPluginManager().registerEvents(new BagOfDrugsGUI(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
+        this.getServer().getPluginManager().registerEvents(new DrugUseListener(), this);
+        this.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
+        this.getServer().getPluginManager().registerEvents(new AddictionListener(), this);
+        this.getServer().getPluginManager().registerEvents(new CraftingEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new PlantItemListener(), this);
+        this.getServer().getPluginManager().registerEvents(new BrewingRecipeListener(), this);
+        this.getCommand("drugs").setExecutor(new Commands());
+        this.getCommand("drugs").setTabCompleter(new TabCommands());
     }
 }

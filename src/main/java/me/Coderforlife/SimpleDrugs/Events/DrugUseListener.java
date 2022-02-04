@@ -74,7 +74,7 @@ public class DrugUseListener implements Listener {
     //TODO Throws Error
     @EventHandler
     public void HitPlayerWithDrug(EntityDamageByEntityEvent ev){
-        if(!(ev.getDamager() instanceof Player)){
+        if(!(ev.getDamager() instanceof Player) && !(ev.getEntity() instanceof Player)){
             return;
         }
         Player hitter = (Player) ev.getDamager();
