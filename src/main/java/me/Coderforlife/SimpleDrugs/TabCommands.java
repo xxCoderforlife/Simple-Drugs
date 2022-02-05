@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TabCommands implements TabCompleter {
-    private String[] commands = {"help","recipe","list","bagofdrugs","soberup","give","version","settings","addiction"};
+    private String[] commands = {"help","recipe","list","bagofdrugs","soberup","give","version","settings","addiction","editor"};
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> tab = new ArrayList<>();

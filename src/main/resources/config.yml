@@ -29,4 +29,4 @@ Drugs:
     GiveOnRespawn: true
   Addiction:
     OverDose-Limit: 10.0
-#Yeah that's the end of the Config, You can find Drugs Settings in Drugs.json :)
+#Yeah that's the end of the Config.

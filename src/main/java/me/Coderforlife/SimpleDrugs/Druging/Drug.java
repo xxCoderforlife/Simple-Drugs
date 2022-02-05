@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -76,6 +77,21 @@ public class Drug {
     public void influenceOtherPlayers(Drug d, Player p) {
         for (DrugEffect effect : d.getEffects()) {
             p.addPotionEffect(new PotionEffect(effect.getEffect(), effect.getTime(), effect.getIntensity()));
+        }
+    }
+
+    /**
+     * Used to influence any type of Mob
+     * 
+     * @param e Mob 
+     * @apiNote See for info {@link Mob}
+     */
+    public void influenceAnimal(Mob e){
+        if(!(e instanceof Mob)){
+            return;
+        }
+        for(DrugEffect effect : effects){
+            e.addPotionEffect(new PotionEffect(effect.getEffect() ,effect.getTime(), effect.getIntensity()));
         }
     }
 

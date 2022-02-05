@@ -4,6 +4,7 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.SDRecipeInventory;
 
@@ -133,6 +134,11 @@ public class Commands implements CommandExecutor {
                             Double addLvl = addic.get(p.getUniqueId());
                             p.sendMessage(plugin.getMessages().getPrefix() + 
                             ChatColor.translateAlternateColorCodes('&', "&3Addiction Level:&r&l ") + Double.toString(addLvl));
+                        }
+                    }else if(args[0].equalsIgnoreCase("editor")){
+                        if(p.hasPermission("drugs.editor")){
+                            DrugCreatorGUI dgui = new DrugCreatorGUI();
+                            p.openInventory(dgui.drugCreator());
                         }
                     }
                 } else if(args.length == 2) {
