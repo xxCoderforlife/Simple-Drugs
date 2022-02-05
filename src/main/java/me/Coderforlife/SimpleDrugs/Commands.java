@@ -4,8 +4,9 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CreateNewDrug;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugGUI;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.SDRecipeInventory;
 
 import org.bukkit.Bukkit;
@@ -137,8 +138,8 @@ public class Commands implements CommandExecutor {
                         }
                     }else if(args[0].equalsIgnoreCase("editor")){
                         if(p.hasPermission("drugs.editor")){
-                            DrugCreatorGUI dgui = new DrugCreatorGUI();
-                            p.openInventory(dgui.drugCreator());
+                            DrugGUI dgui = new DrugGUI();
+                            p.openInventory(dgui.drugMainMenu());
                         }
                     }
                 } else if(args.length == 2) {

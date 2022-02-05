@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -12,11 +12,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class DrugCreatorGUI implements Listener{
+public class CreateNewDrug implements Listener{
 
     private Inventory inv;
     
-    private final String invName = ChatColor.translateAlternateColorCodes('&', "&4&lDrug Creator");
+    private final String invName = ChatColor.translateAlternateColorCodes('&', "&4&lCreate New Drug");
 
     public Inventory drugCreator(){
         inv = Bukkit.createInventory(null, 18,invName);
@@ -24,6 +24,10 @@ public class DrugCreatorGUI implements Listener{
         inv.setItem(1, setEffects());
         inv.setItem(2, setSeedItem());
         inv.setItem(3, setDrugItem());
+        inv.setItem(4, setHasSeed());
+        inv.setItem(5, setPermission());
+        inv.setItem(6, setAddictionLevel());
+        inv.setItem(7, setCrafting());
         return inv;
     }
 
@@ -31,6 +35,9 @@ public class DrugCreatorGUI implements Listener{
     public void PlayerClick(InventoryClickEvent ev){
 
         if(ev.getCurrentItem() == null){
+            return;
+        }
+        if(!ev.getView().getTitle().equals(invName)){
             return;
         }
 
@@ -47,6 +54,14 @@ public class DrugCreatorGUI implements Listener{
         }else if(s.equals(setDrugItem())){
             p.sendMessage(s.getItemMeta().getDisplayName());
 
+        }else if(s.equals(setHasSeed())){
+
+        }else if(s.equals(setPermission())){
+
+        }else if(s.equals(setAddictionLevel())){
+
+        }else if(s.equals(setCrafting())){
+            
         }
         ev.setCancelled(true);
     }
@@ -79,6 +94,38 @@ public class DrugCreatorGUI implements Listener{
         ItemStack s = new ItemStack(Material.REDSTONE);
         ItemMeta im = s.getItemMeta();
         im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&f&oSet Drug Item"));
+        s.setItemMeta(im);
+        return s;
+    }
+
+    private ItemStack setAddictionLevel(){
+        ItemStack s = new ItemStack(Material.WITHER_SKELETON_SKULL);
+        ItemMeta im = s.getItemMeta();
+        im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&f&oSet Addiction Level"));
+        s.setItemMeta(im);
+        return s;
+    }
+
+    private ItemStack setPermission(){
+        ItemStack s = new ItemStack(Material.PAPER);
+        ItemMeta im = s.getItemMeta();
+        im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&f&oSet Drug Permission"));
+        s.setItemMeta(im);
+        return s;
+    }
+
+    private ItemStack setHasSeed(){
+        ItemStack s = new ItemStack(Material.GREEN_SHULKER_BOX);
+        ItemMeta im = s.getItemMeta();
+        im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&f&oSet If The Drug Has A Seed"));
+        s.setItemMeta(im);
+        return s;
+    }
+
+    private ItemStack setCrafting(){
+        ItemStack s = new ItemStack(Material.GREEN_SHULKER_BOX);
+        ItemMeta im = s.getItemMeta();
+        im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&f&oSet If The Drug Has A Seed"));
         s.setItemMeta(im);
         return s;
     }
