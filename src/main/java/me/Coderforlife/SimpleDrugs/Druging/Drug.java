@@ -13,10 +13,11 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.potion.PotionEffect;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Crafting.SDCraftableItem;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 
-public class Drug {
+public class Drug implements SDCraftableItem {
 
     private Main plugin = Main.plugin;
     private AddictionManager am = plugin.getAddictionManager();
@@ -105,6 +106,10 @@ public class Drug {
 
     public String getName() {
         return name;
+    }
+    
+    public String getNamespaceName() {
+    	return "Drug_" + name;
     }
 
     public void setName(String name) {

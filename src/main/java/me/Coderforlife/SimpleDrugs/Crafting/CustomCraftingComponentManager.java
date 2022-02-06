@@ -52,7 +52,7 @@ public class CustomCraftingComponentManager {
 	
 	public void loadAllRecipes() {
 		for(CraftingComponent cc : craftingComponents.values()) {
-			cc.registerRecipe();
+			cc.getRecipe().registerRecipe();
 		}
 	}
 	

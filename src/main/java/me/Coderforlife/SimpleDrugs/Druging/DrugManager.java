@@ -33,12 +33,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
 import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent;
 import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
-import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
-import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
-import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.DrugPlants.DrugPlantItem;
 import me.Coderforlife.SimpleDrugs.Util.JsonFileInterpretter;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
@@ -54,7 +50,6 @@ public class DrugManager {
     
     private Map<String, Drug> drugs = new HashMap<>();
     private Map<Drug, ItemStack> drugSeeds = new HashMap<>();
-
 
     public void loadFiles() {
     	if(!folder.exists()) folder.mkdir();
@@ -76,7 +71,7 @@ public class DrugManager {
     	}
     	if(enabled.length() > 0) sendConsoleMessage("§6Enabled Drugs: §a" + enabled.toString().trim());
     }
-    
+
     private void loadDrugs() {
     	for(File f : folder.listFiles()) {
     		if(f.getName().endsWith(".json")) {
@@ -145,7 +140,9 @@ public class DrugManager {
 					
 					DrugPlantItem dpi = new DrugPlantItem(d, seedItem, Material.FARMLAND, harvestAmount);
 					
-					if(!loadSeedCrafting(f.getName(), dpi, ja, dct)) {
+					SDRecipe recipe = Main.plugin.getRecipeManager().loadRecipe(f.getName(), dpi, ja, dct);
+					
+					if(recipe == null) {
 						sendConsoleMessage("§c[ERROR] Error in: §7" + f.getName());
 						sendConsoleMessage("§c[ERROR] Error in Recipe");
 						sendConsoleMessage("§c[ERROR] Skipping Recipe");
@@ -203,7 +200,7 @@ public class DrugManager {
 						continue;
 					}
 					
-					SDRecipe recipe = loadCraftingRecipe(f.getName(), d, ja, dct);
+					SDRecipe recipe = Main.plugin.getRecipeManager().loadRecipe(f.getName(), d, ja, dct);
 					
 					if(recipe == null) {
 						sendConsoleMessage("§c[ERROR] Error in: §7" + f.getName());
@@ -221,7 +218,7 @@ public class DrugManager {
     		}
     	}
     }
-    
+
     private DrugLoadError canRecipeLoad(JsonObject jo, Boolean seed) {
     	DrugLoadError dle = new DrugLoadError();
     	JsonFileInterpretter config = new JsonFileInterpretter(jo);
@@ -254,135 +251,6 @@ public class DrugManager {
     	
     	return dle;
     }
-    
-    private boolean loadSeedCrafting(String fileName, DrugPlantItem dpi, JsonArray ja, DrugCraftingType dct) {
-    	switch(dct) {
-		case FURNACE:
-			List<ItemStack> furnaceMats = loadMaterialsForCrafting(fileName, ja);
-			
-			if(furnaceMats.size() > 1 || furnaceMats.size() == 0) {
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Can only have one input for Recipe using FURNACE type");
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
-			}
-			
-			SDFurnace furnace = new SDFurnace("DrugSeed_" + dpi.getDrug().getName(), dpi.makeItem(), furnaceMats.get(0), 0f, 90);
-			furnace.registerRecipe();
-			
-			return true;
-		case SHAPED:
-			SDShaped shaped = new SDShaped("DrugSeed_" + dpi.getDrug().getName(), dpi.makeItem());
-			List<ItemStack> mats = loadMaterialsForCrafting(fileName, ja);
-			
-			if(mats == null) {
-				return false;
-			}
-			
-			for(int i = 0; i < mats.size(); i++) {
-				shaped.addItemStack(mats.get(i));
-			}
-
-			shaped.registerRecipe();
-			
-			return true;
-		case SHAPELESS:
-			SDShapeless shapeless = new SDShapeless("DrugSeed_" + dpi.getDrug().getName(), dpi.makeItem());
-			List<ItemStack> materials = loadMaterialsForCrafting(fileName, ja);
-			
-			if(materials == null) {
-				return false;
-			}
-			
-			materials.forEach(e -> {
-				shapeless.addItemStack(e);
-			});
-			
-			shapeless.registerRecipe();
-			
-			return true;
-		default:
-			return false;
-    	}
-    }
-    
-    private SDRecipe loadCraftingRecipe(String fileName, Drug d, JsonArray ja, DrugCraftingType dct) {
-    	switch(dct) {
-		case FURNACE:
-			List<ItemStack> furnaceMats = loadMaterialsForCrafting(fileName, ja);
-			
-			if(furnaceMats.size() > 1 || furnaceMats.size() == 0) {
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Can only have one input for Recipe using FURNACE type");
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
-				return null;
-			}
-			
-			SDFurnace furnace = new SDFurnace(d.getName(), d.getItem(), furnaceMats.get(0), 0f, 90);
-			furnace.registerRecipe();
-			return furnace;
-		case SHAPED:
-			SDShaped shaped = new SDShaped(d.getName(), d.getItem());
-			List<ItemStack> mats = loadMaterialsForCrafting(fileName, ja);
-			
-			if(mats == null) {
-				return null;
-			}
-			
-			for(int i = 0; i < mats.size(); i++) {
-				shaped.addItemStack(mats.get(i));
-			}
-
-			shaped.registerRecipe();
-			
-			return shaped;
-		case SHAPELESS:
-			SDShapeless shapeless = new SDShapeless(d.getName(), d.getItem());
-			List<ItemStack> materials = loadMaterialsForCrafting(fileName, ja);
-			
-			if(materials == null) {
-				return null;
-			}
-			
-			materials.forEach(e -> {
-				shapeless.addItemStack(e);
-			});
-			
-			shapeless.registerRecipe();
-			
-			return shapeless;
-		default:
-			return null;
-    	}
-    }
-    
-    private List<ItemStack> loadMaterialsForCrafting(String fileName, JsonArray ja) {
-		List<ItemStack> materials = new ArrayList<>();
-	    
-		for(int i = 0; i < ja.size(); i++) {
-    		Material m = Material.getMaterial(ja.get(i).getAsString().toUpperCase());
-    		if(m == null) {
-    			CraftingComponent cc = Main.plugin.getCraftingManager().getByName(ja.get(i).getAsString().toUpperCase());
-    			if(cc == null) {
-    				sendConsoleMessage("§c[ERROR] Error in: §7" + fileName);
-    				sendConsoleMessage("§c[ERROR] Material: §7" + ja.get(i).getAsString().toUpperCase() + " §cdoes not exist as a Minecraft Material or Custom Crafting Component");
-    				sendConsoleMessage("§c[ERROR] Skipping Recipe");
-    				return null;
-    			}
-    			
-    			materials.add(cc.getStack());
-    		} else {
-    			materials.add(new ItemStack(m));
-    		}
-    	}
-		
-    	if(materials.size() > 9) {
-    		sendConsoleMessage("§c[ERROR] Error in: §7" + fileName);
-    		sendConsoleMessage("§c[ERROR] Materials added cannot be above 9");
-    		return null;
-    	}
-    	
-    	return materials;
-	}
     
     private DrugLoadError canDrugLoad(JsonObject jo) {
     	DrugLoadError dle = new DrugLoadError();

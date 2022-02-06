@@ -6,9 +6,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Crafting.SDCraftableItem;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 
-public class DrugPlantItem {
+public class DrugPlantItem implements SDCraftableItem {
 	
 	private Drug drugToBePlaced;
 	private ItemStack plantableItem;
@@ -37,6 +38,16 @@ public class DrugPlantItem {
 		
 		plantableItem.setItemMeta(im);
 		return plantableItem;
+	}
+
+	@Override
+	public ItemStack getItem() {
+		return makeItem();
+	}
+
+	@Override
+	public String getNamespaceName() {
+		return "DrugSeed_" + getDrug().getName();
 	}
 	
 }
