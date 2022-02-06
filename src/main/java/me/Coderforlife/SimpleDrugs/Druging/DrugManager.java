@@ -22,6 +22,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffectType;
 
 import com.google.gson.Gson;
@@ -284,6 +285,7 @@ public class DrugManager {
     private ItemStack createItem(String s, Material item, ArrayList<DrugEffect> effects) {
     	ItemStack is = new ItemStack(item);
     	ItemMeta im = is.getItemMeta();
+    	im.getPersistentDataContainer().set(Main.plugin.isDrugItem(), PersistentDataType.BYTE, (byte)1);
     	im.setDisplayName(s);
     	im.addItemFlags(ItemFlag.HIDE_ENCHANTS , ItemFlag.HIDE_ATTRIBUTES);
     	List<String> lore = new ArrayList<String>();

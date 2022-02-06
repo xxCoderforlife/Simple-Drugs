@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -88,6 +90,10 @@ public class CustomCraftingComponentManager {
 		
 		String name = config.getString("name");
 		ItemStack result = config.getItem("item");
+		ItemMeta im = result.getItemMeta();
+		im.getPersistentDataContainer().set(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE, (byte)1);
+		result.setItemMeta(im);
+		
 		DrugCraftingType dct = config.getDrugCraftingType("type");
 		JsonObject ja = config.getJsonObject("recipe");
 		

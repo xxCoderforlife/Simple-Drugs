@@ -1,5 +1,9 @@
 package me.Coderforlife.SimpleDrugs;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,6 +26,7 @@ import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CreateNewDrug;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DeleteDrug;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugGUI;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.EditDrug;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.SettingNameListener;
 import me.Coderforlife.SimpleDrugs.Util.Messages;
 import net.md_5.bungee.api.ChatColor;
 
@@ -36,6 +41,8 @@ public class Main extends JavaPlugin {
     private NamespacedKey drugKey;
     private NamespacedKey drugHarvestAmount;
     private NamespacedKey drugSeedKey;
+    private NamespacedKey isDrugItem;
+    private NamespacedKey isCraftingComponent;
     
     private DrugManager drugManager;
     private CustomCraftingComponentManager craftingManager;
@@ -43,6 +50,8 @@ public class Main extends JavaPlugin {
     private Messages messages;
     private RecipeManager recipeManager;
     private AddictionManager addictionManager;
+    
+    private List<UUID> creatingName = new ArrayList<UUID>();
     
     @Override
     public void onEnable() {
@@ -53,6 +62,8 @@ public class Main extends JavaPlugin {
         drugKey = new NamespacedKey(plugin, "SimpleDrugs-DrugName");
         drugHarvestAmount = new NamespacedKey(plugin, "SimpleDrugs-HarvestAmount");
         drugSeedKey = new NamespacedKey(plugin, "SimpleDrugs-DrugSeed");
+        isDrugItem = new NamespacedKey(plugin, "SimpleDrugs-IsDrugItem");
+        isCraftingComponent = new NamespacedKey(plugin, "SimpleDrugs-IsCraftingComponent");
         
         settings = new Settings();
         messages = new Messages();
@@ -79,9 +90,13 @@ public class Main extends JavaPlugin {
     public void onDisable() {
         getSettings().save();
     }
-
+    
     private void sendConsoleMessage(String message) {
         this.getServer().getConsoleSender().sendMessage(message);
+    }
+    
+    public List<UUID> getCreatingName() {
+    	return creatingName;
     }
     
     public RecipeManager getRecipeManager() {
@@ -132,6 +147,14 @@ public class Main extends JavaPlugin {
     	return drugSeedKey;
     }
     
+    public NamespacedKey isDrugItem() {
+    	return isDrugItem;
+    }
+    
+    public NamespacedKey isCraftingComponent() {
+    	return isCraftingComponent;
+    }
+    
     public Messages getMessages(){
         return messages;
     }
@@ -155,6 +178,8 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new CraftingEvent(), this);
         this.getServer().getPluginManager().registerEvents(new PlantItemListener(), this);
         this.getServer().getPluginManager().registerEvents(new BrewingRecipeListener(), this);
+        
+        this.getServer().getPluginManager().registerEvents(new SettingNameListener(), this);
         this.getServer().getPluginManager().registerEvents(new CreateNewDrug(), this);
         this.getCommand("drugs").setExecutor(new Commands());
         this.getCommand("drugs").setTabCompleter(new TabCommands());
