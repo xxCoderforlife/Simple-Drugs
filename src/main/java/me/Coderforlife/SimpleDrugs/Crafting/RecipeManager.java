@@ -10,6 +10,7 @@ import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
@@ -91,42 +92,32 @@ public class RecipeManager {
 		}
 	}
 	
-	public SDRecipe loadRecipe(String fileName, SDCraftableItem item, JsonArray ja, DrugCraftingType dct) {
-    	switch(dct) {
+	public SDRecipe loadRecipe(String fileName, SDCraftableItem item, JsonObject jo, DrugCraftingType dct) {
+		switch(dct) {
 		case FURNACE:
-			List<ItemStack> furnaceMats = loadMaterialsForCrafting(fileName, ja);
+			ItemStack fItem = getItemForFurnace(fileName, jo);
+			if(fItem == null) return null;
 			
-			if(furnaceMats.size() > 1 || furnaceMats.size() == 0) {
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Can only have one input for Recipe using FURNACE type");
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
-			}
-			
-			SDFurnace furnace = new SDFurnace("Simple-Drug_" + item.getNamespaceName(), item.getItem(), furnaceMats.get(0), 0f, 90);
+			SDFurnace furnace = new SDFurnace("Simple-Drug_" + item.getNamespaceName(), item.getItem(), fItem, 0f, 90);
 			furnace.registerRecipe();
-			
 			return furnace;
 		case SHAPED:
 			SDShaped shaped = new SDShaped("Simple-Drug_" + item.getNamespaceName(), item.getItem());
-			List<ItemStack> mats = loadMaterialsForCrafting(fileName, ja);
 			
-			if(mats == null) {
-				return null;
-			}
+			List<ItemStack> mats = getItemsForShaped(fileName, jo);
+			if(mats == null) return null;
 			
 			for(int i = 0; i < mats.size(); i++) {
 				shaped.addItemStack(mats.get(i));
 			}
-
+			
 			shaped.registerRecipe();
 			return shaped;
 		case SHAPELESS:
 			SDShapeless shapeless = new SDShapeless("Simple-Drug_" + item.getNamespaceName(), item.getItem());
-			List<ItemStack> materials = loadMaterialsForCrafting(fileName, ja);
+			List<ItemStack> materials = getItemsForShapeless(fileName, jo);
 			
-			if(materials == null) {
-				return null;
-			}
+			if(materials == null) return null;
 			
 			materials.forEach(e -> {
 				shapeless.addItemStack(e);
@@ -137,27 +128,64 @@ public class RecipeManager {
 			return shapeless;
 		default:
 			return null;
-    	}
-    }
+		}
+	}
 	
-	private List<ItemStack> loadMaterialsForCrafting(String fileName, JsonArray ja) {
+	private ItemStack getItemForFurnace(String fileName, JsonObject jo) {
+		if(!jo.has("item")) {
+			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+			Bukkit.getConsoleSender().sendMessage("§c[ERROR] `Item` JsonObject Required In Recipe");
+			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+			return null;
+		}
+		
+		return getCCOrMaterial(fileName, jo.get("item").getAsString());
+	}
+	
+	private List<ItemStack> getItemsForShaped(String fileName, JsonObject jo) {
+		List<ItemStack> materials = new ArrayList<>();
+		
+		if(hasNone(jo)) {
+			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Items Required In Recipe");
+			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+			return null;
+		}
+		
+		for(int i = 1; i < 10; i++) {
+			if(!jo.has(String.valueOf(i))) {
+				materials.add(new ItemStack(Material.AIR));
+				continue;
+			}
+			
+			ItemStack item = getCCOrMaterial(fileName, jo.get(String.valueOf(i)).getAsString());
+			if(item == null) return null;
+			materials.add(item);
+		}
+		
+		return materials;
+	}
+	
+	private boolean hasNone(JsonObject jo) {
+		return (!jo.has("1") && !jo.has("2") && !jo.has("3") && !jo.has("4") && !jo.has("5") && !jo.has("6") && !jo.has("7") && !jo.has("8") && !jo.has("9"));
+	}
+	
+	private List<ItemStack> getItemsForShapeless(String fileName, JsonObject jo) {
 		List<ItemStack> materials = new ArrayList<>();
 	    
+		if(!jo.has("items") || !jo.get("items").isJsonArray()) {
+			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+			Bukkit.getConsoleSender().sendMessage("§c[ERROR] `items` JsonElement Required In Recipe OR `items` is not a JsonArray");
+			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+			return null;
+		}
+		
+		JsonArray ja = jo.get("items").getAsJsonArray();
+		
 		for(int i = 0; i < ja.size(); i++) {
-    		Material m = Material.getMaterial(ja.get(i).getAsString().toUpperCase());
-    		if(m == null) {
-    			CraftingComponent cc = Main.plugin.getCraftingManager().getByName(ja.get(i).getAsString().toUpperCase());
-    			if(cc == null) {
-    				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-    				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Material: §7" + ja.get(i).getAsString().toUpperCase() + " §cdoes not exist as a Minecraft Material or Custom Crafting Component");
-    				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
-    				return null;
-    			}
-    			
-    			materials.add(cc.getStack());
-    		} else {
-    			materials.add(new ItemStack(m));
-    		}
+    		ItemStack item = getCCOrMaterial(fileName, ja.get(i).getAsString());
+    		if(item == null) return null;
+    		materials.add(item);
     	}
 		
     	if(materials.size() > 9) {
@@ -167,6 +195,21 @@ public class RecipeManager {
     	}
     	
     	return materials;
+	}
+	
+	private ItemStack getCCOrMaterial(String fileName, String name) {
+		Material m = Material.getMaterial(name.toUpperCase());
+		if(m == null) {
+			CraftingComponent cc = Main.plugin.getCraftingManager().getByName(name.toUpperCase());
+			if(cc == null) {
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Material: §7" + name.toUpperCase() + " §cdoes not exist as a Minecraft Material or Custom Crafting Component");
+				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
+				return null;
+			}
+			return cc.getStack();
+		}
+		return new ItemStack(m);
 	}
 	
 }
