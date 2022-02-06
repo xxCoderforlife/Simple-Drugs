@@ -216,6 +216,10 @@ public class InventoryUI implements Listener {
 		public boolean isFilled(int slot) {
 			return buttons.containsKey(slot);
 		}
+		
+		public Inventory getInventory() {
+			return inv;
+		}
 	
 		/**
 		 * Will update and set items from the buttons mappings

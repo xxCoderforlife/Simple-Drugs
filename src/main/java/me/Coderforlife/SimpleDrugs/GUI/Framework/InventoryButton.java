@@ -39,7 +39,7 @@ public abstract class InventoryButton {
 	protected final void setItemStackUsing(Material mat, Integer i, String title, String lore) {
 		item = new ItemStack(mat, i.intValue());
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(title);
+		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', title));
 		meta.setLore(wrapLoreText(lore));
 		item.setItemMeta(meta);
 	}
