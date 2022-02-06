@@ -1,7 +1,9 @@
 package me.Coderforlife.SimpleDrugs.GUI.DrugCreator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -19,8 +21,20 @@ import net.md_5.bungee.api.ChatColor;
 public class CreateNewDrug implements Listener{
 
     private Inventory inv;
+
+    private HashMap<UUID,Inventory> pInvMap = new HashMap<>();
     
     private final String invName = ChatColor.translateAlternateColorCodes('&', "&5&lCreate New Drug");
+
+
+    /**
+     * 
+     * @return
+     */
+    public HashMap<UUID,Inventory> getNewDurgGUIMap(){
+        return pInvMap;
+    }
+
 
     /**
      * Main Menu Drug Creator Menu
@@ -79,6 +93,13 @@ public class CreateNewDrug implements Listener{
         }else if(s.equals(mainMenu())){
             DrugGUI dgui = new DrugGUI();
             p.openInventory(dgui.drugMainMenu(p));
+        }else if(s.equals(saveButton())){
+            ConfirmGUI cGUI = new ConfirmGUI();
+            pInvMap.put(p.getUniqueId(), inv);
+            p.openInventory(cGUI.confirmGUI(p));
+
+        }else if(s.equals(cancelButton())){
+
         }
         ev.setCancelled(true);
     }

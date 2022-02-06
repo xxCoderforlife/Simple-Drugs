@@ -17,6 +17,7 @@ import me.Coderforlife.SimpleDrugs.Events.InventoryListener;
 import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
 import me.Coderforlife.SimpleDrugs.Events.PlayerRespawn;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.ConfirmGUI;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CreateNewDrug;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DeleteDrug;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugGUI;
@@ -140,6 +141,7 @@ public class Main extends JavaPlugin {
     }
 
     private void registerListeners(){
+        this.getServer().getPluginManager().registerEvents(new ConfirmGUI(), this);
         this.getServer().getPluginManager().registerEvents(new DeleteDrug(), this);
         this.getServer().getPluginManager().registerEvents(new EditDrug(), this);
         this.getServer().getPluginManager().registerEvents(new DrugGUI(), this);

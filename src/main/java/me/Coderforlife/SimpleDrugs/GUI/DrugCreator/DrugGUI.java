@@ -1,6 +1,7 @@
 package me.Coderforlife.SimpleDrugs.GUI.DrugCreator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -10,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -24,9 +26,16 @@ public class DrugGUI implements Listener{
 
     private Messages m = plugin.getMessages();
 
+    private HashMap<Player,Inventory> pInvMap = new HashMap<>();
+
     private Inventory inv;
     
     private final String mmName = new String(ChatColor.translateAlternateColorCodes('&', "&8&lDrug Creator"));
+
+
+    public HashMap<Player,Inventory> getPInvMap(){
+        return pInvMap;
+    }
 
     public Inventory drugMainMenu(Player p){
         inv = Bukkit.createInventory(null, 9,mmName);
@@ -37,6 +46,15 @@ public class DrugGUI implements Listener{
         p.playSound(p.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_CHARGE, 1.0f, 1.0f);
         return inv;
     }
+
+
+    @EventHandler
+    public void onDrugGUIClose(InventoryCloseEvent ev){
+        if(!(ev.getView().getTitle().equals(mmName))){
+            return;
+        }
+    }
+
 
     @EventHandler
     public void PlayerClick(InventoryClickEvent ev){

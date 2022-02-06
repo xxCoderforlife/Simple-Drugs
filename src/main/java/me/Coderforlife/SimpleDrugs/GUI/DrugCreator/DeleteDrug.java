@@ -41,7 +41,7 @@ public class DeleteDrug implements Listener{
         Player p = (Player) ev.getWhoClicked();
         if(plugin.getDrugManager().isDrugItem(clickedItem)){
             Drug d = plugin.getDrugManager().matchDrug(clickedItem);
-            //TODO Add Confirm GUI
+            
         }
         if(clickedItem.equals(mainMenu())){
             DrugGUI dgui = new DrugGUI();
