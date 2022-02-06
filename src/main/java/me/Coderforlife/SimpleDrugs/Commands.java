@@ -1,12 +1,8 @@
 package me.Coderforlife.SimpleDrugs;
 
-import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
-import me.Coderforlife.SimpleDrugs.Druging.Drug;
-import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
-import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
-import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugGUI;
-import me.Coderforlife.SimpleDrugs.GUI.Framework.SDRecipeInventory;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,9 +13,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.UUID;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
+import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
+import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
+import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugGUI;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.SimpleDrugsEditor;
+import me.Coderforlife.SimpleDrugs.GUI.Framework.SDRecipeInventory;
 
 public class Commands implements CommandExecutor {
     private Main plugin = Main.plugin;
@@ -140,6 +141,11 @@ public class Commands implements CommandExecutor {
                             DrugGUI dgui = new DrugGUI();
                             p.openInventory(dgui.drugMainMenu(p));
                         }
+                    }else if(args[0].equalsIgnoreCase("editortest")) {
+                    	if(p.hasPermission("drugs.editor")){
+                    		SimpleDrugsEditor sde = new SimpleDrugsEditor();
+                    		sde.open(p);
+                    	}
                     }
                 } else if(args.length == 2) {
                     if(args[0].equalsIgnoreCase("recipe")) {
