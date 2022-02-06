@@ -10,7 +10,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -90,7 +89,7 @@ public class CustomCraftingComponentManager {
 		String name = config.getString("name");
 		ItemStack result = config.getItem("item");
 		DrugCraftingType dct = config.getDrugCraftingType("type");
-		JsonArray ja = config.getJsonArray("recipe");
+		JsonObject ja = config.getJsonObject("recipe");
 		
 		if(config.getAllError().size() > 0) {
 			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);

@@ -118,13 +118,7 @@ public class DrugManager {
 					}
 					
 					DrugCraftingType dct = config.contains("type") ? config.getDrugCraftingType("type") : DrugCraftingType.SHAPED;
-					JsonArray ja = config.getJsonArray("recipe");
-					if(dct.equals(DrugCraftingType.SHAPED) && ja.size() != 9) {
-						sendConsoleMessage("§c[ERROR] Error in: §7" + f.getName());
-						sendConsoleMessage("§c[ERROR] Shaped Recipes require 9 items or air if none");
-						sendConsoleMessage("§c[ERROR] Skipping Recipe");
-						continue;
-					}
+					JsonObject ja = config.getJsonObject("recipe");
 					
 					Integer harvestAmount = config.getInteger("harvest-amount");
 					ItemStack seedItem = config.getItem("seed-item");
@@ -183,13 +177,7 @@ public class DrugManager {
 					}
 					
 					DrugCraftingType dct = config.contains("type") ? config.getDrugCraftingType("type") : DrugCraftingType.SHAPED;
-					JsonArray ja = config.getJsonArray("recipe");
-					if(dct.equals(DrugCraftingType.SHAPED) && ja.size() != 9) {
-						sendConsoleMessage("§c[ERROR] Error in: §7" + f.getName());
-						sendConsoleMessage("§c[ERROR] Shaped Recipes require 9 items or air if none");
-						sendConsoleMessage("§c[ERROR] Skipping Recipe");
-						continue;
-					}
+					JsonObject ja = config.getJsonObject("recipe");
 					
 					if(config.getAllError().size() > 0) {
 						sendConsoleMessage("§c[ERROR] Error in: §7" + f.getName());

@@ -2,7 +2,7 @@ package me.Coderforlife.SimpleDrugs.Crafting;
 
 import org.bukkit.inventory.ItemStack;
 
-import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
@@ -13,10 +13,10 @@ public class CraftingComponent implements SDCraftableItem {
 	private String fileName;
 	private ItemStack result;
 	private DrugCraftingType type;
-	private JsonArray materials;
+	private JsonObject materials;
 	private SDRecipe recipe;
 	
-	public CraftingComponent(String s, String fn, ItemStack is, DrugCraftingType t, JsonArray m) {
+	public CraftingComponent(String s, String fn, ItemStack is, DrugCraftingType t, JsonObject m) {
 		name = s;
 		fileName = fn;
 		result = is;
@@ -41,7 +41,7 @@ public class CraftingComponent implements SDCraftableItem {
 		return fileName;
 	}
 	
-	public JsonArray getMaterials() {
+	public JsonObject getMaterials() {
 		return materials;
 	}
 	
