@@ -25,10 +25,10 @@ public class DrugGUI implements Listener{
 
     private Inventory inv;
     
-    private final String invName = ChatColor.translateAlternateColorCodes('&', "&8&lDrug Creator");
+    private final String mmName = new String(ChatColor.translateAlternateColorCodes('&', "&8&lDrug Creator"));
 
     public Inventory drugMainMenu(){
-        inv = Bukkit.createInventory(null, 9,invName);
+        inv = Bukkit.createInventory(null, 9,mmName);
         inv.setItem(0, createDrug());
         inv.setItem(1, editDrug());
         inv.setItem(2, deleteDrug());
@@ -38,15 +38,14 @@ public class DrugGUI implements Listener{
 
     @EventHandler
     public void PlayerClick(InventoryClickEvent ev){
-        if(ev.getView().getTitle().equals(invName)){
-            return;
-        }
-        if(ev.getCurrentItem() == null){
+        Bukkit.getConsoleSender().sendMessage("Fuck me");
+        ItemStack s = ev.getCurrentItem();
+        Player p = (Player) ev.getWhoClicked();
+        if(s == null){return;}
+        if(!ev.getView().getTitle().equals(mmName)){
             return;
         }
 
-        ItemStack s = ev.getCurrentItem();
-        Player p = (Player) ev.getWhoClicked();
         if(s.equals(createDrug())){
             CreateNewDrug cd = new CreateNewDrug();
             p.openInventory(cd.drugCreator());
@@ -58,6 +57,7 @@ public class DrugGUI implements Listener{
             p.closeInventory();
         }
         ev.setCancelled(true);
+
     }
 
     private ItemStack createDrug(){

@@ -1,5 +1,8 @@
 package me.Coderforlife.SimpleDrugs.GUI.DrugCreator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -62,6 +65,9 @@ public class CreateNewDrug implements Listener{
 
         }else if(s.equals(setCrafting())){
             
+        }else if(s.equals(mainMenu())){
+            DrugGUI dgui = new DrugGUI();
+            p.openInventory(dgui.drugMainMenu());
         }
         ev.setCancelled(true);
     }
@@ -126,6 +132,15 @@ public class CreateNewDrug implements Listener{
         ItemStack s = new ItemStack(Material.GREEN_SHULKER_BOX);
         ItemMeta im = s.getItemMeta();
         im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&f&oSet If The Drug Has A Seed"));
+        s.setItemMeta(im);
+        return s;
+    }
+    private ItemStack mainMenu(){
+        ItemStack s = new ItemStack(Material.ARROW);
+        ItemMeta im = s.getItemMeta();
+        im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&e&<- Back To Main Menu"));
+        List<String> sList = new ArrayList<>();
+        sList.add(ChatColor.translateAlternateColorCodes('&', "&8&oTakes you back to the Drug Creator"));
         s.setItemMeta(im);
         return s;
     }

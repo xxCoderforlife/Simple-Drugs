@@ -138,6 +138,7 @@ public class Main extends JavaPlugin {
     }
 
     private void registerListeners(){
+        this.getServer().getPluginManager().registerEvents(new DrugGUI(), this);
         this.getServer().getPluginManager().registerEvents(new RecipeChecker(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
         this.getServer().getPluginManager().registerEvents(new BagOfDrugsGUI(), this);
@@ -149,7 +150,6 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlantItemListener(), this);
         this.getServer().getPluginManager().registerEvents(new BrewingRecipeListener(), this);
         this.getServer().getPluginManager().registerEvents(new CreateNewDrug(), this);
-        this.getServer().getPluginManager().registerEvents(new DrugGUI(), this);
         this.getCommand("drugs").setExecutor(new Commands());
         this.getCommand("drugs").setTabCompleter(new TabCommands());
     }

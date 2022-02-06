@@ -5,7 +5,6 @@ import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CreateNewDrug;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugGUI;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.SDRecipeInventory;
 
