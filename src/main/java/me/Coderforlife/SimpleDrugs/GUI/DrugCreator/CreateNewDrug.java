@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,10 +20,16 @@ public class CreateNewDrug implements Listener{
 
     private Inventory inv;
     
-    private final String invName = ChatColor.translateAlternateColorCodes('&', "&4&lCreate New Drug");
+    private final String invName = ChatColor.translateAlternateColorCodes('&', "&5&lCreate New Drug");
 
-    public Inventory drugCreator(){
-        inv = Bukkit.createInventory(null, 18,invName);
+    /**
+     * Main Menu Drug Creator Menu
+     * 
+     * @param p {@link Player}
+     * @return Drug Creator Inventory
+     */
+    public Inventory drugCreator(Player p){
+        inv = Bukkit.createInventory(null, 27,invName);
         inv.setItem(0, nameStack());
         inv.setItem(1, setEffects());
         inv.setItem(2, setSeedItem());
@@ -31,6 +38,10 @@ public class CreateNewDrug implements Listener{
         inv.setItem(5, setPermission());
         inv.setItem(6, setAddictionLevel());
         inv.setItem(7, setCrafting());
+        inv.setItem(18, mainMenu());
+        inv.setItem(25, saveButton());
+        inv.setItem(26, cancelButton());
+        p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
         return inv;
     }
 
@@ -67,7 +78,7 @@ public class CreateNewDrug implements Listener{
             
         }else if(s.equals(mainMenu())){
             DrugGUI dgui = new DrugGUI();
-            p.openInventory(dgui.drugMainMenu());
+            p.openInventory(dgui.drugMainMenu(p));
         }
         ev.setCancelled(true);
     }
@@ -138,9 +149,30 @@ public class CreateNewDrug implements Listener{
     private ItemStack mainMenu(){
         ItemStack s = new ItemStack(Material.ARROW);
         ItemMeta im = s.getItemMeta();
-        im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&e&<- Back To Main Menu"));
+        im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&e&o<- Back To Main Menu"));
         List<String> sList = new ArrayList<>();
         sList.add(ChatColor.translateAlternateColorCodes('&', "&8&oTakes you back to the Drug Creator"));
+        im.setLore(sList);
+        s.setItemMeta(im);
+        return s;
+    }
+    private ItemStack saveButton(){
+        ItemStack s = new ItemStack(Material.GREEN_BED);
+        ItemMeta im = s.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&', "&a&oSaves the current Drug"));
+        im.setLore(lore);
+        im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&2&lSAVE"));
+        s.setItemMeta(im);
+        return s;
+    }
+    private ItemStack cancelButton(){
+        ItemStack s = new ItemStack(Material.RED_BED);
+        ItemMeta im = s.getItemMeta();
+        im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&4&lCANCEL"));
+        List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.translateAlternateColorCodes('&', "&c&oDiscards the current Drug"));
+        im.setLore(lore);
         s.setItemMeta(im);
         return s;
     }

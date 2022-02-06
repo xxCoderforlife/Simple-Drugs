@@ -46,7 +46,8 @@ public class Updater implements Listener {
             } else {
                 if(currVersionINT > spigotVersionINT) {
                     isdev = true;
-                    Bukkit.getConsoleSender().sendMessage(plugin.getMessages().getPrefix() + "You are running a Dev build.");
+                    Bukkit.getConsoleSender().sendMessage(plugin.getMessages().getPrefix() + "You are running a Development build.");
+                    Bukkit.getConsoleSender().sendMessage(plugin.getMessages().getPrefix() + "GitHub: https://github.com/xxCoderforlife/Simple-Drugs");
 
                 } else {
                     isnew = true;

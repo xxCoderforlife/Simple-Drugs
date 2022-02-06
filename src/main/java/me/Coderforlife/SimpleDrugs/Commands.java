@@ -138,7 +138,7 @@ public class Commands implements CommandExecutor {
                     }else if(args[0].equalsIgnoreCase("editor")){
                         if(p.hasPermission("drugs.editor")){
                             DrugGUI dgui = new DrugGUI();
-                            p.openInventory(dgui.drugMainMenu());
+                            p.openInventory(dgui.drugMainMenu(p));
                         }
                     }
                 } else if(args.length == 2) {

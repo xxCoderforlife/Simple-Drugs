@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,18 +28,18 @@ public class DrugGUI implements Listener{
     
     private final String mmName = new String(ChatColor.translateAlternateColorCodes('&', "&8&lDrug Creator"));
 
-    public Inventory drugMainMenu(){
+    public Inventory drugMainMenu(Player p){
         inv = Bukkit.createInventory(null, 9,mmName);
         inv.setItem(0, createDrug());
         inv.setItem(1, editDrug());
         inv.setItem(2, deleteDrug());
         inv.setItem(8, closeMainMenu());
+        p.playSound(p.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_CHARGE, 1.0f, 1.0f);
         return inv;
     }
 
     @EventHandler
     public void PlayerClick(InventoryClickEvent ev){
-        Bukkit.getConsoleSender().sendMessage("Fuck me");
         ItemStack s = ev.getCurrentItem();
         Player p = (Player) ev.getWhoClicked();
         if(s == null){return;}
@@ -48,12 +49,15 @@ public class DrugGUI implements Listener{
 
         if(s.equals(createDrug())){
             CreateNewDrug cd = new CreateNewDrug();
-            p.openInventory(cd.drugCreator());
+            p.openInventory(cd.drugCreator(p));
         }else if(s.equals(editDrug())){
-
+            EditDrug ed = new EditDrug();
+            p.openInventory(ed.editableDrugs(p));
         }else if(s.equals(deleteDrug())){
-
+            DeleteDrug dd = new DeleteDrug();
+            p.openInventory(dd.editableDrugs(p));
         }else if(s.equals(closeMainMenu())){
+            p.playSound(p.getLocation(), Sound.BLOCK_BARREL_CLOSE, 1.0f, 1.0f);
             p.closeInventory();
         }
         ev.setCancelled(true);
