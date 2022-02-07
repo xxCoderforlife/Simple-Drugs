@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.SubInventories;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,21 +11,23 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Drugs.DrugCreatorInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.InventoryPotionEffect;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.PotionEffectInventoryUtil;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Drugs.DrugCreatorInventory;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;
 import net.md_5.bungee.api.ChatColor;
 
-public abstract class PotionEffectSetterInventory extends InventoryUI {
+public abstract class AbstractDrugCraftingInventory extends InventoryUI {
 	
 	private PotionEffectInventoryUtil peiu;
-	private PotionEffectSetterInventory pesi;
+	private AbstractDrugCraftingInventory pesi;
 	private HashMap<Integer, ItemStack> items;
 	private double addLevel;
 	private String drugName;
 	
-	public PotionEffectSetterInventory(int size, String title, String dN, PotionEffectInventoryUtil p, HashMap<Integer, ItemStack> i, double addiction) {
+	public AbstractDrugCraftingInventory(int size, String title, String dN, PotionEffectInventoryUtil p, HashMap<Integer, ItemStack> i, double addiction) {
 		super(size, title);
 		setShouldRemove(false);
 		pesi = this;

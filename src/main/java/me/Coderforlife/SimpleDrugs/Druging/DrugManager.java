@@ -40,8 +40,8 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.DrugPlants.DrugPlantItem;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.InventoryPotionEffect;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectSetterInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.InventoryPotionEffect;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.SubInventories.AbstractDrugCraftingInventory;
 import me.Coderforlife.SimpleDrugs.Util.JsonFileInterpretter;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
 import net.md_5.bungee.api.ChatColor;
@@ -405,7 +405,7 @@ public class DrugManager {
 		}
     }
 
-    public void addDrug(String n, ItemStack i, PotionEffectSetterInventory peiu) {
+    public void addDrug(String n, ItemStack i, AbstractDrugCraftingInventory peiu) {
     	String disName = n;
     	String name = ChatColor.stripColor(n).replaceAll(" ", "_").toUpperCase();
     	ArrayList<DrugEffect> drugEffects = new ArrayList<>();

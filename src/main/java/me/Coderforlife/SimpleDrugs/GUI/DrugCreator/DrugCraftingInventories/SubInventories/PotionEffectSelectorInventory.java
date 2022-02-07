@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.SubInventories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class PotionEffectSelectorInventory extends InventoryUI {
 
-	public PotionEffectSelectorInventory(PotionEffectSetterInventory pesi) {
+	public PotionEffectSelectorInventory(AbstractDrugCraftingInventory pesi) {
 		super(36, ChatColor.translateAlternateColorCodes('&', "&7&lSelect Potion Type"));
 		
 		List<PotionEffectType> allPotionEffects = new ArrayList<>();

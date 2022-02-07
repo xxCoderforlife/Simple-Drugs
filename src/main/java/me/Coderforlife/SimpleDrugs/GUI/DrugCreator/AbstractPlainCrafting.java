@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingComponent;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CraftingComponent.CCCreatorInventory;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;

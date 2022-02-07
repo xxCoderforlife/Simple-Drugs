@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Drugs;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Drugs;
 
 import java.util.HashMap;
 
@@ -7,10 +7,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingTypeInventories.FurnaceCraftingInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingTypeInventories.ShapedCraftingInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingTypeInventories.ShapelessCraftingInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectInventoryUtil;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.FurnaceCraftingInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.ShapedCraftingInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.ShapelessCraftingInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.PotionEffectInventoryUtil;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;

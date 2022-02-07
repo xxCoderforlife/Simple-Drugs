@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingTypeInventories;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,13 +11,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectInventoryUtil;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectSetterInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.PotionEffectInventoryUtil;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.SubInventories.AbstractDrugCraftingInventory;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import net.md_5.bungee.api.ChatColor;
 
-public class ShapedCraftingInventory extends PotionEffectSetterInventory {
+public class ShapedCraftingInventory extends AbstractDrugCraftingInventory {
 	
 	public ShapedCraftingInventory(String drugName, PotionEffectInventoryUtil p, HashMap<Integer, ItemStack> i, double addiction) {
 		super(27, ChatColor.translateAlternateColorCodes('&', "&6&lCreate Shaped Recipe"), drugName, p, i, addiction);

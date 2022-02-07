@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.SubInventories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.InventoryPotionEffect;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;
@@ -28,7 +29,7 @@ public class PotionEffectStatSetterInventory extends InventoryUI {
 	private List<InventoryButton> timeBtns;
 	private List<InventoryButton> intBtns;
 	
-	public PotionEffectStatSetterInventory(PotionEffectType pet, PotionEffectSetterInventory pesi) {
+	public PotionEffectStatSetterInventory(PotionEffectType pet, AbstractDrugCraftingInventory pesi) {
 		super(27, ChatColor.translateAlternateColorCodes('&', "&6&lAdd: " + ChatColor.GREEN + pet.getName()));
 		
 		addInfoSigns();

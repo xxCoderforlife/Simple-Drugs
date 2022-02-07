@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.SubInventories;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,9 +12,9 @@ import net.md_5.bungee.api.ChatColor;
 
 public class SetAddictionInventory extends InventoryUI {
 
-	private PotionEffectSetterInventory in;
+	private AbstractDrugCraftingInventory in;
 	
-	public SetAddictionInventory(PotionEffectSetterInventory pesi) {
+	public SetAddictionInventory(AbstractDrugCraftingInventory pesi) {
 		super(18, ChatColor.translateAlternateColorCodes('&', "&6&lSet Addication Level"));
 		in = pesi;
 		

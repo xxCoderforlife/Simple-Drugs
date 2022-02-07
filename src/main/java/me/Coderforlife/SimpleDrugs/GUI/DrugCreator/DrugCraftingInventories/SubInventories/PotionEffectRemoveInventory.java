@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.SubInventories;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -6,6 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.InventoryPotionEffect;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;
@@ -13,7 +14,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class PotionEffectRemoveInventory extends InventoryUI {
 
-	public PotionEffectRemoveInventory(PotionEffectSetterInventory pesi) {
+	public PotionEffectRemoveInventory(AbstractDrugCraftingInventory pesi) {
 		super(36, ChatColor.translateAlternateColorCodes('&', "&4&lRemove Potion Effect"));
 		
 		for(InventoryPotionEffect ipe : pesi.getPotionEffects().getPotionEffects()) {
