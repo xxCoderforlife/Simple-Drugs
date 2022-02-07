@@ -51,12 +51,6 @@ public class CustomCraftingComponentManager {
 		}
 	}
 	
-	public void loadAllRecipes() {
-		for(CraftingComponent cc : craftingComponents.values()) {
-			cc.getRecipe().registerRecipe();
-		}
-	}
-	
 	private DrugLoadError canMakeCraftingComponents(String fileName, JsonObject jo) {
 		DrugLoadError dle = new DrugLoadError();
 		
@@ -92,6 +86,7 @@ public class CustomCraftingComponentManager {
 		ItemStack result = config.getItem("item");
 		ItemMeta im = result.getItemMeta();
 		im.getPersistentDataContainer().set(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE, (byte)1);
+		im.getPersistentDataContainer().set(Main.plugin.getCraftingComponentName(), PersistentDataType.STRING, name.toUpperCase());
 		result.setItemMeta(im);
 		
 		DrugCraftingType dct = config.getDrugCraftingType("type");

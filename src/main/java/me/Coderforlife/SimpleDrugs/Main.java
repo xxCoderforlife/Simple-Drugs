@@ -45,6 +45,7 @@ public class Main extends JavaPlugin {
     private NamespacedKey drugSeedKey;
     private NamespacedKey isDrugItem;
     private NamespacedKey isCraftingComponent;
+    private NamespacedKey craftingComponentName;
     
     private DrugManager drugManager;
     private CustomCraftingComponentManager craftingManager;
@@ -66,6 +67,7 @@ public class Main extends JavaPlugin {
         drugSeedKey = new NamespacedKey(plugin, "SimpleDrugs-DrugSeed");
         isDrugItem = new NamespacedKey(plugin, "SimpleDrugs-IsDrugItem");
         isCraftingComponent = new NamespacedKey(plugin, "SimpleDrugs-IsCraftingComponent");
+        craftingComponentName = new NamespacedKey(plugin, "SimpleDrugs-CraftingComponentName");
         
         settings = new Settings();
         messages = new Messages();
@@ -159,6 +161,10 @@ public class Main extends JavaPlugin {
     
     public NamespacedKey isCraftingComponent() {
     	return isCraftingComponent;
+    }
+    
+    public NamespacedKey getCraftingComponentName() {
+    	return craftingComponentName;
     }
     
     public Messages getMessages(){
