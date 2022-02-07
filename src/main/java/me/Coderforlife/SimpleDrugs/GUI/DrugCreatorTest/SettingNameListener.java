@@ -1,5 +1,6 @@
 package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest;
 
+import java.util.HashMap;
 import java.util.concurrent.Callable;
 
 import org.bukkit.Bukkit;
@@ -7,8 +8,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.inventory.ItemStack;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectInventoryUtil;
 import net.md_5.bungee.api.ChatColor;
 
 public class SettingNameListener implements Listener {
@@ -23,7 +26,7 @@ public class SettingNameListener implements Listener {
 		String name = ChatColor.translateAlternateColorCodes('&', e.getMessage());
 		String a = ChatColor.stripColor(name).replace(" ", "_");
 		
-		if(Main.plugin.getDrugManager().getDrug(a) != null) {
+		if(Main.plugin.getDrugManager().getDrug(a.toUpperCase()) != null) {
 			p.sendMessage(ChatColor.RED + "A drug with that name already exists");
 			return;
 		}
@@ -31,7 +34,7 @@ public class SettingNameListener implements Listener {
 		Bukkit.getScheduler().callSyncMethod(Main.plugin, new Callable<DrugCreatorInventory>() {
 			@Override
 			public DrugCreatorInventory call() throws Exception {
-				DrugCreatorInventory dci = new DrugCreatorInventory(name);
+				DrugCreatorInventory dci = new DrugCreatorInventory(name, new PotionEffectInventoryUtil(), new HashMap<Integer, ItemStack>(), 0.1, null);
 				dci.open(p);
 				return dci;
 			}

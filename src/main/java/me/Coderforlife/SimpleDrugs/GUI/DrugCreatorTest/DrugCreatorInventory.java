@@ -1,11 +1,16 @@
 package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest;
 
+import java.util.HashMap;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
+import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingTypeInventories.FurnaceCraftingInventory;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingTypeInventories.ShapedCraftingInventory;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingTypeInventories.ShapelessCraftingInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectInventoryUtil;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;
@@ -13,14 +18,15 @@ import net.md_5.bungee.api.ChatColor;
 
 public class DrugCreatorInventory extends InventoryUI {
 
-	public DrugCreatorInventory(String drugName) {
+	public DrugCreatorInventory(String drugName, PotionEffectInventoryUtil peiu, HashMap<Integer, ItemStack> items, Double al, DrugCraftingType dct) {
 		super(9, ChatColor.translateAlternateColorCodes('&', "&6&lSelect Crafting Type"));
 		
 		addButton(new InventoryButton(Material.CRAFTING_TABLE, "&b&lShaped", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				close(p);
-				ShapedCraftingInventory sci = new ShapedCraftingInventory(drugName);
+				if(dct == null || !dct.equals(DrugCraftingType.SHAPED)) items.clear();
+				ShapedCraftingInventory sci = new ShapedCraftingInventory(drugName, peiu, items, al);
 				sci.open(p);
 			}
 		}, 1);
@@ -29,7 +35,8 @@ public class DrugCreatorInventory extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				close(p);
-				ShapelessCraftingInventory sci = new ShapelessCraftingInventory(drugName);
+				if(dct == null || !dct.equals(DrugCraftingType.SHAPELESS)) items.clear();
+				ShapelessCraftingInventory sci = new ShapelessCraftingInventory(drugName, peiu, items, al);
 				sci.open(p);
 			}
 		}, 3);
@@ -38,7 +45,8 @@ public class DrugCreatorInventory extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				close(p);
-				FurnaceCraftingInventory sci = new FurnaceCraftingInventory(drugName);
+				if(dct == null || !dct.equals(DrugCraftingType.FURNACE)) items.clear();
+				FurnaceCraftingInventory sci = new FurnaceCraftingInventory(drugName, peiu, items, al);
 				sci.open(p);
 			}
 		}, 5);
@@ -46,7 +54,7 @@ public class DrugCreatorInventory extends InventoryUI {
 		addButton(new InventoryButton(Material.BREWING_STAND, "&b&lBrewing", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				
+				close(p);
 			}
 		}, 7);
 		

@@ -48,14 +48,18 @@ public class SimpleDrugsEditor extends InventoryUI {
 		addButton(new InventoryButton(Material.ANVIL, "&b&oEdit A Drug", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				
+				close(p);
+				DrugSelectorInventory dsi = new DrugSelectorInventory(true);
+				dsi.open(p);
 			}
 		}, 4);
 		
 		addButton(new InventoryButton(Material.BARRIER, "&4&o&lDELETE A DRUG", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				
+				close(p);
+				DrugSelectorInventory dsi = new DrugSelectorInventory(false);
+				dsi.open(p);
 			}
 		}, 5);
 	}

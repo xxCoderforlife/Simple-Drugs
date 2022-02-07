@@ -55,7 +55,7 @@ public class DrugManager {
     private final File drugSFolder = new File(recipeFolder, "Seeds");
     
     private Map<String, Drug> drugs = new HashMap<>();
-    private Map<Drug, ItemStack> drugSeeds = new HashMap<>();
+    private Map<Drug, DrugPlantItem> drugSeeds = new HashMap<>();
 
     public void loadFiles() {
     	if(!folder.exists()) folder.mkdir();
@@ -138,7 +138,7 @@ public class DrugManager {
 						continue;
 					}
 					
-					DrugPlantItem dpi = new DrugPlantItem(d, seedItem, Material.FARMLAND, harvestAmount);
+					DrugPlantItem dpi = new DrugPlantItem(d, f.getName(), seedItem, Material.FARMLAND, harvestAmount);
 					
 					SDRecipe recipe = Main.plugin.getRecipeManager().loadRecipe(f.getName(), dpi, ja, dct);
 					
@@ -149,7 +149,7 @@ public class DrugManager {
 						continue;
 					}
 					
-					drugSeeds.put(d, seedItem);
+					drugSeeds.put(d, dpi);
 					
 				} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
 					e.printStackTrace();
@@ -407,7 +407,7 @@ public class DrugManager {
 
     public void addDrug(String n, ItemStack i, PotionEffectSetterInventory peiu) {
     	String disName = n;
-    	String name = ChatColor.stripColor(n).replaceAll(" ", "_");
+    	String name = ChatColor.stripColor(n).replaceAll(" ", "_").toUpperCase();
     	ArrayList<DrugEffect> drugEffects = new ArrayList<>();
     	for(InventoryPotionEffect ipe : peiu.getPotionEffects().getPotionEffects()) {
     		drugEffects.add(new DrugEffect(ipe.getType(), ipe.getTime(), ipe.getIntensity() - 1));
@@ -418,12 +418,34 @@ public class DrugManager {
     	ItemStack finalItem = createItem(n, i.getType(), drugEffects);
     	
     	Drug d = new Drug(name, disName, name + ".json", finalItem, drugEffects, permission, addLevel);
+    	
+    	if(drugs.containsKey(name)) {
+    		drugs.remove(name);
+    	}
+    	
     	addDrug(d, name);
     	
     	addDrugFile(d);
     	
     	SDRecipe sd = Main.plugin.getRecipeManager().loadRecipe(d, peiu.getRecipe(), peiu.getRecipeType());
+    	d.setRecipe(sd);
     	addRecipeFile(d, peiu.getRecipeType(), sd);
+    }
+    
+    public void deleteDrug(Drug d) {
+    	File drugFile = new File(folder, d.getFileName());
+    	File drugRecipe = new File(drugRFolder, d.getFileName());
+    	
+    	if(drugSeeds.containsKey(d)) {
+    		File drugSRecipe = new File(drugSFolder, drugSeeds.get(d).getFileName());
+    		drugSRecipe.delete();
+    		drugSeeds.remove(d);
+    	}
+    	
+    	drugFile.delete();
+    	drugRecipe.delete();
+    	
+    	drugs.remove(d.getName().toUpperCase());
     }
     
     /**
@@ -454,11 +476,20 @@ public class DrugManager {
     
 	//TODO Edit Doc
 	/**
-	 * Not too sure what this does
+	 * Get the ItemStack associated with DrugPlantItem from Drug
 0	 * @param d Drug
 	 * @return Drug 
 	 */
     public ItemStack getItemStackFromDrug(Drug d) {
+    	return drugSeeds.get(d).getItem();
+    }
+    
+    /**
+     * Get the DrugPlantItem from a Drug
+     * @param d Drug
+     * @return DrugPlantItem
+     */
+    public DrugPlantItem getDrugPlantItemFromDrug(Drug d) {
     	return drugSeeds.get(d);
     }
 
