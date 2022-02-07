@@ -1,7 +1,7 @@
 package me.Coderforlife.SimpleDrugs;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -54,7 +54,7 @@ public class Main extends JavaPlugin {
     private RecipeManager recipeManager;
     private AddictionManager addictionManager;
     
-    private List<UUID> creatingName = new ArrayList<UUID>();
+    private Map<UUID, String> creatingName = new HashMap<UUID, String>();
     
     @Override
     public void onEnable() {
@@ -103,7 +103,7 @@ public class Main extends JavaPlugin {
         this.getServer().getConsoleSender().sendMessage(message);
     }
     
-    public List<UUID> getCreatingName() {
+    public Map<UUID, String> getCreatingName() {
     	return creatingName;
     }
     

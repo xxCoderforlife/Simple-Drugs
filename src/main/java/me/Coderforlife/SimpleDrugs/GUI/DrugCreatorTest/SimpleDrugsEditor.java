@@ -42,7 +42,7 @@ public class SimpleDrugsEditor extends InventoryUI {
 			public void onPlayerClick(Player p, ClickAction action) {
 				close(p);
 				p.sendMessage(ChatColor.GREEN + "Enter Name For Drug Using '&' As Color Codes");
-				Main.plugin.getCreatingName().add(p.getUniqueId());
+				Main.plugin.getCreatingName().put(p.getUniqueId(), "drug");
 			}
 		}, 3);
 		
@@ -73,14 +73,14 @@ public class SimpleDrugsEditor extends InventoryUI {
 			}
 		}, 12);
 		
-		addButton(new InventoryButton(Material.ANVIL, "&b&oEdit A Drug", "") {
+		addButton(new InventoryButton(Material.ANVIL, "&b&oEdit A Seed", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				
 			}
 		}, 13);
 		
-		addButton(new InventoryButton(Material.BARRIER, "&4&o&lDELETE A DRUG", "") {
+		addButton(new InventoryButton(Material.BARRIER, "&4&o&lDELETE A SEED", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				
@@ -92,7 +92,9 @@ public class SimpleDrugsEditor extends InventoryUI {
 		addButton(new InventoryButton(Material.NETHER_STAR, "&b&oCreate A New Crafting Component", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				
+				close(p);
+				p.sendMessage(ChatColor.GREEN + "Enter Name For Crafting Component Using '&' As Color Codes");
+				Main.plugin.getCreatingName().put(p.getUniqueId(), "cc");
 			}
 		}, 21);
 		

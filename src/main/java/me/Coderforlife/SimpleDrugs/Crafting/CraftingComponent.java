@@ -1,5 +1,7 @@
 package me.Coderforlife.SimpleDrugs.Crafting;
 
+import java.util.List;
+
 import org.bukkit.inventory.ItemStack;
 
 import com.google.gson.JsonObject;
@@ -15,6 +17,14 @@ public class CraftingComponent implements SDCraftableItem {
 	private DrugCraftingType type;
 	private JsonObject materials;
 	private SDRecipe recipe;
+	
+	public CraftingComponent(String s, String fN, ItemStack is, DrugCraftingType t, List<ItemStack> items) {
+		name = s;
+		fileName = fN;
+		result = is;
+		type = t;
+		recipe = Main.plugin.getRecipeManager().loadRecipe(this, items, t);
+	}
 	
 	public CraftingComponent(String s, String fn, ItemStack is, DrugCraftingType t, JsonObject m) {
 		name = s;
