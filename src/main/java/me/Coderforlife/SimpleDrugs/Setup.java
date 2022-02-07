@@ -25,7 +25,6 @@ public class Setup {
         Main.plugin.setRecipeManager(new RecipeManager());
         
         Main.plugin.setCraftingManager(new CustomCraftingComponentManager());
-        Main.plugin.getCraftingManager().loadAllRecipes();
         
         Main.plugin.setDrugManager(new DrugManager());
         Main.plugin.getDrugManager().loadFiles();
