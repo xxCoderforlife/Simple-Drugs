@@ -21,6 +21,12 @@ public class SettingNameListener implements Listener {
 		Main.plugin.getCreatingName().remove(p.getUniqueId());
 		
 		String name = ChatColor.translateAlternateColorCodes('&', e.getMessage());
+		String a = ChatColor.stripColor(name).replace(" ", "_");
+		
+		if(Main.plugin.getDrugManager().getDrug(a) != null) {
+			p.sendMessage(ChatColor.RED + "A drug with that name already exists");
+			return;
+		}
 		
 		Bukkit.getScheduler().callSyncMethod(Main.plugin, new Callable<DrugCreatorInventory>() {
 			@Override
