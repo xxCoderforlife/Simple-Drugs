@@ -36,6 +36,8 @@ public class InventoryUI implements Listener {
 		private Inventory inv;
 	
 		private boolean registered = false;
+		
+		private boolean shouldRemove = true;
 	
 		/**
 		 * Creates an InventoryUI of the specified InventoryType and Title
@@ -82,6 +84,10 @@ public class InventoryUI implements Listener {
 		public void open(Iterable<Player> pls) {
 			for (Player p : pls)
 				open(p);
+		}
+		
+		public void setShouldRemove(boolean b) {
+			shouldRemove = b;
 		}
 	
 		/**
@@ -227,7 +233,7 @@ public class InventoryUI implements Listener {
 		public void updateInventory() {
 			for (int x = 0; x < inv.getSize(); x++) {
 				InventoryButton but = buttons.get(Integer.valueOf(x));
-				if (but == null && inv.getItem(x) != null)
+				if (shouldRemove && but == null && inv.getItem(x) != null)
 					inv.setItem(x, null);
 				else if ((inv.getItem(x) == null && but != null) || updatedSlots.contains(Integer.valueOf(x))) {
 					assert but != null;
