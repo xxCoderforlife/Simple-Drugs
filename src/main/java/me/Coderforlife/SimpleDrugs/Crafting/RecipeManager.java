@@ -8,6 +8,9 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -97,6 +100,14 @@ public class RecipeManager {
 		case FURNACE:
 			ItemStack fItem = items.get(0);
 			
+			if(fItem.hasItemMeta()) {
+				ItemMeta im = fItem.getItemMeta();
+				PersistentDataContainer pdc = im.getPersistentDataContainer();
+				if(pdc.has(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) && (pdc.get(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) == (byte)1)) {
+					fItem = Main.plugin.getCraftingManager().getByName(pdc.get(Main.plugin.getCraftingComponentName(), PersistentDataType.STRING)).getItem();
+				}
+			}
+			
 			SDFurnace furnace = new SDFurnace("Simple-Drug_" + item.getNamespaceName(), item.getItem(), fItem, 0f, 90);
 			furnace.registerRecipe();
 			return furnace;
@@ -106,6 +117,16 @@ public class RecipeManager {
 			if(items == null) return null;
 			
 			for(int i = 0; i < items.size(); i++) {
+				ItemStack sItem = items.get(i);
+				
+				if(sItem.hasItemMeta()) {
+					ItemMeta im = sItem.getItemMeta();
+					PersistentDataContainer pdc = im.getPersistentDataContainer();
+					if(pdc.has(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) && (pdc.get(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) == (byte)1)) {
+						sItem = Main.plugin.getCraftingManager().getByName(pdc.get(Main.plugin.getCraftingComponentName(), PersistentDataType.STRING)).getItem();
+					}
+				}
+				
 				shaped.addItemStack(items.get(i));
 			}
 			
@@ -115,6 +136,16 @@ public class RecipeManager {
 			SDShapeless shapeless = new SDShapeless("Simple-Drug_" + item.getNamespaceName(), item.getItem());
 			
 			items.forEach(e -> {
+				ItemStack sItem = e;
+				
+				if(sItem.hasItemMeta()) {
+					ItemMeta im = sItem.getItemMeta();
+					PersistentDataContainer pdc = im.getPersistentDataContainer();
+					if(pdc.has(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) && (pdc.get(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) == (byte)1)) {
+						sItem = Main.plugin.getCraftingManager().getByName(pdc.get(Main.plugin.getCraftingComponentName(), PersistentDataType.STRING)).getItem();
+					}
+				}
+				
 				shapeless.addItemStack(e);
 			});
 			

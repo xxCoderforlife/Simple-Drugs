@@ -159,9 +159,6 @@ public class BagOfDrugsGUI implements Listener {
         Inventory inv = Bukkit.createInventory(null, stack.size(), invName);
 
         inv.setContents(stack.toArray(new ItemStack[0]));
-        for(ItemStack s :inv.getContents()){
-            s.setAmount(1);
-        }
         return inv;
     }
 
