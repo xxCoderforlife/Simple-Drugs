@@ -14,6 +14,6 @@ Well Drugs are things you put in your body to alter your state of mind, and we'v
 
 ### Support or Contact
 
-- ## [Discord](https://discord.com/invite/jnmKj7Z)
+- ## [Discord](https://discord.beer/Simple-Drugs)
 - ## [Spigot]()
 - ## Minecraft Server - **mc.zdeathradio.dev**
