@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.DrugCreatorInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Drugs.DrugCreatorInventory;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;

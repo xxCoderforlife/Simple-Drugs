@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Drugs;
 
 import java.util.HashMap;
 
