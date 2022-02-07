@@ -26,6 +26,7 @@ public class Drug implements SDCraftableItem {
     private Double addictionLevel;
     private SDRecipe sdRecipe;
     private ArrayList<DrugEffect> effects;
+    private String fileName;
     private ItemStack item;
     private String permission;
     private boolean crafting;
@@ -34,9 +35,10 @@ public class Drug implements SDCraftableItem {
     private Recipe seedRecipe = null;
     private Integer harvestAmount = 1;
 
-    public Drug(String name, String displayname, ItemStack item, ArrayList<DrugEffect> effects, String permission, Double addlvl) {
+    public Drug(String name, String displayname, String fN, ItemStack item, ArrayList<DrugEffect> effects, String permission, Double addlvl) {
         this.name = name;
         this.displayname = displayname;
+        this.fileName = fN;
         this.effects = effects;
         this.permission = permission;
         this.item = item;
@@ -115,6 +117,10 @@ public class Drug implements SDCraftableItem {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public String getFileName() {
+    	return fileName;
+    }
 
     public String getDisplayname() {
         return displayname;
@@ -186,6 +192,10 @@ public class Drug implements SDCraftableItem {
 
     public void setHarvestAmount(int i) {
         harvestAmount = i;
+    }
+    
+    public double getAddictionLevel() {
+    	return addictionLevel;
     }
 
 }

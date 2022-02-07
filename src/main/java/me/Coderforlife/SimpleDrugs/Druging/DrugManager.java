@@ -35,7 +35,10 @@ import com.google.gson.JsonSyntaxException;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
+import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.DrugPlants.DrugPlantItem;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.InventoryPotionEffect;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectSetterInventory;
@@ -281,7 +284,7 @@ public class DrugManager {
     	
     	ItemStack is = createItem(displayName, mat, effects);
     	
-    	addDrug(new Drug(name, displayName, is, effects, permission,addLvl), name.toUpperCase());
+    	addDrug(new Drug(name, displayName, fileName, is, effects, permission,addLvl), name.toUpperCase());
     }
     
     private ItemStack createItem(String s, Material item, ArrayList<DrugEffect> effects) {
@@ -332,6 +335,75 @@ public class DrugManager {
     	
     	return de;
     }
+    
+    private void addDrugFile(Drug d) {
+    	File f = new File(folder, d.getFileName());
+    	if(f.exists()) f.delete();
+    	
+    	JsonObject main = new JsonObject();
+    	main.addProperty("name", d.getName());
+    	main.addProperty("displayname", d.getDisplayname());
+    	
+    	if(d.getEffects().size() > 0) {
+    		JsonArray ja = new JsonArray();
+    		for(DrugEffect de : d.getEffects()) {
+    			JsonObject jo = new JsonObject();
+    			jo.addProperty("type", de.getEffect().getName().toUpperCase());
+    			jo.addProperty("time", de.getTime());
+    			jo.addProperty("intensity", de.getIntensity());
+    			ja.add(jo);
+    		}
+    		main.add("effects", ja);
+    	}
+    	
+    	main.addProperty("item", d.getItem().getType().toString().toUpperCase());
+    	main.addProperty("permission", d.getPermission());
+    	main.addProperty("addictionLevel", d.getAddictionLevel());
+    	
+    	Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+        	FileWriter writer = new FileWriter(f);
+			gson.toJson(main, writer);
+			writer.close();
+		} catch (JsonIOException | IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    private void addRecipeFile(Drug d, DrugCraftingType dct, SDRecipe rec) {
+    	File f = new File(drugRFolder, d.getFileName());
+    	if(f.exists()) f.delete();
+    	
+    	JsonObject main = new JsonObject();
+    	main.addProperty("drug", d.getName());
+    	main.addProperty("type", dct.toString().toUpperCase());
+    	JsonObject recipe = new JsonObject();
+    	
+    	if(rec instanceof SDShaped) {
+    		for(int i = 0; i < rec.getItems().size(); i++) {
+    			recipe.addProperty(String.valueOf(i), rec.getItems().get(i).getType().toString());
+    		}
+    	} else if(rec instanceof SDShapeless) {
+    		JsonArray ja = new JsonArray();
+    		for(ItemStack i : rec.getItems()) {
+    			ja.add(i.getType().toString());
+    		}
+    		recipe.add("items", ja);
+    	} else if(rec instanceof SDFurnace) {
+    		recipe.addProperty("item", rec.getItems().get(0).getType().toString());
+    	}
+    	
+    	main.add("recipe", recipe);
+    	
+    	Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+        	FileWriter writer = new FileWriter(f);
+			gson.toJson(main, writer);
+			writer.close();
+		} catch (JsonIOException | IOException e) {
+			e.printStackTrace();
+		}
+    }
 
     public void addDrug(String n, ItemStack i, PotionEffectSetterInventory peiu) {
     	String disName = n;
@@ -340,15 +412,18 @@ public class DrugManager {
     	for(InventoryPotionEffect ipe : peiu.getPotionEffects().getPotionEffects()) {
     		drugEffects.add(new DrugEffect(ipe.getType(), ipe.getTime(), ipe.getIntensity() - 1));
     	}
-    	String permission = "drugs.use." + name;
+    	String permission = "drugs.use." + name.toLowerCase();
     	Double addLevel = peiu.getAddLevel();
     	
     	ItemStack finalItem = createItem(n, i.getType(), drugEffects);
     	
-    	Drug d = new Drug(name, disName, finalItem, drugEffects, permission, addLevel);
+    	Drug d = new Drug(name, disName, name + ".json", finalItem, drugEffects, permission, addLevel);
     	addDrug(d, name);
     	
-    	Main.plugin.getRecipeManager().loadRecipe(d, peiu.getRecipe(), peiu.getRecipeType());
+    	addDrugFile(d);
+    	
+    	SDRecipe sd = Main.plugin.getRecipeManager().loadRecipe(d, peiu.getRecipe(), peiu.getRecipeType());
+    	addRecipeFile(d, peiu.getRecipeType(), sd);
     }
     
     /**
