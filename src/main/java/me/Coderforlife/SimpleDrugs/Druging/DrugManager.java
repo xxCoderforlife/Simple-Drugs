@@ -381,7 +381,7 @@ public class DrugManager {
     	
     	if(rec instanceof SDShaped) {
     		for(int i = 0; i < rec.getItems().size(); i++) {
-    			recipe.addProperty(String.valueOf(i), rec.getItems().get(i).getType().toString());
+    			recipe.addProperty(String.valueOf(i + 1), rec.getItems().get(i).getType().toString());
     		}
     	} else if(rec instanceof SDShapeless) {
     		JsonArray ja = new JsonArray();

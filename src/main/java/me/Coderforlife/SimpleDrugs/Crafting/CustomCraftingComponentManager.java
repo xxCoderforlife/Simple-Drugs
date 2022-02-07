@@ -61,6 +61,12 @@ public class CustomCraftingComponentManager {
 		}
 	}
 	
+	public void registerAllRecipe() {
+		for(CraftingComponent cc : craftingComponents.values()) {
+			cc.getRecipe().registerRecipe();
+		}
+	}
+	
 	private DrugLoadError canMakeCraftingComponents(String fileName, JsonObject jo) {
 		DrugLoadError dle = new DrugLoadError();
 		
@@ -108,7 +114,7 @@ public class CustomCraftingComponentManager {
 		JsonObject recipe = new JsonObject();
     	if(rec instanceof SDShaped) {
     		for(int i = 0; i < rec.getItems().size(); i++) {
-    			recipe.addProperty(String.valueOf(i), rec.getItems().get(i).getType().toString());
+    			recipe.addProperty(String.valueOf(i + 1), rec.getItems().get(i).getType().toString());
     		}
     	} else if(rec instanceof SDShapeless) {
     		JsonArray ja = new JsonArray();
