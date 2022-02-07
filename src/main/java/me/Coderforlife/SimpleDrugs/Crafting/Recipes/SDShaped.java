@@ -21,6 +21,7 @@ public class SDShaped extends SDRecipe {
 	@Override
 	public void registerRecipe() {
 		NamespacedKey nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + getName());
+		Bukkit.getServer().removeRecipe(nk);
 		ShapedRecipe r = new ShapedRecipe(nk, getResult());
 		r.shape("ABC", "DEF", "GHI");
 		r.setIngredient('A', new RecipeChoice.ExactChoice(items.get(0)));

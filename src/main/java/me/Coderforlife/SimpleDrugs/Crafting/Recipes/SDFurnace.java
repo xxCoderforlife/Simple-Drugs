@@ -25,6 +25,7 @@ public class SDFurnace extends SDRecipe {
 	@Override
 	public void registerRecipe() {
 		NamespacedKey nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + getName());
+		Bukkit.getServer().removeRecipe(nk);
 		FurnaceRecipe fr = new FurnaceRecipe(nk, getResult(), new RecipeChoice.ExactChoice(input), xp, time);
 		registerNamespacedKey(nk);
 		Bukkit.getServer().addRecipe(fr);

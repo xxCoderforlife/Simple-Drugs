@@ -26,6 +26,7 @@ public class SDShapeless extends SDRecipe {
 	
 	public void registerRecipe() {
 		NamespacedKey nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + getName());
+		Bukkit.getServer().removeRecipe(nk);
 		ShapelessRecipe sr = new ShapelessRecipe(nk, getResult());
 		for(ItemStack i : items) {
 			sr.addIngredient(new RecipeChoice.ExactChoice(i));
