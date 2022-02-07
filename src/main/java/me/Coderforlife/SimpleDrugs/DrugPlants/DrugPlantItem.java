@@ -12,19 +12,25 @@ import me.Coderforlife.SimpleDrugs.Druging.Drug;
 public class DrugPlantItem implements SDCraftableItem {
 	
 	private Drug drugToBePlaced;
+	private String fileName;
 	private ItemStack plantableItem;
 	private Material plantOn;
 	private Integer amount;
 	
-	public DrugPlantItem(Drug d, ItemStack pi, Material m, Integer i) {
+	public DrugPlantItem(Drug d, String fN, ItemStack pi, Material m, Integer i) {
 		drugToBePlaced = d;
 		plantableItem = pi;
 		plantOn = m;
 		amount = i;
+		fileName = fN;
 	}
 	
 	public Drug getDrug() {
 		return drugToBePlaced;
+	}
+	
+	public String getFileName() {
+		return fileName;
 	}
 	
 	public ItemStack makeItem() {

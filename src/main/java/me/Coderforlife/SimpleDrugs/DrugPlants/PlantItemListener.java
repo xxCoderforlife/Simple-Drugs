@@ -72,18 +72,16 @@ public class PlantItemListener implements Listener {
 		
 		Ageable age = (Ageable)b.getBlockData();
 		Drug d = Main.plugin.getDrugManager().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING).toUpperCase());
+		
+		if(d == null) return;
+		
 		if(age.getAge() >= age.getMaximumAge()) {
 			ItemStack i = d.getItem();
 			i.setAmount(bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));
 			e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), i);
 		}
 		
-		ItemStack seed = Main.plugin.getDrugManager().getItemStackFromDrug(d);
-		Material m = e.getClickedBlock().getType();
-		Integer amountHarvest = bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER);
-		
-		DrugPlantItem cpi = new DrugPlantItem(d, seed, m, amountHarvest);
-		e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), cpi.makeItem());
+		e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), Main.plugin.getDrugManager().getDrugPlantItemFromDrug(d).makeItem());
 		
 		b.setType(Material.AIR);
 		cbd.removeBlock(b);
@@ -108,6 +106,9 @@ public class PlantItemListener implements Listener {
 		age.setAge(0);
 		e.getClickedBlock().setBlockData(age);
 		Drug d = Main.plugin.getDrugManager().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING).toUpperCase());
+		
+		if(d == null) return;
+		
 		ItemStack i = d.getItem();
 		i.setAmount(bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));
 		e.getPlayer().getWorld().dropItemNaturally(e.getClickedBlock().getLocation(), i);
@@ -128,18 +129,16 @@ public class PlantItemListener implements Listener {
 		
 		Ageable age = (Ageable)b.getBlockData();
 		Drug d = Main.plugin.getDrugManager().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING).toUpperCase());
+		
+		if(d == null) return;
+		
 		if(age.getAge() >= age.getMaximumAge()) {
 			ItemStack i = d.getItem();
 			i.setAmount(bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));
 			e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), i);
 		}
 		
-		ItemStack seed = Main.plugin.getDrugManager().getItemStackFromDrug(d);
-		Material m = e.getBlock().getLocation().subtract(0, 1, 0).getBlock().getType();
-		Integer amountHarvest = bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER);
-		
-		DrugPlantItem cpi = new DrugPlantItem(d, seed, m, amountHarvest);
-		e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), cpi.makeItem());
+		e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), Main.plugin.getDrugManager().getDrugPlantItemFromDrug(d).makeItem());
 		cbd.removeBlock(b);
 		b.setType(Material.AIR);
 	}
@@ -158,18 +157,16 @@ public class PlantItemListener implements Listener {
 		
 		Ageable age = (Ageable)e.getBlock().getBlockData();
 		Drug d = Main.plugin.getDrugManager().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING).toUpperCase());
+		
+		if(d == null) return;
+		
 		if(age.getAge() >= age.getMaximumAge()) {
 			ItemStack i = d.getItem();
 			i.setAmount(bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER));
 			e.getPlayer().getWorld().dropItemNaturally(e.getBlock().getLocation(), i);
 		}
 		
-		ItemStack seed = Main.plugin.getDrugManager().getItemStackFromDrug(d);
-		Material m = e.getBlock().getLocation().subtract(0, 1, 0).getBlock().getType();
-		Integer amountHarvest = bPDC.get(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER);
-		
-		DrugPlantItem cpi = new DrugPlantItem(d, seed, m, amountHarvest);
-		e.getPlayer().getWorld().dropItemNaturally(e.getBlock().getLocation(), cpi.makeItem());
+		e.getPlayer().getWorld().dropItemNaturally(e.getBlock().getLocation(), Main.plugin.getDrugManager().getDrugPlantItemFromDrug(d).makeItem());
 		cbd.removeBlock(e.getBlock());
 	}
 	
