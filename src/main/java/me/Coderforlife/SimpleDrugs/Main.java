@@ -23,11 +23,6 @@ import me.Coderforlife.SimpleDrugs.Events.InventoryListener;
 import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
 import me.Coderforlife.SimpleDrugs.Events.PlayerRespawn;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.ConfirmGUI;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CreateNewDrug;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DeleteDrug;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugGUI;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.EditDrug;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.SettingNameListener;
 import me.Coderforlife.SimpleDrugs.Util.Messages;
 import net.md_5.bungee.api.ChatColor;
@@ -176,10 +171,6 @@ public class Main extends JavaPlugin {
     }
 
     private void registerListeners(){
-        this.getServer().getPluginManager().registerEvents(new ConfirmGUI(), this);
-        this.getServer().getPluginManager().registerEvents(new DeleteDrug(), this);
-        this.getServer().getPluginManager().registerEvents(new EditDrug(), this);
-        this.getServer().getPluginManager().registerEvents(new DrugGUI(), this);
         this.getServer().getPluginManager().registerEvents(new RecipeChecker(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
         this.getServer().getPluginManager().registerEvents(new BagOfDrugsGUI(), this);
@@ -192,7 +183,6 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new BrewingRecipeListener(), this);
         
         this.getServer().getPluginManager().registerEvents(new SettingNameListener(), this);
-        this.getServer().getPluginManager().registerEvents(new CreateNewDrug(), this);
         this.getCommand("drugs").setExecutor(new Commands());
         this.getCommand("drugs").setTabCompleter(new TabCommands());
     }

@@ -18,7 +18,6 @@ import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugGUI;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.SimpleDrugsEditor;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.SDRecipeInventory;
 
@@ -138,14 +137,9 @@ public class Commands implements CommandExecutor {
                         }
                     }else if(args[0].equalsIgnoreCase("editor")){
                         if(p.hasPermission("drugs.editor")){
-                            DrugGUI dgui = new DrugGUI();
-                            p.openInventory(dgui.drugMainMenu(p));
-                        }
-                    }else if(args[0].equalsIgnoreCase("editortest")) {
-                    	if(p.hasPermission("drugs.editor")){
-                    		SimpleDrugsEditor sde = new SimpleDrugsEditor();
+                        	SimpleDrugsEditor sde = new SimpleDrugsEditor();
                     		sde.open(p);
-                    	}
+                        }
                     }
                 } else if(args.length == 2) {
                     if(args[0].equalsIgnoreCase("recipe")) {
