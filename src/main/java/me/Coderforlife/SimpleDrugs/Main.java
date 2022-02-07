@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Coderforlife.SimpleDrugs.Crafting.CustomCraftingComponentManager;
@@ -73,6 +75,10 @@ public class Main extends JavaPlugin {
         sendConsoleMessage(header1);
         sendConsoleMessage("§aLoading Plugin...");
 
+        for(Player p : Bukkit.getOnlinePlayers()) {
+        	addictionManager.addictionMap().put(p.getUniqueId(), 0.0);
+        }
+        
         new Setup();
 /** TODO
         ItemStack result = new ItemStack(Material.DIAMOND);

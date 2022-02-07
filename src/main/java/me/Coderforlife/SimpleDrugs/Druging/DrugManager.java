@@ -37,6 +37,8 @@ import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.DrugPlants.DrugPlantItem;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.InventoryPotionEffect;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectSetterInventory;
 import me.Coderforlife.SimpleDrugs.Util.JsonFileInterpretter;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
 import net.md_5.bungee.api.ChatColor;
@@ -331,6 +333,24 @@ public class DrugManager {
     	return de;
     }
 
+    public void addDrug(String n, ItemStack i, PotionEffectSetterInventory peiu) {
+    	String disName = n;
+    	String name = ChatColor.stripColor(n).replaceAll(" ", "_");
+    	ArrayList<DrugEffect> drugEffects = new ArrayList<>();
+    	for(InventoryPotionEffect ipe : peiu.getPotionEffects().getPotionEffects()) {
+    		drugEffects.add(new DrugEffect(ipe.getType(), ipe.getTime(), ipe.getIntensity() - 1));
+    	}
+    	String permission = "drugs.use." + name;
+    	Double addLevel = peiu.getAddLevel();
+    	
+    	ItemStack finalItem = createItem(n, i.getType(), drugEffects);
+    	
+    	Drug d = new Drug(name, disName, finalItem, drugEffects, permission, addLevel);
+    	addDrug(d, name);
+    	
+    	Main.plugin.getRecipeManager().loadRecipe(d, peiu.getRecipe(), peiu.getRecipeType());
+    }
+    
     /**
 	 * Adds the Drug and it's file name the Map
 	 * @param drug Drug

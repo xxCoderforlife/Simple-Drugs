@@ -92,6 +92,40 @@ public class RecipeManager {
 		}
 	}
 	
+	public SDRecipe loadRecipe(SDCraftableItem item, List<ItemStack> items, DrugCraftingType dct) {
+		switch(dct) {
+		case FURNACE:
+			ItemStack fItem = items.get(0);
+			
+			SDFurnace furnace = new SDFurnace("Simple-Drug_" + item.getNamespaceName(), item.getItem(), fItem, 0f, 90);
+			furnace.registerRecipe();
+			return furnace;
+		case SHAPED:
+			SDShaped shaped = new SDShaped("Simple-Drug_" + item.getNamespaceName(), item.getItem());
+			
+			if(items == null) return null;
+			
+			for(int i = 0; i < items.size(); i++) {
+				shaped.addItemStack(items.get(i));
+			}
+			
+			shaped.registerRecipe();
+			return shaped;
+		case SHAPELESS:
+			SDShapeless shapeless = new SDShapeless("Simple-Drug_" + item.getNamespaceName(), item.getItem());
+			
+			items.forEach(e -> {
+				shapeless.addItemStack(e);
+			});
+			
+			shapeless.registerRecipe();
+			
+			return shapeless;
+		default:
+			return null;
+		}
+	}
+	
 	public SDRecipe loadRecipe(String fileName, SDCraftableItem item, JsonObject jo, DrugCraftingType dct) {
 		switch(dct) {
 		case FURNACE:

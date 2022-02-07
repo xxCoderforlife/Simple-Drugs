@@ -27,7 +27,6 @@ public class AddictionListener implements Listener{
         Player p = (Player) ev.getPlayer();
         if(!am.addictionMap().containsKey(p.getUniqueId())){
             am.addictionMap().put(p.getUniqueId(), 0.0);
-
         }
     }
 

@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.InventoryPotionEffect;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectInventoryUtil;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectRemoveInventory;
@@ -69,11 +71,36 @@ public class ShapedCraftingInventory extends PotionEffectSetterInventory {
 		addButton(new InventoryButton(Material.GREEN_WOOL, "&2&lAdd Drug", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
+				if(allBlank()) return;
+				if(getInventory().getItem(17) == null || getInventory().getItem(17).getType().equals(Material.AIR)) return;
+				Main.plugin.getDrugManager().addDrug(drugName, getInventory().getItem(17), sci);
 				close(p);
 			}
 		}, 26);
 		
 		updateInventory();
+	}
+	
+	private boolean allBlank() {
+		return getInventory().getItem(3) == null && getInventory().getItem(4) == null && getInventory().getItem(5) == null
+				 && getInventory().getItem(12) == null && getInventory().getItem(13) == null && getInventory().getItem(14) == null
+						 && getInventory().getItem(21) == null && getInventory().getItem(22) == null && getInventory().getItem(23) == null;
+	}
+	
+	public List<ItemStack> getRecipe() {
+		List<ItemStack> items = new ArrayList<>();
+		
+		items.add(isSlotNull(3) ? new ItemStack(Material.AIR) : getInventory().getItem(3));
+		items.add(isSlotNull(4) ? new ItemStack(Material.AIR) : getInventory().getItem(4));
+		items.add(isSlotNull(5) ? new ItemStack(Material.AIR) : getInventory().getItem(5));
+		items.add(isSlotNull(12) ? new ItemStack(Material.AIR) : getInventory().getItem(12));
+		items.add(isSlotNull(13) ? new ItemStack(Material.AIR) : getInventory().getItem(13));
+		items.add(isSlotNull(14) ? new ItemStack(Material.AIR) : getInventory().getItem(14));
+		items.add(isSlotNull(21) ? new ItemStack(Material.AIR) : getInventory().getItem(21));
+		items.add(isSlotNull(22) ? new ItemStack(Material.AIR) : getInventory().getItem(22));
+		items.add(isSlotNull(23) ? new ItemStack(Material.AIR) : getInventory().getItem(23));
+		
+		return items;
 	}
 	
 	private void saveItems() {
@@ -196,6 +223,16 @@ public class ShapedCraftingInventory extends PotionEffectSetterInventory {
 	@Override
 	public void setAddLevel(double b) {
 		addLevel = b;
+	}
+
+	@Override
+	public DrugCraftingType getRecipeType() {
+		return DrugCraftingType.SHAPED;
+	}
+
+	@Override
+	public double getAddLevel() {
+		return addLevel;
 	}
 	
 }

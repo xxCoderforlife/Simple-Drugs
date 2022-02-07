@@ -34,7 +34,7 @@ public class Drug implements SDCraftableItem {
     private Recipe seedRecipe = null;
     private Integer harvestAmount = 1;
 
-    public Drug(String name, String displayname, ItemStack item, ArrayList<DrugEffect> effects, String permission,Double addlvl) {
+    public Drug(String name, String displayname, ItemStack item, ArrayList<DrugEffect> effects, String permission, Double addlvl) {
         this.name = name;
         this.displayname = displayname;
         this.effects = effects;
