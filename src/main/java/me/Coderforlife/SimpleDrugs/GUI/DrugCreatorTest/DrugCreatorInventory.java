@@ -3,7 +3,9 @@ package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingTypeInventories.FurnaceCraftingInventory;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingTypeInventories.ShapedCraftingInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingTypeInventories.ShapelessCraftingInventory;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;
@@ -26,14 +28,18 @@ public class DrugCreatorInventory extends InventoryUI {
 		addButton(new InventoryButton(Material.CRAFTING_TABLE, "&b&lShapeless", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				
+				close(p);
+				ShapelessCraftingInventory sci = new ShapelessCraftingInventory(drugName);
+				sci.open(p);
 			}
 		}, 3);
 		
 		addButton(new InventoryButton(Material.FURNACE, "&b&lFurnace", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				
+				close(p);
+				FurnaceCraftingInventory sci = new FurnaceCraftingInventory(drugName);
+				sci.open(p);
 			}
 		}, 5);
 		
