@@ -64,7 +64,7 @@ public class DrugSelectorInventory extends InventoryUI {
 		PotionEffectInventoryUtil peiu = new PotionEffectInventoryUtil();
 		
 		for(DrugEffect de : d.getEffects()) {
-			InventoryPotionEffect ipe = new InventoryPotionEffect(de.getEffect(), de.getTime(), de.getIntensity());
+			InventoryPotionEffect ipe = new InventoryPotionEffect(de.getEffect(), de.getTime()/20, de.getIntensity());
 			peiu.getPotionEffects().add(ipe);
 		}
 		
