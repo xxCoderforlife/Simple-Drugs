@@ -349,7 +349,7 @@ public class DrugManager {
     		for(DrugEffect de : d.getEffects()) {
     			JsonObject jo = new JsonObject();
     			jo.addProperty("type", de.getEffect().getName().toUpperCase());
-    			jo.addProperty("time", de.getTime());
+    			jo.addProperty("time", de.getTime()/20);
     			jo.addProperty("intensity", de.getIntensity());
     			ja.add(jo);
     		}
@@ -410,7 +410,7 @@ public class DrugManager {
     	String name = ChatColor.stripColor(n).replaceAll(" ", "_").toUpperCase();
     	ArrayList<DrugEffect> drugEffects = new ArrayList<>();
     	for(InventoryPotionEffect ipe : peiu.getPotionEffects().getPotionEffects()) {
-    		drugEffects.add(new DrugEffect(ipe.getType(), ipe.getTime(), ipe.getIntensity() - 1));
+    		drugEffects.add(new DrugEffect(ipe.getType(), ipe.getTime(), ipe.getIntensity()));
     	}
     	String permission = "drugs.use." + name.toLowerCase();
     	Double addLevel = peiu.getAddLevel();
