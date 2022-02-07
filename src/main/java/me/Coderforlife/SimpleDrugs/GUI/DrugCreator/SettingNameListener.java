@@ -12,8 +12,8 @@ import org.bukkit.inventory.ItemStack;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CraftingComponent.CCCreatorInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.DrugCreatorInventory;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.PotionEffectInventoryUtil;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Drugs.DrugCreatorInventory;
 import net.md_5.bungee.api.ChatColor;
 
 public class SettingNameListener implements Listener {

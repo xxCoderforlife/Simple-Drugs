@@ -20,6 +20,7 @@ public abstract class AbstractPlainCrafting extends InventoryUI {
 	
 	public AbstractPlainCrafting(String title, String name, HashMap<Integer, ItemStack> i) {
 		super(27, title);
+		setShouldRemove(false);
 		itemName = name;
 		items = i;
 		

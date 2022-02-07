@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Drugs;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories;
 
 import java.util.HashMap;
 
@@ -11,9 +11,6 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.DrugEffect;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.FurnaceCraftingInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.ShapedCraftingInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.ShapelessCraftingInventory;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.InventoryPotionEffect;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.PotionEffectInventoryUtil;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;

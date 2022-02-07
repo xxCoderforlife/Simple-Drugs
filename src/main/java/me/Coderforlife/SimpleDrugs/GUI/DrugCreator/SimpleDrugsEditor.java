@@ -5,7 +5,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Drugs.DrugSelectorInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CraftingComponent.CraftingComponentSelectorInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.DrugSelectorInventory;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;
@@ -49,6 +50,7 @@ public class SimpleDrugsEditor extends InventoryUI {
 		addButton(new InventoryButton(Material.ANVIL, "&b&oEdit A Drug", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
+				if(Main.plugin.getDrugManager().getallDrugs().size() == 0) return;
 				close(p);
 				DrugSelectorInventory dsi = new DrugSelectorInventory(true);
 				dsi.open(p);
@@ -58,6 +60,7 @@ public class SimpleDrugsEditor extends InventoryUI {
 		addButton(new InventoryButton(Material.BARRIER, "&4&o&lDELETE A DRUG", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
+				if(Main.plugin.getDrugManager().getallDrugs().size() == 0) return;
 				close(p);
 				DrugSelectorInventory dsi = new DrugSelectorInventory(false);
 				dsi.open(p);
@@ -101,14 +104,20 @@ public class SimpleDrugsEditor extends InventoryUI {
 		addButton(new InventoryButton(Material.ANVIL, "&b&oEdit A Crafting Component", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				
+				if(Main.plugin.getCraftingManager().getCraftingComponents().size() == 0) return;
+				close(p);
+				CraftingComponentSelectorInventory ccsi = new CraftingComponentSelectorInventory(true);
+				ccsi.open(p);
 			}
 		}, 22);
 		
 		addButton(new InventoryButton(Material.BARRIER, "&4&o&lDELETE A CRAFTING COMPONENT", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				
+				if(Main.plugin.getCraftingManager().getCraftingComponents().size() == 0) return;
+				close(p);
+				CraftingComponentSelectorInventory ccsi = new CraftingComponentSelectorInventory(false);
+				ccsi.open(p);
 			}
 		}, 23);
 	}

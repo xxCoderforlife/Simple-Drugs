@@ -67,6 +67,13 @@ public class CustomCraftingComponentManager {
 		}
 	}
 	
+	public void deleteCraftingComponent(CraftingComponent cc) {
+		File f = new File(drugCFolder, cc.getFileName());
+		Bukkit.getConsoleSender().sendMessage(cc.getFileName());
+		f.delete();
+		craftingComponents.remove(cc.getName().replaceAll(" ", "_").toUpperCase());
+	}
+	
 	private DrugLoadError canMakeCraftingComponents(String fileName, JsonObject jo) {
 		DrugLoadError dle = new DrugLoadError();
 		
@@ -160,7 +167,7 @@ public class CustomCraftingComponentManager {
 	private void createCraftingComponentFromJSON(String fileName, JsonObject jo) {
 		JsonFileInterpretter config = new JsonFileInterpretter(jo);
 		
-		String name = config.getString("name");
+		String name = config.getString("name").replaceAll(" ", "_");
 		ItemStack result = config.getItem("item");
 		ItemMeta im = result.getItemMeta();
 		im.getPersistentDataContainer().set(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE, (byte)1);
