@@ -2,25 +2,29 @@ package me.Coderforlife.SimpleDrugs.Druging;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.SDCraftableItem;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
-import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
+import me.Coderforlife.SimpleDrugs.Druging.Util.DrugEffect;
 
 public class Drug implements SDCraftableItem {
 
-    private Main plugin = Main.plugin;
-    private AddictionManager am = plugin.getAddictionManager();
     private String name;
     private String displayname;
     private Double addictionLevel;
@@ -28,20 +32,16 @@ public class Drug implements SDCraftableItem {
     private ArrayList<DrugEffect> effects;
     private String fileName;
     private ItemStack item;
+    private Material mat;
     private String permission;
-    private boolean crafting;
-    private boolean hasSeed = false;
-    private Material seedItem = Material.WHEAT_SEEDS;
-    private Recipe seedRecipe = null;
-    private Integer harvestAmount = 1;
 
-    public Drug(String name, String displayname, String fN, ItemStack item, ArrayList<DrugEffect> effects, String permission, Double addlvl) {
+    public Drug(String name, String displayname, Material item, ArrayList<DrugEffect> effects, String permission, Double addlvl) {
         this.name = name;
         this.displayname = displayname;
-        this.fileName = fN;
         this.effects = effects;
         this.permission = permission;
-        this.item = item;
+        this.mat = item;
+        this.item = createItem();
         this.addictionLevel = addlvl;
     }
 
@@ -51,9 +51,9 @@ public class Drug implements SDCraftableItem {
      * @param p The Player to influence
      */
     public void influencePlayer(Player p) {
-        HashMap<UUID,Double> addic = am.addictionMap();
+        HashMap<UUID,Double> addic = Main.plugin.getAddictionManager().addictionMap();
         Double addLvl = addic.get(p.getUniqueId());
-        if(addLvl < plugin.getConfig().getDouble("Drugs.Addiction.OverDose-Limit")){
+        if(addLvl < Main.plugin.getConfig().getDouble("Drugs.Addiction.OverDose-Limit")){
             for (DrugEffect effect : this.effects) {
                 if (!(p.hasPotionEffect(effect.getEffect()))) {
                     addic.put(p.getUniqueId(), addLvl + addictionLevel);
@@ -65,7 +65,7 @@ public class Drug implements SDCraftableItem {
                     addic.put(p.getUniqueId(), addLvl + addictionLevel);
                 }
             }
-        }else if(addLvl >= plugin.getConfig().getDouble("Drugs.Addiction.OverDose-Limit")){
+        }else if(addLvl >= Main.plugin.getConfig().getDouble("Drugs.Addiction.OverDose-Limit")){
             p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_HURT, 1.0f, 1.0f);
             p.setHealth(0.0);
         }
@@ -98,6 +98,26 @@ public class Drug implements SDCraftableItem {
         }
     }
 
+    private ItemStack createItem() {
+    	ItemStack is = new ItemStack(mat);
+    	ItemMeta im = is.getItemMeta();
+    	im.getPersistentDataContainer().set(Main.plugin.isDrugItem(), PersistentDataType.BYTE, (byte)1);
+    	im.setDisplayName(ChatColor.translateAlternateColorCodes('&', displayname));
+    	im.addItemFlags(ItemFlag.HIDE_ENCHANTS , ItemFlag.HIDE_ATTRIBUTES);
+    	List<String> lore = new ArrayList<String>();
+    	if(effects.size() > 0) {
+    		lore.add("§a§lEffects:");
+    		for(DrugEffect de : effects) {
+    			lore.add("§7- §6" + de.getEffect().getName().toUpperCase(Locale.ROOT));
+    		}
+    	}
+    	lore.add("§7Click To Use");
+    	im.setLore(lore);
+    	is.setItemMeta(im);
+    	is.addUnsafeEnchantment(Enchantment.ARROW_FIRE, 1);
+    	return is;
+    }
+    
     public ArrayList<DrugEffect> getEffects() {
         return effects;
     }
@@ -118,8 +138,12 @@ public class Drug implements SDCraftableItem {
         this.name = name;
     }
     
-    public String getFileName() {
+    public String getFile() {
     	return fileName;
+    }
+    
+    public void setFile(String s) {
+    	fileName = s;
     }
 
     public String getDisplayname() {
@@ -152,46 +176,6 @@ public class Drug implements SDCraftableItem {
 
     public void setPermission(String permission) {
         this.permission = permission;
-    }
-
-    public boolean isCraftable() {
-        return crafting;
-    }
-
-    public void setCraftable(boolean crafting) {
-        this.crafting = crafting;
-    }
-
-    public void setHasSeed(boolean b) {
-        hasSeed = b;
-    }
-
-    public boolean hasSeed() {
-        return hasSeed;
-    }
-
-    public void setSeedRecipe(Recipe r) {
-        seedRecipe = r;
-    }
-
-    public Recipe getSeedRecipe() {
-        return seedRecipe;
-    }
-
-    public Material getSeedItem() {
-        return seedItem;
-    }
-
-    public void setSeedItem(Material m) {
-        seedItem = m;
-    }
-
-    public Integer getHarvestAmount() {
-        return harvestAmount;
-    }
-
-    public void setHarvestAmount(int i) {
-        harvestAmount = i;
     }
     
     public double getAddictionLevel() {

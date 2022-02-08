@@ -12,6 +12,8 @@ import me.Coderforlife.SimpleDrugs.Main;
 
 public class SDShapeless extends SDRecipe {
 	
+	public SDShapeless() {}
+	
 	public SDShapeless(String name, ItemStack result) {
 		super(name, result);
 	}

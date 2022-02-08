@@ -31,7 +31,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Settings;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
-import me.Coderforlife.SimpleDrugs.GUI.Framework.SDRecipeInventory;
 import net.md_5.bungee.api.ChatColor;
 
 public class BagOfDrugsGUI implements Listener {
@@ -137,9 +136,9 @@ public class BagOfDrugsGUI implements Listener {
     }
 
     public Inventory create() {
-        ArrayList<Drug> drugs = Main.plugin.getDrugManager().getallDrugs();
+        ArrayList<Drug> drugs = new ArrayList<>(Main.plugin.getDrugManager().getItems().values());
         int amountofdrugs = drugs.size();
-
+        
         ArrayList<ItemStack> stack = new ArrayList<>();
         amountofdrugs = Math.min(amountofdrugs, maxdrugs);
 
@@ -163,7 +162,7 @@ public class BagOfDrugsGUI implements Listener {
     }
 
     public Inventory openPage(int page) {
-        ArrayList<Drug> drugs = Main.plugin.getDrugManager().getallDrugs();
+        ArrayList<Drug> drugs = new ArrayList<>(Main.plugin.getDrugManager().getItems().values());
         int amountofdrugs = drugs.size();
 
         int drugsleft = amountofdrugs - ((page - 1) * maxdrugs);

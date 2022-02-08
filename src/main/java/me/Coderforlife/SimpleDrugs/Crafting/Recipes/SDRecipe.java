@@ -14,6 +14,8 @@ public abstract class SDRecipe {
 	private ItemStack result;
 	protected List<ItemStack> items = new ArrayList<>();
 	
+	public SDRecipe() {}
+	
 	public SDRecipe(String n, ItemStack r) {
 		result = r;
 		name = n;
@@ -23,8 +25,16 @@ public abstract class SDRecipe {
 		return result;
 	}
 	
+	public void setResult(ItemStack item) {
+		result = item;
+	}
+	
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String s) {
+		name = s;
 	}
 	
 	public List<ItemStack> getItems() {

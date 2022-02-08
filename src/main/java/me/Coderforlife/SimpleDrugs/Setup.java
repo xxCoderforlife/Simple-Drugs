@@ -1,18 +1,18 @@
 package me.Coderforlife.SimpleDrugs;
 
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.RegisteredServiceProvider;
 
-import me.Coderforlife.SimpleDrugs.Crafting.CustomCraftingComponentManager;
 import me.Coderforlife.SimpleDrugs.Crafting.RecipeManager;
+import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.CCManager;
 import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
+import me.Coderforlife.SimpleDrugs.Druging.DrugRecipeManager;
+import me.Coderforlife.SimpleDrugs.Druging.DrugPlants.DrugSeedManager;
 import me.Coderforlife.SimpleDrugs.PlaceHolder.DrugPlaceHolders;
 import me.Coderforlife.SimpleDrugs.UpdateChecker.Updater;
-import net.milkbowl.vault.economy.Economy;
 
 public class Setup {
 
-    private Economy econ;
+    // private Economy econ;
     private Main plugin = Main.plugin;
 
     public Setup() {
@@ -20,15 +20,16 @@ public class Setup {
         plugin.getSettings().setup();
         loadPlaceHolders();
         checkForUpdate();
-        loadVault();
+        // loadVault();
 
         Main.plugin.setRecipeManager(new RecipeManager());
         
-        Main.plugin.setCraftingManager(new CustomCraftingComponentManager());
-        Main.plugin.getCraftingManager().registerAllRecipe();
+        Main.plugin.setCraftingManager(new CCManager());
+        //Main.plugin.getCraftingManager().registerAllRecipe();
         
         Main.plugin.setDrugManager(new DrugManager());
-        Main.plugin.getDrugManager().loadFiles();
+        Main.plugin.setDrugSeedManager(new DrugSeedManager());
+        Main.plugin.setDrugRecipeManager(new DrugRecipeManager());
     }
 
     private void loadPlaceHolders() {
@@ -49,18 +50,18 @@ public class Setup {
         }
     }
 
-    public void loadVault() {
-        if(plugin.getServer().getPluginManager().getPlugin("Vault") != null) {
-            RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager().getRegistration(Economy.class);
-            if(rsp != null)
-                econ = rsp.getProvider();
-            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aVault has been found.");
-            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aHooked into Vault.");
-            return;
-        }
-        sendConsoleMessage(plugin.getMessages().getPrefix() + "§cVault.jar was not found or you don't have an Economy Plugin");
-        sendConsoleMessage(plugin.getMessages().getPrefix() + "§cDisabling all Vault elements");
-    }
+//    public void loadVault() {
+//        if(plugin.getServer().getPluginManager().getPlugin("Vault") != null) {
+//            RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager().getRegistration(Economy.class);
+//            if(rsp != null)
+//                econ = rsp.getProvider();
+//            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aVault has been found.");
+//            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aHooked into Vault.");
+//            return;
+//        }
+//        sendConsoleMessage(plugin.getMessages().getPrefix() + "§cVault.jar was not found or you don't have an Economy Plugin");
+//        sendConsoleMessage(plugin.getMessages().getPrefix() + "§cDisabling all Vault elements");
+//    }
 
     private void sendConsoleMessage(String message) {
         Main.plugin.getServer().getConsoleSender().sendMessage(message);

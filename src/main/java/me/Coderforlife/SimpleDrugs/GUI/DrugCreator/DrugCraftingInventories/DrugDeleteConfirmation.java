@@ -30,7 +30,13 @@ public class DrugDeleteConfirmation extends InventoryUI {
 		addButton(new InventoryButton(Material.GREEN_WOOL, "&2&lDelete", "") {
 			public void onPlayerClick(Player p, ClickAction action) {
 				close(p);
-				Main.plugin.getDrugManager().deleteDrug(d);
+				
+				if(Main.plugin.getDrugSeedManager().getItem(d.getName().toUpperCase()) != null) {
+					Main.plugin.getDrugSeedManager().removeItem(d.getName().toUpperCase());
+				}
+				
+				Main.plugin.getDrugRecipeManager().removeItem(d.getName().toUpperCase());
+				Main.plugin.getDrugManager().removeItem(d.getName().toUpperCase());
 			}
 		});
 		

@@ -12,7 +12,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
+import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.DrugCraftingType;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import net.md_5.bungee.api.ChatColor;
 
@@ -26,7 +26,7 @@ public class JsonFileInterpretter {
 	}
 	
 	public Drug getDrug(String key) {
-		Drug d = Main.plugin.getDrugManager().getDrug(getString(key).toUpperCase());
+		Drug d = Main.plugin.getDrugManager().getItem(getString(key).toUpperCase());
 		if(d == null) {
 			errorMessages.add("§c[ERROR] JSON Key: §7" + key + " §cMust have a valid Drug Name");
 		}

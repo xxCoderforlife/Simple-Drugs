@@ -16,7 +16,7 @@ public class CraftingEvent implements Listener {
     public void OnCraftEvent(CraftItemEvent e) {
         Player p = (Player) e.getWhoClicked();
         if(e.getInventory().getType().equals(InventoryType.CRAFTING)) {
-            for(Drug drugs : Main.plugin.getDrugManager().getallDrugs()) {
+            for(Drug drugs : Main.plugin.getDrugManager().getItems().values()) {
                 if(e.getInventory().getResult().equals(drugs.getItem())) {
                     if(!p.hasPermission("drugs.craft" + drugs.getName().toLowerCase())) {
                         e.setCancelled(true);

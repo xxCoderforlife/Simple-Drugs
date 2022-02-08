@@ -1,27 +1,31 @@
-package me.Coderforlife.SimpleDrugs.Crafting;
+package me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent;
 
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 
 import com.google.gson.JsonObject;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Crafting.SDCraftableItem;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 
 public class CraftingComponent implements SDCraftableItem {
 
 	private String name;
 	private String fileName;
-	private ItemStack result;
 	private DrugCraftingType type;
 	private JsonObject materials;
 	private SDRecipe recipe;
 	
+	public CraftingComponent(String s) {
+		name = s;
+	}
+	
 	public CraftingComponent(String s, String fN, ItemStack is, DrugCraftingType t, List<ItemStack> items) {
 		name = s;
 		fileName = fN;
-		result = is;
 		type = t;
 		recipe = Main.plugin.getRecipeManager().loadRecipe(this, items, t);
 	}
@@ -29,9 +33,9 @@ public class CraftingComponent implements SDCraftableItem {
 	public CraftingComponent(String s, String fn, ItemStack is, DrugCraftingType t, JsonObject m) {
 		name = s;
 		fileName = fn;
-		result = is;
 		type = t;
 		materials = m;
+		Bukkit.getConsoleSender().sendMessage("Test");
 		recipe = Main.plugin.getRecipeManager().loadRecipe(fn, this, materials, type);
 	}
 	
@@ -39,16 +43,16 @@ public class CraftingComponent implements SDCraftableItem {
 		return type;
 	}
 	
-	public ItemStack getStack() {
-		return result;
-	}
-	
 	public String getName() {
 		return name;
 	}
 	
-	public String getFileName() {
+	public String getFile() {
 		return fileName;
+	}
+	
+	public void setFile(String s) {
+		fileName = s;
 	}
 	
 	public JsonObject getMaterials() {
@@ -58,10 +62,14 @@ public class CraftingComponent implements SDCraftableItem {
 	public SDRecipe getRecipe() {
 		return recipe;
 	}
+	
+	public void setRecipe(SDRecipe rec) {
+		recipe = rec;
+	}
 
 	@Override
 	public ItemStack getItem() {
-		return result;
+		return recipe.getResult();
 	}
 
 	@Override

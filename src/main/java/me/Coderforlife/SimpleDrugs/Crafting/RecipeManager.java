@@ -16,11 +16,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.DrugCraftingType;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.SDBrewingRecipe;
+import me.Coderforlife.SimpleDrugs.Util.CCMaterialConverter;
 
 public class RecipeManager {
 
@@ -104,7 +106,7 @@ public class RecipeManager {
 				ItemMeta im = fItem.getItemMeta();
 				PersistentDataContainer pdc = im.getPersistentDataContainer();
 				if(pdc.has(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) && (pdc.get(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) == (byte)1)) {
-					fItem = Main.plugin.getCraftingManager().getByName(pdc.get(Main.plugin.getCraftingComponentName(), PersistentDataType.STRING)).getItem();
+					fItem = Main.plugin.getCraftingManager().getItem(pdc.get(Main.plugin.getCraftingComponentName(), PersistentDataType.STRING)).getItem();
 				}
 			}
 			
@@ -123,7 +125,7 @@ public class RecipeManager {
 					ItemMeta im = sItem.getItemMeta();
 					PersistentDataContainer pdc = im.getPersistentDataContainer();
 					if(pdc.has(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) && (pdc.get(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) == (byte)1)) {
-						sItem = Main.plugin.getCraftingManager().getByName(pdc.get(Main.plugin.getCraftingComponentName(), PersistentDataType.STRING)).getItem();
+						sItem = Main.plugin.getCraftingManager().getItem(pdc.get(Main.plugin.getCraftingComponentName(), PersistentDataType.STRING)).getItem();
 					}
 				}
 				
@@ -142,7 +144,7 @@ public class RecipeManager {
 					ItemMeta im = sItem.getItemMeta();
 					PersistentDataContainer pdc = im.getPersistentDataContainer();
 					if(pdc.has(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) && (pdc.get(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) == (byte)1)) {
-						sItem = Main.plugin.getCraftingManager().getByName(pdc.get(Main.plugin.getCraftingComponentName(), PersistentDataType.STRING)).getItem();
+						sItem = Main.plugin.getCraftingManager().getItem(pdc.get(Main.plugin.getCraftingComponentName(), PersistentDataType.STRING)).getItem();
 					}
 				}
 				
@@ -204,7 +206,7 @@ public class RecipeManager {
 			return null;
 		}
 		
-		return getCCOrMaterial(fileName, jo.get("item").getAsString());
+		return CCMaterialConverter.getCCOrMaterial(fileName, jo.get("item").getAsString());
 	}
 	
 	private List<ItemStack> getItemsForShaped(String fileName, JsonObject jo) {
@@ -223,7 +225,7 @@ public class RecipeManager {
 				continue;
 			}
 			
-			ItemStack item = getCCOrMaterial(fileName, jo.get(String.valueOf(i)).getAsString());
+			ItemStack item = CCMaterialConverter.getCCOrMaterial(fileName, jo.get(String.valueOf(i)).getAsString());
 			if(item == null) return null;
 			materials.add(item);
 		}
@@ -248,7 +250,7 @@ public class RecipeManager {
 		JsonArray ja = jo.get("items").getAsJsonArray();
 		
 		for(int i = 0; i < ja.size(); i++) {
-    		ItemStack item = getCCOrMaterial(fileName, ja.get(i).getAsString());
+    		ItemStack item = CCMaterialConverter.getCCOrMaterial(fileName, ja.get(i).getAsString());
     		if(item == null) return null;
     		materials.add(item);
     	}
@@ -260,21 +262,6 @@ public class RecipeManager {
     	}
     	
     	return materials;
-	}
-	
-	private ItemStack getCCOrMaterial(String fileName, String name) {
-		Material m = Material.getMaterial(name.toUpperCase());
-		if(m == null) {
-			CraftingComponent cc = Main.plugin.getCraftingManager().getByName(name.toUpperCase());
-			if(cc == null) {
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Material: §7" + name.toUpperCase() + " §cdoes not exist as a Minecraft Material or Custom Crafting Component");
-				Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
-				return null;
-			}
-			return cc.getStack();
-		}
-		return new ItemStack(m);
 	}
 	
 }

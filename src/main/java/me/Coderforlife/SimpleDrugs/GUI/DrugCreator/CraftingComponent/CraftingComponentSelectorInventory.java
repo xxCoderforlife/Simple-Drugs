@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent;
+import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.CraftingComponent;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
@@ -18,9 +18,9 @@ import net.md_5.bungee.api.ChatColor;
 public class CraftingComponentSelectorInventory extends InventoryUI {
 
 	public CraftingComponentSelectorInventory(boolean editing) {
-		super((int)Math.ceil((double)Main.plugin.getCraftingManager().getCraftingComponents().values().size() / 9.0) * 9, ChatColor.translateAlternateColorCodes('&', "&6&lSelect Crafting Component"));
+		super((int)Math.ceil((double)Main.plugin.getCraftingManager().getItems().values().size() / 9.0) * 9, ChatColor.translateAlternateColorCodes('&', "&6&lSelect Crafting Component"));
 		
-		for(CraftingComponent cc : Main.plugin.getCraftingManager().getCraftingComponents().values()) {
+		for(CraftingComponent cc : Main.plugin.getCraftingManager().getItems().values()) {
 			addButton(new InventoryButton(cc.getItem()) {
 
 				@Override

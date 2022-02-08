@@ -30,7 +30,7 @@ public class DrugPlaceHolders extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer player, String params) {
-        for(Drug drugs : Main.plugin.getDrugManager().getallDrugs()) {
+        for(Drug drugs : Main.plugin.getDrugManager().getItems().values()) {
             if(params.equalsIgnoreCase(drugs.getName())) {
                 return drugs.getDisplayname();
             }

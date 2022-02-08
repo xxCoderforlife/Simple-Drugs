@@ -28,7 +28,7 @@ public class TabCommands implements TabCompleter {
                 }
             }
             if(args[0].equalsIgnoreCase("give") || args[0].equalsIgnoreCase("recipe")) {
-                for(Drug drugs : Main.plugin.getDrugManager().getallDrugs()) {
+                for(Drug drugs : Main.plugin.getDrugManager().getItems().values()) {
                     tab.add(drugs.getName());
                 }
             }

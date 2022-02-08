@@ -8,8 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Crafting.DrugCraftingType;
+import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.DrugCraftingType;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.AbstractPlainCrafting;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
@@ -47,7 +46,7 @@ public class CCShapelessCraftingInventory extends AbstractPlainCrafting {
 	public void handleAccept(Player p) {
 		if(allBlank()) return;
 		if(getInventory().getItem(17) == null || getInventory().getItem(17).getType().equals(Material.AIR)) return;
-		Main.plugin.getCraftingManager().createCraftingComponent(getName(), getInventory().getItem(17), getRecipeType(), getRecipe());
+		//Main.plugin.getCraftingManager().createCraftingComponent(getName(), getInventory().getItem(17), getRecipeType(), getRecipe());
 		close(p);
 	}
 	

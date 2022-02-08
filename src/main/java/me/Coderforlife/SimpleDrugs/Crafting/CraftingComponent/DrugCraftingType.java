@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.Crafting;
+package me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent;
 
 public enum DrugCraftingType {
 

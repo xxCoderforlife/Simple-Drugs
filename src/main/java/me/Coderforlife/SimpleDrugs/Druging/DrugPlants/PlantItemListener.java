@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.DrugPlants;
+package me.Coderforlife.SimpleDrugs.Druging.DrugPlants;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -71,7 +71,7 @@ public class PlantItemListener implements Listener {
 		if(!bPDC.has(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING)) return;
 		
 		Ageable age = (Ageable)b.getBlockData();
-		Drug d = Main.plugin.getDrugManager().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING).toUpperCase());
+		Drug d = Main.plugin.getDrugManager().getItem(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING).toUpperCase());
 		
 		if(d == null) return;
 		
@@ -81,7 +81,7 @@ public class PlantItemListener implements Listener {
 			e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), i);
 		}
 		
-		e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), Main.plugin.getDrugManager().getDrugPlantItemFromDrug(d).makeItem());
+		e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), Main.plugin.getDrugSeedManager().getDrugPlantItemFromDrug(d).makeItem());
 		
 		b.setType(Material.AIR);
 		cbd.removeBlock(b);
@@ -105,7 +105,7 @@ public class PlantItemListener implements Listener {
 		if(age.getAge() < age.getMaximumAge()) return;
 		age.setAge(0);
 		e.getClickedBlock().setBlockData(age);
-		Drug d = Main.plugin.getDrugManager().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING).toUpperCase());
+		Drug d = Main.plugin.getDrugManager().getItem(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING).toUpperCase());
 		
 		if(d == null) return;
 		
@@ -128,7 +128,7 @@ public class PlantItemListener implements Listener {
 		if(!bPDC.has(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING)) return;
 		
 		Ageable age = (Ageable)b.getBlockData();
-		Drug d = Main.plugin.getDrugManager().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING).toUpperCase());
+		Drug d = Main.plugin.getDrugManager().getItem(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING).toUpperCase());
 		
 		if(d == null) return;
 		
@@ -138,7 +138,7 @@ public class PlantItemListener implements Listener {
 			e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), i);
 		}
 		
-		e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), Main.plugin.getDrugManager().getDrugPlantItemFromDrug(d).makeItem());
+		e.getPlayer().getWorld().dropItemNaturally(b.getLocation(), Main.plugin.getDrugSeedManager().getDrugPlantItemFromDrug(d).makeItem());
 		cbd.removeBlock(b);
 		b.setType(Material.AIR);
 	}
@@ -156,7 +156,7 @@ public class PlantItemListener implements Listener {
 		e.setDropItems(false);
 		
 		Ageable age = (Ageable)e.getBlock().getBlockData();
-		Drug d = Main.plugin.getDrugManager().getDrug(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING).toUpperCase());
+		Drug d = Main.plugin.getDrugManager().getItem(bPDC.get(Main.plugin.getDrugKey(), PersistentDataType.STRING).toUpperCase());
 		
 		if(d == null) return;
 		
@@ -166,7 +166,7 @@ public class PlantItemListener implements Listener {
 			e.getPlayer().getWorld().dropItemNaturally(e.getBlock().getLocation(), i);
 		}
 		
-		e.getPlayer().getWorld().dropItemNaturally(e.getBlock().getLocation(), Main.plugin.getDrugManager().getDrugPlantItemFromDrug(d).makeItem());
+		e.getPlayer().getWorld().dropItemNaturally(e.getBlock().getLocation(), Main.plugin.getDrugSeedManager().getDrugPlantItemFromDrug(d).makeItem());
 		cbd.removeBlock(e.getBlock());
 	}
 	

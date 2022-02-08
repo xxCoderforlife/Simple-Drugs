@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.Framework;
+package me.Coderforlife.SimpleDrugs.GUI;
 
 import java.util.HashMap;
 import java.util.HashSet;

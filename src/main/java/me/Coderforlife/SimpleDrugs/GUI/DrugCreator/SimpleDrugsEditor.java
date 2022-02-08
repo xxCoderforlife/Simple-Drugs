@@ -50,7 +50,7 @@ public class SimpleDrugsEditor extends InventoryUI {
 		addButton(new InventoryButton(Material.ANVIL, "&b&oEdit A Drug", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				if(Main.plugin.getDrugManager().getallDrugs().size() == 0) return;
+				if(Main.plugin.getDrugManager().getItems().values().size() == 0) return;
 				close(p);
 				DrugSelectorInventory dsi = new DrugSelectorInventory(true);
 				dsi.open(p);
@@ -60,7 +60,7 @@ public class SimpleDrugsEditor extends InventoryUI {
 		addButton(new InventoryButton(Material.BARRIER, "&4&o&lDELETE A DRUG", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				if(Main.plugin.getDrugManager().getallDrugs().size() == 0) return;
+				if(Main.plugin.getDrugManager().getItems().values().size() == 0) return;
 				close(p);
 				DrugSelectorInventory dsi = new DrugSelectorInventory(false);
 				dsi.open(p);
@@ -104,7 +104,7 @@ public class SimpleDrugsEditor extends InventoryUI {
 		addButton(new InventoryButton(Material.ANVIL, "&b&oEdit A Crafting Component", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				if(Main.plugin.getCraftingManager().getCraftingComponents().size() == 0) return;
+				if(Main.plugin.getCraftingManager().getItems().values().size() == 0) return;
 				close(p);
 				CraftingComponentSelectorInventory ccsi = new CraftingComponentSelectorInventory(true);
 				ccsi.open(p);
@@ -114,7 +114,7 @@ public class SimpleDrugsEditor extends InventoryUI {
 		addButton(new InventoryButton(Material.BARRIER, "&4&o&lDELETE A CRAFTING COMPONENT", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				if(Main.plugin.getCraftingManager().getCraftingComponents().size() == 0) return;
+				if(Main.plugin.getCraftingManager().getItems().values().size() == 0) return;
 				close(p);
 				CraftingComponentSelectorInventory ccsi = new CraftingComponentSelectorInventory(false);
 				ccsi.open(p);

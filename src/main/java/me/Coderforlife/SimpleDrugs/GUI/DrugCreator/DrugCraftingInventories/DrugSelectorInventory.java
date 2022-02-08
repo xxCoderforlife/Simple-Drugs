@@ -10,7 +10,7 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
-import me.Coderforlife.SimpleDrugs.Druging.DrugEffect;
+import me.Coderforlife.SimpleDrugs.Druging.Util.DrugEffect;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.InventoryPotionEffect;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.PotionEffectInventoryUtil;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
@@ -21,9 +21,9 @@ import net.md_5.bungee.api.ChatColor;
 public class DrugSelectorInventory extends InventoryUI {
 	
 	public DrugSelectorInventory(boolean editing) {
-		super((int)Math.ceil((double)Main.plugin.getDrugManager().getallDrugs().size() / 9.0) * 9, ChatColor.translateAlternateColorCodes('&', "&6&lSelect Drug"));
+		super((int)Math.ceil((double)Main.plugin.getDrugManager().getItems().values().size() / 9.0) * 9, ChatColor.translateAlternateColorCodes('&', "&6&lSelect Drug"));
 		
-		for(Drug d : Main.plugin.getDrugManager().getallDrugs()) {
+		for(Drug d : Main.plugin.getDrugManager().getItems().values()) {
 			addButton(new InventoryButton(d.getItem()) {
 				@Override
 				public void onPlayerClick(Player p, ClickAction action) {

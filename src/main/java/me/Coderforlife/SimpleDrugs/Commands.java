@@ -17,9 +17,9 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
+import me.Coderforlife.SimpleDrugs.GUI.SDRecipeInventory;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.SimpleDrugsEditor;
-import me.Coderforlife.SimpleDrugs.GUI.Framework.SDRecipeInventory;
 
 public class Commands implements CommandExecutor {
     private Main plugin = Main.plugin;
@@ -89,7 +89,7 @@ public class Commands implements CommandExecutor {
                     } else if(args[0].equalsIgnoreCase("list")) {
                         if(p.hasPermission("drugs.list")) {
                             p.sendMessage(plugin.getMessages().getHeader());
-                            for(Drug drug : Main.plugin.getDrugManager().getallDrugs()) {
+                            for(Drug drug : Main.plugin.getDrugManager().getItems().values()) {
                                 p.sendMessage(dash + drug.getDisplayname());
                             }
                         } else {
@@ -143,7 +143,7 @@ public class Commands implements CommandExecutor {
                     }
                 } else if(args.length == 2) {
                     if(args[0].equalsIgnoreCase("recipe")) {
-                        Drug drug = Main.plugin.getDrugManager().getDrug(args[1].toUpperCase());
+                        Drug drug = Main.plugin.getDrugManager().getItem(args[1].toUpperCase());
                         if(drug == null) {
                             p.sendMessage(plugin.getMessages().getPrefix() + "§e" + args[1] + " §cdoes not exist.");
                             return true;
@@ -212,7 +212,7 @@ public class Commands implements CommandExecutor {
                         }
                     } else if(args[0].equalsIgnoreCase("give")) {
                         if(p.hasPermission("drugs.give")) {
-                            for(Drug drugs : Main.plugin.getDrugManager().getallDrugs()) {
+                            for(Drug drugs : Main.plugin.getDrugManager().getItems().values()) {
                                 if(args[1].equalsIgnoreCase(drugs.getName())) {
                                     p.getInventory().addItem(drugs.getItem());
                                     p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', "&7You've been given " + drugs.getDisplayname()));
@@ -244,7 +244,7 @@ public class Commands implements CommandExecutor {
                 } else if(args.length == 3) {
                     if(args[0].equalsIgnoreCase("give")) {
                         if(p.hasPermission("durgs.give.others")) {
-                            for(Drug drugs : Main.plugin.getDrugManager().getallDrugs()) {
+                            for(Drug drugs : Main.plugin.getDrugManager().getItems().values()) {
                                 if(args[1].equalsIgnoreCase(drugs.getName())) {
                                     for(Player players : Bukkit.getOnlinePlayers()) {
                                         if(args[2].equalsIgnoreCase(players.getName())) {

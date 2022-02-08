@@ -9,14 +9,16 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.Coderforlife.SimpleDrugs.Crafting.CustomCraftingComponentManager;
 import me.Coderforlife.SimpleDrugs.Crafting.RecipeManager;
+import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.CCManager;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.RecipeChecker;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.BrewingRecipeListener;
-import me.Coderforlife.SimpleDrugs.DrugPlants.PlantItemListener;
 import me.Coderforlife.SimpleDrugs.Druging.DrugManager;
+import me.Coderforlife.SimpleDrugs.Druging.DrugRecipeManager;
 import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionListener;
 import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
+import me.Coderforlife.SimpleDrugs.Druging.DrugPlants.DrugSeedManager;
+import me.Coderforlife.SimpleDrugs.Druging.DrugPlants.PlantItemListener;
 import me.Coderforlife.SimpleDrugs.Events.CraftingEvent;
 import me.Coderforlife.SimpleDrugs.Events.DrugUseListener;
 import me.Coderforlife.SimpleDrugs.Events.InventoryListener;
@@ -43,7 +45,9 @@ public class Main extends JavaPlugin {
     private NamespacedKey craftingComponentName;
     
     private DrugManager drugManager;
-    private CustomCraftingComponentManager craftingManager;
+    private DrugRecipeManager drugRecipeManager;
+    private DrugSeedManager seedManager;
+    private CCManager craftingManager;
     private Settings settings;
     private Messages messages;
     private RecipeManager recipeManager;
@@ -110,6 +114,22 @@ public class Main extends JavaPlugin {
     	recipeManager = rm;
     }
     
+    public DrugRecipeManager getDrugRecipeManager() {
+    	return drugRecipeManager;
+    }
+    
+    public void setDrugRecipeManager(DrugRecipeManager drm) {
+    	drugRecipeManager = drm;
+    }
+    
+    public DrugSeedManager getDrugSeedManager() {
+    	return seedManager;
+    }
+    
+    public void setDrugSeedManager(DrugSeedManager dsm) {
+    	seedManager = dsm;
+    }
+    
     public DrugManager getDrugManager() {
     	return drugManager;
     }
@@ -118,11 +138,11 @@ public class Main extends JavaPlugin {
     	drugManager = dm;
     }
     
-    public CustomCraftingComponentManager getCraftingManager() {
+    public CCManager getCraftingManager() {
     	return craftingManager;
     }
     
-    public void setCraftingManager(CustomCraftingComponentManager cccm) {
+    public void setCraftingManager(CCManager cccm) {
     	craftingManager = cccm;
     }
     

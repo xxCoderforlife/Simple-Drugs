@@ -30,7 +30,7 @@ public class SettingNameListener implements Listener {
 			String name = ChatColor.translateAlternateColorCodes('&', e.getMessage());
 			String a = ChatColor.stripColor(name).replace(" ", "_");
 			
-			if(Main.plugin.getDrugManager().getDrug(a.toUpperCase()) != null) {
+			if(Main.plugin.getDrugManager().getItem(a.toUpperCase()) != null) {
 				p.sendMessage(ChatColor.RED + "A drug with that name already exists");
 				return;
 			}
@@ -49,7 +49,7 @@ public class SettingNameListener implements Listener {
 			String name = ChatColor.translateAlternateColorCodes('&', e.getMessage());
 			String a = ChatColor.stripColor(name).replace(" ", "_");
 			
-			if(Main.plugin.getCraftingManager().getByName(a.toUpperCase()) != null) {
+			if(Main.plugin.getCraftingManager().getItem(a.toUpperCase()) != null) {
 				p.sendMessage(ChatColor.RED + "A crafting component with that name already exists");
 				return;
 			}

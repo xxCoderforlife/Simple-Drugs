@@ -10,6 +10,8 @@ import me.Coderforlife.SimpleDrugs.Main;
 
 public class SDShaped extends SDRecipe {
 	
+	public SDShaped() {}
+	
 	public SDShaped(String name, ItemStack r) {
 		super(name, r);
 	}
