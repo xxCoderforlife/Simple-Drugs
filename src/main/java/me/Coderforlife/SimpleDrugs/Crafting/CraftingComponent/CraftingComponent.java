@@ -6,8 +6,10 @@ import org.bukkit.inventory.ItemStack;
 
 import com.google.gson.JsonObject;
 
+import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.SDCraftableItem;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
+import me.Coderforlife.SimpleDrugs.Util.AbstractSDCraftableManager;
 
 public class CraftingComponent implements SDCraftableItem {
 
@@ -63,6 +65,11 @@ public class CraftingComponent implements SDCraftableItem {
 	@Override
 	public String getNamespaceName() {
 		return "DrugCraftingComponent_" + name;
+	}
+
+	@Override
+	public AbstractSDCraftableManager<CraftingComponent> getManager() {
+		return Main.plugin.getCraftingManager();
 	}
 	
 }

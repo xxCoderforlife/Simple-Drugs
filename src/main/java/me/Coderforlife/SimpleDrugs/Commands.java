@@ -20,6 +20,7 @@ import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SDRecipeInventory;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.SimpleDrugsEditor;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.DrugMainMenu;
 
 public class Commands implements CommandExecutor {
     private Main plugin = Main.plugin;
@@ -138,6 +139,11 @@ public class Commands implements CommandExecutor {
                     }else if(args[0].equalsIgnoreCase("editor")){
                         if(p.hasPermission("drugs.editor")){
                         	SimpleDrugsEditor sde = new SimpleDrugsEditor();
+                    		sde.open(p);
+                        }
+                    }else if(args[0].equalsIgnoreCase("editortest")){
+                        if(p.hasPermission("drugs.editor")){
+                        	DrugMainMenu sde = new DrugMainMenu();
                     		sde.open(p);
                         }
                     }

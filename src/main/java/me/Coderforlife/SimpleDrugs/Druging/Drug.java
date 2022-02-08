@@ -22,6 +22,7 @@ import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.SDCraftableItem;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Druging.Util.DrugEffect;
+import me.Coderforlife.SimpleDrugs.Util.AbstractSDCraftableManager;
 
 public class Drug implements SDCraftableItem {
 
@@ -182,4 +183,9 @@ public class Drug implements SDCraftableItem {
     	return addictionLevel;
     }
 
+    @Override
+	public AbstractSDCraftableManager<Drug> getManager() {
+		return Main.plugin.getDrugManager();
+	}
+    
 }

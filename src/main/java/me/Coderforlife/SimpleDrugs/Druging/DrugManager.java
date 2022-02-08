@@ -79,6 +79,14 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
 		addItem(cc.getName(), cc);
 	}
 
+	@Override
+	public void removeItem(String name) {
+		super.removeItem(name);
+		
+		Main.plugin.getDrugRecipeManager().removeItem(name);
+		Main.plugin.getDrugSeedManager().removeItem(name);
+	}
+	
 	protected DrugLoadError canMake(String fileName, JsonObject jo) {
 		DrugLoadError dle = new DrugLoadError();
     	JsonFileInterpretter config = new JsonFileInterpretter(jo);
