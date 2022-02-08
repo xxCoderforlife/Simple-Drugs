@@ -23,10 +23,7 @@ public class Setup {
         // loadVault();
 
         Main.plugin.setRecipeManager(new RecipeManager());
-        
         Main.plugin.setCraftingManager(new CCManager());
-        //Main.plugin.getCraftingManager().registerAllRecipe();
-        
         Main.plugin.setDrugManager(new DrugManager());
         Main.plugin.setDrugSeedManager(new DrugSeedManager());
         Main.plugin.setDrugRecipeManager(new DrugRecipeManager());

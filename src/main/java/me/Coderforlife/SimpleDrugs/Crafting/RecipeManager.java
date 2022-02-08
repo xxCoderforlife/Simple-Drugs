@@ -3,17 +3,12 @@ package me.Coderforlife.SimpleDrugs.Crafting;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.DrugCraftingType;
@@ -22,7 +17,6 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.SDBrewingRecipe;
-import me.Coderforlife.SimpleDrugs.Util.CCMaterialConverter;
 
 public class RecipeManager {
 
@@ -157,111 +151,6 @@ public class RecipeManager {
 		default:
 			return null;
 		}
-	}
-	
-	public SDRecipe loadRecipe(String fileName, SDCraftableItem item, JsonObject jo, DrugCraftingType dct) {
-		switch(dct) {
-		case FURNACE:
-			ItemStack fItem = getItemForFurnace(fileName, jo);
-			if(fItem == null) return null;
-			
-			SDFurnace furnace = new SDFurnace("Simple-Drug_" + item.getNamespaceName(), item.getItem(), fItem, 0f, 90);
-			furnace.registerRecipe();
-			return furnace;
-		case SHAPED:
-			SDShaped shaped = new SDShaped("Simple-Drug_" + item.getNamespaceName(), item.getItem());
-			
-			List<ItemStack> mats = getItemsForShaped(fileName, jo);
-			if(mats == null) return null;
-			
-			for(int i = 0; i < mats.size(); i++) {
-				shaped.addItemStack(mats.get(i));
-			}
-			
-			shaped.registerRecipe();
-			return shaped;
-		case SHAPELESS:
-			SDShapeless shapeless = new SDShapeless("Simple-Drug_" + item.getNamespaceName(), item.getItem());
-			List<ItemStack> materials = getItemsForShapeless(fileName, jo);
-			
-			if(materials == null) return null;
-			
-			materials.forEach(e -> {
-				shapeless.addItemStack(e);
-			});
-			
-			shapeless.registerRecipe();
-			
-			return shapeless;
-		default:
-			return null;
-		}
-	}
-	
-	private ItemStack getItemForFurnace(String fileName, JsonObject jo) {
-		if(!jo.has("item")) {
-			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-			Bukkit.getConsoleSender().sendMessage("§c[ERROR] `Item` JsonObject Required In Recipe");
-			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
-			return null;
-		}
-		
-		return CCMaterialConverter.getCCOrMaterial(fileName, jo.get("item").getAsString());
-	}
-	
-	private List<ItemStack> getItemsForShaped(String fileName, JsonObject jo) {
-		List<ItemStack> materials = new ArrayList<>();
-		
-		if(hasNone(jo)) {
-			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Items Required In Recipe");
-			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
-			return null;
-		}
-		
-		for(int i = 1; i < 10; i++) {
-			if(!jo.has(String.valueOf(i))) {
-				materials.add(new ItemStack(Material.AIR));
-				continue;
-			}
-			
-			ItemStack item = CCMaterialConverter.getCCOrMaterial(fileName, jo.get(String.valueOf(i)).getAsString());
-			if(item == null) return null;
-			materials.add(item);
-		}
-		
-		return materials;
-	}
-	
-	private boolean hasNone(JsonObject jo) {
-		return (!jo.has("1") && !jo.has("2") && !jo.has("3") && !jo.has("4") && !jo.has("5") && !jo.has("6") && !jo.has("7") && !jo.has("8") && !jo.has("9"));
-	}
-	
-	private List<ItemStack> getItemsForShapeless(String fileName, JsonObject jo) {
-		List<ItemStack> materials = new ArrayList<>();
-	    
-		if(!jo.has("items") || !jo.get("items").isJsonArray()) {
-			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-			Bukkit.getConsoleSender().sendMessage("§c[ERROR] `items` JsonElement Required In Recipe OR `items` is not a JsonArray");
-			Bukkit.getConsoleSender().sendMessage("§c[ERROR] Skipping Recipe");
-			return null;
-		}
-		
-		JsonArray ja = jo.get("items").getAsJsonArray();
-		
-		for(int i = 0; i < ja.size(); i++) {
-    		ItemStack item = CCMaterialConverter.getCCOrMaterial(fileName, ja.get(i).getAsString());
-    		if(item == null) return null;
-    		materials.add(item);
-    	}
-		
-    	if(materials.size() > 9) {
-    		Bukkit.getConsoleSender().sendMessage("§c[ERROR] Error in: §7" + fileName);
-    		Bukkit.getConsoleSender().sendMessage("§c[ERROR] Materials added cannot be above 9");
-    		return null;
-    	}
-    	
-    	return materials;
 	}
 	
 }
