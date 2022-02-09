@@ -9,6 +9,7 @@ import java.io.Writer;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import org.bukkit.Bukkit;
 
@@ -38,8 +39,6 @@ public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 		typeAdapters.forEach((k, v) -> {
 			builder.registerTypeAdapter(k, v);
 		});
-		
-		loadFiles();
 	}
 	
 	public E getItem(String name) {
@@ -87,7 +86,7 @@ public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 		}
 	}
 	
-	private void loadFiles() {
+	public void loadFiles() {
 		for(File f : getMainFile().listFiles()) {
 			if(f.getName().endsWith(".json")) {
 				try {
@@ -107,6 +106,12 @@ public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 				}
 			}
 		}
+		
+		StringJoiner enabled = new StringJoiner(", ");
+    	for(E e : getItems().values()) {
+    		enabled.add(e.getName());
+    	}
+    	if(enabled.length() > 0) sendConsoleMessage("§6Enabled: §a" + enabled.toString().trim());
 	}
 	
 	public abstract void addOrUpdateItem(String name, InventoryAddons ad);

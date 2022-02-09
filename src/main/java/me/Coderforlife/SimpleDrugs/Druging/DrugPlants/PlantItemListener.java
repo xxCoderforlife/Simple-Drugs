@@ -34,6 +34,7 @@ public class PlantItemListener implements Listener {
 		// get the item meta and ensure that all values are present
 		ItemMeta im = is.getItemMeta();
 		if(im == null) return;
+		
 		PersistentDataContainer pdc = im.getPersistentDataContainer();
 		if(!pdc.has(Main.plugin.getDrugMain(), PersistentDataType.BYTE)) return;
 		if(pdc.get(Main.plugin.getDrugMain(), PersistentDataType.BYTE) != (byte)1) return;

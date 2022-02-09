@@ -49,7 +49,7 @@ public class DrugPlantItemAdapter implements JsonSerializer<DrugPlantItem>, Json
 		DrugPlantItem dpi = new DrugPlantItem(d, item, Material.FARMLAND, amount);
 		
 		rec.setName(dpi.getNamespaceName());
-		rec.setResult(item);
+		rec.setResult(dpi.makeItem());
 		
 		dpi.setRecipe(rec);
 		return dpi;

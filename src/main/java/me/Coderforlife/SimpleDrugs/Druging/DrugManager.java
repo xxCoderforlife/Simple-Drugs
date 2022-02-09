@@ -3,7 +3,6 @@ package me.Coderforlife.SimpleDrugs.Druging;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
 
 import javax.annotation.Nullable;
 
@@ -30,12 +29,6 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
 
 	public DrugManager() {
 		super(new File(Main.plugin.getDataFolder() + File.separator + "Drugs"));
-		
-		StringJoiner enabled = new StringJoiner(", ");
-    	for(Drug d : getItems().values()) {
-    		enabled.add(d.getName());
-    	}
-    	if(enabled.length() > 0) sendConsoleMessage("§6Enabled Drugs: §a" + enabled.toString().trim());
 	}
 
 	public void addOrUpdateItem(String n, InventoryAddons addons) {

@@ -33,9 +33,13 @@ public class Setup {
 
         Main.plugin.setRecipeManager(new RecipeManager());
         Main.plugin.setCraftingManager(new CCManager());
+        Main.plugin.getCraftingManager().loadFiles();
         Main.plugin.setDrugManager(new DrugManager());
+        Main.plugin.getDrugManager().loadFiles();
         Main.plugin.setDrugSeedManager(new DrugSeedManager());
+        Main.plugin.getDrugSeedManager().loadFiles();
         Main.plugin.setDrugRecipeManager(new DrugRecipeManager());
+        Main.plugin.getDrugRecipeManager().loadFiles();
         
         if(Main.plugin.getDrugManager().getItems().size() <= 0) {
         	loadDefaults();
