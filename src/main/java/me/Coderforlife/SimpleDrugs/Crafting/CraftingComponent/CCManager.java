@@ -17,7 +17,6 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.InventoryAddons;
 import me.Coderforlife.SimpleDrugs.Util.AbstractSDCraftableManager;
-import me.Coderforlife.SimpleDrugs.Util.JsonFileInterpretter;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
 import me.Coderforlife.SimpleDrugs.Util.GsonAdapaters.CraftingComponentAdapter;
 import me.Coderforlife.SimpleDrugs.Util.GsonAdapaters.ItemStackAdapter;
@@ -49,26 +48,25 @@ public class CCManager extends AbstractSDCraftableManager<CraftingComponent> {
 		saveFile(cc);
 	}
 
-	protected DrugLoadError canMake(String fileName, JsonObject jo) {
+	protected DrugLoadError canMake(String fileName, JsonObject config) {
 		DrugLoadError dle = new DrugLoadError();
-    	JsonFileInterpretter config = new JsonFileInterpretter(jo);
     	
-    	if(!config.contains("name")) {
+    	if(!config.has("name")) {
     		dle.addError("§c[ERROR] JSON File missing 'name'");
     		dle.unLoad();
     	}
     	
-    	if(!config.contains("type")) {
+    	if(!config.has("type")) {
     		dle.addError("§c[ERROR] JSON File missing 'type'");
     		dle.unLoad();
     	}
     	
-    	if(!config.contains("item")) {
+    	if(!config.has("item")) {
     		dle.addError("§c[ERROR] JSON File missing 'item'");
     		dle.unLoad();
     	}
     	
-    	if(!config.contains("recipe")) {
+    	if(!config.has("recipe")) {
     		dle.addError("§c[ERROR] JSON File missing 'recipe'");
     		dle.unLoad();
     	}

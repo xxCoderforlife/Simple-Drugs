@@ -19,7 +19,6 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.InventoryAddons;
 import me.Coderforlife.SimpleDrugs.Util.AbstractSDCraftableManager;
-import me.Coderforlife.SimpleDrugs.Util.JsonFileInterpretter;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
 import me.Coderforlife.SimpleDrugs.Util.GsonAdapaters.DrugPlantItemAdapter;
 import me.Coderforlife.SimpleDrugs.Util.GsonAdapaters.ItemStackAdapter;
@@ -64,26 +63,25 @@ public class DrugSeedManager extends AbstractSDCraftableManager<DrugPlantItem> {
 		saveFile(dpi);
 	}
 
-	protected DrugLoadError canMake(String fileName, JsonObject jo) {
+	protected DrugLoadError canMake(String fileName, JsonObject config) {
 		DrugLoadError dle = new DrugLoadError();
-    	JsonFileInterpretter config = new JsonFileInterpretter(jo);
     	
-    	if(!config.contains("drug")) {
+    	if(!config.has("drug")) {
     		dle.addError("§c[ERROR] JSON File missing 'drug'");
     		dle.unLoad();
     	}
     	
-    	if(!config.contains("type")) {
+    	if(!config.has("type")) {
     		dle.addError("§c[ERROR] JSON File missing 'type'");
     		dle.unLoad();
     	}
     	
-    	if(!config.contains("recipe")) {
+    	if(!config.has("recipe")) {
     		dle.addError("§c[ERROR] JSON File missing 'recipe'");
     		dle.unLoad();
     	}
     	
-    	if(!config.contains("seed-item")) {
+    	if(!config.has("seed-item")) {
     		dle.addError("§c[ERROR] JSON File missing 'seed-item'");
     		dle.unLoad();
     	}

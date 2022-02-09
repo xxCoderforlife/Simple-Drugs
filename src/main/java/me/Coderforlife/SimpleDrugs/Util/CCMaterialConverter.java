@@ -38,16 +38,4 @@ public class CCMaterialConverter {
 		return item.getType().toString().toUpperCase();
 	}
 	
-	public static String getCCOrMaterial(String name) {
-		Material m = Material.getMaterial(name.toUpperCase());
-		if(m == null) {
-			CraftingComponent cc = Main.plugin.getCraftingManager().getItem(name.toUpperCase());
-			if(cc == null) {
-				return null;
-			}
-			return cc.getName().toUpperCase();
-		}
-		return m.toString().toUpperCase();
-	}
-	
 }

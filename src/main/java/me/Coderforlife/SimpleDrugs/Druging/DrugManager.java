@@ -21,7 +21,6 @@ import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.InventoryAddons;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.InventoryPotionEffect;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.PotionEffectInventoryUtil;
 import me.Coderforlife.SimpleDrugs.Util.AbstractSDCraftableManager;
-import me.Coderforlife.SimpleDrugs.Util.JsonFileInterpretter;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
 import me.Coderforlife.SimpleDrugs.Util.GsonAdapaters.DrugAdapter;
 import me.Coderforlife.SimpleDrugs.Util.GsonAdapaters.DrugAdapters.DrugEffectAdapter;
@@ -90,16 +89,15 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
 		Main.plugin.getDrugSeedManager().removeItem(name);
 	}
 	
-	protected DrugLoadError canMake(String fileName, JsonObject jo) {
+	protected DrugLoadError canMake(String fileName, JsonObject config) {
 		DrugLoadError dle = new DrugLoadError();
-    	JsonFileInterpretter config = new JsonFileInterpretter(jo);
     	
-    	if(!config.contains("name")) {
+    	if(!config.has("name")) {
     		dle.addError("§c[ERROR] JSON File missing 'name'");
     		dle.unLoad();
     	}
     	
-    	if(!config.contains("item")) {
+    	if(!config.has("item")) {
     		dle.addError("§c[ERROR] JSON File missing 'item'");
     		dle.unLoad();
     	}
