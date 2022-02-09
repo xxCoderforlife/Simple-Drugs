@@ -79,6 +79,7 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
 		Drug cc = gson.fromJson(jo, Drug.class);
 		cc.setFile(fileName);
 		addItem(cc.getName().toUpperCase(), cc);
+		saveFile(cc);
 	}
 
 	@Override

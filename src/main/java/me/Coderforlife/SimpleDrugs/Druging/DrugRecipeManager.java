@@ -61,6 +61,7 @@ public class DrugRecipeManager extends AbstractSDCraftableManager<DrugRecipe> {
 		
 		d.setRecipe(rec);
 		rec.registerRecipe();
+		saveFile(cc);
 	}
 
 	@Override

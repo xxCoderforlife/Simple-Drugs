@@ -61,6 +61,7 @@ public class DrugSeedManager extends AbstractSDCraftableManager<DrugPlantItem> {
 		dpi.getRecipe().registerRecipe();
 		dpi.setFile(fileName);
 		addItem(dpi.getDrug().getName().toUpperCase(), dpi);
+		saveFile(dpi);
 	}
 
 	protected DrugLoadError canMake(String fileName, JsonObject jo) {

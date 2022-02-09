@@ -69,6 +69,15 @@ public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 	protected void saveFile(E clazz) {
 		Gson gson = builder.create();
 		String s = gson.toJson(clazz, clazz.getClass());
+		
+		File f = new File(clazz.getFile());
+		if(f.exists()) f.delete();
+		try {
+			f.createNewFile();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
 		try {
 			Writer writer = new FileWriter(clazz.getFile());
 			writer.write(s);

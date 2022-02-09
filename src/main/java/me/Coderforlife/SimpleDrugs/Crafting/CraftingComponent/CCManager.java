@@ -46,6 +46,7 @@ public class CCManager extends AbstractSDCraftableManager<CraftingComponent> {
 		cc.setFile(fileName);
 		addItem(cc.getName(), cc);
 		cc.getRecipe().registerRecipe();
+		saveFile(cc);
 	}
 
 	protected DrugLoadError canMake(String fileName, JsonObject jo) {

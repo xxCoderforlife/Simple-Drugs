@@ -78,19 +78,19 @@ public class Setup {
         Reader drugReader = new InputStreamReader(this.getClass().getResourceAsStream("/drugs.json"));
         JsonArray drugs = new Gson().fromJson(drugReader, JsonArray.class);
         for(JsonElement drug : drugs) {
-        	Main.plugin.getDrugManager().createFromJson(new File(Main.plugin.getDrugManager().getMainFile(), drug.getAsJsonObject().get("name") + ".json").getAbsolutePath(), drug.getAsJsonObject());
+        	Main.plugin.getDrugManager().createFromJson(new File(Main.plugin.getDrugManager().getMainFile(), drug.getAsJsonObject().get("name").getAsString() + ".json").getAbsolutePath(), drug.getAsJsonObject());
         }
         
         Reader drReader = new InputStreamReader(this.getClass().getResourceAsStream("/drugcrafting.json"));
         JsonArray drugRecipes = new Gson().fromJson(drReader, JsonArray.class);
         for(JsonElement recipe : drugRecipes) {
-        	Main.plugin.getDrugRecipeManager().createFromJson(new File(Main.plugin.getDrugManager().getMainFile(), recipe.getAsJsonObject().get("drug") + ".json").getAbsolutePath(), recipe.getAsJsonObject());
+        	Main.plugin.getDrugRecipeManager().createFromJson(new File(Main.plugin.getDrugRecipeManager().getMainFile(), recipe.getAsJsonObject().get("drug").getAsString() + ".json").getAbsolutePath(), recipe.getAsJsonObject());
         }
         
         Reader sReader = new InputStreamReader(this.getClass().getResourceAsStream("/seedcrafting.json"));
         JsonArray seeds = new Gson().fromJson(sReader, JsonArray.class);
         for(JsonElement seed : seeds) {
-        	Main.plugin.getDrugSeedManager().createFromJson(new File(Main.plugin.getDrugManager().getMainFile(), seed.getAsJsonObject().get("drug") + ".json").getAbsolutePath(), seed.getAsJsonObject());
+        	Main.plugin.getDrugSeedManager().createFromJson(new File(Main.plugin.getDrugSeedManager().getMainFile(), seed.getAsJsonObject().get("drug").getAsString() + ".json").getAbsolutePath(), seed.getAsJsonObject());
         }
         sendConsoleMessage(ChatColor.GREEN + "Default Drugs Created! Enjoy Simple-Drugs :D");
     }
