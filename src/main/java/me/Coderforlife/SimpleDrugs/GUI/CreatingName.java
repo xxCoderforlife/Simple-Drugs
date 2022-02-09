@@ -1,6 +1,6 @@
 package me.Coderforlife.SimpleDrugs.GUI;
 
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.SDObjectType;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SDObjectType;
 
 public class CreatingName {
 

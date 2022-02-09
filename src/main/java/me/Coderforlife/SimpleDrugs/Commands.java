@@ -19,7 +19,7 @@ import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SDRecipeInventory;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.DrugMainMenu;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugMainMenu;
 
 public class Commands implements CommandExecutor {
     private Main plugin = Main.plugin;

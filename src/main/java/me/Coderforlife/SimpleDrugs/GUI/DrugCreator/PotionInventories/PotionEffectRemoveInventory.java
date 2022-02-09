@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.PotionInventories;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.PotionInventories;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -6,9 +6,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingInventories.AbstractSDCInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.InventoryPotionEffect;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectInventoryUtil;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CraftingInventories.AbstractSDCInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.InventoryPotionEffect;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.PotionEffectInventoryUtil;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;

@@ -19,7 +19,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
 import me.Coderforlife.SimpleDrugs.Crafting.SDCraftableItem;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.InventoryAddons;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.InventoryAddons;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
 
 public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {

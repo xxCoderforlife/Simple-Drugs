@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator;
 
 import java.util.HashMap;
 
@@ -11,7 +11,7 @@ import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.CraftingComponent;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.DrugPlants.DrugPlantItem;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.SDObjectType;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SDObjectType;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;

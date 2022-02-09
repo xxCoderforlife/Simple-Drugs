@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util;
 
 import java.util.HashMap;
 import java.util.concurrent.Callable;
@@ -11,7 +11,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.ItemStack;
 
 import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingTypeSelector;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CraftingTypeSelector;
 import net.md_5.bungee.api.ChatColor;
 
 public class SettingNameListener implements Listener {

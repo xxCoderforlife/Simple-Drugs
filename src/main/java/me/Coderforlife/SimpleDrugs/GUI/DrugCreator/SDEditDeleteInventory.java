@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,11 +14,11 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.DrugPlants.DrugPlantItem;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingInventories.AbstractSDCInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingInventories.SDFurnaceCInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingInventories.SDShapedCInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingInventories.SDShapelessCInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.SDObjectType;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CraftingInventories.AbstractSDCInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CraftingInventories.SDFurnaceCInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CraftingInventories.SDShapedCInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CraftingInventories.SDShapelessCInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SDObjectType;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;

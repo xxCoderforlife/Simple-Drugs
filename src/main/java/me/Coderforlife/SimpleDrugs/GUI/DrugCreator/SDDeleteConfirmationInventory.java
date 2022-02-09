@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

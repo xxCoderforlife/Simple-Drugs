@@ -1,10 +1,10 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util;
 
 import org.bukkit.entity.Player;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingInventories.AbstractSDCInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CraftingInventories.AbstractSDCInventory;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;

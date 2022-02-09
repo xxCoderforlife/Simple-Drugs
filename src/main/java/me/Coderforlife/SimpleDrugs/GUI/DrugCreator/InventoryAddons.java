@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,14 +15,14 @@ import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.DrugCraftingType;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.DrugPlants.DrugPlantItem;
 import me.Coderforlife.SimpleDrugs.Druging.Util.DrugEffect;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingInventories.AbstractSDCInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.PotionInventories.PotionEffectRemoveInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.PotionInventories.PotionSelectorInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.PotionInventories.SetAddictionInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.DrugSelectorInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.InventoryPotionEffect;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectInventoryUtil;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.SDObjectType;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CraftingInventories.AbstractSDCInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.PotionInventories.PotionEffectRemoveInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.PotionInventories.PotionSelectorInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.PotionInventories.SetAddictionInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.DrugSelectorInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.InventoryPotionEffect;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.PotionEffectInventoryUtil;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SDObjectType;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import net.md_5.bungee.api.ChatColor;

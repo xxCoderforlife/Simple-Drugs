@@ -17,7 +17,7 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.InventoryAddons;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.InventoryAddons;
 import me.Coderforlife.SimpleDrugs.Util.AbstractSDCraftableManager;
 import me.Coderforlife.SimpleDrugs.Util.JsonFileInterpretter;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;

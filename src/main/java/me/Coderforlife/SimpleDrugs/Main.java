@@ -25,8 +25,8 @@ import me.Coderforlife.SimpleDrugs.Events.InventoryListener;
 import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
 import me.Coderforlife.SimpleDrugs.Events.PlayerRespawn;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.SDObjectType;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.SettingNameListener;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SDObjectType;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SettingNameListener;
 import me.Coderforlife.SimpleDrugs.Util.Messages;
 import net.md_5.bungee.api.ChatColor;
 

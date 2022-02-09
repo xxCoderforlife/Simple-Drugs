@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingInventories;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CraftingInventories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.DrugCraftingType;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.SDObjectType;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SDObjectType;
 import net.md_5.bungee.api.ChatColor;
 
 public class SDShapelessCInventory extends AbstractSDCInventory {
