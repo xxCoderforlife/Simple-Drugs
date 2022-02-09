@@ -55,7 +55,7 @@ public class DrugMainMenu extends InventoryUI {
 		addButton(new InventoryButton(Material.ANVIL, "&b&oEdit A Drug", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				if(Main.plugin.getDrugManager().getItems().isEmpty()) return;
+				if(Main.plugin.getDrugManager().getItems().size() == 0) return;
 				SDEditDeleteInventory<Drug> sedi = new SDEditDeleteInventory<Drug>(Main.plugin.getDrugManager().getItems().values(), true);
 				sedi.open(p);
 			}
@@ -64,7 +64,7 @@ public class DrugMainMenu extends InventoryUI {
 		addButton(new InventoryButton(Material.BARRIER, "&4&o&lDELETE A DRUG", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				if(Main.plugin.getDrugManager().getItems().isEmpty()) return;
+				if(Main.plugin.getDrugManager().getItems().size() == 0) return;
 				SDEditDeleteInventory<Drug> sedi = new SDEditDeleteInventory<Drug>(Main.plugin.getDrugManager().getItems().values(), false);
 				sedi.open(p);
 			}
@@ -84,7 +84,7 @@ public class DrugMainMenu extends InventoryUI {
 		addButton(new InventoryButton(Material.ANVIL, "&b&oEdit A Seed", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				if(Main.plugin.getDrugManager().getItems().isEmpty()) return;
+				if(Main.plugin.getDrugSeedManager().getItems().size() == 0) return;
 				SDEditDeleteInventory<DrugPlantItem> sedi = new SDEditDeleteInventory<DrugPlantItem>(Main.plugin.getDrugSeedManager().getItems().values(), true);
 				sedi.open(p);
 			}
@@ -93,7 +93,7 @@ public class DrugMainMenu extends InventoryUI {
 		addButton(new InventoryButton(Material.BARRIER, "&4&o&lDELETE A SEED", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				if(Main.plugin.getDrugSeedManager().getItems().isEmpty()) return;
+				if(Main.plugin.getDrugSeedManager().getItems().size() == 0) return;
 				SDEditDeleteInventory<DrugPlantItem> sedi = new SDEditDeleteInventory<DrugPlantItem>(Main.plugin.getDrugSeedManager().getItems().values(), false);
 				sedi.open(p);
 			}
@@ -113,7 +113,7 @@ public class DrugMainMenu extends InventoryUI {
 		addButton(new InventoryButton(Material.ANVIL, "&b&oEdit A Crafting Component", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				if(Main.plugin.getCraftingManager().getItems().isEmpty()) return;
+				if(Main.plugin.getCraftingManager().getItems().size() == 0) return;
 				SDEditDeleteInventory<CraftingComponent> sedi = new SDEditDeleteInventory<CraftingComponent>(Main.plugin.getCraftingManager().getItems().values(), true);
 				sedi.open(p);
 			}
@@ -122,7 +122,7 @@ public class DrugMainMenu extends InventoryUI {
 		addButton(new InventoryButton(Material.BARRIER, "&4&o&lDELETE A CRAFTING COMPONENT", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				if(Main.plugin.getCraftingManager().getItems().isEmpty()) return;
+				if(Main.plugin.getCraftingManager().getItems().size() == 0) return;
 				SDEditDeleteInventory<CraftingComponent> sedi = new SDEditDeleteInventory<CraftingComponent>(Main.plugin.getCraftingManager().getItems().values(), false);
 				sedi.open(p);
 			}
