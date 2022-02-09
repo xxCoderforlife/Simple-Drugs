@@ -147,7 +147,7 @@ public class Drug implements SDCraftableItem {
     	fileName = s;
     }
 
-    public String getDisplayname() {
+    public String getDisplayName() {
         return displayname;
     }
 

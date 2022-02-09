@@ -1,10 +1,11 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.SubInventories;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.PotionInventories;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingInventories.AbstractSDCInventory;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;
@@ -12,11 +13,11 @@ import net.md_5.bungee.api.ChatColor;
 
 public class SetAddictionInventory extends InventoryUI {
 
-	private AbstractDrugCraftingInventory in;
+	private AbstractSDCInventory asdci;
 	
-	public SetAddictionInventory(AbstractDrugCraftingInventory pesi) {
+	public SetAddictionInventory(AbstractSDCInventory inv) {
 		super(18, ChatColor.translateAlternateColorCodes('&', "&6&lSet Addication Level"));
-		in = pesi;
+		asdci = inv;
 		
 		addNullButtons();
 		
@@ -24,7 +25,7 @@ public class SetAddictionInventory extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				close(p);
-				pesi.open(p);
+				asdci.open(p);
 			}
 		}, 17);
 		
@@ -52,9 +53,11 @@ public class SetAddictionInventory extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				close(p);
-				in.setAddLevel(t);
-				in.updateAddictionButton();
-				in.open(p);
+				if(asdci.getAddons().getOptionValues().containsKey("AddictionLevel")) asdci.getAddons().getOptionValues().remove("AddictionLevel");
+				asdci.getAddons().getOptionValues().put("AddictionLevel", t);
+				asdci.getAddons().updateDrugButtons();
+				asdci.updateAddons();
+				asdci.open(p);
 			}
 		};
 		return ib;

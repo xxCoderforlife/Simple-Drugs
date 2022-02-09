@@ -116,7 +116,7 @@ public class BagOfDrugsGUI implements Listener {
                 p.getInventory().addItem(drug);
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
                 p.sendMessage(plugin.getMessages().getPrefix() + 
-                ChatColor.translateAlternateColorCodes('&', "You've been given " + d.getDisplayname()));
+                ChatColor.translateAlternateColorCodes('&', "You've been given " + d.getDisplayName()));
                 
             }else if(ev.getClick() == ClickType.SHIFT_LEFT){
                     p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);

@@ -12,6 +12,7 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.Util.DrugRecipe;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.InventoryAddons;
 import me.Coderforlife.SimpleDrugs.Util.AbstractSDCraftableManager;
 import me.Coderforlife.SimpleDrugs.Util.JsonFileInterpretter;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
@@ -40,7 +41,7 @@ public class DrugRecipeManager extends AbstractSDCraftableManager<DrugRecipe> {
 	}
 
 	@Override
-	protected void createFromJson(String fileName, JsonObject jo) {
+	public void createFromJson(String fileName, JsonObject jo) {
 		Gson gson = builder.create();
 		DrugRecipe cc = gson.fromJson(jo, DrugRecipe.class);
 		cc.setFile(fileName);
@@ -83,6 +84,10 @@ public class DrugRecipeManager extends AbstractSDCraftableManager<DrugRecipe> {
     	}
     	
     	return dle;
+	}
+
+	public void addOrUpdateItem(String name, InventoryAddons ad) {
+		return;
 	}
 	
 }

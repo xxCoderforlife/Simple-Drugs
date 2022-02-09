@@ -19,6 +19,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
 import me.Coderforlife.SimpleDrugs.Crafting.SDCraftableItem;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.InventoryAddons;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
 
 public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
@@ -99,9 +100,11 @@ public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 		}
 	}
 	
+	public abstract void addOrUpdateItem(String name, InventoryAddons ad);
 	protected abstract void registerTypeAdapters();
-	protected abstract void createFromJson(String fileName, JsonObject jo);
+	public abstract void createFromJson(String fileName, JsonObject jo);
 	protected abstract DrugLoadError canMake(String fileName, JsonObject jo);
+	
 	
 	protected void sendConsoleMessage(String message) {
         Bukkit.getConsoleSender().sendMessage(message);

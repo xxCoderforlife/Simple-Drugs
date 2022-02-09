@@ -69,7 +69,7 @@ public class SDRecipeInventory implements Listener {
         }
 
         if (drug.getRecipe() instanceof SDShaped) {
-            inv = Bukkit.createInventory(null, InventoryType.WORKBENCH, drug.getDisplayname() +
+            inv = Bukkit.createInventory(null, InventoryType.WORKBENCH, drug.getDisplayName() +
             ChatColor.translateAlternateColorCodes('&', " &6&lRecipe"));
             // ArrayList<ItemStack> stack = new ArrayList<>();
 
@@ -97,7 +97,7 @@ public class SDRecipeInventory implements Listener {
             ItemStack charcoal = new ItemStack(Material.CHARCOAL);
             ItemStack blaze = new ItemStack(Material.BLAZE_POWDER);
             ItemStack tool = new ItemStack(Material.WOODEN_PICKAXE);
-            inv = Bukkit.createInventory(null, InventoryType.FURNACE, drug.getDisplayname() + 
+            inv = Bukkit.createInventory(null, InventoryType.FURNACE, drug.getDisplayName() + 
                     ChatColor.translateAlternateColorCodes('&', " &6&lRecipe"));
             SDFurnace recipe = (SDFurnace) drug.getRecipe();
             inv.setItem(0, recipe.getItems().get(0));
@@ -135,7 +135,7 @@ public class SDRecipeInventory implements Listener {
             p.openInventory(inv);
         }
         if(drug.getRecipe() instanceof SDBrewingRecipe){
-            inv = Bukkit.createInventory(null, InventoryType.BREWING,drug.getDisplayname() + 
+            inv = Bukkit.createInventory(null, InventoryType.BREWING,drug.getDisplayName() + 
             ChatColor.translateAlternateColorCodes('&', "&6&l Recipe"));
             if (players.contains(p.getUniqueId()))
                 return;
@@ -172,7 +172,7 @@ public class SDRecipeInventory implements Listener {
         Player p = (Player) ev.getWhoClicked();
         if(ev.getCurrentItem().equals(drug.getItem())){
             if(p.getGameMode() == GameMode.CREATIVE){
-                p.sendMessage(plugin.getMessages().getPrefix() + "You crafted " + drug.getDisplayname());
+                p.sendMessage(plugin.getMessages().getPrefix() + "You crafted " + drug.getDisplayName());
                 p.getInventory().addItem(drug.getItem());
                 p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, (float) 1.0, (float) 1.0);
                 p.closeInventory();
@@ -182,12 +182,12 @@ public class SDRecipeInventory implements Listener {
                 for(ItemStack s : drug.getRecipe().getItems()){
                     removeInventoryItems(p.getInventory(), s.getType(), 1);
                 }
-                p.sendMessage(plugin.getMessages().getPrefix() + "You crafted " + drug.getDisplayname());
+                p.sendMessage(plugin.getMessages().getPrefix() + "You crafted " + drug.getDisplayName());
                 p.getInventory().addItem(drug.getItem());
                 p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, (float) 1.0, (float) 1.0);
                 p.closeInventory();
             }else{
-                p.sendMessage(plugin.getMessages().getPrefix() + "You can't craft " + drug.getDisplayname());
+                p.sendMessage(plugin.getMessages().getPrefix() + "You can't craft " + drug.getDisplayName());
                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, (float) 1.0, (float) 1.0);
 
             }

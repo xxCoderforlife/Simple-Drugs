@@ -9,6 +9,7 @@ public interface SDCraftableItem {
 
 	public String getNamespaceName();
 	public ItemStack getItem();
+	public String getDisplayName();
 	public String getFile();
 	public void setFile(String s);
 	public String getName();

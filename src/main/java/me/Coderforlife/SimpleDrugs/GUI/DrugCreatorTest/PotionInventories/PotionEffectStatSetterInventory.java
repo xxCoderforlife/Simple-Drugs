@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.SubInventories;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.PotionInventories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.InventoryPotionEffect;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingInventories.AbstractSDCInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.InventoryPotionEffect;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectInventoryUtil;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;
@@ -29,7 +31,7 @@ public class PotionEffectStatSetterInventory extends InventoryUI {
 	private List<InventoryButton> timeBtns;
 	private List<InventoryButton> intBtns;
 	
-	public PotionEffectStatSetterInventory(PotionEffectType pet, AbstractDrugCraftingInventory pesi) {
+	public PotionEffectStatSetterInventory(PotionEffectType pet, AbstractSDCInventory inv) {
 		super(27, ChatColor.translateAlternateColorCodes('&', "&6&lAdd: " + ChatColor.GREEN + pet.getName()));
 		
 		addInfoSigns();
@@ -48,7 +50,7 @@ public class PotionEffectStatSetterInventory extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				close(p);
-				pesi.open(p);
+				inv.open(p);
 			}
 		}, 18);
 		
@@ -56,10 +58,12 @@ public class PotionEffectStatSetterInventory extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				if(time == 0 || inte == 0) return;
-				pesi.getPotionEffects().getPotionEffects().add(new InventoryPotionEffect(pet, time, inte));
+				
+				((PotionEffectInventoryUtil)inv.getAddons().getOptionValues().get("DrugEffects")).getPotionEffects().add(new InventoryPotionEffect(pet, time, inte));
 				close(p);
-				pesi.updateEffectsButton();
-				pesi.open(p);
+				inv.getAddons().updateDrugButtons();
+				inv.updateAddons();
+				inv.open(p);
 			}
 		}, 26);
 		

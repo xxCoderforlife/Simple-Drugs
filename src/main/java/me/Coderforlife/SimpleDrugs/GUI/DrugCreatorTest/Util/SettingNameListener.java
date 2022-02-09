@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreator;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util;
 
 import java.util.HashMap;
 import java.util.concurrent.Callable;
@@ -11,9 +11,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.ItemStack;
 
 import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.CraftingComponent.CCCreatorInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.DrugCreatorInventory;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.PotionEffectInventoryUtil;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingTypeSelector;
 import net.md_5.bungee.api.ChatColor;
 
 public class SettingNameListener implements Listener {
@@ -24,7 +22,7 @@ public class SettingNameListener implements Listener {
 		if(!Main.plugin.getCreatingName().containsKey(p.getUniqueId())) return;
 		e.setCancelled(true);
 		
-		if(Main.plugin.getCreatingName().get(p.getUniqueId()).equalsIgnoreCase("drug")) {
+		if(Main.plugin.getCreatingName().get(p.getUniqueId()).equals(SDObjectType.DRUG)) {
 			Main.plugin.getCreatingName().remove(p.getUniqueId());
 			
 			String name = ChatColor.translateAlternateColorCodes('&', e.getMessage());
@@ -35,15 +33,15 @@ public class SettingNameListener implements Listener {
 				return;
 			}
 			
-			Bukkit.getScheduler().callSyncMethod(Main.plugin, new Callable<DrugCreatorInventory>() {
+			Bukkit.getScheduler().callSyncMethod(Main.plugin, new Callable<CraftingTypeSelector>() {
 				@Override
-				public DrugCreatorInventory call() throws Exception {
-					DrugCreatorInventory dci = new DrugCreatorInventory(name, new PotionEffectInventoryUtil(), new HashMap<Integer, ItemStack>(), 0.1, null);
-					dci.open(p);
-					return dci;
+				public CraftingTypeSelector call() throws Exception {
+					CraftingTypeSelector cts = new CraftingTypeSelector(name, null, SDObjectType.DRUG, new HashMap<Integer, ItemStack>(), null);
+					cts.open(p);
+					return cts;
 				}
 			});
-		} else if(Main.plugin.getCreatingName().get(p.getUniqueId()).equalsIgnoreCase("cc")) {
+		} else if(Main.plugin.getCreatingName().get(p.getUniqueId()).equals(SDObjectType.CC)) {
 			Main.plugin.getCreatingName().remove(p.getUniqueId());
 			
 			String name = ChatColor.translateAlternateColorCodes('&', e.getMessage());
@@ -54,12 +52,12 @@ public class SettingNameListener implements Listener {
 				return;
 			}
 			
-			Bukkit.getScheduler().callSyncMethod(Main.plugin, new Callable<CCCreatorInventory>() {
+			Bukkit.getScheduler().callSyncMethod(Main.plugin, new Callable<CraftingTypeSelector>() {
 				@Override
-				public CCCreatorInventory call() throws Exception {	
-					CCCreatorInventory dci = new CCCreatorInventory(name, new HashMap<Integer, ItemStack>(), null);
-					dci.open(p);
-					return dci;
+				public CraftingTypeSelector call() throws Exception {
+					CraftingTypeSelector cts = new CraftingTypeSelector(name, null, SDObjectType.CC, new HashMap<Integer, ItemStack>(), null);
+					cts.open(p);
+					return cts;
 				}
 			});
 		}

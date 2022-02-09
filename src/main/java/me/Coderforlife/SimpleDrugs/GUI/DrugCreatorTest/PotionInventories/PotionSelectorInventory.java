@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.SubInventories;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.PotionInventories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +10,15 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingInventories.AbstractSDCInventory;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;
 import net.md_5.bungee.api.ChatColor;
 
-public class PotionEffectSelectorInventory extends InventoryUI {
-
-	public PotionEffectSelectorInventory(AbstractDrugCraftingInventory pesi) {
+public class PotionSelectorInventory extends InventoryUI {
+	
+	public PotionSelectorInventory(AbstractSDCInventory inv) {
 		super(36, ChatColor.translateAlternateColorCodes('&', "&7&lSelect Potion Type"));
 		
 		List<PotionEffectType> allPotionEffects = new ArrayList<>();
@@ -37,7 +38,7 @@ public class PotionEffectSelectorInventory extends InventoryUI {
 				@Override
 				public void onPlayerClick(Player p, ClickAction action) {
 					close(p);
-					PotionEffectStatSetterInventory pessi = new PotionEffectStatSetterInventory(pet, pesi);
+					PotionEffectStatSetterInventory pessi = new PotionEffectStatSetterInventory(pet, inv);
 					pessi.open(p);
 				}
 			}, i);
@@ -55,7 +56,7 @@ public class PotionEffectSelectorInventory extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				close(p);
-				pesi.open(p);
+				inv.open(p);
 			}
 		}, 35);
 		

@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util;
 
 import org.bukkit.potion.PotionEffectType;
 

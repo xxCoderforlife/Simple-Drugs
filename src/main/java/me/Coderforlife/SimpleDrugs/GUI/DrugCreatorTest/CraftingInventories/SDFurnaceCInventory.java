@@ -1,25 +1,38 @@
 package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingInventories;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.InventoryOptionButton;
+import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.DrugCraftingType;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.SDObjectType;
 import net.md_5.bungee.api.ChatColor;
 
 public class SDFurnaceCInventory extends AbstractSDCInventory {
 
-	public SDFurnaceCInventory(String name, Map<Integer, ItemStack> i, Map<Integer, InventoryOptionButton> options, Map<Integer, Object> optionVals) {
-		super(ChatColor.translateAlternateColorCodes('&', "&6&lCreate Furnace Recipe"), name, i, options, optionVals);
+	public SDFurnaceCInventory(String name, Map<Integer, ItemStack> i) {
+		super(ChatColor.translateAlternateColorCodes('&', "&6&lCreate Furnace Recipe"), name, i);
 	}
 
 	public void handleAccept(Player p) {
+		if(getInventory().getItem(4) == null || getInventory().getItem(4).getType().equals(Material.AIR)) return;
+		if(getInventory().getItem(17) == null || getInventory().getItem(17).getType().equals(Material.AIR)) return;
+		getAddons().getOptionValues().put("ResultMaterial", getInventory().getItem(17));
+		getAddons().getOptionValues().put("Recipe", getRecipe());
+		getAddons().getOptionValues().put("RecipeType", DrugCraftingType.FURNACE);
 		close(p);
-	}
-
-	public void handleUpdate(int i) {
-		
+		if(getType().equals(SDObjectType.DRUG)) {
+			Main.plugin.getDrugManager().addOrUpdateItem(getName(), getAddons());
+		} else if(getType().equals(SDObjectType.CC)) {
+			Main.plugin.getCraftingManager().addOrUpdateItem(getName(), getAddons());
+		} else if(getType().equals(SDObjectType.SEED)) {
+			Main.plugin.getDrugSeedManager().addOrUpdateItem(getName(), getAddons());
+		}
 	}
 
 	public void setCraftingSlots() {
@@ -30,6 +43,12 @@ public class SDFurnaceCInventory extends AbstractSDCInventory {
 		addNullItem(14);
 		addNullItem(21);
 		addNullItem(23);
+	}
+
+	public List<ItemStack> getRecipe() {
+		List<ItemStack> materials = new ArrayList<>();
+		materials.add(getInventory().getItem(4));
+		return materials;
 	}
 	
 }

@@ -44,7 +44,7 @@ public class CraftingComponentAdapter implements JsonSerializer<CraftingComponen
 		}
 		
 		rec.setResult(item);
-		CraftingComponent cc = new CraftingComponent(name);
+		CraftingComponent cc = new CraftingComponent(name, item.getItemMeta().getDisplayName(), item);
 		rec.setName(cc.getNamespaceName());
 		cc.setRecipe(rec);
 		return cc;

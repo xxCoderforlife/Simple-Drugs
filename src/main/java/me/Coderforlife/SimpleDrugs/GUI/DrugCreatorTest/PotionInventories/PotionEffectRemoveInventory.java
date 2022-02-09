@@ -1,4 +1,4 @@
-package me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.SubInventories;
+package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.PotionInventories;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -6,7 +6,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.InventoryPotionEffect;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingInventories.AbstractSDCInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.InventoryPotionEffect;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectInventoryUtil;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;
@@ -14,10 +16,10 @@ import net.md_5.bungee.api.ChatColor;
 
 public class PotionEffectRemoveInventory extends InventoryUI {
 
-	public PotionEffectRemoveInventory(AbstractDrugCraftingInventory pesi) {
+	public PotionEffectRemoveInventory(AbstractSDCInventory asdci) {
 		super(36, ChatColor.translateAlternateColorCodes('&', "&4&lRemove Potion Effect"));
 		
-		for(InventoryPotionEffect ipe : pesi.getPotionEffects().getPotionEffects()) {
+		for(InventoryPotionEffect ipe : ((PotionEffectInventoryUtil)asdci.getAddons().getOptionValues().get("DrugEffects")).getPotionEffects()) {
 			ItemStack item = new ItemStack(Material.POTION);
 			PotionMeta pm = (PotionMeta)item.getItemMeta();
 			pm.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&b&l" + ipe.getType().getName()));
@@ -27,10 +29,11 @@ public class PotionEffectRemoveInventory extends InventoryUI {
 			addButton(new InventoryButton(item) {
 				@Override
 				public void onPlayerClick(Player p, ClickAction action) {
-					pesi.getPotionEffects().getPotionEffects().remove(ipe);
+					((PotionEffectInventoryUtil)asdci.getAddons().getOptionValues().get("DrugEffects")).getPotionEffects().remove(ipe);
 					close(p);
-					pesi.updateEffectsButton();
-					pesi.open(p);
+					asdci.getAddons().updateDrugButtons();
+					asdci.updateAddons();
+					asdci.open(p);
 				}
 			});
 		}
@@ -39,7 +42,7 @@ public class PotionEffectRemoveInventory extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				close(p);
-				pesi.open(p);
+				asdci.open(p);
 			}
 		}, 35);
 		

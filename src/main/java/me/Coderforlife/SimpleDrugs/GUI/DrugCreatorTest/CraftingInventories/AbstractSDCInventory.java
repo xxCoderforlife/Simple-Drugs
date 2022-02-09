@@ -9,7 +9,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.InventoryOptionButton;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.CraftingTypeSelector;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.InventoryAddons;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.SDObjectType;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;
@@ -18,32 +20,25 @@ import net.md_5.bungee.api.ChatColor;
 public abstract class AbstractSDCInventory extends InventoryUI {
 
 	private Map<Integer, ItemStack> items;
-	private Map<Integer, InventoryOptionButton> optionBtns;
-	private Map<Integer, Object> optionValues;
+	private InventoryAddons inventoryAddons;
 	private String name;
+	private SDObjectType objectType;
 	
-	public AbstractSDCInventory(String title, String n, Map<Integer, ItemStack> i, Map<Integer, InventoryOptionButton> options, Map<Integer, Object> optionVals) {
+	public AbstractSDCInventory(String title, String n, Map<Integer, ItemStack> i) {
 		super(27, title);
 		setShouldRemove(false);
 		items = i;
-		optionBtns = options;
-		optionValues = optionVals;
 		name = n;
 		addNullItems();
 		reApplyItems();
 		setCraftingSlots();
 		
-		if(optionBtns != null && !optionBtns.isEmpty()) {
-			optionBtns.forEach((k, v) -> {
-				addButton(v.getButton(), k);
-			});
-		}
-		
 		addButton(new InventoryButton(Material.FEATHER, "&6&lChange Crafting Type", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				close(p);
-				// TODO: Back to editor
+				CraftingTypeSelector cts = new CraftingTypeSelector(n, inventoryAddons.getItem(), objectType, i, inventoryAddons.getCraftingType());
+				cts.open(p);
 			}
 		}, 11);
 		
@@ -65,23 +60,55 @@ public abstract class AbstractSDCInventory extends InventoryUI {
 	}
 	
 	public abstract void handleAccept(Player p);
-	public abstract void handleUpdate(int i);
 	public abstract void setCraftingSlots();
+	public abstract List<ItemStack> getRecipe();
+	
+	public void updateAddons() {
+		if(!inventoryAddons.getOptionalButtons().isEmpty()) {
+			inventoryAddons.getOptionalButtons().forEach((k, v) -> {
+				clearSlot(k);
+				addButton(v, k);
+			});
+		}
+		updateInventory();
+	}
+	
+	public void loadAndSetInventoryAddon(InventoryAddons ai) {
+		inventoryAddons = ai;
+		if(!inventoryAddons.getOptionalButtons().isEmpty()) {
+			inventoryAddons.getOptionalButtons().forEach((k, v) -> {
+				clearSlot(k);
+				addButton(v, k);
+			});
+		}
+		
+		updateInventory();
+	}
+	
+	public SDObjectType getType() {
+		return objectType;
+	}
+	
+	public void setType(SDObjectType oType) {
+		objectType = oType;
+	}
+	
+	public InventoryAddons getAddons() {
+		return inventoryAddons;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	protected boolean allBlank() {
+		return isSlotNull(3) && isSlotNull(4) && isSlotNull(5)
+				 && isSlotNull(12) && isSlotNull(13) && isSlotNull(14)
+						 && isSlotNull(21) && isSlotNull(22) && isSlotNull(23);
+	}
 	
 	protected boolean isSlotNull(int i) {
 		return getInventory().getItem(i) == null || getInventory().getItem(i).getType().equals(Material.AIR);
-	}
-	
-	protected void updateOptionButton(int i) {
-		clearSlot(i);
-		reApplyItems();
-		handleUpdate(i);
-	}
-	
-	private void reApplyItems() {
-		items.forEach((k, v) -> {
-			getInventory().setItem(k, v);
-		});
 	}
 	
 	protected void addNullItem(int i) {
@@ -91,6 +118,13 @@ public abstract class AbstractSDCInventory extends InventoryUI {
 		
 		addButton(ib, i);
 	}
+	
+	private void reApplyItems() {
+		items.forEach((k, v) -> {
+			getInventory().setItem(k, v);
+		});
+	}
+	
 	
 	private void addNullItems() {
 		addNullItem(0);

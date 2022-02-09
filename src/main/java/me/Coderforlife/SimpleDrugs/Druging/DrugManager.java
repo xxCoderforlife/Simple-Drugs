@@ -2,6 +2,7 @@ package me.Coderforlife.SimpleDrugs.Druging;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
 import javax.annotation.Nullable;
@@ -12,11 +13,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.DrugCraftingType;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Druging.Util.DrugEffect;
 import me.Coderforlife.SimpleDrugs.Druging.Util.DrugRecipe;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.PotionUtil.InventoryPotionEffect;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugCraftingInventories.SubInventories.AbstractDrugCraftingInventory;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.InventoryAddons;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.InventoryPotionEffect;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.PotionEffectInventoryUtil;
 import me.Coderforlife.SimpleDrugs.Util.AbstractSDCraftableManager;
 import me.Coderforlife.SimpleDrugs.Util.JsonFileInterpretter;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
@@ -36,47 +39,46 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
     	if(enabled.length() > 0) sendConsoleMessage("§6Enabled Drugs: §a" + enabled.toString().trim());
 	}
 
-	public void addDrug(String n, ItemStack i, AbstractDrugCraftingInventory peiu) {
+	public void addOrUpdateItem(String n, InventoryAddons addons) {
 		n = ChatColor.translateAlternateColorCodes('&', n);
     	String disName = n;
     	String name = ChatColor.stripColor(n).replaceAll(" ", "_");
     	ArrayList<DrugEffect> drugEffects = new ArrayList<>();
-    	for(InventoryPotionEffect ipe : peiu.getPotionEffects().getPotionEffects()) {
+    	for(InventoryPotionEffect ipe : ((PotionEffectInventoryUtil)addons.getOptionValues().get("DrugEffects")).getPotionEffects()) {
     		drugEffects.add(new DrugEffect(ipe.getType(), ipe.getTime(), ipe.getIntensity()));
     	}
     	String permission = "drugs.use." + name.toLowerCase();
-    	Double addLevel = peiu.getAddLevel();
+    	Double addLevel = (Double) addons.getOptionValues().get("AddictionLevel");
     	
-    	Drug d = new Drug(name.toUpperCase(), disName, i.getType(), drugEffects, permission, addLevel);
+    	Drug d = new Drug(name, disName, ((ItemStack)addons.getOptionValues().get("ResultMaterial")).getType(), drugEffects, permission, addLevel);
     	d.setFile(new File(getMainFile(), name + ".json").getAbsolutePath());
     	
-    	if(getItems().containsKey(name.toUpperCase())) {
-    		getItems().remove(name.toUpperCase());
-    	}
+    	if(getItems().containsKey(name.toUpperCase())) getItems().remove(name.toUpperCase());
     	
     	addItem(name.toUpperCase(), d);
     	saveFile(d);
     	
-    	SDRecipe sd = Main.plugin.getRecipeManager().loadRecipe(d, peiu.getRecipe(), peiu.getRecipeType());
-    	d.setRecipe(sd);
-    	sd.registerRecipe();
-    	
-    	DrugRecipe dr = new DrugRecipe(d, sd);
-    	dr.setFile(new File(Main.plugin.getDrugRecipeManager().getMainFile(), d.getName() + ".json").getAbsolutePath());
-    	
-    	Main.plugin.getDrugRecipeManager().updateRecipeFile(dr);
-    }
+		@SuppressWarnings("unchecked")
+		SDRecipe sd = Main.plugin.getRecipeManager().loadRecipe(d, (List<ItemStack>)addons.getOptionValues().get("Recipe"), (DrugCraftingType)addons.getOptionValues().get("RecipeType"));
+		d.setRecipe(sd);
+		sd.registerRecipe();
+		
+		DrugRecipe dr = new DrugRecipe(d, sd);
+		dr.setFile(new File(Main.plugin.getDrugRecipeManager().getMainFile(), d.getName() + ".json").getAbsolutePath());
+		
+		Main.plugin.getDrugRecipeManager().updateRecipeFile(dr);
+	}
 	
 	protected void registerTypeAdapters() {
 		typeAdapters.put(Drug.class, new DrugAdapter());
 		typeAdapters.put(DrugEffect.class, new DrugEffectAdapter());
 	}
 
-	protected void createFromJson(String fileName, JsonObject jo) {
+	public void createFromJson(String fileName, JsonObject jo) {
 		Gson gson = builder.create();
 		Drug cc = gson.fromJson(jo, Drug.class);
 		cc.setFile(fileName);
-		addItem(cc.getName(), cc);
+		addItem(cc.getName().toUpperCase(), cc);
 	}
 
 	@Override
@@ -107,7 +109,7 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
 	public Drug matchDrug(@Nullable ItemStack item) {
 		if(isDrugItem(item)){
 			for(Drug drug : getItems().values()) {
-				if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(drug.getDisplayname())) {
+				if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(drug.getDisplayName())) {
 					return drug;
 				}
 			}
@@ -120,7 +122,7 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
 			return false;
 		}
         for(Drug d : getItems().values()) {
-            if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(d.getDisplayname())) {
+            if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(d.getDisplayName())) {
                 return true;
             }
         }

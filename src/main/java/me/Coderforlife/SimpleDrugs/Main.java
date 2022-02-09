@@ -25,7 +25,8 @@ import me.Coderforlife.SimpleDrugs.Events.InventoryListener;
 import me.Coderforlife.SimpleDrugs.Events.PlayerJoin;
 import me.Coderforlife.SimpleDrugs.Events.PlayerRespawn;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.SettingNameListener;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.SDObjectType;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.SettingNameListener;
 import me.Coderforlife.SimpleDrugs.Util.Messages;
 import net.md_5.bungee.api.ChatColor;
 
@@ -53,7 +54,7 @@ public class Main extends JavaPlugin {
     private RecipeManager recipeManager;
     private AddictionManager addictionManager;
     
-    private Map<UUID, String> creatingName = new HashMap<UUID, String>();
+    private Map<UUID, SDObjectType> creatingName = new HashMap<>();
     
     @Override
     public void onEnable() {
@@ -102,7 +103,7 @@ public class Main extends JavaPlugin {
         this.getServer().getConsoleSender().sendMessage(message);
     }
     
-    public Map<UUID, String> getCreatingName() {
+    public Map<UUID, SDObjectType> getCreatingName() {
     	return creatingName;
     }
     

@@ -52,5 +52,10 @@ public class DrugRecipe implements SDCraftableItem {
 	public AbstractSDCraftableManager<DrugRecipe> getManager() {
 		return Main.plugin.getDrugRecipeManager();
 	}
+
+	@Override
+	public String getDisplayName() {
+		return getName();
+	}
 	
 }

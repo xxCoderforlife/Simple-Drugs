@@ -1,5 +1,8 @@
 package me.Coderforlife.SimpleDrugs.Druging.DrugPlants;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -10,6 +13,7 @@ import me.Coderforlife.SimpleDrugs.Crafting.SDCraftableItem;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Util.AbstractSDCraftableManager;
+import net.md_5.bungee.api.ChatColor;
 
 public class DrugPlantItem implements SDCraftableItem {
 	
@@ -73,12 +77,17 @@ public class DrugPlantItem implements SDCraftableItem {
 	
 	public ItemStack makeItem() {
 		ItemMeta im = plantableItem.getItemMeta();
+		im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&b&o" + drug.getName() + " Seeds"));
 		
 		im.getPersistentDataContainer().set(Main.plugin.getDrugMain(), PersistentDataType.BYTE, (byte)1);
 		im.getPersistentDataContainer().set(Main.plugin.getDrugKey(), PersistentDataType.STRING, drug.getName());
 		im.getPersistentDataContainer().set(Main.plugin.getDrugPlantedOn(), PersistentDataType.STRING, plantOn.toString());
 		im.getPersistentDataContainer().set(Main.plugin.getDrugHarvestAmount(), PersistentDataType.INTEGER, amount);
 		im.getPersistentDataContainer().set(Main.plugin.getDrugSeedKey(), PersistentDataType.STRING, plantableItem.getType().toString());
+		
+		List<String> lore = new ArrayList<>();
+		lore.add(ChatColor.translateAlternateColorCodes('&', "&7- &ePlant these to make a &2&o" + drug.getName() + " Plant"));
+		im.setLore(lore);
 		
 		plantableItem.setItemMeta(im);
 		return plantableItem;
@@ -97,6 +106,11 @@ public class DrugPlantItem implements SDCraftableItem {
 	@Override
 	public AbstractSDCraftableManager<DrugPlantItem> getManager() {
 		return Main.plugin.getDrugSeedManager();
+	}
+
+	@Override
+	public String getDisplayName() {
+		return getName();
 	}
 	
 }

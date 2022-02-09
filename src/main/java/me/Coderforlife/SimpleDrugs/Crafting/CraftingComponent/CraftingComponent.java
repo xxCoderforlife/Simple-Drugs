@@ -1,10 +1,6 @@
 package me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent;
 
-import java.util.List;
-
 import org.bukkit.inventory.ItemStack;
-
-import com.google.gson.JsonObject;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.SDCraftableItem;
@@ -14,23 +10,14 @@ import me.Coderforlife.SimpleDrugs.Util.AbstractSDCraftableManager;
 public class CraftingComponent implements SDCraftableItem {
 
 	private String name;
+	private String diplayName;
+	private ItemStack item;
 	private String fileName;
-	private DrugCraftingType type;
-	private JsonObject materials;
 	private SDRecipe recipe;
 	
-	public CraftingComponent(String s) {
+	public CraftingComponent(String s, String displayName, ItemStack i) {
 		name = s;
-	}
-	
-	public CraftingComponent(String s, String fN, ItemStack is, DrugCraftingType t, List<ItemStack> items) {
-		name = s;
-		fileName = fN;
-		type = t;
-	}
-	
-	public DrugCraftingType getType() {
-		return type;
+		item = i;
 	}
 	
 	public String getName() {
@@ -45,10 +32,6 @@ public class CraftingComponent implements SDCraftableItem {
 		fileName = s;
 	}
 	
-	public JsonObject getMaterials() {
-		return materials;
-	}
-	
 	public SDRecipe getRecipe() {
 		return recipe;
 	}
@@ -59,7 +42,7 @@ public class CraftingComponent implements SDCraftableItem {
 
 	@Override
 	public ItemStack getItem() {
-		return recipe.getResult();
+		return item;
 	}
 
 	@Override
@@ -70,6 +53,11 @@ public class CraftingComponent implements SDCraftableItem {
 	@Override
 	public AbstractSDCraftableManager<CraftingComponent> getManager() {
 		return Main.plugin.getCraftingManager();
+	}
+
+	@Override
+	public String getDisplayName() {
+		return diplayName;
 	}
 	
 }

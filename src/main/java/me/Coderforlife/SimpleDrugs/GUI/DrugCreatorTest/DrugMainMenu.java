@@ -1,13 +1,17 @@
 package me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest;
 
+import java.util.HashMap;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.CraftingComponent;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.DrugPlants.DrugPlantItem;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.Util.SDObjectType;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryUI;
@@ -42,7 +46,9 @@ public class DrugMainMenu extends InventoryUI {
 		addButton(new InventoryButton(Material.NETHER_STAR, "&b&oCreate A New Drug", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				
+				close(p);
+				p.sendMessage(ChatColor.GREEN + "Enter Name For Drug Using '&' As Color Codes");
+				Main.plugin.getCreatingName().put(p.getUniqueId(), SDObjectType.DRUG);
 			}
 		}, 3);
 		
@@ -50,7 +56,7 @@ public class DrugMainMenu extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				if(Main.plugin.getDrugManager().getItems().isEmpty()) return;
-				SDEditDeleteInventory<Drug> sedi = new SDEditDeleteInventory<Drug>(Main.plugin.getDrugManager().getItems().values(), true, null);
+				SDEditDeleteInventory<Drug> sedi = new SDEditDeleteInventory<Drug>(Main.plugin.getDrugManager().getItems().values(), true);
 				sedi.open(p);
 			}
 		}, 4);
@@ -59,7 +65,7 @@ public class DrugMainMenu extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				if(Main.plugin.getDrugManager().getItems().isEmpty()) return;
-				SDEditDeleteInventory<Drug> sedi = new SDEditDeleteInventory<Drug>(Main.plugin.getDrugManager().getItems().values(), false, null);
+				SDEditDeleteInventory<Drug> sedi = new SDEditDeleteInventory<Drug>(Main.plugin.getDrugManager().getItems().values(), false);
 				sedi.open(p);
 			}
 		}, 5);
@@ -69,7 +75,9 @@ public class DrugMainMenu extends InventoryUI {
 		addButton(new InventoryButton(Material.NETHER_STAR, "&b&oCreate A New Seed", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				
+				close(p);
+				CraftingTypeSelector cts = new CraftingTypeSelector("", null, SDObjectType.SEED, new HashMap<Integer, ItemStack>(), null);
+				cts.open(p);
 			}
 		}, 12);
 		
@@ -77,7 +85,7 @@ public class DrugMainMenu extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				if(Main.plugin.getDrugManager().getItems().isEmpty()) return;
-				SDEditDeleteInventory<DrugPlantItem> sedi = new SDEditDeleteInventory<DrugPlantItem>(Main.plugin.getDrugSeedManager().getItems().values(), true, null);
+				SDEditDeleteInventory<DrugPlantItem> sedi = new SDEditDeleteInventory<DrugPlantItem>(Main.plugin.getDrugSeedManager().getItems().values(), true);
 				sedi.open(p);
 			}
 		}, 13);
@@ -86,7 +94,7 @@ public class DrugMainMenu extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				if(Main.plugin.getDrugSeedManager().getItems().isEmpty()) return;
-				SDEditDeleteInventory<DrugPlantItem> sedi = new SDEditDeleteInventory<DrugPlantItem>(Main.plugin.getDrugSeedManager().getItems().values(), false, null);
+				SDEditDeleteInventory<DrugPlantItem> sedi = new SDEditDeleteInventory<DrugPlantItem>(Main.plugin.getDrugSeedManager().getItems().values(), false);
 				sedi.open(p);
 			}
 		}, 14);
@@ -96,7 +104,9 @@ public class DrugMainMenu extends InventoryUI {
 		addButton(new InventoryButton(Material.NETHER_STAR, "&b&oCreate A New Crafting Component", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
-				
+				close(p);
+				p.sendMessage(ChatColor.GREEN + "Enter Name For Crafting Component Using '&' As Color Codes");
+				Main.plugin.getCreatingName().put(p.getUniqueId(), SDObjectType.CC);
 			}
 		}, 21);
 		
@@ -104,7 +114,7 @@ public class DrugMainMenu extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				if(Main.plugin.getCraftingManager().getItems().isEmpty()) return;
-				SDEditDeleteInventory<CraftingComponent> sedi = new SDEditDeleteInventory<CraftingComponent>(Main.plugin.getCraftingManager().getItems().values(), true, null);
+				SDEditDeleteInventory<CraftingComponent> sedi = new SDEditDeleteInventory<CraftingComponent>(Main.plugin.getCraftingManager().getItems().values(), true);
 				sedi.open(p);
 			}
 		}, 22);
@@ -113,7 +123,7 @@ public class DrugMainMenu extends InventoryUI {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				if(Main.plugin.getCraftingManager().getItems().isEmpty()) return;
-				SDEditDeleteInventory<CraftingComponent> sedi = new SDEditDeleteInventory<CraftingComponent>(Main.plugin.getCraftingManager().getItems().values(), false, null);
+				SDEditDeleteInventory<CraftingComponent> sedi = new SDEditDeleteInventory<CraftingComponent>(Main.plugin.getCraftingManager().getItems().values(), false);
 				sedi.open(p);
 			}
 		}, 23);

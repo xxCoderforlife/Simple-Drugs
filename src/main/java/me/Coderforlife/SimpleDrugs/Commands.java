@@ -19,7 +19,6 @@ import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SDRecipeInventory;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
-import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.SimpleDrugsEditor;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreatorTest.DrugMainMenu;
 
 public class Commands implements CommandExecutor {
@@ -91,7 +90,7 @@ public class Commands implements CommandExecutor {
                         if(p.hasPermission("drugs.list")) {
                             p.sendMessage(plugin.getMessages().getHeader());
                             for(Drug drug : Main.plugin.getDrugManager().getItems().values()) {
-                                p.sendMessage(dash + drug.getDisplayname());
+                                p.sendMessage(dash + drug.getDisplayName());
                             }
                         } else {
                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED + "You don't have permission to use that command.");
@@ -137,11 +136,6 @@ public class Commands implements CommandExecutor {
                             ChatColor.translateAlternateColorCodes('&', "&3Addiction Level:&r&l ") + Double.toString(addLvl));
                         }
                     }else if(args[0].equalsIgnoreCase("editor")){
-                        if(p.hasPermission("drugs.editor")){
-                        	SimpleDrugsEditor sde = new SimpleDrugsEditor();
-                    		sde.open(p);
-                        }
-                    }else if(args[0].equalsIgnoreCase("editortest")){
                         if(p.hasPermission("drugs.editor")){
                         	DrugMainMenu sde = new DrugMainMenu();
                     		sde.open(p);
@@ -221,7 +215,7 @@ public class Commands implements CommandExecutor {
                             for(Drug drugs : Main.plugin.getDrugManager().getItems().values()) {
                                 if(args[1].equalsIgnoreCase(drugs.getName())) {
                                     p.getInventory().addItem(drugs.getItem());
-                                    p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', "&7You've been given " + drugs.getDisplayname()));
+                                    p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', "&7You've been given " + drugs.getDisplayName()));
                                     return true;
                                 }
                             }
@@ -254,8 +248,8 @@ public class Commands implements CommandExecutor {
                                 if(args[1].equalsIgnoreCase(drugs.getName())) {
                                     for(Player players : Bukkit.getOnlinePlayers()) {
                                         if(args[2].equalsIgnoreCase(players.getName())) {
-                                            p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', "You sent " + players.getName() + " " + drugs.getDisplayname()));
-                                            players.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', p.getDisplayName() + " Sent you some " + drugs.getDisplayname()));
+                                            p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', "You sent " + players.getName() + " " + drugs.getDisplayName()));
+                                            players.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', p.getDisplayName() + " Sent you some " + drugs.getDisplayName()));
                                             players.getInventory().addItem(drugs.getItem());
                                             return true;
                                         }
