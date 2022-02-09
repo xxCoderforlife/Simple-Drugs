@@ -84,6 +84,7 @@ public class BagOfDrugsGUI implements Listener {
         if (clickedItem == null){return;}
 
         if (Main.plugin.getSettings().isBagOfDrugs_CanMove()) {
+        	if(!clickedItem.hasItemMeta()) return;
             if (clickedItem.getItemMeta().getDisplayName().equals(invName)) {
                 ev.setCancelled(true);
                 p.getItemOnCursor();
