@@ -10,12 +10,13 @@ import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
-import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
+import me.Coderforlife.SimpleDrugs.Druging.DrugPlants.DrugPlantItem;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SDRecipeInventory;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
@@ -154,11 +155,6 @@ public class Commands implements CommandExecutor {
                             return true;
                         }
 
-                        if(drug.getRecipe() instanceof SDShapeless) {
-                            p.sendMessage(plugin.getMessages().getPrefix() + "§e" + args[1] + " §cdoes not have support for shapeless.");
-                            return true;
-                        }
-
                         new SDRecipeInventory(drug).createSDRecipeInventory(p);
                     } else if(args[0].equalsIgnoreCase("bagofdrugs")) {
                         if(p.hasPermission("drugs.command.bagofdrugs.others")) {
@@ -240,6 +236,21 @@ public class Commands implements CommandExecutor {
                         }else{
                             p.sendMessage(plugin.getMessages().getPermission());
                         }
+                    }else if(args[0].equalsIgnoreCase("giveSeed")){
+                        if(p.hasPermission("drugs.give.seed")){
+                            for(DrugPlantItem d : plugin.getDrugSeedManager().getItems().values()){
+                                if(args[1].equalsIgnoreCase(d.getName())){
+                                    p.getInventory().addItem(d.getItem());
+                                    p.sendMessage(plugin.getMessages().getPrefix() + 
+                                    ChatColor.translateAlternateColorCodes('&', "You've been given " + d.getDisplayName() + " Seed"));
+                                    return true;
+                                }
+                            }
+                            p.sendMessage(plugin.getMessages().getPrefix() + 
+                            ChatColor.translateAlternateColorCodes('&', "&c&o" + args[1] + "&ris not a drug"));
+                        }else{
+                            p.sendMessage(plugin.getMessages().getPermission());
+                        }
                     }
                 } else if(args.length == 3) {
                     if(args[0].equalsIgnoreCase("give")) {
@@ -271,13 +282,18 @@ public class Commands implements CommandExecutor {
                 p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED + "You don't have permission to use that command.");
                 p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.main");
             }
-        } else if(args.length == 0) {
+        } 
+        ConsoleCommandSender cSender = Bukkit.getConsoleSender();
+         if(args.length == 0) {
             sender.sendMessage(plugin.getMessages().getPrefix() + "§eUse §a§odrugs reload §eand §a§odrugs version");
         } else if(args.length == 1) {
             if(args[0].equalsIgnoreCase("reload")) {
-                Bukkit.getServer().getConsoleSender().sendMessage(plugin.getMessages().getPrefix() + ChatColor.GREEN + "Attempting to reload config...");
+                cSender.sendMessage(plugin.getMessages().getPrefix() + ChatColor.GREEN + "Attempting to reload config...");
                 plugin.reloadConfig();
-                Bukkit.getServer().getConsoleSender().sendMessage(plugin.getMessages().getPrefix() + ChatColor.GREEN + "Config has been reloaded");
+                cSender.sendMessage(plugin.getMessages().getPrefix() + ChatColor.GREEN + "Config has been reloaded");
+            }else if(args[0].equalsIgnoreCase("version")){
+                cSender.sendMessage(plugin.getMessages().getPrefix() + 
+                ChatColor.translateAlternateColorCodes('&', "&a&oVersion: ") + plugin.getDescription().getVersion().toString());
             }
         }
         return true;
