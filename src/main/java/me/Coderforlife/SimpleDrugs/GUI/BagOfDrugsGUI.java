@@ -46,6 +46,9 @@ public class BagOfDrugsGUI implements Listener {
 
     @EventHandler
     public void BagOpen(PlayerInteractEvent ev) {
+        if(ev.getHand() == null){
+            return;
+        }
         if(ev.getHand().equals(EquipmentSlot.OFF_HAND)){
             return;
         }

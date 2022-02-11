@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TabCommands implements TabCompleter {
-    private String[] commands = {"help","recipe","list","bagofdrugs","soberup","give","version","settings","addiction","editor"};
+    private String[] commands = {"help","recipe","list","bagofdrugs","soberup","give","version","settings","addiction","editor","giveSeed"};
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> tab = new ArrayList<>();
@@ -27,7 +27,7 @@ public class TabCommands implements TabCompleter {
                     tab.add(p.getName());
                 }
             }
-            if(args[0].equalsIgnoreCase("give") || args[0].equalsIgnoreCase("recipe")) {
+            if(args[0].equalsIgnoreCase("give") || args[0].equalsIgnoreCase("recipe") || args[0].equalsIgnoreCase("giveSeed") ) {
                 for(Drug drugs : Main.plugin.getDrugManager().getItems().values()) {
                     tab.add(drugs.getName());
                 }
