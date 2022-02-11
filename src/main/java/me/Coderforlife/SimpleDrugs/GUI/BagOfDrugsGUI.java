@@ -1,13 +1,10 @@
 package me.Coderforlife.SimpleDrugs.GUI;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Settings;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -21,24 +18,19 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.CraftingInventory;
-import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Settings;
-import me.Coderforlife.SimpleDrugs.Druging.Drug;
-import net.md_5.bungee.api.ChatColor;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BagOfDrugsGUI implements Listener {
     private Main plugin = Main.plugin;
     Settings s = plugin.getSettings();
 
-    public BagOfDrugsGUI(){
+    public BagOfDrugsGUI() {
     }
+
     private ItemStack bag = BagOfDrugsStack();
     private final int maxdrugs = 45;
     public final String bagName = "§6§lBag Of Drugs";
@@ -46,24 +38,24 @@ public class BagOfDrugsGUI implements Listener {
 
     @EventHandler
     public void BagOpen(PlayerInteractEvent ev) {
-        if(ev.getHand() == null){
+        if(ev.getHand() == null) {
             return;
         }
-        if(ev.getHand().equals(EquipmentSlot.OFF_HAND)){
+        if(ev.getHand().equals(EquipmentSlot.OFF_HAND)) {
             return;
         }
         Player p = ev.getPlayer();
         Action pa = ev.getAction();
-        if(p.getInventory().getItemInMainHand().getItemMeta() == null){
+        if(p.getInventory().getItemInMainHand().getItemMeta() == null) {
             return;
         }
 
-        if (pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
-            if (p.hasPermission("drugs.use.bagofdrugs")) {
-                if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(bagName) 
-                && p.getInventory().getItemInMainHand().hasItemMeta()) {
+        if(pa.equals(Action.RIGHT_CLICK_AIR) || pa.equals(Action.RIGHT_CLICK_BLOCK)) {
+            if(p.hasPermission("drugs.use.bagofdrugs")) {
+                if(p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(bagName) && p.getInventory().getItemInMainHand()
+                        .hasItemMeta()) {
                     Location loc = p.getLocation();
-                    for (int degree = 0; degree < 360; degree++) {
+                    for(int degree = 0; degree < 360; degree++) {
                         double radians = Math.toRadians(degree);
                         double x = Math.cos(radians);
                         double z = Math.sin(radians);
@@ -71,10 +63,10 @@ public class BagOfDrugsGUI implements Listener {
                         loc.getWorld().playEffect(loc, Effect.SMOKE, degree);
                         loc.subtract(x, 0, z);
                     }
-                    p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP ,1, (float) 0.4);
+                    p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, (float) 0.4);
                     p.openInventory(create());
                 }
-            }else{
+            } else {
                 //TODO Add perm message
             }
         }
@@ -84,18 +76,21 @@ public class BagOfDrugsGUI implements Listener {
     public void handleInventoryClick(InventoryClickEvent ev) {
         Player p = (Player) ev.getWhoClicked();
         ItemStack clickedItem = ev.getCurrentItem();
-        if (clickedItem == null){return;}
+        if(clickedItem == null) {
+            return;
+        }
 
-        if (Main.plugin.getSettings().isBagOfDrugs_CanMove()) {
-        	if(!clickedItem.hasItemMeta()) return;
-            if (clickedItem.getItemMeta().getDisplayName().equals(invName)) {
+        if(Main.plugin.getSettings().isBagOfDrugs_CanMove()) {
+            if(!clickedItem.hasItemMeta())
+                return;
+            if(clickedItem.getItemMeta().getDisplayName().equals(invName)) {
                 ev.setCancelled(true);
                 p.getItemOnCursor();
                 p.setItemOnCursor(null);
             }
         }
 
-        if (!ev.getView().getTitle().equals(invName)) {
+        if(!ev.getView().getTitle().equals(invName)) {
             return;
         }
         ev.setCancelled(true);
@@ -103,35 +98,35 @@ public class BagOfDrugsGUI implements Listener {
         String itemname = clickedItem.getItemMeta().getDisplayName();
         String[] pagenumber = itemname.split(" ");
 
-        if (ev.getCurrentItem().getType().equals(Material.ARROW) && itemname.startsWith("§6Page")) {
+        if(ev.getCurrentItem().getType().equals(Material.ARROW) && itemname.startsWith("§6Page")) {
             int page = Integer.parseInt(pagenumber[1]);
-            if (page == 1) {
+            if(page == 1) {
                 p.openInventory(this.create());
             } else {
                 p.openInventory(this.openPage(page));
             }
             return;
         }
-        if(plugin.getDrugManager().isDrugItem(clickedItem)){
-            Drug d = plugin.getDrugManager().matchDrug(clickedItem);   
-            if(ev.getClick() == ClickType.LEFT){
+        if(plugin.getDrugManager().isDrugItem(clickedItem)) {
+            Drug d = plugin.getDrugManager().matchDrug(clickedItem);
+            if(ev.getClick() == ClickType.LEFT) {
                 ItemStack drug = d.getItem();
                 drug.setAmount(1);
                 p.getInventory().addItem(drug);
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
-                p.sendMessage(plugin.getMessages().getPrefix() + 
-                ChatColor.translateAlternateColorCodes('&', "You've been given " + d.getDisplayName()));
-                
-            }else if(ev.getClick() == ClickType.SHIFT_LEFT){
-                    p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
-                    ItemStack d64 = d.getItem();
-                    d64.setAmount(64);
-                    p.getInventory().addItem(d64);
-            }else if (ev.getClick() == ClickType.RIGHT){
+                p.sendMessage(
+                        plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', "You've been given " + d.getDisplayName()));
+
+            } else if(ev.getClick() == ClickType.SHIFT_LEFT) {
+                p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
+                ItemStack d64 = d.getItem();
+                d64.setAmount(64);
+                p.getInventory().addItem(d64);
+            } else if(ev.getClick() == ClickType.RIGHT) {
                 d.influencePlayer(p);
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
                 p.closeInventory();
-            }else if(ev.getClick() == ClickType.SHIFT_RIGHT){
+            } else if(ev.getClick() == ClickType.SHIFT_RIGHT) {
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
                 p.closeInventory();
                 new SDRecipeInventory(d).createSDRecipeInventory(p);
@@ -142,19 +137,18 @@ public class BagOfDrugsGUI implements Listener {
     public Inventory create() {
         ArrayList<Drug> drugs = new ArrayList<>(Main.plugin.getDrugManager().getItems().values());
         int amountofdrugs = drugs.size();
-        
+
         ArrayList<ItemStack> stack = new ArrayList<>();
         amountofdrugs = Math.min(amountofdrugs, maxdrugs);
 
-        for (int i = 0; i < amountofdrugs; i++) {
+        for(int i = 0; i < amountofdrugs; i++) {
             stack.add(drugs.get(i).getItem());
         }
-        while (stack.size() % 9 != 0) {
+        while(stack.size() % 9 != 0) {
             stack.add(new ItemStack(Material.AIR));
         }
 
-        stack.add(BackwardButton(false, 1));
-        for (int i = 0; i < 7; i++) {
+        for(int i = 0; i < 8; i++) {
             stack.add(GreyGlassPane());
         }
         stack.add(ForwardButton(drugs.size() > maxdrugs, 2));
@@ -175,15 +169,15 @@ public class BagOfDrugsGUI implements Listener {
         ArrayList<ItemStack> stack = new ArrayList<>();
         amountofdrugs = Math.min(drugsleft, maxdrugs);
 
-        for (int i = startfrom; i < amountofdrugs + (startfrom - 1); i++) {
+        for(int i = startfrom; i < amountofdrugs + (startfrom - 1); i++) {
             stack.add(drugs.get(i).getItem());
         }
-        while (stack.size() % 9 != 0) {
+        while(stack.size() % 9 != 0) {
             stack.add(new ItemStack(Material.AIR));
         }
 
         stack.add(BackwardButton(true, page - 1));
-        for (int i = 0; i < 7; i++) {
+        for(int i = 0; i < 7; i++) {
             stack.add(GreyGlassPane());
         }
         stack.add(ForwardButton(drugs.size() > maxdrugs * page, page + 1));
@@ -207,7 +201,7 @@ public class BagOfDrugsGUI implements Listener {
         ItemMeta meta = stack.getItemMeta();
         assert meta != null;
         meta.setDisplayName("§6Page " + page);
-        if (!active) {
+        if(!active) {
             stack.setType(Material.BARRIER);
             meta.setDisplayName("§cYou are at the last page");
         }
@@ -220,13 +214,14 @@ public class BagOfDrugsGUI implements Listener {
         ItemMeta meta = stack.getItemMeta();
         assert meta != null;
         meta.setDisplayName("§6Page " + page);
-        if (!active) {
+        if(!active) {
             stack.setType(Material.BARRIER);
             meta.setDisplayName("§cYou are at the first page");
         }
         stack.setItemMeta(meta);
         return stack;
     }
+
     @EventHandler
     public void onDragEvent(InventoryDragEvent ev) {
         if(ev.getView().getTitle().equals(invName)) {
@@ -263,15 +258,17 @@ public class BagOfDrugsGUI implements Listener {
 
         if(inv.getResult().getType() == Material.BEACON) {
             if(mat[4].getItemMeta().getDisplayName().contentEquals(bagName)) {
-                p.sendMessage(plugin.getMessages().getPrefix() + "§c§oCan " + "not use " + bagName + " §c§oto craft a " + "§b" + inv.getResult().getType());
+                p.sendMessage(
+                        plugin.getMessages().getPrefix() + "§c§oCan " + "not use " + bagName + " §c§oto craft a " + "§b" + inv.getResult().getType());
                 e.setCancelled(true);
             }
         }
     }
 
-    public String getBagName(){
+    public String getBagName() {
         return bagName;
     }
+
     private ItemStack BagOfDrugsStack() {
         ItemStack stack = new ItemStack(Material.NETHER_STAR);
         ItemMeta meta = stack.getItemMeta();
@@ -287,7 +284,8 @@ public class BagOfDrugsGUI implements Listener {
         stack.setItemMeta(meta);
         return stack;
     }
-    public ItemStack getBagOfDrugs(){
+
+    public ItemStack getBagOfDrugs() {
         return bag;
     }
 }
