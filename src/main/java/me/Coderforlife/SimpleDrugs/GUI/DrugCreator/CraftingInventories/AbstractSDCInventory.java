@@ -61,7 +61,7 @@ public abstract class AbstractSDCInventory extends InventoryUI {
 	
 	public abstract void handleAccept(Player p);
 	public abstract void setCraftingSlots();
-	public abstract List<ItemStack> getRecipe();
+	public abstract List<String> getRecipe();
 	
 	public void updateAddons() {
 		if(!inventoryAddons.getOptionalButtons().isEmpty()) {

@@ -78,15 +78,15 @@ public class SDEditDeleteInventory<E extends SDCraftableItem> extends InventoryU
 	
 	private HashMap<Integer, ItemStack> getStackFromShaped(SDShaped shaped) {
 		HashMap<Integer, ItemStack> items = new HashMap<Integer, ItemStack>();
-		items.put(3, shaped.getItems().get(0));
-		items.put(4, shaped.getItems().get(1));
-		items.put(5, shaped.getItems().get(2));
-		items.put(12, shaped.getItems().get(3));
-		items.put(13, shaped.getItems().get(4));
-		items.put(14, shaped.getItems().get(5));
-		items.put(21, shaped.getItems().get(6));
-		items.put(22, shaped.getItems().get(7));
-		items.put(23, shaped.getItems().get(8));
+		items.put(3, shaped.getConvertedItems().get(0));
+		items.put(4, shaped.getConvertedItems().get(1));
+		items.put(5, shaped.getConvertedItems().get(2));
+		items.put(12, shaped.getConvertedItems().get(3));
+		items.put(13, shaped.getConvertedItems().get(4));
+		items.put(14, shaped.getConvertedItems().get(5));
+		items.put(21, shaped.getConvertedItems().get(6));
+		items.put(22, shaped.getConvertedItems().get(7));
+		items.put(23, shaped.getConvertedItems().get(8));
 		items.put(17, new ItemStack(shaped.getResult().getType()));
 		return items;
 	}
@@ -108,7 +108,7 @@ public class SDEditDeleteInventory<E extends SDCraftableItem> extends InventoryU
 	private HashMap<Integer, ItemStack> getStackFromShapeless(SDShapeless recipe) {
 		HashMap<Integer, ItemStack> items = new HashMap<Integer, ItemStack>();
 		for(int i = 0; i < recipe.getItems().size(); i++) {
-			items.put(convertNumber(i), recipe.getItems().get(i));
+			items.put(convertNumber(i), recipe.getConvertedItems().get(i));
 		}
 		items.put(17, new ItemStack(recipe.getResult().getType()));
 		return items;
@@ -116,7 +116,7 @@ public class SDEditDeleteInventory<E extends SDCraftableItem> extends InventoryU
 	
 	private HashMap<Integer, ItemStack> getStackFromFurnace(SDFurnace recipe) {
 		HashMap<Integer, ItemStack> items = new HashMap<Integer, ItemStack>();
-		items.put(4, recipe.getItems().get(0));
+		items.put(4, recipe.getConvertedItems().get(0));
 		items.put(17, new ItemStack(recipe.getResult().getType()));
 		return items;
 	}

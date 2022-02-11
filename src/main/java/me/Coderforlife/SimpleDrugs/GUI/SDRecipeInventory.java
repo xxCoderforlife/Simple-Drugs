@@ -30,6 +30,7 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.SDBrewingRecipe;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.Util.CCMaterialConverter;
 import net.md_5.bungee.api.ChatColor;
 
 public class SDRecipeInventory implements Listener {
@@ -49,15 +50,15 @@ public class SDRecipeInventory implements Listener {
 
             SDShapeless recipe = (SDShapeless) drug.getRecipe();
             inv.setItem(0, drug.getItem());
-            inv.setItem(1, recipe.getItems().get(0));
-            inv.setItem(2, recipe.getItems().get(1));
-            inv.setItem(3, recipe.getItems().get(2));
-            inv.setItem(4, recipe.getItems().get(3));
-            inv.setItem(5, recipe.getItems().get(4));
-            inv.setItem(6, recipe.getItems().get(5));
-            inv.setItem(7, recipe.getItems().get(6));
-            inv.setItem(8, recipe.getItems().get(7));
-            inv.setItem(9, recipe.getItems().get(8));
+            inv.setItem(1, CCMaterialConverter.getCCOrMaterial(null, recipe.getItems().get(0)));
+            inv.setItem(2, CCMaterialConverter.getCCOrMaterial(null, recipe.getItems().get(1)));
+            inv.setItem(3, CCMaterialConverter.getCCOrMaterial(null, recipe.getItems().get(2)));
+            inv.setItem(4, CCMaterialConverter.getCCOrMaterial(null, recipe.getItems().get(3)));
+            inv.setItem(5, CCMaterialConverter.getCCOrMaterial(null, recipe.getItems().get(4)));
+            inv.setItem(6, CCMaterialConverter.getCCOrMaterial(null, recipe.getItems().get(5)));
+            inv.setItem(7, CCMaterialConverter.getCCOrMaterial(null, recipe.getItems().get(6)));
+            inv.setItem(8, CCMaterialConverter.getCCOrMaterial(null, recipe.getItems().get(7)));
+            inv.setItem(9, CCMaterialConverter.getCCOrMaterial(null, recipe.getItems().get(8)));
             if (players.contains(p.getUniqueId()))
                 return;
             players.add(p.getUniqueId());
@@ -75,15 +76,15 @@ public class SDRecipeInventory implements Listener {
 
             SDShaped recipe1 = (SDShaped) drug.getRecipe();
             inv.setItem(0, drug.getItem());
-            inv.setItem(1, recipe1.getItems().get(0));
-            inv.setItem(2, recipe1.getItems().get(1));
-            inv.setItem(3, recipe1.getItems().get(2));
-            inv.setItem(4, recipe1.getItems().get(3));
-            inv.setItem(5, recipe1.getItems().get(4));
-            inv.setItem(6, recipe1.getItems().get(5));
-            inv.setItem(7, recipe1.getItems().get(6));
-            inv.setItem(8, recipe1.getItems().get(7));
-            inv.setItem(9, recipe1.getItems().get(8));
+            inv.setItem(1, CCMaterialConverter.getCCOrMaterial(null, recipe1.getItems().get(0)));
+            inv.setItem(2, CCMaterialConverter.getCCOrMaterial(null, recipe1.getItems().get(1)));
+            inv.setItem(3, CCMaterialConverter.getCCOrMaterial(null, recipe1.getItems().get(2)));
+            inv.setItem(4, CCMaterialConverter.getCCOrMaterial(null, recipe1.getItems().get(3)));
+            inv.setItem(5, CCMaterialConverter.getCCOrMaterial(null, recipe1.getItems().get(4)));
+            inv.setItem(6, CCMaterialConverter.getCCOrMaterial(null, recipe1.getItems().get(5)));
+            inv.setItem(7, CCMaterialConverter.getCCOrMaterial(null, recipe1.getItems().get(6)));
+            inv.setItem(8, CCMaterialConverter.getCCOrMaterial(null, recipe1.getItems().get(7)));
+            inv.setItem(9, CCMaterialConverter.getCCOrMaterial(null, recipe1.getItems().get(8)));
             if (players.contains(p.getUniqueId()))
                 return;
             players.add(p.getUniqueId());
@@ -100,7 +101,7 @@ public class SDRecipeInventory implements Listener {
             inv = Bukkit.createInventory(null, InventoryType.FURNACE, drug.getDisplayName() + 
                     ChatColor.translateAlternateColorCodes('&', " &6&lRecipe"));
             SDFurnace recipe = (SDFurnace) drug.getRecipe();
-            inv.setItem(0, recipe.getItems().get(0));
+            inv.setItem(0, CCMaterialConverter.getCCOrMaterial(null, recipe.getItems().get(0)));
             inv.setItem(2, drug.getItem());
             inv.setItem(1, new ItemStack(Material.FIRE));
             new BukkitRunnable() {
@@ -179,8 +180,8 @@ public class SDRecipeInventory implements Listener {
                 return;
             }
             if(cancraft(p, drug.getRecipe())){
-                for(ItemStack s : drug.getRecipe().getItems()){
-                    removeInventoryItems(p.getInventory(), s.getType(), 1);
+                for(String s : drug.getRecipe().getItems()){
+                    removeInventoryItems(p.getInventory(), CCMaterialConverter.getCCOrMaterial(null, s).getType(), 1);
                 }
                 p.sendMessage(plugin.getMessages().getPrefix() + "You crafted " + drug.getDisplayName());
                 p.getInventory().addItem(drug.getItem());
@@ -215,14 +216,14 @@ public class SDRecipeInventory implements Listener {
     }
     private boolean cancraft(Player p, SDRecipe recipe) {
         HashMap<ItemStack, Integer> needed = new HashMap<>();
-       for(ItemStack stack : recipe.getItems()) {
-           if(stack.getType().equals(Material.AIR)) {
+       for(String stack : recipe.getItems()) {
+           if(stack.equals("AIR")) {
                continue;
            }
-           if(needed.containsKey(stack)) {
-               needed.put(stack, needed.get(stack) + 1);
+           if(needed.containsKey(CCMaterialConverter.getCCOrMaterial(null, stack))) {
+               needed.put(CCMaterialConverter.getCCOrMaterial(null, stack), needed.get(CCMaterialConverter.getCCOrMaterial(null, stack)) + 1);
            } else {
-               needed.put(stack, 1);
+               needed.put(CCMaterialConverter.getCCOrMaterial(null, stack), 1);
            }
        }
        for(ItemStack stack : needed.keySet()) {

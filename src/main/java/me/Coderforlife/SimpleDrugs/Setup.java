@@ -41,6 +41,9 @@ public class Setup {
         Main.plugin.setDrugRecipeManager(new DrugRecipeManager());
         Main.plugin.getDrugRecipeManager().loadFiles();
         
+        Main.plugin.getRecipeManager().convertAllRecipes();
+        Main.plugin.getRecipeManager().addAllRecipes();
+        
         if(Main.plugin.getDrugManager().getItems().size() <= 0) {
         	loadDefaults();
         }

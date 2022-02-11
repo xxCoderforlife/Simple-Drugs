@@ -1,7 +1,5 @@
 package me.Coderforlife.SimpleDrugs.Crafting.Recipes;
 
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -18,24 +16,24 @@ public class SDShapeless extends SDRecipe {
 		super(name, result);
 	}
 	
-	public void addItemStack(ItemStack i) {
+	public void addItemStack(String i) {
 		items.add(i);
 	}
 	
-	public List<ItemStack> getItems() {
-		return items;
-	}
-	
 	public void registerRecipe() {
-		NamespacedKey nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + getName());
+		nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + getName());
+		registerNamespacedKey(nk);
+		Main.plugin.getRecipeManager().addRecipe(this);
+	}
+
+	@Override
+	public void createRecipe() {
 		Bukkit.getServer().removeRecipe(nk);
 		ShapelessRecipe sr = new ShapelessRecipe(nk, getResult());
-		for(ItemStack i : items) {
+		for(ItemStack i : convertedItems) {
 			sr.addIngredient(new RecipeChoice.ExactChoice(i));
 		}
-		registerNamespacedKey(nk);
 		Bukkit.getServer().addRecipe(sr);
-		Main.plugin.getRecipeManager().addRecipe(this);
 	}
 	
 }

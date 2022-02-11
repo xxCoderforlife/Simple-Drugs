@@ -51,9 +51,10 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
     	saveFile(d);
     	
 		@SuppressWarnings("unchecked")
-		SDRecipe sd = Main.plugin.getRecipeManager().loadRecipe(d, (List<ItemStack>)addons.getOptionValues().get("Recipe"), (DrugCraftingType)addons.getOptionValues().get("RecipeType"));
+		SDRecipe sd = Main.plugin.getRecipeManager().loadRecipe(d, (List<String>)addons.getOptionValues().get("Recipe"), (DrugCraftingType)addons.getOptionValues().get("RecipeType"));
 		d.setRecipe(sd);
-		sd.registerRecipe();
+		sd.convertItems();
+		sd.createRecipe();
 		
 		DrugRecipe dr = new DrugRecipe(d, sd);
 		dr.setFile(new File(Main.plugin.getDrugRecipeManager().getMainFile(), d.getName() + ".json").getAbsolutePath());

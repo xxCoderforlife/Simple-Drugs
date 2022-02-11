@@ -7,14 +7,19 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 
 import me.Coderforlife.SimpleDrugs.Main;
+import me.Coderforlife.SimpleDrugs.Util.CCMaterialConverter;
 
 public abstract class SDRecipe {
 
 	private String name;
 	private ItemStack result;
-	protected List<ItemStack> items = new ArrayList<>();
+	protected List<String> items = new ArrayList<>();
+	protected List<ItemStack> convertedItems = new ArrayList<>();
+	protected NamespacedKey nk;
 	
-	public SDRecipe() {}
+	public SDRecipe() {
+		
+	}
 	
 	public SDRecipe(String n, ItemStack r) {
 		result = r;
@@ -37,14 +42,27 @@ public abstract class SDRecipe {
 		name = s;
 	}
 	
-	public List<ItemStack> getItems() {
+	public List<String> getItems() {
 		return items;
+	}
+	
+	public List<ItemStack> getConvertedItems() {
+		return convertedItems;
 	}
 	
 	protected void registerNamespacedKey(NamespacedKey k) {
 		Main.plugin.getRecipeManager().addKey(k);
 	}
 	
+	public void convertItems() {
+		List<ItemStack> stack = new ArrayList<>();
+		for(String s : getItems()) {
+			stack.add(CCMaterialConverter.getCCOrMaterial(null, s));
+		}
+		convertedItems = stack;
+	}
+	
 	public abstract void registerRecipe();
+	public abstract void createRecipe();
 	
 }

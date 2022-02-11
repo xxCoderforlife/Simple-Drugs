@@ -108,9 +108,10 @@ public class DrugSeedManager extends AbstractSDCraftableManager<DrugPlantItem> {
 		}
 		
 		@SuppressWarnings("unchecked")
-		SDRecipe sd = Main.plugin.getRecipeManager().loadRecipe(dpi, (List<ItemStack>)ad.getOptionValues().get("Recipe"), (DrugCraftingType)ad.getOptionValues().get("RecipeType"));
+		SDRecipe sd = Main.plugin.getRecipeManager().loadRecipe(dpi, (List<String>)ad.getOptionValues().get("Recipe"), (DrugCraftingType)ad.getOptionValues().get("RecipeType"));
 		dpi.setRecipe(sd);
-		sd.registerRecipe();
+		sd.convertItems();
+		sd.createRecipe();
 		
 		addItem(newDrug.getName().toUpperCase(), dpi);
 		saveFile(dpi);

@@ -10,26 +10,29 @@ import me.Coderforlife.SimpleDrugs.Main;
 
 public class SDFurnace extends SDRecipe {
 
-	private ItemStack input;
 	private Float xp = 0.0f;
 	private int time = 90;
 	
 	public SDFurnace() {}
 	
-	public SDFurnace(String n, ItemStack result, ItemStack inputItem, Float xpToGive, Integer timeToCook) {
+	public SDFurnace(String n, ItemStack result, String inputItem, Float xpToGive, Integer timeToCook) {
 		super(n, result);
-		input = inputItem;
-		getItems().add(input);
+		getItems().add(inputItem);
 		xp = xpToGive;
 		time = timeToCook;
 	}
 
 	@Override
 	public void registerRecipe() {
-		NamespacedKey nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + getName());
-		Bukkit.getServer().removeRecipe(nk);
-		FurnaceRecipe fr = new FurnaceRecipe(nk, getResult(), new RecipeChoice.ExactChoice(input), xp, time);
+		nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + getName());
 		registerNamespacedKey(nk);
+		Main.plugin.getRecipeManager().addRecipe(this);
+	}
+
+	@Override
+	public void createRecipe() {
+		Bukkit.getServer().removeRecipe(nk);
+		FurnaceRecipe fr = new FurnaceRecipe(nk, getResult(), new RecipeChoice.ExactChoice(convertedItems.get(0)), xp, time);
 		Bukkit.getServer().addRecipe(fr);
 	}
 

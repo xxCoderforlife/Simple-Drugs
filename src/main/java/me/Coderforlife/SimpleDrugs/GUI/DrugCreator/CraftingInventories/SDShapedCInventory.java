@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.DrugCraftingType;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SDObjectType;
+import me.Coderforlife.SimpleDrugs.Util.CCMaterialConverter;
 import net.md_5.bungee.api.ChatColor;
 
 public class SDShapedCInventory extends AbstractSDCInventory {
@@ -37,18 +38,18 @@ public class SDShapedCInventory extends AbstractSDCInventory {
 
 	public void setCraftingSlots() { return; }
 
-	public List<ItemStack> getRecipe() {
-		List<ItemStack> items = new ArrayList<>();
+	public List<String> getRecipe() {
+		List<String> items = new ArrayList<>();
 		
-		items.add(isSlotNull(3) ? new ItemStack(Material.AIR) : getInventory().getItem(3));
-		items.add(isSlotNull(4) ? new ItemStack(Material.AIR) : getInventory().getItem(4));
-		items.add(isSlotNull(5) ? new ItemStack(Material.AIR) : getInventory().getItem(5));
-		items.add(isSlotNull(12) ? new ItemStack(Material.AIR) : getInventory().getItem(12));
-		items.add(isSlotNull(13) ? new ItemStack(Material.AIR) : getInventory().getItem(13));
-		items.add(isSlotNull(14) ? new ItemStack(Material.AIR) : getInventory().getItem(14));
-		items.add(isSlotNull(21) ? new ItemStack(Material.AIR) : getInventory().getItem(21));
-		items.add(isSlotNull(22) ? new ItemStack(Material.AIR) : getInventory().getItem(22));
-		items.add(isSlotNull(23) ? new ItemStack(Material.AIR) : getInventory().getItem(23));
+		items.add(isSlotNull(3) ? "AIR" : CCMaterialConverter.getCCOrMaterial(getInventory().getItem(3)));
+		items.add(isSlotNull(4) ? "AIR" : CCMaterialConverter.getCCOrMaterial(getInventory().getItem(4)));
+		items.add(isSlotNull(5) ? "AIR" : CCMaterialConverter.getCCOrMaterial(getInventory().getItem(5)));
+		items.add(isSlotNull(12) ? "AIR" : CCMaterialConverter.getCCOrMaterial(getInventory().getItem(12)));
+		items.add(isSlotNull(13) ? "AIR" : CCMaterialConverter.getCCOrMaterial(getInventory().getItem(13)));
+		items.add(isSlotNull(14) ? "AIR" : CCMaterialConverter.getCCOrMaterial(getInventory().getItem(14)));
+		items.add(isSlotNull(21) ? "AIR" : CCMaterialConverter.getCCOrMaterial(getInventory().getItem(21)));
+		items.add(isSlotNull(22) ? "AIR" : CCMaterialConverter.getCCOrMaterial(getInventory().getItem(22)));
+		items.add(isSlotNull(23) ? "AIR" : CCMaterialConverter.getCCOrMaterial(getInventory().getItem(23)));
 		
 		return items;
 	}

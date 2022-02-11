@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.DrugCraftingType;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SDObjectType;
+import me.Coderforlife.SimpleDrugs.Util.CCMaterialConverter;
 import net.md_5.bungee.api.ChatColor;
 
 public class SDFurnaceCInventory extends AbstractSDCInventory {
@@ -45,9 +46,9 @@ public class SDFurnaceCInventory extends AbstractSDCInventory {
 		addNullItem(23);
 	}
 
-	public List<ItemStack> getRecipe() {
-		List<ItemStack> materials = new ArrayList<>();
-		materials.add(getInventory().getItem(4));
+	public List<String> getRecipe() {
+		List<String> materials = new ArrayList<>();
+		materials.add(CCMaterialConverter.getCCOrMaterial(getInventory().getItem(4)));
 		return materials;
 	}
 	

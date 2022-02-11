@@ -201,5 +201,11 @@ public class SDBrewingRecipe extends SDRecipe {
 		}
 		
 	}
+
+	@Override
+	public void createRecipe() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

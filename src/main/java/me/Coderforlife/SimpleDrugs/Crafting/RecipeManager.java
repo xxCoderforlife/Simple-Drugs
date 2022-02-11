@@ -6,11 +6,7 @@ import java.util.List;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 
-import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.DrugCraftingType;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
@@ -38,6 +34,18 @@ public class RecipeManager {
 	
 	public void addKey(NamespacedKey key) {
 		keys.add(key);
+	}
+	
+	public void convertAllRecipes() {
+		for(SDRecipe recipe : recipes) {
+			recipe.convertItems();
+		}
+	}
+	
+	public void addAllRecipes() {
+		for(SDRecipe recipe : recipes) {
+			recipe.createRecipe();
+		}
 	}
 	
 	public SDRecipe getRecipeFromResult(ItemStack result) {
@@ -74,13 +82,13 @@ public class RecipeManager {
 	}
 	
 	public boolean itemsMatch(ItemStack[] items, SDShapeless shapeless) {
-		List<ItemStack> sdItems = new ArrayList<>(shapeless.getItems());
+		List<ItemStack> sdItems = new ArrayList<>(shapeless.getConvertedItems());
 		for(ItemStack i : items) {
 			if(i == null) continue;
 			ItemStack newI = i.clone();
 			if(newI == null) continue;
 			newI.setAmount(1);
-			if(shapeless.getItems().contains(newI)) {
+			if(shapeless.getConvertedItems().contains(newI)) {
 				sdItems.remove(newI);
 			}
 		}
@@ -91,19 +99,10 @@ public class RecipeManager {
 		}
 	}
 	
-	public SDRecipe loadRecipe(SDCraftableItem item, List<ItemStack> items, DrugCraftingType dct) {
+	public SDRecipe loadRecipe(SDCraftableItem item, List<String> items, DrugCraftingType dct) {
 		switch(dct) {
 		case FURNACE:
-			ItemStack fItem = items.get(0);
-			
-			if(fItem.hasItemMeta()) {
-				ItemMeta im = fItem.getItemMeta();
-				PersistentDataContainer pdc = im.getPersistentDataContainer();
-				if(pdc.has(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) && (pdc.get(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) == (byte)1)) {
-					fItem = Main.plugin.getCraftingManager().getItem(pdc.get(Main.plugin.getCraftingComponentName(), PersistentDataType.STRING)).getItem();
-				}
-			}
-			
+			String fItem = items.get(0);
 			SDFurnace furnace = new SDFurnace("Simple-Drug_" + item.getNamespaceName(), item.getItem(), fItem, 0f, 90);
 			furnace.registerRecipe();
 			return furnace;
@@ -113,17 +112,8 @@ public class RecipeManager {
 			if(items == null) return null;
 			
 			for(int i = 0; i < items.size(); i++) {
-				ItemStack sItem = items.get(i);
-				
-				if(sItem.hasItemMeta()) {
-					ItemMeta im = sItem.getItemMeta();
-					PersistentDataContainer pdc = im.getPersistentDataContainer();
-					if(pdc.has(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) && (pdc.get(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) == (byte)1)) {
-						sItem = Main.plugin.getCraftingManager().getItem(pdc.get(Main.plugin.getCraftingComponentName(), PersistentDataType.STRING)).getItem();
-					}
-				}
-				
-				shaped.addItemStack(items.get(i));
+				String sItem = items.get(i);	
+				shaped.addItemStack(sItem);
 			}
 			
 			shaped.registerRecipe();
@@ -131,18 +121,11 @@ public class RecipeManager {
 		case SHAPELESS:
 			SDShapeless shapeless = new SDShapeless("Simple-Drug_" + item.getNamespaceName(), item.getItem());
 			
+			if(items == null) return null;
+			
 			items.forEach(e -> {
-				ItemStack sItem = e;
-				
-				if(sItem.hasItemMeta()) {
-					ItemMeta im = sItem.getItemMeta();
-					PersistentDataContainer pdc = im.getPersistentDataContainer();
-					if(pdc.has(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) && (pdc.get(Main.plugin.isCraftingComponent(), PersistentDataType.BYTE) == (byte)1)) {
-						sItem = Main.plugin.getCraftingManager().getItem(pdc.get(Main.plugin.getCraftingComponentName(), PersistentDataType.STRING)).getItem();
-					}
-				}
-				
-				shapeless.addItemStack(e);
+				String sItem = e;
+				shapeless.addItemStack(sItem);
 			});
 			
 			shapeless.registerRecipe();

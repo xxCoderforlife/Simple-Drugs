@@ -11,7 +11,6 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
-import me.Coderforlife.SimpleDrugs.Util.CCMaterialConverter;
 
 public class SDFurnaceAdapter implements JsonSerializer<SDFurnace>, JsonDeserializer<SDFurnace> {
 
@@ -21,7 +20,7 @@ public class SDFurnaceAdapter implements JsonSerializer<SDFurnace>, JsonDeserial
 		SDFurnace furnace = new SDFurnace();
 		
 		JsonObject jo = json.getAsJsonObject();
-		furnace.getItems().add(CCMaterialConverter.getCCOrMaterial(null, jo.get("item").getAsString().toUpperCase()));
+		furnace.getItems().add(jo.get("item").getAsString().toUpperCase());
 		
 		return furnace;
 	}
@@ -29,7 +28,7 @@ public class SDFurnaceAdapter implements JsonSerializer<SDFurnace>, JsonDeserial
 	@Override
 	public JsonElement serialize(SDFurnace src, Type typeOfSrc, JsonSerializationContext context) {
 		JsonObject main = new JsonObject();
-		main.addProperty("item", CCMaterialConverter.getCCOrMaterial(src.getItems().get(0)));
+		main.addProperty("item", src.getItems().get(0));
 		return main;
 	}
 

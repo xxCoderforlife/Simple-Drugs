@@ -2,8 +2,6 @@ package me.Coderforlife.SimpleDrugs.Util.GsonAdapaters.Recipes.RecipeType;
 
 import java.lang.reflect.Type;
 
-import org.bukkit.inventory.ItemStack;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -14,7 +12,6 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
-import me.Coderforlife.SimpleDrugs.Util.CCMaterialConverter;
 
 public class SDShapelessAdapter implements JsonSerializer<SDShapeless>, JsonDeserializer<SDShapeless> {
 
@@ -27,7 +24,7 @@ public class SDShapelessAdapter implements JsonSerializer<SDShapeless>, JsonDese
 		JsonArray ja = jo.get("items").getAsJsonArray();
 		
 		for(JsonElement je : ja) {
-			shapeless.addItemStack(CCMaterialConverter.getCCOrMaterial(null, je.getAsString().toUpperCase()));
+			shapeless.addItemStack(je.getAsString().toUpperCase());
 		}
 		
 		return shapeless;
@@ -37,8 +34,8 @@ public class SDShapelessAdapter implements JsonSerializer<SDShapeless>, JsonDese
 	public JsonElement serialize(SDShapeless src, Type typeOfSrc, JsonSerializationContext context) {
 		JsonObject items = new JsonObject();
 		JsonArray ja = new JsonArray();
-		for(ItemStack i : src.getItems()) {
-			ja.add(CCMaterialConverter.getCCOrMaterial(i));
+		for(String i : src.getItems()) {
+			ja.add(i);
 		}
 		items.add("items", ja);
 		return items;

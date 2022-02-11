@@ -38,7 +38,7 @@ public class CCManager extends AbstractSDCraftableManager<CraftingComponent> {
 		typeAdapters.put(ItemStack.class, new ItemStackAdapter());
 		typeAdapters.put(CraftingComponent.class, new CraftingComponentAdapter());
 	}
-
+	
 	public void createFromJson(String fileName, JsonObject jo) {
 		Gson gson = builder.create();
 		CraftingComponent cc = gson.fromJson(jo, CraftingComponent.class);
@@ -92,9 +92,10 @@ public class CCManager extends AbstractSDCraftableManager<CraftingComponent> {
 		if(getItems().containsKey(name.toUpperCase())) getItems().remove(name.toUpperCase());
     	
 		@SuppressWarnings("unchecked")
-		SDRecipe sd = Main.plugin.getRecipeManager().loadRecipe(cc, (List<ItemStack>)ad.getOptionValues().get("Recipe"), (DrugCraftingType)ad.getOptionValues().get("RecipeType"));
+		SDRecipe sd = Main.plugin.getRecipeManager().loadRecipe(cc, (List<String>)ad.getOptionValues().get("Recipe"), (DrugCraftingType)ad.getOptionValues().get("RecipeType"));
 		cc.setRecipe(sd);
-		sd.registerRecipe();
+		sd.convertItems();
+		sd.createRecipe();
 		
     	addItem(name.toUpperCase(), cc);
     	saveFile(cc);

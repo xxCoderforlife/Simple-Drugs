@@ -16,28 +16,33 @@ public class SDShaped extends SDRecipe {
 		super(name, r);
 	}
 	
-	public void addItemStack(ItemStack i) {
+	public void addItemStack(String i) {
 		items.add(i);
 	}
 
 	@Override
 	public void registerRecipe() {
-		NamespacedKey nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + getName());
+		nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + getName());
+		registerNamespacedKey(nk);
+		Main.plugin.getRecipeManager().addRecipe(this);
+	}
+
+	@Override
+	public void createRecipe() {
 		Bukkit.getServer().removeRecipe(nk);
 		ShapedRecipe r = new ShapedRecipe(nk, getResult());
 		r.shape("ABC", "DEF", "GHI");
-		r.setIngredient('A', new RecipeChoice.ExactChoice(items.get(0)));
-		r.setIngredient('B', new RecipeChoice.ExactChoice(items.get(1)));
-		r.setIngredient('C', new RecipeChoice.ExactChoice(items.get(2)));
-		r.setIngredient('D', new RecipeChoice.ExactChoice(items.get(3)));
-		r.setIngredient('E', new RecipeChoice.ExactChoice(items.get(4)));
-		r.setIngredient('F', new RecipeChoice.ExactChoice(items.get(5)));
-		r.setIngredient('G', new RecipeChoice.ExactChoice(items.get(6)));
-		r.setIngredient('H', new RecipeChoice.ExactChoice(items.get(7)));
-		r.setIngredient('I', new RecipeChoice.ExactChoice(items.get(8)));
-		registerNamespacedKey(nk);
+		r.setIngredient('A', new RecipeChoice.ExactChoice(convertedItems.get(0)));
+		r.setIngredient('B', new RecipeChoice.ExactChoice(convertedItems.get(1)));
+		r.setIngredient('C', new RecipeChoice.ExactChoice(convertedItems.get(2)));
+		r.setIngredient('D', new RecipeChoice.ExactChoice(convertedItems.get(3)));
+		r.setIngredient('E', new RecipeChoice.ExactChoice(convertedItems.get(4)));
+		r.setIngredient('F', new RecipeChoice.ExactChoice(convertedItems.get(5)));
+		r.setIngredient('G', new RecipeChoice.ExactChoice(convertedItems.get(6)));
+		r.setIngredient('H', new RecipeChoice.ExactChoice(convertedItems.get(7)));
+		r.setIngredient('I', new RecipeChoice.ExactChoice(convertedItems.get(8)));
+		
 		Bukkit.getServer().addRecipe(r);
-		Main.plugin.getRecipeManager().addRecipe(this);
 	}
 	
 }
