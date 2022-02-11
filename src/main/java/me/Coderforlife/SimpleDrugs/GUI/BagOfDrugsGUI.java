@@ -148,7 +148,8 @@ public class BagOfDrugsGUI implements Listener {
             stack.add(new ItemStack(Material.AIR));
         }
 
-        for(int i = 0; i < 8; i++) {
+        stack.add(BackwardButton(false, 1));
+        for(int i = 0; i < 7; i++) {
             stack.add(GreyGlassPane());
         }
         stack.add(ForwardButton(drugs.size() > maxdrugs, 2));
@@ -176,7 +177,7 @@ public class BagOfDrugsGUI implements Listener {
             stack.add(new ItemStack(Material.AIR));
         }
 
-        stack.add(BackwardButton(true, page - 1));
+        stack.add(BackwardButton(page > 1, page - 1));
         for(int i = 0; i < 7; i++) {
             stack.add(GreyGlassPane());
         }
@@ -197,27 +198,25 @@ public class BagOfDrugsGUI implements Listener {
     }
 
     private ItemStack ForwardButton(boolean active, int page) {
+        if(!active)
+            return GreyGlassPane();
+
         ItemStack stack = new ItemStack(Material.ARROW);
         ItemMeta meta = stack.getItemMeta();
         assert meta != null;
         meta.setDisplayName("§6Page " + page);
-        if(!active) {
-            stack.setType(Material.BARRIER);
-            meta.setDisplayName("§cYou are at the last page");
-        }
         stack.setItemMeta(meta);
         return stack;
     }
 
     private ItemStack BackwardButton(boolean active, int page) {
+        if(!active)
+            return GreyGlassPane();
+
         ItemStack stack = new ItemStack(Material.ARROW);
         ItemMeta meta = stack.getItemMeta();
         assert meta != null;
         meta.setDisplayName("§6Page " + page);
-        if(!active) {
-            stack.setType(Material.BARRIER);
-            meta.setDisplayName("§cYou are at the first page");
-        }
         stack.setItemMeta(meta);
         return stack;
     }
