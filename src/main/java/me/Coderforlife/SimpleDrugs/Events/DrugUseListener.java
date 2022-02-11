@@ -42,7 +42,7 @@ public class DrugUseListener implements Listener {
         if(ev.getHand().equals(EquipmentSlot.OFF_HAND))
             return;
 
-        if(!p.hasPermission(drug.getPermission())) {
+        if(!p.hasPermission(drug.getPermission().toLowerCase())) {
             p.sendMessage(plugin.getMessages().getPrefix() + "§4You can't use " + drug.getName());
             return;
         }

@@ -101,7 +101,7 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
 	public Drug matchDrug(@Nullable ItemStack item) {
 		if(isDrugItem(item)){
 			for(Drug drug : getItems().values()) {
-				if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(drug.getDisplayName())) {
+				if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', drug.getDisplayName()))) {
 					return drug;
 				}
 			}
@@ -114,7 +114,7 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
 			return false;
 		}
         for(Drug d : getItems().values()) {
-            if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(d.getDisplayName())) {
+            if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', d.getDisplayName()))) {
                 return true;
             }
         }
