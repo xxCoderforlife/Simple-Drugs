@@ -46,7 +46,8 @@ public class SDRecipeInventory implements Listener {
 
     public void createSDRecipeInventory(Player p) {
         if (drug.getRecipe() instanceof SDShapeless) {
-            inv = Bukkit.createInventory(null, InventoryType.WORKBENCH, "inventoryName");
+            inv = Bukkit.createInventory(null, InventoryType.WORKBENCH, 
+            ChatColor.translateAlternateColorCodes('&', drug.getDisplayName() + " &6&lRecipe"));
 
             SDShapeless recipe = (SDShapeless) drug.getRecipe();
             inv.setItem(0, drug.getItem());
@@ -70,8 +71,8 @@ public class SDRecipeInventory implements Listener {
         }
 
         if (drug.getRecipe() instanceof SDShaped) {
-            inv = Bukkit.createInventory(null, InventoryType.WORKBENCH, drug.getDisplayName() +
-            ChatColor.translateAlternateColorCodes('&', " &6&lRecipe"));
+            inv = Bukkit.createInventory(null, InventoryType.WORKBENCH,
+            ChatColor.translateAlternateColorCodes('&', drug.getDisplayName() + " &6&lRecipe"));
             // ArrayList<ItemStack> stack = new ArrayList<>();
 
             SDShaped recipe1 = (SDShaped) drug.getRecipe();
@@ -98,8 +99,8 @@ public class SDRecipeInventory implements Listener {
             ItemStack charcoal = new ItemStack(Material.CHARCOAL);
             ItemStack blaze = new ItemStack(Material.BLAZE_POWDER);
             ItemStack tool = new ItemStack(Material.WOODEN_PICKAXE);
-            inv = Bukkit.createInventory(null, InventoryType.FURNACE, drug.getDisplayName() + 
-                    ChatColor.translateAlternateColorCodes('&', " &6&lRecipe"));
+            inv = Bukkit.createInventory(null, InventoryType.FURNACE,
+            ChatColor.translateAlternateColorCodes('&', drug.getDisplayName() + " &6&lRecipe"));
             SDFurnace recipe = (SDFurnace) drug.getRecipe();
             inv.setItem(0, CCMaterialConverter.getCCOrMaterial(null, recipe.getItems().get(0)));
             inv.setItem(2, drug.getItem());

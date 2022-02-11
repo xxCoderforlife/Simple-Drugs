@@ -148,7 +148,7 @@ public class Drug implements SDCraftableItem {
     }
 
     public String getDisplayName() {
-        return displayname;
+        return ChatColor.translateAlternateColorCodes('&', displayname);
     }
 
     public void setDisplayname(String displayname) {
