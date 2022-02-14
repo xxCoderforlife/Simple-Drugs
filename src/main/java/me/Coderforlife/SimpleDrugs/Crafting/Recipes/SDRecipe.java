@@ -11,7 +11,6 @@ import me.Coderforlife.SimpleDrugs.Util.CCMaterialConverter;
 
 public abstract class SDRecipe {
 
-	private String name;
 	private ItemStack result;
 	protected List<String> items = new ArrayList<>();
 	protected List<ItemStack> convertedItems = new ArrayList<>();
@@ -21,9 +20,8 @@ public abstract class SDRecipe {
 		
 	}
 	
-	public SDRecipe(String n, ItemStack r) {
+	public SDRecipe(ItemStack r) {
 		result = r;
-		name = n;
 	}
 	
 	public ItemStack getResult() {
@@ -32,14 +30,6 @@ public abstract class SDRecipe {
 	
 	public void setResult(ItemStack item) {
 		result = item;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String s) {
-		name = s;
 	}
 	
 	public List<String> getItems() {

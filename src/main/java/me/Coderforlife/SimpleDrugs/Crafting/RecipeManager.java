@@ -19,6 +19,7 @@ public class RecipeManager {
 	private List<SDRecipe> recipes = new ArrayList<>();
 	private List<NamespacedKey> keys = new ArrayList<>();
 	private List<SDBrewingRecipe> brewingRecipes = new ArrayList<>();
+	private int recipeNum = 0;
 	
 	public void addRecipe(SDShapeless r) {
 		recipes.add(r);
@@ -34,6 +35,11 @@ public class RecipeManager {
 	
 	public void addKey(NamespacedKey key) {
 		keys.add(key);
+	}
+	
+	public Integer getRecipeNum() {
+		recipeNum += 1;
+		return recipeNum;
 	}
 	
 	public void convertAllRecipes() {
@@ -103,11 +109,11 @@ public class RecipeManager {
 		switch(dct) {
 		case FURNACE:
 			String fItem = items.get(0);
-			SDFurnace furnace = new SDFurnace("Simple-Drug_" + item.getNamespaceName(), item.getItem(), fItem, 0f, 90);
+			SDFurnace furnace = new SDFurnace(item.getItem(), fItem, 0f, 90);
 			furnace.registerRecipe();
 			return furnace;
 		case SHAPED:
-			SDShaped shaped = new SDShaped("Simple-Drug_" + item.getNamespaceName(), item.getItem());
+			SDShaped shaped = new SDShaped(item.getItem());
 			
 			if(items == null) return null;
 			
@@ -119,7 +125,7 @@ public class RecipeManager {
 			shaped.registerRecipe();
 			return shaped;
 		case SHAPELESS:
-			SDShapeless shapeless = new SDShapeless("Simple-Drug_" + item.getNamespaceName(), item.getItem());
+			SDShapeless shapeless = new SDShapeless(item.getItem());
 			
 			if(items == null) return null;
 			

@@ -20,8 +20,8 @@ public class SDBrewingRecipe extends SDRecipe {
 	private BrewClock clock;
 	private int timeToBrew;
 	
-	public SDBrewingRecipe(String n, ItemStack result, ItemStack in, ItemStack f, ItemStack inp, int fs, int fc, int fuelTime) {
-		super(n, result);
+	public SDBrewingRecipe(ItemStack result, ItemStack in, ItemStack f, ItemStack inp, int fs, int fc, int fuelTime) {
+		super(result);
 		ingredient = in;
 		input = inp;
 		fuel = f;

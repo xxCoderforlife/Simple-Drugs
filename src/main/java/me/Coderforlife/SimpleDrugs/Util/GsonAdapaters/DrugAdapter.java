@@ -16,6 +16,7 @@ import com.google.gson.JsonSerializer;
 
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.Util.DrugEffect;
+import me.Coderforlife.SimpleDrugs.Util.CCMaterialConverter;
 import net.md_5.bungee.api.ChatColor;
 
 public class DrugAdapter implements JsonSerializer<Drug>, JsonDeserializer<Drug> {
@@ -26,7 +27,7 @@ public class DrugAdapter implements JsonSerializer<Drug>, JsonDeserializer<Drug>
 		
 		JsonObject jo = json.getAsJsonObject();
 		
-		String name = ChatColor.stripColor(jo.get("name").getAsString());
+		String name = ChatColor.stripColor(CCMaterialConverter.createUpperCase(jo.get("name").getAsString()));
 		String displayname = jo.get("displayname").getAsString();
 		Material item = Material.getMaterial(jo.get("item").getAsString().toUpperCase());
 		
@@ -49,7 +50,7 @@ public class DrugAdapter implements JsonSerializer<Drug>, JsonDeserializer<Drug>
 	public JsonElement serialize(Drug src, Type typeOfSrc, JsonSerializationContext context) {
 		JsonObject main = new JsonObject();
 		
-		main.addProperty("name", src.getName());
+		main.addProperty("name", CCMaterialConverter.createUpperCase(src.getName()));
 		main.addProperty("displayname", src.getDisplayName());
 		
 		JsonArray effects = new JsonArray();

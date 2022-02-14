@@ -15,8 +15,8 @@ public class SDFurnace extends SDRecipe {
 	
 	public SDFurnace() {}
 	
-	public SDFurnace(String n, ItemStack result, String inputItem, Float xpToGive, Integer timeToCook) {
-		super(n, result);
+	public SDFurnace(ItemStack result, String inputItem, Float xpToGive, Integer timeToCook) {
+		super(result);
 		getItems().add(inputItem);
 		xp = xpToGive;
 		time = timeToCook;
@@ -24,7 +24,7 @@ public class SDFurnace extends SDRecipe {
 
 	@Override
 	public void registerRecipe() {
-		nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + getName());
+		nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + String.valueOf(Main.plugin.getRecipeManager().getRecipeNum()));
 		registerNamespacedKey(nk);
 		Main.plugin.getRecipeManager().addRecipe(this);
 	}

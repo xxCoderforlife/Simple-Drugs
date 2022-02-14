@@ -17,7 +17,7 @@ public class SDShapedAdapter implements JsonSerializer<SDShaped>, JsonDeserializ
 	@Override
 	public SDShaped deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
-		SDShaped recipe = new SDShaped(null, null);
+		SDShaped recipe = new SDShaped(null);
 		
 		JsonObject main = json.getAsJsonObject();
 		

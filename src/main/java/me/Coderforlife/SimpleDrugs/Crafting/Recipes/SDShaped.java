@@ -12,8 +12,8 @@ public class SDShaped extends SDRecipe {
 	
 	public SDShaped() {}
 	
-	public SDShaped(String name, ItemStack r) {
-		super(name, r);
+	public SDShaped(ItemStack r) {
+		super(r);
 	}
 	
 	public void addItemStack(String i) {
@@ -22,7 +22,7 @@ public class SDShaped extends SDRecipe {
 
 	@Override
 	public void registerRecipe() {
-		nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + getName());
+		nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + String.valueOf(Main.plugin.getRecipeManager().getRecipeNum()));
 		registerNamespacedKey(nk);
 		Main.plugin.getRecipeManager().addRecipe(this);
 	}

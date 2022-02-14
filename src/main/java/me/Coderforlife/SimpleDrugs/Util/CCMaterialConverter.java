@@ -1,5 +1,7 @@
 package me.Coderforlife.SimpleDrugs.Util;
 
+import java.nio.charset.StandardCharsets;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -12,6 +14,16 @@ import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.CraftingComponent;
 
 public class CCMaterialConverter {
 
+	public static String createUpperCase(String input) {
+		byte[] bytes = input.replaceAll(" ", "_").getBytes(StandardCharsets.UTF_8);
+		String EncodedString = new String(bytes, StandardCharsets.UTF_8);
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < EncodedString.length(); i++) {
+			sb.append(Character.toUpperCase(EncodedString.charAt(i)));
+		}
+		return sb.toString();
+	}
+	
 	public static ItemStack getCCOrMaterial(String fileName, String name) {
 		Material m = Material.getMaterial(name.toUpperCase());
 		if(m == null) {

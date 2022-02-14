@@ -41,7 +41,6 @@ public class DrugRecipeAdapter implements JsonSerializer<DrugRecipe>, JsonDeseri
 			break;
 		}
 		
-		rec.setName(d.getNamespaceName());
 		rec.setResult(d.getItem());
 		
 		DrugRecipe dr = new DrugRecipe(d, rec);

@@ -22,6 +22,7 @@ import com.google.gson.JsonSyntaxException;
 import me.Coderforlife.SimpleDrugs.Crafting.SDCraftableItem;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.InventoryAddons;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
+import net.md_5.bungee.api.ChatColor;
 
 public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 
@@ -42,11 +43,15 @@ public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 	}
 	
 	public E getItem(String name) {
-		return items.get(name.toUpperCase());
+		String EncodedString = CCMaterialConverter.createUpperCase(name);
+		Bukkit.getConsoleSender().sendMessage("Getting: " + ChatColor.RED + EncodedString);
+		return items.get(EncodedString);
 	}
 	
 	public void addItem(String name, E item) {
-		items.put(name.replaceAll(" ", "_").toUpperCase(), item);
+		String EncodedString = CCMaterialConverter.createUpperCase(name);
+		Bukkit.getConsoleSender().sendMessage("Adding: " + ChatColor.RED + EncodedString);
+		items.put(EncodedString, item);
 	}
 	
 	public Map<String, E> getItems() {
@@ -54,11 +59,11 @@ public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 	}
 	
 	public void removeItem(String name) {
-		if(items.containsKey(name.replaceAll(" ", "_").toUpperCase())) {
-			File f = new File(items.get(name.replaceAll(" ", "_").toUpperCase()).getFile());
+		if(items.containsKey(CCMaterialConverter.createUpperCase(name))) {
+			File f = new File(items.get(CCMaterialConverter.createUpperCase(name)).getFile());
 			if(f.exists()) f.delete();
 		}
-		items.remove(name);
+		items.remove(CCMaterialConverter.createUpperCase(name));
 	}
 	
 	public File getMainFile() {
@@ -109,7 +114,7 @@ public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 		
 		StringJoiner enabled = new StringJoiner(", ");
     	for(E e : getItems().values()) {
-    		enabled.add(e.getName());
+    		enabled.add(CCMaterialConverter.createUpperCase(e.getName()));
     	}
     	if(enabled.length() > 0) sendConsoleMessage("§6Enabled: §a" + enabled.toString().trim());
 	}
@@ -118,7 +123,6 @@ public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 	protected abstract void registerTypeAdapters();
 	public abstract void createFromJson(String fileName, JsonObject jo);
 	protected abstract DrugLoadError canMake(String fileName, JsonObject jo);
-	
 	
 	protected void sendConsoleMessage(String message) {
         Bukkit.getConsoleSender().sendMessage(message);

@@ -18,6 +18,7 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDFurnace;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDRecipe;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
+import me.Coderforlife.SimpleDrugs.Util.CCMaterialConverter;
 
 public class CraftingComponentAdapter implements JsonSerializer<CraftingComponent>, JsonDeserializer<CraftingComponent> {
 
@@ -27,7 +28,7 @@ public class CraftingComponentAdapter implements JsonSerializer<CraftingComponen
 		
 		JsonObject main = je.getAsJsonObject();
 		
-		String name = main.get("name").getAsString();
+		String name = CCMaterialConverter.createUpperCase(main.get("name").getAsString());
 		DrugCraftingType dct = DrugCraftingType.valueOf(main.get("type").getAsString());
 		ItemStack item = jdc.deserialize(main.get("item"), ItemStack.class);
 		SDRecipe rec = null;
@@ -45,7 +46,6 @@ public class CraftingComponentAdapter implements JsonSerializer<CraftingComponen
 		
 		rec.setResult(item);
 		CraftingComponent cc = new CraftingComponent(name, item.getItemMeta().getDisplayName(), item);
-		rec.setName(cc.getNamespaceName());
 		cc.setRecipe(rec);
 		return cc;
 	}
@@ -54,7 +54,7 @@ public class CraftingComponentAdapter implements JsonSerializer<CraftingComponen
 	public JsonElement serialize(CraftingComponent cc, Type arg1, JsonSerializationContext jsc) {
 		JsonObject jo = new JsonObject();
 		
-		jo.addProperty("name", cc.getName());
+		jo.addProperty("name", CCMaterialConverter.createUpperCase(cc.getName()));
 		if(cc.getRecipe() instanceof SDShaped) {
 			jo.addProperty("type", "SHAPED");
 		} else if (cc.getRecipe() instanceof SDShapeless) {

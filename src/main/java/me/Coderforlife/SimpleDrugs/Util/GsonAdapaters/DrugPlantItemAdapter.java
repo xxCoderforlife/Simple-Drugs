@@ -21,6 +21,7 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.DrugPlants.DrugPlantItem;
+import me.Coderforlife.SimpleDrugs.Util.CCMaterialConverter;
 
 public class DrugPlantItemAdapter implements JsonSerializer<DrugPlantItem>, JsonDeserializer<DrugPlantItem> {
 
@@ -28,7 +29,7 @@ public class DrugPlantItemAdapter implements JsonSerializer<DrugPlantItem>, Json
 	public DrugPlantItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
 		JsonObject jo = json.getAsJsonObject();
-		Drug d = Main.plugin.getDrugManager().getItem(jo.get("drug").getAsString().toUpperCase());
+		Drug d = Main.plugin.getDrugManager().getItem(CCMaterialConverter.createUpperCase(jo.get("drug").getAsString()));
 		DrugCraftingType dct = DrugCraftingType.valueOf(jo.get("type").getAsString().toUpperCase());
 		ItemStack item = context.deserialize(jo.get("seed-item"), ItemStack.class);
 		SDRecipe rec = null;
@@ -48,7 +49,6 @@ public class DrugPlantItemAdapter implements JsonSerializer<DrugPlantItem>, Json
 		
 		DrugPlantItem dpi = new DrugPlantItem(d, item, Material.FARMLAND, amount);
 		
-		rec.setName(dpi.getNamespaceName());
 		rec.setResult(dpi.makeItem());
 		
 		dpi.setRecipe(rec);
@@ -59,7 +59,7 @@ public class DrugPlantItemAdapter implements JsonSerializer<DrugPlantItem>, Json
 	public JsonElement serialize(DrugPlantItem src, Type typeOfSrc, JsonSerializationContext context) {
 		JsonObject jo = new JsonObject();
 		
-		jo.addProperty("drug", src.getDrug().getName().toUpperCase());
+		jo.addProperty("drug", CCMaterialConverter.createUpperCase(src.getDrug().getName()));
 		if(src.getRecipe() instanceof SDShaped) {
 			jo.addProperty("type", "SHAPED");
 		} else if (src.getRecipe() instanceof SDShapeless) {

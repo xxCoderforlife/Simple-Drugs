@@ -12,8 +12,8 @@ public class SDShapeless extends SDRecipe {
 	
 	public SDShapeless() {}
 	
-	public SDShapeless(String name, ItemStack result) {
-		super(name, result);
+	public SDShapeless(ItemStack result) {
+		super(result);
 	}
 	
 	public void addItemStack(String i) {
@@ -21,7 +21,7 @@ public class SDShapeless extends SDRecipe {
 	}
 	
 	public void registerRecipe() {
-		nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + getName());
+		nk = new NamespacedKey(Main.plugin, "drugs_crafting_" + String.valueOf(Main.plugin.getRecipeManager().getRecipeNum()));
 		registerNamespacedKey(nk);
 		Main.plugin.getRecipeManager().addRecipe(this);
 	}
