@@ -22,7 +22,6 @@ import com.google.gson.JsonSyntaxException;
 import me.Coderforlife.SimpleDrugs.Crafting.SDCraftableItem;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.InventoryAddons;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
-import net.md_5.bungee.api.ChatColor;
 
 public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 
@@ -44,13 +43,11 @@ public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 	
 	public E getItem(String name) {
 		String EncodedString = CCMaterialConverter.createUpperCase(name);
-		Bukkit.getConsoleSender().sendMessage("Getting: " + ChatColor.RED + EncodedString);
 		return items.get(EncodedString);
 	}
 	
 	public void addItem(String name, E item) {
 		String EncodedString = CCMaterialConverter.createUpperCase(name);
-		Bukkit.getConsoleSender().sendMessage("Adding: " + ChatColor.RED + EncodedString);
 		items.put(EncodedString, item);
 	}
 	
