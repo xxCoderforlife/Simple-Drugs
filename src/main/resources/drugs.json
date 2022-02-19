@@ -26,7 +26,8 @@
       ],
       "item":"GREEN_DYE",
       "permission":"drugs.use.weed",
-      "addictionLevel": 0.1
+      "addictionLevel": 0.1,
+      "craftingpermission": "drugs.craft.weed"
    },
    {
       "name":"Percocet",
@@ -55,7 +56,8 @@
       ],
       "item":"PUMPKIN_SEEDS",
       "permission":"drugs.use.percocet",
-      "addictionLevel": 0.3
+      "addictionLevel": 0.3,
+      "craftingpermission":"drugs.craft.percocet"
    },
    {
       "name":"Acid",
@@ -84,7 +86,8 @@
       ],
       "item":"PAPER",
       "permission":"drugs.use.acid",
-      "addictionLevel": 0.4
+      "addictionLevel": 0.4,
+      "craftingpermission": "drugs.craft.acid"
    },
    {
       "name":"Coke",
@@ -113,7 +116,8 @@
       ],
       "item":"SUGAR",
       "permission":"drugs.use.coke",
-      "addictionLevel": 0.5
+      "addictionLevel": 0.5,
+      "craftingpermission":"drugs.craft.coke"
    },
    {
       "name":"Heroin",
@@ -142,7 +146,8 @@
       ],
       "item":"WITHER_ROSE",
       "permission":"drugs.use.heroin",
-      "addictionLevel": 0.8
+      "addictionLevel": 0.8,
+      "craftingpermission":"drugs.craft.heroin"
    },
    {
       "name":"Molly",
@@ -176,7 +181,8 @@
       ],
       "item":"IRON_NUGGET",
       "permission":"drugs.use.molly",
-      "addictionLevel": 0.2
+      "addictionLevel": 0.2,
+      "craftingpermission":"drugs.craft.molly"
    },
    {
       "name":"Ciggy",
@@ -205,7 +211,8 @@
       ],
       "item":"REDSTONE_TORCH",
       "permission":"drugs.use.ciggy",
-      "addictionLevel": 0.3
+      "addictionLevel": 0.3,
+      "craftingpermission":"drugs.craft.ciggy" 
    },
    {
       "name":"Shrooms",
@@ -234,7 +241,8 @@
       ],
       "item":"CRIMSON_FUNGUS",
       "permission":"drugs.use.shrooms",
-      "addictionLevel": 0.3
+      "addictionLevel": 0.3,
+      "craftingpermission":"drugs.craft.shrooms"
    },
    {
       "name":"Salvia",
@@ -263,7 +271,8 @@
       ],
       "item":"DRIED_KELP",
       "permission":"drugs.use.salvia",
-      "addictionLevel": 0.2
+      "addictionLevel": 0.2,
+      "craftingpermission":"drugs.craft.salvia" 
    },
    {
       "name":"PCP",
@@ -287,7 +296,8 @@
       ],
       "item":"SPORE_BLOSSOM",
       "permission":"drugs.use.pcp",
-      "addictionLevel": 0.6
+      "addictionLevel": 0.6,
+      "craftingpermission":"drugs.craft.pcp"
    },
    {
       "name":"DMT",
@@ -316,7 +326,8 @@
       ],
       "item":"GLOWSTONE_DUST",
       "permission":"drugs.use.dmt",
-      "addictionLevel": 0.3
+      "addictionLevel": 0.3,
+      "craftingpermission":"drugs.craft.dmt"
    },
    {
       "name":"Alcohol",
@@ -345,7 +356,8 @@
       ],
       "item":"WATER_BUCKET",
       "permission":"drugs.use.alcohol",
-      "addictionLevel": 0.5
+      "addictionLevel": 0.5,
+      "craftingpermission":"drugs.craft.alcohol"
    },
    {
       "name":"Flakka",
@@ -374,7 +386,8 @@
       ],
       "item":"QUARTZ",
       "permission":"drugs.use.flakka",
-      "addictionLevel": 0.4
+      "addictionLevel": 0.4,
+      "craftingpermission":"drugs.craft.flakka"
    },
    {
       "name":"Meth",
@@ -403,7 +416,8 @@
       ],
       "item":"PRISMARINE_SHARD",
       "permission":"drugs.use.meth",
-      "addictionLevel": 0.3
+      "addictionLevel": 0.3,
+      "craftingpermission":"drugs.craft.meth"
    },
    {
       "name":"Ketamine",
@@ -437,7 +451,8 @@
       ],
       "item":"POWDER_SNOW_BUCKET",
       "permission":"drugs.use.ketamine",
-      "addictionLevel": 0.3
+      "addictionLevel": 0.3,
+      "craftingpermission":"drugs.craft.ketamine"
    },
    {
       "name":"Oxy",
@@ -466,7 +481,8 @@
       ],
       "item":"WHITE_DYE",
       "permission":"drugs.use.oxy",
-      "addictionLevel": 0.2
+      "addictionLevel": 0.2,
+      "craftingpermission":"drugs.craft.oxy"
    },
    {
       "name":"Tussin",
@@ -495,7 +511,8 @@
       ],
       "item":"PURPLE_CANDLE",
       "permission":"drugs.use.tussin",
-      "addictionLevel": 0.4
+      "addictionLevel": 0.4,
+      "craftingpermission":"drugs.craft.tussin"
    },
    {
       "name":"Xannx",
@@ -524,6 +541,7 @@
       ],
       "item":"GREEN_CANDLE",
       "permission":"drugs.use.xannx",
-      "addictionLevel": 0.7
+      "addictionLevel": 0.7,
+      "craftingpermission":"drugs.craft.xannx"
    }
 ]

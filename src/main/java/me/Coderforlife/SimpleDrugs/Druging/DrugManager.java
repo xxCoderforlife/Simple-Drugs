@@ -41,8 +41,9 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
     	}
     	String permission = "drugs.use." + name.toLowerCase();
     	Double addLevel = (Double) addons.getOptionValues().get("AddictionLevel");
+		String craftPerm = "drugs.craft." + name.toLowerCase();
     	
-    	Drug d = new Drug(name, disName, ((ItemStack)addons.getOptionValues().get("ResultMaterial")).getType(), drugEffects, permission, addLevel);
+    	Drug d = new Drug(name, disName, ((ItemStack)addons.getOptionValues().get("ResultMaterial")).getType(), drugEffects, permission, addLevel, craftPerm);
     	d.setFile(new File(getMainFile(), name + ".json").getAbsolutePath());
     	
     	if(getItems().containsKey(name.toUpperCase())) getItems().remove(name.toUpperCase());
