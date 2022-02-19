@@ -18,7 +18,7 @@ public class CraftingEvent implements Listener {
         if(e.getInventory().getType().equals(InventoryType.CRAFTING)) {
             for(Drug drugs : Main.plugin.getDrugManager().getItems().values()) {
                 if(e.getInventory().getResult().equals(drugs.getItem())) {
-                    if(!p.hasPermission("drugs.craft." + drugs.getName().toLowerCase())) {
+                    if(!p.hasPermission(drugs.getPermission())) {
                         e.setCancelled(true);
                         p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED + "You don't have permission to use that command.");
                         p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.craft." + drugs.getName());
