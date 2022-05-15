@@ -23,6 +23,7 @@ import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.DrugSelectorInventory;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.InventoryPotionEffect;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.PotionEffectInventoryUtil;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SDObjectType;
+import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SetSeedDropAmountInventory;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.ClickAction;
 import me.Coderforlife.SimpleDrugs.GUI.Framework.InventoryButton;
 import net.md_5.bungee.api.ChatColor;
@@ -66,6 +67,17 @@ public class InventoryAddons {
 			});
 		}
 		
+		if(objectType.equals(SDObjectType.SEED)) {
+			optionBtns.put(11, new InventoryButton(Material.STONE_BUTTON, "&6&lSet Drop Amount: " + String.valueOf((Integer)optionValues.get("HarvestAmount")), "") {
+				@Override
+				public void onPlayerClick(Player p, ClickAction action) {
+					asdci.close(p);
+					SetSeedDropAmountInventory ssdai = new SetSeedDropAmountInventory(asdci);
+					ssdai.open(p);
+				}
+			});
+		}
+		
 		if(craftingType.equals(DrugCraftingType.FURNACE)) {
 			optionBtns.put(22, new InventoryButton(new ItemStack(Material.COAL)) {
 				public void onPlayerClick(Player p, ClickAction action) {}
@@ -93,6 +105,17 @@ public class InventoryAddons {
 				asdci.close(p);
 				DrugSelectorInventory dsi = new DrugSelectorInventory(asdci);
 				dsi.open(p);
+			}
+		});
+	}
+	
+	public void updateSeedAmountButton() {
+		optionBtns.put(11, new InventoryButton(Material.STONE_BUTTON, "&6&lSet Drop Amount: " + String.valueOf((Integer)optionValues.get("HarvestAmount")), "") {
+			@Override
+			public void onPlayerClick(Player p, ClickAction action) {
+				asdci.close(p);
+				SetSeedDropAmountInventory ssdai = new SetSeedDropAmountInventory(asdci);
+				ssdai.open(p);
 			}
 		});
 	}
