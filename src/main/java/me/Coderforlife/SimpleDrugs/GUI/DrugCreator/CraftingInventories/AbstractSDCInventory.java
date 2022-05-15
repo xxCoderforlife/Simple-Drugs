@@ -49,7 +49,7 @@ public abstract class AbstractSDCInventory extends InventoryUI {
 			}
 		}, 8);
 		
-		addButton(new InventoryButton(Material.GREEN_WOOL, "&2&lAdd Item", "") {
+		addButton(new InventoryButton(Material.GREEN_WOOL, "&2&lSave Item", "") {
 			@Override
 			public void onPlayerClick(Player p, ClickAction action) {
 				handleAccept(p);
