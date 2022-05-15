@@ -35,8 +35,9 @@ public class Drug implements SDCraftableItem {
     private ItemStack item;
     private Material mat;
     private String permission;
+    private String carftingPerm;
 
-    public Drug(String name, String displayname, Material item, ArrayList<DrugEffect> effects, String permission, Double addlvl) {
+    public Drug(String name, String displayname, Material item, ArrayList<DrugEffect> effects, String permission, Double addlvl, String carftPerm) {
         this.name = name;
         this.displayname = displayname;
         this.effects = effects;
@@ -44,6 +45,7 @@ public class Drug implements SDCraftableItem {
         this.mat = item;
         this.item = createItem();
         this.addictionLevel = addlvl;
+        this.carftingPerm = carftPerm;
     }
 
     /**
@@ -181,6 +183,10 @@ public class Drug implements SDCraftableItem {
     
     public double getAddictionLevel() {
     	return addictionLevel;
+    }
+
+    public String getCraftingPermission(){
+        return carftingPerm;
     }
 
     @Override

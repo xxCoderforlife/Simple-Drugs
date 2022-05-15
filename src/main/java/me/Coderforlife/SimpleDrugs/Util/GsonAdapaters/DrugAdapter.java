@@ -40,8 +40,9 @@ public class DrugAdapter implements JsonSerializer<Drug>, JsonDeserializer<Drug>
 		
 		String permission = jo.get("permission").getAsString();
 		Double addicLevel = jo.get("addictionLevel").getAsDouble();
+		String craftPerm = jo.get("craftingpermission").getAsString();
 		
-		Drug d = new Drug(name, displayname, item, effects, permission, addicLevel);
+		Drug d = new Drug(name, displayname, item, effects, permission, addicLevel, craftPerm);
 		
 		return d;
 	}
