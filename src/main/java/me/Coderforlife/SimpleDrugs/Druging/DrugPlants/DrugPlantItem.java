@@ -77,7 +77,7 @@ public class DrugPlantItem implements SDCraftableItem {
 	
 	public ItemStack makeItem() {
 		ItemMeta im = plantableItem.getItemMeta();
-		im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&b&o" + drug.getName() + " Seeds"));
+		im.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&b&o" + drug.getDisplayName() + " Seeds"));
 		
 		im.getPersistentDataContainer().set(Main.plugin.getDrugMain(), PersistentDataType.BYTE, (byte)1);
 		im.getPersistentDataContainer().set(Main.plugin.getDrugKey(), PersistentDataType.STRING, drug.getName().toUpperCase());

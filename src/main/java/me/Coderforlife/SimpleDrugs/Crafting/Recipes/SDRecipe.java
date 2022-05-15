@@ -16,9 +16,7 @@ public abstract class SDRecipe {
 	protected List<ItemStack> convertedItems = new ArrayList<>();
 	protected NamespacedKey nk;
 	
-	public SDRecipe() {
-		
-	}
+	public SDRecipe() {}
 	
 	public SDRecipe(ItemStack r) {
 		result = r;
