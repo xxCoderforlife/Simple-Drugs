@@ -64,6 +64,7 @@ public class DrugAdapter implements JsonSerializer<Drug>, JsonDeserializer<Drug>
 		main.addProperty("item", src.getItem().getType().toString());
 		main.addProperty("permission", src.getPermission());
 		main.addProperty("addictionLevel", src.getAddictionLevel());
+		main.addProperty("craftingpermission", src.getCraftingPermission());
 		
 		return main;
 	}
