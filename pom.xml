@@ -7,7 +7,7 @@
 
     <groupId>com.Coderforlife</groupId>
     <artifactId>Simple-Drugs</artifactId>
-    <version>2.7.3-DEV</version>
+    <version>2.7.4-DEV</version>
     <build>
         <plugins>
             <plugin>
@@ -33,7 +33,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.18.2-R0.1-SNAPSHOT</version>
+            <version>1.19-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

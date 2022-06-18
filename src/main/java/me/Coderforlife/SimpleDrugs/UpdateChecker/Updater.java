@@ -35,12 +35,11 @@ public class Updater implements Listener {
             if(spigotVersion == null) {
                 return;
             }
-            String version1 = spigotVersion.replaceAll("[A-Za-z-+.]*", "");
-            String version2 = currVersion.replaceAll("[A-Za-z-+.]*", "");
-            //Added remove 44 so we don't get spammed with an outdated version, message every test.
-            //We can remove this when we post a new spigot update.
-            int spigotVersionINT = Integer.parseInt(version1.replaceAll("44", ""));
-            int currVersionINT = Integer.parseInt(version2);
+            String sVersion = spigotVersion.replaceAll("[A-Za-z-+.]*", "");
+            String cVersion = currVersion.replaceAll("[A-Za-z-+.]*", "");
+            //ALWAYS KEEP FOPMAT THE VERSION NUMBER LIKE THIS: x.x.x-DEV
+            int spigotVersionINT = Integer.parseInt(sVersion);
+            int currVersionINT = Integer.parseInt(cVersion);
             if(spigotVersionINT == currVersionINT) {
                 Bukkit.getConsoleSender().sendMessage(plugin.getMessages().getPrefix() + "Running the most current build " + currVersion);
             } else {
