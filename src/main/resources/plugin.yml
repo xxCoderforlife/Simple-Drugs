@@ -1,6 +1,6 @@
 name: Simple-Drugs
 #Always format the version like: x.x.x-DEV
-version: 2.7.4-DEV
+version: 2.7.5-DEV
 author: xxCoderforlife
 prefix: SD
 softdepend: [ Vault,PlaceHolderAPI ]
@@ -14,7 +14,7 @@ commands:
   drugs:
     permission: drugs.main
     description: Root Command For Simple-Drugs.
-    usage: /[d|drugs] [soberup|help|list|bagofdrugs|reload|recipe]
+    usage: /[d|drugs] [soberup|help|list|bagofdrugs|reload|recipe|give|giveSeed|version|settings]
     aliases: [ d ]
 #PERMISSIONS
 permissions:
@@ -41,6 +41,33 @@ permissions:
     default: true
   drugs.use.settings:
     description: Used for '/drugs settings' command.
+    default: op
+  drugs.soberup.others:
+    description: Used for '/drugs soberup <player>' command.
+    default: op
+  drugs.give:
+    description: Used for '/drugs give <drug>' command.
+    default: op
+  drugs.give.others:
+    description: Used for '/drugs give <drug> <player>' command.
+    default: op
+  drugs.give.seed:
+    description: Used for '/drugs giveSeed <drug>' command.
+    default: op
+  drugs.give.seed.others:
+    description: Used for '/drugs giveSeed <drug> <player>' command.
+    default: op
+  drugs.addiction:
+    description: Used for '/drugs addiction' command.
+    default: true
+  drugs.addiction.others: 
+    description: Used for '/drugs addiction <player>' command.
+    default: op
+  drugs.editor:
+    description: Used for '/drugs editor' command.
+    default: op
+  drugs.version:
+    description: Used for '/drugs version' command.
     default: op
   drugs.use.weed:
     description: To use Weed

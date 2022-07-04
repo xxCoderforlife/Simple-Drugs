@@ -2,6 +2,8 @@ package me.Coderforlife.SimpleDrugs.GUI;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Settings;
+import net.md_5.bungee.api.ChatColor;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -24,7 +26,8 @@ public class SettingsGUI {
     Settings s = plugin.getSettings();
 
     public Inventory create() {
-        Inventory inventory = Bukkit.createInventory(null, (9 * 5), "§6§lDrugs Settings");
+        Inventory inventory = Bukkit.createInventory(null, (9 * 5), ChatColor.translateAlternateColorCodes('&', 
+        "&4&o&lSimple&f&o&l-&4&o&lDrugs &6&o&lSettings"));
 
         ArrayList<ItemStack> items = new ArrayList<>();
 
