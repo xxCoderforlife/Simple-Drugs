@@ -50,7 +50,7 @@ public class Commands implements CommandExecutor {
                     p.sendMessage("§7- §f/drugs reload §8| §fReloads the config.");
                     p.sendMessage("§7- §f/drugs giveSeed §a<drug> §e[player] §8| §fGives you or another player a Drug Seed.");
                     p.sendMessage("§7- §f/drugs recipe §a<drug> §8| §fSee the recipe for a drug.");
-                    p.sendMessage("§7- §f/drugs addiction §a[player] §8| §fCheck your or another player's addiction.");
+                    p.sendMessage("§7- §f/drugs addiction §e[player] §8| §fCheck your or another player's addiction.");
                     p.sendMessage("§7- §f/drugs settings §8| §fOpen the General Settings.");
                     p.sendMessage("§7- §f/drugs editor §8| §fOpen the Drug Editor.");
 
@@ -291,7 +291,7 @@ public class Commands implements CommandExecutor {
                     }
                 } else if(args.length == 3) {
                     if(args[0].equalsIgnoreCase("give")) {
-                        if(p.hasPermission("durgs.give.others")) {
+                        if(p.hasPermission("drugs.give.others")) {
                             for(Drug drugs : Main.plugin.getDrugManager().getItems().values()) {
                                 if(args[1].equalsIgnoreCase(drugs.getName())) {
                                     for(Player players : Bukkit.getOnlinePlayers()) {

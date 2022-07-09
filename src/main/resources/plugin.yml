@@ -1,6 +1,6 @@
 name: Simple-Drugs
 #Always format the version like: x.x.x-DEV
-version: 2.7.5-DEV
+version: 2.7.6-DEV
 author: xxCoderforlife
 prefix: SD
 softdepend: [ Vault,PlaceHolderAPI ]

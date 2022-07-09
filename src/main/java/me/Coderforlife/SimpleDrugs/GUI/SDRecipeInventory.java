@@ -1,7 +1,9 @@
 package me.Coderforlife.SimpleDrugs.GUI;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
@@ -21,6 +23,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import me.Coderforlife.SimpleDrugs.Main;
@@ -30,6 +33,7 @@ import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShaped;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.SDShapeless;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.Brewing.SDBrewingRecipe;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.Druging.Util.DrugEffect;
 import me.Coderforlife.SimpleDrugs.Util.CCMaterialConverter;
 import net.md_5.bungee.api.ChatColor;
 
@@ -45,6 +49,18 @@ public class SDRecipeInventory implements Listener {
     }
 
     public void createSDRecipeInventory(Player p) {
+        ItemMeta im = this.drug.getItem().getItemMeta();
+        List<String> lores = new ArrayList<>();
+        im.getLore().clear();
+        im.setLore(lores);
+        for(DrugEffect ef : this.drug.getEffects()){
+            lores.add(ChatColor.translateAlternateColorCodes('&', 
+            "&7- &6&o" + ef.getEffect().getName()));
+        }
+        lores.add(ChatColor.translateAlternateColorCodes('&', 
+        "&7&oClick to craft."));
+        im.setLore(lores);
+        this.drug.getItem().setItemMeta(im);
         if (drug.getRecipe() instanceof SDShapeless) {
             inv = Bukkit.createInventory(null, InventoryType.WORKBENCH, 
             ChatColor.translateAlternateColorCodes('&', drug.getDisplayName() + " &6&lRecipe"));

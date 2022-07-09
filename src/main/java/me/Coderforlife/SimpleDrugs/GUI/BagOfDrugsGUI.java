@@ -1,6 +1,7 @@
 package me.Coderforlife.SimpleDrugs.GUI;
 
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.Druging.Util.DrugEffect;
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Settings;
 import net.md_5.bungee.api.ChatColor;
@@ -20,7 +21,6 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class BagOfDrugsGUI implements Listener {
     private ItemStack bag = BagOfDrugsStack();
     private final int maxdrugs = 45;
     public final String bagName = "§6§lBag Of Drugs";
-    public final String invName = "§6§l§oBag Of Drugs";
+    public final String invName = "             §6§l§oBag Of Drugs";
 
     @EventHandler
     public void BagOpen(PlayerInteractEvent ev) {
@@ -67,7 +67,8 @@ public class BagOfDrugsGUI implements Listener {
                     p.openInventory(create());
                 }
             } else {
-                //TODO Add perm message
+                p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED + "You don't have permission to use that command.");
+                p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: " + ChatColor.WHITE + "drugs.use.bagofdrugs");
             }
         }
     }
@@ -80,13 +81,13 @@ public class BagOfDrugsGUI implements Listener {
             return;
         }
 
-        if(Main.plugin.getSettings().isBagOfDrugs_CanMove()) {
-            if(!clickedItem.hasItemMeta())
+        if(!Main.plugin.getSettings().isBagOfDrugs_CanMove()) {
+            if(!clickedItem.hasItemMeta()){
                 return;
-            if(clickedItem.getItemMeta().getDisplayName().equals(invName)) {
-                ev.setCancelled(true);
-                p.getItemOnCursor();
-                p.setItemOnCursor(null);
+            }
+            if(clickedItem.getItemMeta().getDisplayName().equals(bagName)) {
+                p.setItemOnCursor(new ItemStack(Material.AIR));
+                ev.setCancelled(true);                
             }
         }
 
@@ -111,17 +112,39 @@ public class BagOfDrugsGUI implements Listener {
             Drug d = plugin.getDrugManager().matchDrug(clickedItem);
             if(ev.getClick() == ClickType.LEFT) {
                 ItemStack drug = d.getItem();
+                ItemMeta im = drug.getItemMeta();
+                List<String> lores = new ArrayList<>();
+                lores.clear();
+                im.setLore(lores);
+                for(DrugEffect de : d.getEffects()){
+                    lores.add(ChatColor.translateAlternateColorCodes('&', 
+                    "&7- &6&o" + de.getEffect().getName()));
+                }
                 drug.setAmount(1);
+                im.setLore(lores);
+                drug.setItemMeta(im);
                 p.getInventory().addItem(drug);
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
                 p.sendMessage(
-                        plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', "You've been given " + d.getDisplayName()));
+                        plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', "&oYou've been given " + d.getDisplayName()));
 
             } else if(ev.getClick() == ClickType.SHIFT_LEFT) {
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
                 ItemStack d64 = d.getItem();
+                ItemMeta im = d64.getItemMeta();
+                im.getLore().clear();
+                List<String> lores = new ArrayList<>();
+                im.setLore(lores);
+                for(DrugEffect de : d.getEffects()){
+                    lores.add(ChatColor.translateAlternateColorCodes('&', 
+                    "&7- &6&o" + de.getEffect().getName()));
+                 
+                }
                 d64.setAmount(64);
+                im.setLore(lores);
+                d64.setItemMeta(im);
                 p.getInventory().addItem(d64);
+
             } else if(ev.getClick() == ClickType.RIGHT) {
                 d.influencePlayer(p);
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
@@ -156,7 +179,10 @@ public class BagOfDrugsGUI implements Listener {
 
         Inventory inv = Bukkit.createInventory(null, stack.size(), invName);
 
-        inv.setContents(stack.toArray(new ItemStack[0]));
+        inv.setContents(stack.toArray(new ItemStack[0])); 
+        for(ItemStack m : inv.getContents()){
+            m.setAmount(1);
+        }
         return inv;
     }
 
@@ -230,8 +256,8 @@ public class BagOfDrugsGUI implements Listener {
 
     @EventHandler
     public void onDropItem(PlayerDropItemEvent ev) {
-        if(s.isBagOfDrugs_CanDrop()) {
-            if(ev.getItemDrop().getItemStack().getItemMeta().getDisplayName().equals(invName)) {
+        if(!Main.plugin.getSettings().isBagOfDrugs_CanDrop()) {
+            if(ev.getItemDrop().getItemStack().getItemMeta().getDisplayName().equals(bagName)) {
                 ev.setCancelled(true);
             }
         }
@@ -246,6 +272,11 @@ public class BagOfDrugsGUI implements Listener {
                 drop.setCustomName(bagName);
                 drop.setCustomNameVisible(true);
             }
+            if(Main.plugin.getDrugManager().isDrugItem(item)) {
+                drop.setCustomName(item.getItemMeta().getDisplayName());
+                drop.setCustomNameVisible(true);
+            }
+
         }
     }
 

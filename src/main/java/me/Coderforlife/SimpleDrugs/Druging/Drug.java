@@ -114,7 +114,14 @@ public class Drug implements SDCraftableItem {
     			lore.add("§7- §6" + de.getEffect().getName().toUpperCase(Locale.ROOT));
     		}
     	}
-    	lore.add("§7Click To Use");
+    	lore.add(ChatColor.translateAlternateColorCodes('&', 
+        "&7- &oLeft-Click to get the drug"));
+        lore.add(ChatColor.translateAlternateColorCodes('&', 
+        "&7- &oRight-Click to get the effects"));
+        lore.add(ChatColor.translateAlternateColorCodes('&', 
+        "&7- &oShift-Left-Click to get a 64 stack"));
+        lore.add(ChatColor.translateAlternateColorCodes('&', 
+        "&7- &oShift-Right-Click to see the recipe"));
     	im.setLore(lore);
     	is.setItemMeta(im);
     	is.addUnsafeEnchantment(Enchantment.ARROW_FIRE, 1);
