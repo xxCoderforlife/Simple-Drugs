@@ -10,7 +10,7 @@ Drugs:
   #If you want to even check for an update
   CheckForUpdate: true
   #If you want a message sent to players in game with the permission 'drugs.updater'
-  UpdateMessage: false
+  UpdateMessage: true
   #Sends the player a plugin message on Join
   JoinMessage: true
   #Cooldown between Drug Usage in Seconds (Change to 0 to disable)
@@ -22,11 +22,11 @@ Drugs:
     CanDrop: false
     #Is the bag given on player join
     #If you set this to false use /drugs bagofdrugs to get it
-    GiveOnJoin: true
+    GiveOnJoin: false
     #If the Bag is dropped on death or not.
     DropOnDeath: false
     #If the player Keeps the Bag when they Respawn
-    GiveOnRespawn: true
+    GiveOnRespawn: false
   Addiction:
     OverDose-Limit: 10.0
 #Yeah that's the end of the Config.

@@ -36,5 +36,5 @@ public class DrugEffectAdapter implements JsonSerializer<DrugEffect>, JsonDeseri
 		main.addProperty("intensity", src.getIntensity());
 		return main;
 	}
-	
+
 }

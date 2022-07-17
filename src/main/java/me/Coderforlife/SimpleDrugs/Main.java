@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Coderforlife.SimpleDrugs.Crafting.RecipeManager;
@@ -27,15 +28,18 @@ import me.Coderforlife.SimpleDrugs.Events.PlayerRespawn;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SDObjectType;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SettingNameListener;
+import me.Coderforlife.SimpleDrugs.GUI.Shop.drugShopGUI;
 import me.Coderforlife.SimpleDrugs.Util.Messages;
 import net.md_5.bungee.api.ChatColor;
+import net.milkbowl.vault.economy.Economy;
 
 public class Main extends JavaPlugin {
 
     public static Main plugin;
 
-    //Mess of Strings
-    public String header1 = ChatColor.WHITE + "" + ChatColor.BOLD + "============" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "[Simple-Drugs]" + ChatColor.WHITE + "" + ChatColor.BOLD + "============";
+    // Mess of Strings
+    public String header1 = ChatColor.WHITE + "" + ChatColor.BOLD + "============" + ChatColor.DARK_RED + ""
+            + ChatColor.BOLD + "[Simple-Drugs]" + ChatColor.WHITE + "" + ChatColor.BOLD + "============";
     private NamespacedKey drugMain;
     private NamespacedKey drugPlantedOn;
     private NamespacedKey drugKey;
@@ -44,7 +48,7 @@ public class Main extends JavaPlugin {
     private NamespacedKey isDrugItem;
     private NamespacedKey isCraftingComponent;
     private NamespacedKey craftingComponentName;
-    
+
     private DrugManager drugManager;
     private DrugRecipeManager drugRecipeManager;
     private DrugSeedManager seedManager;
@@ -53,13 +57,14 @@ public class Main extends JavaPlugin {
     private Messages messages;
     private RecipeManager recipeManager;
     private AddictionManager addictionManager;
-    
+    private Economy econ;
+
     private Map<UUID, SDObjectType> creatingName = new HashMap<>();
-    
+
     @Override
     public void onEnable() {
         plugin = this;
-        
+
         drugMain = new NamespacedKey(plugin, "SimpleDrugs-DrugMain");
         drugPlantedOn = new NamespacedKey(plugin, "SimpleDrugs-DrugPlantedOn");
         drugKey = new NamespacedKey(plugin, "SimpleDrugs-DrugName");
@@ -68,130 +73,138 @@ public class Main extends JavaPlugin {
         isDrugItem = new NamespacedKey(plugin, "SimpleDrugs-IsDrugItem");
         isCraftingComponent = new NamespacedKey(plugin, "SimpleDrugs-IsCraftingComponent");
         craftingComponentName = new NamespacedKey(plugin, "SimpleDrugs-CraftingComponentName");
-        
+
         settings = new Settings();
         messages = new Messages();
         addictionManager = new AddictionManager();
-        registerListeners();
-        
+
         sendConsoleMessage(header1);
-        sendConsoleMessage("§aLoading Plugin...");
-
-        for(Player p : Bukkit.getOnlinePlayers()) {
-        	addictionManager.addictionMap().put(p.getUniqueId(), 0.0);
+        sendConsoleMessage(getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&',
+                "&a&oStarting up &f&o&lSimple-&4&l&oDrugs &a&lVersion: &f" + getDescription().getVersion()));
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            addictionManager.addictionMap().put(p.getUniqueId(), 0.0);
         }
-        
+        registerListeners();
+        loadVault();
         new Setup();
-/** TODO
-        ItemStack result = new ItemStack(Material.DIAMOND);
-        ItemStack ing = new ItemStack(Material.COAL);
-        ItemStack fuel = new ItemStack(Material.GOLD_INGOT);
-        ItemStack input = craftingManager.getByName("WeedComponentNew".toUpperCase()).getStack();
-        BrewingRecipe br = new BrewingRecipe("TestThing", result, ing, fuel, input, 25, 25, 100);
-        br.registerRecipe();
-*/
+        /**
+         * TODO: Furance Recipe
+         * ItemStack result = new ItemStack(Material.DIAMOND);
+         * ItemStack ing = new ItemStack(Material.COAL);
+         * ItemStack fuel = new ItemStack(Material.GOLD_INGOT);
+         * ItemStack input =
+         * craftingManager.getByName("WeedComponentNew".toUpperCase()).getStack();
+         * BrewingRecipe br = new BrewingRecipe("TestThing", result, ing, fuel, input,
+         * 25, 25, 100);
+         * br.registerRecipe();
+         */
 
-        sendConsoleMessage("§aLoaded without Errors. Plugin is ready to Use :D");
+        sendConsoleMessage(getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&',
+                "&f&o&lSimple-&4&l&oDrugs &a&lVersion: &f" + getDescription().getVersion() + " &ahas been enabled!"));
     }
 
     @Override
     public void onDisable() {
         getSettings().save();
     }
-    
+
     private void sendConsoleMessage(String message) {
         this.getServer().getConsoleSender().sendMessage(message);
     }
-    
+
     public Map<UUID, SDObjectType> getCreatingName() {
-    	return creatingName;
+        return creatingName;
     }
-    
+
     public RecipeManager getRecipeManager() {
-    	return recipeManager;
+        return recipeManager;
     }
-    
+
     public void setRecipeManager(RecipeManager rm) {
-    	recipeManager = rm;
+        recipeManager = rm;
     }
-    
+
     public DrugRecipeManager getDrugRecipeManager() {
-    	return drugRecipeManager;
+        return drugRecipeManager;
     }
-    
+
     public void setDrugRecipeManager(DrugRecipeManager drm) {
-    	drugRecipeManager = drm;
+        drugRecipeManager = drm;
     }
-    
+
     public DrugSeedManager getDrugSeedManager() {
-    	return seedManager;
+        return seedManager;
     }
-    
+
     public void setDrugSeedManager(DrugSeedManager dsm) {
-    	seedManager = dsm;
+        seedManager = dsm;
     }
-    
+
     public DrugManager getDrugManager() {
-    	return drugManager;
+        return drugManager;
     }
-    
+
     public void setDrugManager(DrugManager dm) {
-    	drugManager = dm;
+        drugManager = dm;
     }
-    
+
     public CCManager getCraftingManager() {
-    	return craftingManager;
+        return craftingManager;
     }
-    
+
     public void setCraftingManager(CCManager cccm) {
-    	craftingManager = cccm;
+        craftingManager = cccm;
     }
-    
+
     public Settings getSettings() {
-    	return settings;
+        return settings;
     }
-    
+
     public NamespacedKey getDrugMain() {
-    	return drugMain;
+        return drugMain;
     }
-    
+
     public NamespacedKey getDrugKey() {
-    	return drugKey;
+        return drugKey;
     }
-    
+
     public NamespacedKey getDrugPlantedOn() {
-    	return drugPlantedOn;
+        return drugPlantedOn;
     }
-    
+
     public NamespacedKey getDrugHarvestAmount() {
-    	return drugHarvestAmount;
+        return drugHarvestAmount;
     }
-    
+
     public NamespacedKey getDrugSeedKey() {
-    	return drugSeedKey;
+        return drugSeedKey;
     }
-    
+
     public NamespacedKey isDrugItem() {
-    	return isDrugItem;
+        return isDrugItem;
     }
-    
+
     public NamespacedKey isCraftingComponent() {
-    	return isCraftingComponent;
+        return isCraftingComponent;
     }
-    
+
     public NamespacedKey getCraftingComponentName() {
-    	return craftingComponentName;
+        return craftingComponentName;
     }
-    
-    public Messages getMessages(){
+
+    public Messages getMessages() {
         return messages;
     }
 
-    public AddictionManager getAddictionManager(){
+    public AddictionManager getAddictionManager() {
         return addictionManager;
     }
 
-    private void registerListeners(){
+    public Economy getEconomy() {
+        return econ;
+    }
+
+    private void registerListeners() {
         this.getServer().getPluginManager().registerEvents(new RecipeChecker(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
         this.getServer().getPluginManager().registerEvents(new BagOfDrugsGUI(), this);
@@ -202,9 +215,25 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new CraftingEvent(), this);
         this.getServer().getPluginManager().registerEvents(new PlantItemListener(), this);
         this.getServer().getPluginManager().registerEvents(new BrewingRecipeListener(), this);
-        
+        this.getServer().getPluginManager().registerEvents(new drugShopGUI(), this);
+
         this.getServer().getPluginManager().registerEvents(new SettingNameListener(), this);
         this.getCommand("drugs").setExecutor(new Commands());
         this.getCommand("drugs").setTabCompleter(new TabCommands());
+    }
+
+    public void loadVault() {
+        if (plugin.getServer().getPluginManager().getPlugin("Vault") != null) {
+            RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager()
+                    .getRegistration(Economy.class);
+            if (rsp != null)
+                econ = rsp.getProvider();
+            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aVault has been found.");
+            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aHooked into Vault.");
+            return;
+        }
+        sendConsoleMessage(
+                plugin.getMessages().getPrefix() + "§cVault.jar was not found or you don't have an Economy Plugin");
+        sendConsoleMessage(plugin.getMessages().getPrefix() + "§cDisabling all Vault elements");
     }
 }

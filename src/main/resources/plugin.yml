@@ -1,6 +1,6 @@
 name: Simple-Drugs
 #Always format the version like: x.x.x-DEV
-version: 2.7.6-DEV
+version: 2.7.7-DEV
 author: xxCoderforlife
 prefix: SD
 softdepend: [ Vault,PlaceHolderAPI ]
@@ -131,6 +131,9 @@ permissions:
     default: op
   drugs.updater:
     description: Sends update message to player on Join
+    default: op
+  drugs.shop:
+    description: Used for '/drugs shop' command.
     default: op
   drugs.craft.weed:
     description: To craft Weed

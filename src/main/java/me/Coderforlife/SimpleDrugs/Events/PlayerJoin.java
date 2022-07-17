@@ -18,7 +18,7 @@ public class PlayerJoin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent ev) {
         Player p = ev.getPlayer();
         p.discoverRecipes(Main.plugin.getRecipeManager().getKeys());
-        if(plugin.getSettings().isBagOfDrugs_GiveOnJoin()) {
+        if(plugin.getConfig().getBoolean("Drugs.BagOfDrugs.GiveOnJoin")) {
             if(!p.getInventory().contains(bd.getBagOfDrugs())) {
                 p.getInventory().addItem(bd.getBagOfDrugs());
             }

@@ -12,7 +12,7 @@ public class PlayerDeath implements Listener {
     BagOfDrugsGUI  bd = new BagOfDrugsGUI();
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent ev) {
-        if(!(plugin.getSettings().isBagOfDrugs_DropOnDeath())) {
+        if(!(plugin.getConfig().getBoolean("Drugs.BagOfDrugs.GiveOnDeath"))) {
             ev.getDrops().remove(bd.getBagOfDrugs());
         }
     }

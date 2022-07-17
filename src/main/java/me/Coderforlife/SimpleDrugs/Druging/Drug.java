@@ -36,8 +36,10 @@ public class Drug implements SDCraftableItem {
     private Material mat;
     private String permission;
     private String carftingPerm;
+    private Double sellPrice;
+    private Double buyPrice;
 
-    public Drug(String name, String displayname, Material item, ArrayList<DrugEffect> effects, String permission, Double addlvl, String carftPerm) {
+    public Drug(String name, String displayname, Material item, ArrayList<DrugEffect> effects, String permission, Double addlvl, String carftPerm,Double sellp,Double buyp) {
         this.name = name;
         this.displayname = displayname;
         this.effects = effects;
@@ -46,6 +48,8 @@ public class Drug implements SDCraftableItem {
         this.item = createItem();
         this.addictionLevel = addlvl;
         this.carftingPerm = carftPerm;
+        this.sellPrice = sellp;
+        this.buyPrice = buyp;
     }
 
     /**
@@ -100,6 +104,7 @@ public class Drug implements SDCraftableItem {
             e.addPotionEffect(new PotionEffect(effect.getEffect() ,effect.getTime(), effect.getIntensity()));
         }
     }
+    
 
     private ItemStack createItem() {
     	ItemStack is = new ItemStack(mat);
@@ -195,7 +200,12 @@ public class Drug implements SDCraftableItem {
     public String getCraftingPermission(){
         return carftingPerm;
     }
-
+    public Double getSellPrice(){
+        return sellPrice;
+    }
+    public Double getBuyPrice(){
+        return buyPrice;
+    }
     @Override
 	public AbstractSDCraftableManager<Drug> getManager() {
 		return Main.plugin.getDrugManager();

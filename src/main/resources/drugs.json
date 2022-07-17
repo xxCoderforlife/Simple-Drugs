@@ -27,7 +27,9 @@
       "item":"GREEN_DYE",
       "permission":"drugs.use.weed",
       "addictionLevel": 0.1,
-      "craftingpermission": "drugs.craft.weed"
+      "craftingpermission": "drugs.craft.weed",
+      "sellPrice": 100,
+      "buyPrice": 200
    },
    {
       "name":"Percocet",
@@ -57,7 +59,9 @@
       "item":"PUMPKIN_SEEDS",
       "permission":"drugs.use.percocet",
       "addictionLevel": 0.3,
-      "craftingpermission":"drugs.craft.percocet"
+      "craftingpermission":"drugs.craft.percocet",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"Acid",
@@ -87,7 +91,9 @@
       "item":"PAPER",
       "permission":"drugs.use.acid",
       "addictionLevel": 0.4,
-      "craftingpermission": "drugs.craft.acid"
+      "craftingpermission": "drugs.craft.acid",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"Coke",
@@ -117,7 +123,9 @@
       "item":"SUGAR",
       "permission":"drugs.use.coke",
       "addictionLevel": 0.5,
-      "craftingpermission":"drugs.craft.coke"
+      "craftingpermission":"drugs.craft.coke",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"Heroin",
@@ -147,7 +155,9 @@
       "item":"WITHER_ROSE",
       "permission":"drugs.use.heroin",
       "addictionLevel": 0.8,
-      "craftingpermission":"drugs.craft.heroin"
+      "craftingpermission":"drugs.craft.heroin",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"Molly",
@@ -182,7 +192,9 @@
       "item":"IRON_NUGGET",
       "permission":"drugs.use.molly",
       "addictionLevel": 0.2,
-      "craftingpermission":"drugs.craft.molly"
+      "craftingpermission":"drugs.craft.molly",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"Ciggy",
@@ -212,7 +224,9 @@
       "item":"REDSTONE_TORCH",
       "permission":"drugs.use.ciggy",
       "addictionLevel": 0.3,
-      "craftingpermission":"drugs.craft.ciggy" 
+      "craftingpermission":"drugs.craft.ciggy",
+      "sellPrice": 500,
+      "buyPrice": 1000 
    },
    {
       "name":"Shrooms",
@@ -242,7 +256,9 @@
       "item":"CRIMSON_FUNGUS",
       "permission":"drugs.use.shrooms",
       "addictionLevel": 0.3,
-      "craftingpermission":"drugs.craft.shrooms"
+      "craftingpermission":"drugs.craft.shrooms",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"Salvia",
@@ -272,7 +288,9 @@
       "item":"DRIED_KELP",
       "permission":"drugs.use.salvia",
       "addictionLevel": 0.2,
-      "craftingpermission":"drugs.craft.salvia" 
+      "craftingpermission":"drugs.craft.salvia",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"PCP",
@@ -297,7 +315,9 @@
       "item":"SPORE_BLOSSOM",
       "permission":"drugs.use.pcp",
       "addictionLevel": 0.6,
-      "craftingpermission":"drugs.craft.pcp"
+      "craftingpermission":"drugs.craft.pcp",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"DMT",
@@ -327,7 +347,9 @@
       "item":"GLOWSTONE_DUST",
       "permission":"drugs.use.dmt",
       "addictionLevel": 0.3,
-      "craftingpermission":"drugs.craft.dmt"
+      "craftingpermission":"drugs.craft.dmt",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"Alcohol",
@@ -357,7 +379,9 @@
       "item":"WATER_BUCKET",
       "permission":"drugs.use.alcohol",
       "addictionLevel": 0.5,
-      "craftingpermission":"drugs.craft.alcohol"
+      "craftingpermission":"drugs.craft.alcohol",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"Flakka",
@@ -387,7 +411,9 @@
       "item":"QUARTZ",
       "permission":"drugs.use.flakka",
       "addictionLevel": 0.4,
-      "craftingpermission":"drugs.craft.flakka"
+      "craftingpermission":"drugs.craft.flakka",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"Meth",
@@ -417,7 +443,9 @@
       "item":"PRISMARINE_SHARD",
       "permission":"drugs.use.meth",
       "addictionLevel": 0.3,
-      "craftingpermission":"drugs.craft.meth"
+      "craftingpermission":"drugs.craft.meth",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"Ketamine",
@@ -452,7 +480,9 @@
       "item":"POWDER_SNOW_BUCKET",
       "permission":"drugs.use.ketamine",
       "addictionLevel": 0.3,
-      "craftingpermission":"drugs.craft.ketamine"
+      "craftingpermission":"drugs.craft.ketamine",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"Oxy",
@@ -482,7 +512,9 @@
       "item":"WHITE_DYE",
       "permission":"drugs.use.oxy",
       "addictionLevel": 0.2,
-      "craftingpermission":"drugs.craft.oxy"
+      "craftingpermission":"drugs.craft.oxy",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"Tussin",
@@ -512,7 +544,9 @@
       "item":"PURPLE_CANDLE",
       "permission":"drugs.use.tussin",
       "addictionLevel": 0.4,
-      "craftingpermission":"drugs.craft.tussin"
+      "craftingpermission":"drugs.craft.tussin",
+      "sellPrice": 500,
+      "buyPrice": 1000
    },
    {
       "name":"Xannx",
@@ -542,6 +576,8 @@
       "item":"GREEN_CANDLE",
       "permission":"drugs.use.xannx",
       "addictionLevel": 0.7,
-      "craftingpermission":"drugs.craft.xannx"
+      "craftingpermission":"drugs.craft.xannx",
+      "sellPrice": 500,
+      "buyPrice": 1000
    }
 ]

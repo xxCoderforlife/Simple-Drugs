@@ -19,9 +19,11 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
+import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Crafting.SDCraftableItem;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.InventoryAddons;
 import me.Coderforlife.SimpleDrugs.Util.Errors.DrugLoadError;
+import net.md_5.bungee.api.ChatColor;
 
 public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 
@@ -29,6 +31,7 @@ public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
 	private Map<String, E> items = new HashMap<String, E>();
 	private File mainFile;
 	protected GsonBuilder builder;
+	private Main plugin = Main.plugin;
 	
 	public AbstractSDCraftableManager(File mF) {
 		mainFile = mF;
@@ -113,7 +116,8 @@ public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
     	for(E e : getItems().values()) {
     		enabled.add(CCMaterialConverter.createUpperCase(e.getName()));
     	}
-    	if(enabled.length() > 0) sendConsoleMessage("§6Enabled: §a" + enabled.toString().trim());
+    	if(enabled.length() > 0) sendConsoleMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', 
+		"&6Enabled: &a" + enabled.toString().trim().toLowerCase()));
 	}
 	
 	public abstract void addOrUpdateItem(String name, InventoryAddons ad);
