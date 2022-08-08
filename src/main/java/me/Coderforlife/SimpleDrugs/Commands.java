@@ -12,6 +12,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
 import me.Coderforlife.SimpleDrugs.Druging.Addiction.AddictionManager;
@@ -20,7 +21,8 @@ import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SDRecipeInventory;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugMainMenu;
-import me.Coderforlife.SimpleDrugs.GUI.Shop.drugShopGUI;
+import me.Coderforlife.SimpleDrugs.GUI.Shop.buyGUI;
+import net.milkbowl.vault.economy.Economy;
 
 public class Commands implements CommandExecutor {
     private Main plugin = Main.plugin;
@@ -55,7 +57,7 @@ public class Commands implements CommandExecutor {
                     p.sendMessage("§7- §f/drugs settings §8| §fOpen the General Settings.");
                     p.sendMessage("§7- §f/drugs editor §8| §fOpen the Drug Editor.");
 
-                    // p.sendMessage("§7- §f/drugs sell §8| §fSells the Drug in your hand."));
+                    p.sendMessage("§7- §f/drugs sell §8| §fSells the Drug in your hand.");
                 } else if (args.length == 1) {
                     if (args[0].equalsIgnoreCase("settings")) {
                         if (p.hasPermission("drugs.use.settings")) {
@@ -146,17 +148,32 @@ public class Commands implements CommandExecutor {
                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.DARK_GRAY + "drugs.reload");
                         }
-                    } else if (args[0].equalsIgnoreCase("shop")) {
-                        if (p.hasPermission("drugs.shop")) {
-                            p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&',
-                                    "&4&o&lWARNING:&f This is still in development. Do not use for as a real Drug Shop."));
-                            drugShopGUI dsGUI = new drugShopGUI();
-                            p.openInventory(dsGUI.openShopGUI());
+                    } else if (args[0].equalsIgnoreCase("sell")) {
+                        if (p.hasPermission("drugs.sell")) {
+                            if (!(plugin.isEcoSetUp())) {
+                                p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED
+                                        + "You need to setup an economy plugin.");
+                            } else {
+                                ItemStack hand = p.getInventory().getItemInMainHand();
+                                Drug d = plugin.getDrugManager().matchDrug(hand);
+                                if (plugin.getDrugManager().isDrugItem(hand)) {
+                                    p.sendMessage(plugin.getMessages().getPrefix() +
+                                            ChatColor.GREEN + "You sold " + d.getDisplayName() + " for "
+                                            + d.getSellPrice());
+                                    hand.setAmount(hand.getAmount() - 1);
+                                    Economy eco = plugin.getEconomy();
+                                    eco.depositPlayer(p, d.getSellPrice());
+                                } else {
+                                    p.sendMessage(plugin.getMessages().getPrefix() +
+                                            ChatColor.RED + "Must be a drug in your hand.");
+                                }
+                            }
+
                         } else {
                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED
                                     + "You don't have permission to use that command.");
                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: "
-                                    + ChatColor.WHITE + "drugs.shop");
+                                    + ChatColor.WHITE + "drugs.sell");
                         }
                     } else if (args[0].equalsIgnoreCase("version")) {
                         if (p.hasPermission("drugs.version")) {
@@ -220,6 +237,26 @@ public class Commands implements CommandExecutor {
                                     + "You don't have permission to use that command.");
                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.give.seed");
+                        }
+                    } else if (args[0].equalsIgnoreCase("buy")) {
+                        if (p.hasPermission("drugs.buy")) {
+                            if (!(plugin.isEcoSetUp())) {
+                                p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED
+                                        + "You need to setup an economy plugin.");
+                            }
+                            buyGUI bGUI = new buyGUI();
+                            bGUI.openShop(p);
+                        } else {
+                            p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED
+                                    + "You don't have permission to use that command.");
+                            p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: "
+                                    + ChatColor.WHITE + "drugs.buy");
+                        }
+
+                    }else if(args[0].equalsIgnoreCase("gui")){
+                        if(p.hasPermission("drugs.gui.bagofdrugs")){
+                            p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&',
+                                    "&f&oUse &a&o/drugs gui bagofdrugs"));                            
                         }
                     }
                 } else if (args.length == 2) {
@@ -361,6 +398,19 @@ public class Commands implements CommandExecutor {
                             p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.give.seed");
                         }
+                    }else if(args[0].equalsIgnoreCase("gui")){
+                        if(args[1].equalsIgnoreCase("bagofdrugs")){
+                            if(p.hasPermission("drugs.gui.bagofdrugs")){
+                                BagOfDrugsGUI bGUI = new BagOfDrugsGUI();
+                                p.openInventory(bGUI.create());
+                            }else{
+                                p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.RED
+                                        + "You don't have permission to use that command.");
+                                p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.DARK_RED + "Permission: "
+                                        + ChatColor.WHITE + "drugs.gui");
+                            }
+                        }
+
                     }
                 } else if (args.length == 3) {
                     if (args[0].equalsIgnoreCase("give")) {

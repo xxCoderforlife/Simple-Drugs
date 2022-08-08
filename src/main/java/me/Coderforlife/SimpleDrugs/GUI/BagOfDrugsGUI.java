@@ -16,9 +16,7 @@ import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.*;
@@ -186,7 +184,6 @@ public class BagOfDrugsGUI implements Listener {
         Inventory inv = Bukkit.createInventory(null, stack.size(), invName);
 
         inv.setContents(stack.toArray(new ItemStack[0]));
-        // BUG TODO: Lore is changed when shop is opened.
         for (ItemStack s : inv.getStorageContents()) {
             s.setAmount(1);
             if (plugin.getDrugManager().isDrugItem(s)) {
@@ -306,22 +303,6 @@ public class BagOfDrugsGUI implements Listener {
                                 + inv.getResult().getType());
                 e.setCancelled(true);
             }
-        }
-    }
-
-    @EventHandler
-    public void onBagClose(InventoryCloseEvent ev) {
-        if (ev.getView().getTitle().equals(invName)) {
-            Player p = (Player) ev.getPlayer();
-
-        }
-
-    }
-
-    @EventHandler
-    public void onBagOpen(InventoryOpenEvent ev) {
-        if (ev.getView().getTitle().equals(invName)) {
-            Player p = (Player) ev.getPlayer();
         }
     }
 

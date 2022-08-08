@@ -3,7 +3,7 @@ name: Simple-Drugs
 version: 2.7.7-DEV
 author: xxCoderforlife
 prefix: SD
-softdepend: [ Vault,PlaceHolderAPI ]
+softdepend: [Vault,PlaceholderAPI]
 load: POSTWORLD
 api-version: 1.13
 website: https://www.spigotmc.org/resources/simple-drugs.9684/
@@ -132,8 +132,14 @@ permissions:
   drugs.updater:
     description: Sends update message to player on Join
     default: op
-  drugs.shop:
-    description: Used for '/drugs shop' command.
+  drugs.sell:
+    description: Used for '/drugs sell' command.
+    default: op
+  drugs.buy:
+    description: Used for '/drugs buy' command.
+    default: true
+  drugs.gui.bagofdrugs:
+    description: Used for '/drugs gui bagofdrugs' command.
     default: op
   drugs.craft.weed:
     description: To craft Weed

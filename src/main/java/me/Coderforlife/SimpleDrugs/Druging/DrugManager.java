@@ -101,7 +101,11 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
     	
     	return dle;
 	}
-	
+	/**
+	 * Used to match a random ItemStack to a {@link Drug}
+	 * @param item
+	 * @return Drug
+	 */
 	public Drug matchDrug(@Nullable ItemStack item) {
 		if(isDrugItem(item)){
 			for(Drug drug : getItems().values()) {
@@ -112,7 +116,7 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
 		}
         return null;
     }
-	
+
 	public boolean isDrugItem(ItemStack item) {
 		if(item == null){
 			return false;

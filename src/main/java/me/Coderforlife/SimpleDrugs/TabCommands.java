@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TabCommands implements TabCompleter {
-    private String[] commands = {"addiction","bagofdrugs","soberup","shop","settings","help","recipe","list","give","giveSeed","version","editor"};
+    private String[] commands = {"addiction","bagofdrugs","buy","soberup","sell","settings","help","gui","recipe","list","give","giveSeed","version","editor"};
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> tab = new ArrayList<>();
@@ -23,11 +23,12 @@ public class TabCommands implements TabCompleter {
             }
             if(args[0].startsWith("s")){
                 tab.clear();
-                tab.add("shop");
+                tab.add("sell");
                 tab.add("settings");
                 tab.add("soberup");
             }else if(args[0].startsWith("g")){
                 tab.clear();
+                tab.add("gui");
                 tab.add("give");
                 tab.add("giveSeed");
 
@@ -47,6 +48,7 @@ public class TabCommands implements TabCompleter {
             }else if(args[0].startsWith("b")){
                 tab.clear();
                 tab.add("bagofdrugs");
+                tab.add("buy");
             }else if(args[0].startsWith("e")){
                 tab.clear();
                 tab.add("editor");
@@ -64,6 +66,9 @@ public class TabCommands implements TabCompleter {
                 for(Drug drugs : Main.plugin.getDrugManager().getItems().values()) {
                     tab.add(drugs.getName());
                 }
+            }else if(args[0].equalsIgnoreCase("gui")){
+                tab.clear();
+                tab.add("bagofdrugs");
             }
         } else if(args.length == 3) {
             for(Player all : Bukkit.getOnlinePlayers()) {

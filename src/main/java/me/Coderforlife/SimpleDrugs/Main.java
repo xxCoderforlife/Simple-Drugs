@@ -28,7 +28,8 @@ import me.Coderforlife.SimpleDrugs.Events.PlayerRespawn;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SDObjectType;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SettingNameListener;
-import me.Coderforlife.SimpleDrugs.GUI.Shop.drugShopGUI;
+import me.Coderforlife.SimpleDrugs.GUI.Shop.buyGUI;
+import me.Coderforlife.SimpleDrugs.GUI.Shop.sellGUI;
 import me.Coderforlife.SimpleDrugs.Util.Messages;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.economy.Economy;
@@ -58,6 +59,7 @@ public class Main extends JavaPlugin {
     private RecipeManager recipeManager;
     private AddictionManager addictionManager;
     private Economy econ;
+    private Boolean setupEconomy;
 
     private Map<UUID, SDObjectType> creatingName = new HashMap<>();
 
@@ -84,6 +86,7 @@ public class Main extends JavaPlugin {
         for (Player p : Bukkit.getOnlinePlayers()) {
             addictionManager.addictionMap().put(p.getUniqueId(), 0.0);
         }
+        setEcoBoolean(false);
         registerListeners();
         loadVault();
         new Setup();
@@ -204,6 +207,13 @@ public class Main extends JavaPlugin {
         return econ;
     }
 
+    public Boolean isEcoSetUp() {
+        return setupEconomy;
+    }
+    private void setEcoBoolean(Boolean b) {
+        setupEconomy = b;
+    }
+
     private void registerListeners() {
         this.getServer().getPluginManager().registerEvents(new RecipeChecker(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerRespawn(), this);
@@ -215,7 +225,8 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new CraftingEvent(), this);
         this.getServer().getPluginManager().registerEvents(new PlantItemListener(), this);
         this.getServer().getPluginManager().registerEvents(new BrewingRecipeListener(), this);
-        this.getServer().getPluginManager().registerEvents(new drugShopGUI(), this);
+        this.getServer().getPluginManager().registerEvents(new buyGUI(), this);
+        this.getServer().getPluginManager().registerEvents(new sellGUI(), this);
 
         this.getServer().getPluginManager().registerEvents(new SettingNameListener(), this);
         this.getCommand("drugs").setExecutor(new Commands());
@@ -230,6 +241,8 @@ public class Main extends JavaPlugin {
                 econ = rsp.getProvider();
             sendConsoleMessage(plugin.getMessages().getPrefix() + "§aVault has been found.");
             sendConsoleMessage(plugin.getMessages().getPrefix() + "§aHooked into Vault.");
+            setEcoBoolean(true);
+
             return;
         }
         sendConsoleMessage(
