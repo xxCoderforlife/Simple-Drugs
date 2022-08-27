@@ -11,11 +11,7 @@ public class Messages {
     private final String permission = new String(prefix + ChatColor.translateAlternateColorCodes('&', 
     "&cYou don't have permission for this command."));
     private final String consoleHeader = new String("&f&l============&4&l[Simple-Drugs]&4&l============");
-
-    public Messages(){
-
-    }
-
+    
     public String getPrefix(){
         return prefix;
     }

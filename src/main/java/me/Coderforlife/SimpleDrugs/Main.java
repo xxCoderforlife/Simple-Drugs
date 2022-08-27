@@ -28,8 +28,8 @@ import me.Coderforlife.SimpleDrugs.Events.PlayerRespawn;
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SDObjectType;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.Util.SettingNameListener;
-import me.Coderforlife.SimpleDrugs.GUI.Shop.buyGUI;
-import me.Coderforlife.SimpleDrugs.GUI.Shop.sellGUI;
+//import me.Coderforlife.SimpleDrugs.GUI.Shop.buyGUI;
+//import me.Coderforlife.SimpleDrugs.GUI.Shop.sellGUI;
 import me.Coderforlife.SimpleDrugs.Util.Messages;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.economy.Economy;
@@ -225,8 +225,8 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new CraftingEvent(), this);
         this.getServer().getPluginManager().registerEvents(new PlantItemListener(), this);
         this.getServer().getPluginManager().registerEvents(new BrewingRecipeListener(), this);
-        this.getServer().getPluginManager().registerEvents(new buyGUI(), this);
-        this.getServer().getPluginManager().registerEvents(new sellGUI(), this);
+//        this.getServer().getPluginManager().registerEvents(new buyGUI(), this);
+//        this.getServer().getPluginManager().registerEvents(new sellGUI(), this);
 
         this.getServer().getPluginManager().registerEvents(new SettingNameListener(), this);
         this.getCommand("drugs").setExecutor(new Commands());

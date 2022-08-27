@@ -294,6 +294,7 @@ public class BagOfDrugsGUI implements Listener {
     public void DisableBeaconDup(CraftItemEvent e) {
         Player p = (Player) e.getView().getPlayer();
         CraftingInventory inv = e.getInventory();
+        if(inv.getResult() == null) return;
         ItemStack[] mat = inv.getMatrix();
 
         if (inv.getResult().getType() == Material.BEACON) {

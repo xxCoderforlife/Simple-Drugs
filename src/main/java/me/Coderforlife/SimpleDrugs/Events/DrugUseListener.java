@@ -16,6 +16,8 @@ import org.bukkit.inventory.ItemStack;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
+import me.Coderforlife.SimpleDrugs.Util.TranslationFile;
+import net.md_5.bungee.api.ChatColor;
 
 
 public class DrugUseListener implements Listener {
@@ -43,12 +45,19 @@ public class DrugUseListener implements Listener {
             return;
 
         if(!p.hasPermission(drug.getPermission().toLowerCase())) {
-            p.sendMessage(plugin.getMessages().getPrefix() + "§4You can't use " + drug.getName());
+        	String error = TranslationFile.Error_Cant_Use_Drug;
+        	error = TranslationFile.sanitize(error, drug);
+        	p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', error));
+//            p.sendMessage(plugin.getMessages().getPrefix() + "§4You can't use " + drug.getName());
             return;
         }
 
         if(cooldownMap.getOrDefault(p.getUniqueId(), System.currentTimeMillis()) > System.currentTimeMillis()) {
-            p.sendMessage(plugin.getMessages().getPrefix() + "§4You can't use " + drug.getName() + " for another §c" + (cooldownMap.get(p.getUniqueId()) - System.currentTimeMillis()) / 1000 + "§4 seconds");
+        	String error = TranslationFile.Error_Drug_Timer_Not_Zero;
+        	error = TranslationFile.sanitize(error, drug);
+        	error = TranslationFile.sanitize(error, (cooldownMap.get(p.getUniqueId()) - System.currentTimeMillis()) / 1000);
+        	p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', error));
+//            p.sendMessage(plugin.getMessages().getPrefix() + "§4You can't use " + drug.getName() + " for another §c" + (cooldownMap.get(p.getUniqueId()) - System.currentTimeMillis()) / 1000 + "§4 seconds");
             return;
         }
 

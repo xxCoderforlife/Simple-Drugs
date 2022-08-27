@@ -109,6 +109,7 @@ public class DrugManager extends AbstractSDCraftableManager<Drug> {
 	public Drug matchDrug(@Nullable ItemStack item) {
 		if(isDrugItem(item)){
 			for(Drug drug : getItems().values()) {
+				if(!drug.getItem().isSimilar(item)) continue;
 				if(item.hasItemMeta() && item.getItemMeta().getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', drug.getDisplayName()))) {
 					return drug;
 				}
