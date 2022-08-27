@@ -17,18 +17,21 @@ import me.Coderforlife.SimpleDrugs.Druging.DrugRecipeManager;
 import me.Coderforlife.SimpleDrugs.Druging.DrugPlants.DrugSeedManager;
 import me.Coderforlife.SimpleDrugs.PlaceHolder.DrugPlaceHolders;
 import me.Coderforlife.SimpleDrugs.UpdateChecker.Updater;
+import me.Coderforlife.SimpleDrugs.Util.Messages;
 import net.milkbowl.vault.economy.Economy;
 
 public class Setup {
 
     private Economy econ;
     private Main plugin = Main.plugin;
+    private Messages m = new Messages();
 
     public Setup() {
         new Metrics(plugin, 13155);
         plugin.getSettings().setup();
         loadPlaceHolders();
         checkForUpdate();
+        m.checkForMessagesFile();
 
         Main.plugin.setRecipeManager(new RecipeManager());
         Main.plugin.setCraftingManager(new CCManager());
