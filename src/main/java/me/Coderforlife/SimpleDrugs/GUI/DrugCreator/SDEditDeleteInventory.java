@@ -56,7 +56,6 @@ public class SDEditDeleteInventory<E extends SDCraftableItem> extends InventoryU
 						if(d instanceof Drug) sdot = SDObjectType.DRUG;
 						else if(d instanceof DrugPlantItem) sdot = SDObjectType.SEED;
 						else if(d instanceof CraftingComponent) sdot = SDObjectType.CC;
-						
 						inv.setType(sdot);
 						InventoryAddons ia = new InventoryAddons(inv, d, type, sdot);
 						ia.loadOptionAndValues();

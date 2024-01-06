@@ -78,18 +78,18 @@ public class DrugUseListener implements Listener {
         }
     }
 
-    @EventHandler
-    public void HitPlayerWithDrug(EntityDamageByEntityEvent ev){
-        if(!(ev.getDamager() instanceof Player) || !(ev.getEntity() instanceof Player)){
-            return;
-        }
-        Player hitter = (Player) ev.getDamager();
-        Player victim = (Player) ev.getEntity();
-        ItemStack hand = hitter.getInventory().getItemInMainHand();
-        if(plugin.getDrugManager().isDrugItem(hand)){
-            Drug d = plugin.getDrugManager().matchDrug(hand);
-            hand.setAmount(0);
-            d.influencePlayer(victim);
-        }
-    }
+    // @EventHandler
+    // public void HitPlayerWithDrug(EntityDamageByEntityEvent ev){
+    //     if(!(ev.getDamager() instanceof Player) || !(ev.getEntity() instanceof Player)){
+    //         return;
+    //     }
+    //     Player hitter = (Player) ev.getDamager();
+    //     Player victim = (Player) ev.getEntity();
+    //     ItemStack hand = hitter.getInventory().getItemInMainHand();
+    //     if(plugin.getDrugManager().isDrugItem(hand)){
+    //         Drug d = plugin.getDrugManager().matchDrug(hand);
+    //         hand.setAmount(0);
+    //         d.influencePlayer(victim);
+    //     }
+    // }
 }

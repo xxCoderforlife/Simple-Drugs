@@ -4,7 +4,6 @@ import java.io.File;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.yaml.snakeyaml.Yaml;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import net.md_5.bungee.api.ChatColor;
