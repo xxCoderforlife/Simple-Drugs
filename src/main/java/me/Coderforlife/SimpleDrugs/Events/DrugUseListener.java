@@ -9,7 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -47,8 +46,8 @@ public class DrugUseListener implements Listener {
         if(!p.hasPermission(drug.getPermission().toLowerCase())) {
         	String error = TranslationFile.Error_Cant_Use_Drug;
         	error = TranslationFile.sanitize(error, drug);
-        	p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', error));
-//            p.sendMessage(plugin.getMessages().getPrefix() + "§4You can't use " + drug.getName());
+        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', error));
+//            p.sendMessage("SD " + "§4You can't use " + drug.getName());
             return;
         }
 
@@ -56,8 +55,8 @@ public class DrugUseListener implements Listener {
         	String error = TranslationFile.Error_Drug_Timer_Not_Zero;
         	error = TranslationFile.sanitize(error, drug);
         	error = TranslationFile.sanitize(error, (cooldownMap.get(p.getUniqueId()) - System.currentTimeMillis()) / 1000);
-        	p.sendMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', error));
-//            p.sendMessage(plugin.getMessages().getPrefix() + "§4You can't use " + drug.getName() + " for another §c" + (cooldownMap.get(p.getUniqueId()) - System.currentTimeMillis()) / 1000 + "§4 seconds");
+        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', error));
+//            p.sendMessage("SD " + "§4You can't use " + drug.getName() + " for another §c" + (cooldownMap.get(p.getUniqueId()) - System.currentTimeMillis()) / 1000 + "§4 seconds");
             return;
         }
 

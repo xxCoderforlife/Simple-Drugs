@@ -3,6 +3,7 @@ package me.Coderforlife.SimpleDrugs;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,21 +18,20 @@ import me.Coderforlife.SimpleDrugs.Druging.DrugRecipeManager;
 import me.Coderforlife.SimpleDrugs.Druging.DrugPlants.DrugSeedManager;
 import me.Coderforlife.SimpleDrugs.PlaceHolder.DrugPlaceHolders;
 import me.Coderforlife.SimpleDrugs.UpdateChecker.Updater;
-import me.Coderforlife.SimpleDrugs.Util.Messages;
 import net.milkbowl.vault.economy.Economy;
 
 public class Setup {
 
     private Economy econ;
     private Main plugin = Main.plugin;
-    private Messages m = new Messages();
+    private Logger logger = plugin.getLogger();
+    private File drugsJSON;
 
     public Setup() {
         new Metrics(plugin, 13155);
-        plugin.getSettings().setup();
         loadPlaceHolders();
         checkForUpdate();
-        m.checkForMessagesFile();
+        //m.checkForMessagesFile();
 
         Main.plugin.setRecipeManager(new RecipeManager());
         Main.plugin.setCraftingManager(new CCManager());
@@ -53,12 +53,11 @@ public class Setup {
 
     private void loadPlaceHolders() {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aFound PlaceHolderAPI.");
+            sendConsoleMessage("§aFound PlaceHolderAPI.");
             new DrugPlaceHolders().register();
-            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aHooked into PlaceHolderAPI");
+            sendConsoleMessage("§aHooked into PlaceHolderAPI");
         } else {
-            sendConsoleMessage(plugin.getMessages().getPrefix()
-                    + "§cPlaceHolderAPI.jar was not found. Disabling all PlaceHolderAPI elements!");
+            sendConsoleMessage("§cPlaceHolderAPI.jar was not found. Disabling all PlaceHolderAPI elements!");
         }
     }
 
@@ -66,13 +65,13 @@ public class Setup {
         if (Main.plugin.getSettings().isCheckForUpdate()) {
             new Updater(9684).checkForUpdate();
         } else {
-            sendConsoleMessage(plugin.getMessages().getPrefix() + "§c§oDisabled Update Checking");
+            sendConsoleMessage("§c§oDisabled Update Checking");
         }
     }
 
     private void loadDefaults() {
-        sendConsoleMessage(ChatColor.BLUE + "[INFO] No Drugs where Found in your Folder. Creating Default Drugs!");
-        Reader drugReader = new InputStreamReader(this.getClass().getResourceAsStream("/drugs.json"));
+        logger.info('[' + plugin.getName() + "] Loading Default Drugs");
+        Reader drugReader = new InputStreamReader(plugin.getClass().getResourceAsStream("/drugs.json"));
         JsonArray drugs = new Gson().fromJson(drugReader, JsonArray.class);
         for (JsonElement drug : drugs) {
             Main.plugin.getDrugManager().createFromJson(
@@ -107,5 +106,11 @@ public class Setup {
 
     public Economy getEcon() {
         return econ;
+    }
+
+    public void checkForFiles(){
+        if(!drugsJSON.exists()){
+
+        }
     }
 }

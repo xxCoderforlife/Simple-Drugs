@@ -55,7 +55,7 @@ public class SDRecipeInventory implements Listener {
         im.setLore(lores);
         for(DrugEffect ef : this.drug.getEffects()){
             lores.add(ChatColor.translateAlternateColorCodes('&', 
-            "&7- &6&o" + ef.getEffect().getName()));
+            "&7- &6&o" + ef.getEffect().getKey().getKey()));
         }
         lores.add(ChatColor.translateAlternateColorCodes('&', 
         "&7&oClick to craft."));
@@ -190,7 +190,7 @@ public class SDRecipeInventory implements Listener {
         Player p = (Player) ev.getWhoClicked();
         if(ev.getCurrentItem().equals(drug.getItem())){
             if(p.getGameMode() == GameMode.CREATIVE){
-                p.sendMessage(plugin.getMessages().getPrefix() + "You crafted " + drug.getDisplayName());
+                p.sendMessage("SD " + "You crafted " + drug.getDisplayName());
                 p.getInventory().addItem(drug.getItem());
                 p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, (float) 1.0, (float) 1.0);
                 p.closeInventory();
@@ -200,12 +200,12 @@ public class SDRecipeInventory implements Listener {
                 for(String s : drug.getRecipe().getItems()){
                     removeInventoryItems(p.getInventory(), CCMaterialConverter.getCCOrMaterial(null, s).getType(), 1);
                 }
-                p.sendMessage(plugin.getMessages().getPrefix() + "You crafted " + drug.getDisplayName());
+                p.sendMessage("SD " + "You crafted " + drug.getDisplayName());
                 p.getInventory().addItem(drug.getItem());
                 p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, (float) 1.0, (float) 1.0);
                 p.closeInventory();
             }else{
-                p.sendMessage(plugin.getMessages().getPrefix() + "You can't craft " + drug.getDisplayName());
+                p.sendMessage("SD " + "You can't craft " + drug.getDisplayName());
                 p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, (float) 1.0, (float) 1.0);
 
             }

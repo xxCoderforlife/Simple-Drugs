@@ -85,78 +85,78 @@ public class SettingsGUI {
             case "§6§lDrug Cooldown":
                 if(event.getClick().equals(ClickType.RIGHT)) {
                     if(Main.plugin.getSettings().getCooldown() < 1) {
-                        p.sendMessage(plugin.getMessages().getPrefix() + "§c§lDrug Cooldown is Disabled. Right Click to Increase");
+                        p.sendMessage("SD " + "§c§lDrug Cooldown is Disabled. Right Click to Increase");
                     } else {
                         s.setCooldown(plugin.getSettings().getCooldown() - 1);
-                        p.sendMessage(plugin.getMessages().getPrefix() + "§aDrug Cooldown set to §e" + Main.plugin.getSettings().getCooldown() + " §aSeconds");
+                        p.sendMessage("SD " + "§aDrug Cooldown set to §e" + Main.plugin.getSettings().getCooldown() + " §aSeconds");
                     }
                 } else {
                     s.setCooldown(Main.plugin.getSettings().getCooldown() + 1);
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§aDrug Cooldown set to §e" + Main.plugin.getSettings().getCooldown() + " §aSeconds");
+                    p.sendMessage("SD " + "§aDrug Cooldown set to §e" + Main.plugin.getSettings().getCooldown() + " §aSeconds");
                 }
                 break;
             case "§6§lCheck for Updates":
                 s.setCheckForUpdate(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §aChecking for Updates.");
+                    p.sendMessage("SD " + "§cDisabled §aChecking for Updates.");
                 } else {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled Checking for Updates.");
+                    p.sendMessage("SD " + "§aEnabled Checking for Updates.");
                 }
                 break;
             case "§6§lUpdate Message":
                 s.setUpdateMessage(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §asending Update Message");
+                    p.sendMessage("SD " + "§cDisabled §asending Update Message");
                 } else {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled sending Update Message.");
+                    p.sendMessage("SD " + "§aEnabled sending Update Message.");
                 }
                 break;
             case "§6§lJoin Message":
                 s.setJoinMessage(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §asending Join Message");
+                    p.sendMessage("SD " + "§cDisabled §asending Join Message");
                 } else {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled sending Join Message.");
+                    p.sendMessage("SD " + "§aEnabled sending Join Message.");
                 }
                 break;
             case "§6§lBag Movable":
                 s.setBagOfDrugs_CanMove(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §aMovable Bag of Drugs.");
+                    p.sendMessage("SD " + "§cDisabled §aMovable Bag of Drugs.");
                 } else {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled Movable Bag of Drugs.");
+                    p.sendMessage("SD " + "§aEnabled Movable Bag of Drugs.");
                 }
                 break;
             case "§6§lBag Droppable":
                 s.setBagOfDrugs_CanDrop(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §aDroppable Bag of Drugs.");
+                    p.sendMessage("SD " + "§cDisabled §aDroppable Bag of Drugs.");
                 } else {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled Droppable Bag of Drugs.");
+                    p.sendMessage("SD " + "§aEnabled Droppable Bag of Drugs.");
                 }
                 break;
             case "§6§lGive Bag on Join":
                 s.setBagOfDrugs_GiveOnJoin(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §agiving Bag of Drugs on Join.");
+                    p.sendMessage("SD " + "§cDisabled §agiving Bag of Drugs on Join.");
                 } else {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled giving Bag of Drugs on Join.");
+                    p.sendMessage("SD " + "§aEnabled giving Bag of Drugs on Join.");
                 }
                 break;
             case "§6§lBag Dropped on Death":
                 s.setBagOfDrugs_DropOnDeath(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §aBag of Drugs Dropped on Death.");
+                    p.sendMessage("SD " + "§cDisabled §aBag of Drugs Dropped on Death.");
                 } else {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled Bag of Drugs Dropped on Death.");
+                    p.sendMessage("SD " + "§aEnabled Bag of Drugs Dropped on Death.");
                 }
                 break;
             case "§6§lKeep Bag on Respawn":
                 s.setBagOfDrugs_GiveOnRespawn(!isEnabled);
                 if(isEnabled) {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§cDisabled §agiving Bag of Drugs on Respawn.");
+                    p.sendMessage("SD " + "§cDisabled §agiving Bag of Drugs on Respawn.");
                 } else {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§aEnabled giving Bag of Drugs on Respawn.");
+                    p.sendMessage("SD " + "§aEnabled giving Bag of Drugs on Respawn.");
                 }
                 break;
             default:

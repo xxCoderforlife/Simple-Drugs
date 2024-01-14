@@ -32,7 +32,7 @@ public class PotionEffectStatSetterInventory extends InventoryUI {
 	private List<InventoryButton> intBtns;
 	
 	public PotionEffectStatSetterInventory(PotionEffectType pet, AbstractSDCInventory inv) {
-		super(27, ChatColor.translateAlternateColorCodes('&', "&6&lAdd: " + ChatColor.GREEN + pet.getName()));
+		super(27, ChatColor.translateAlternateColorCodes('&', "&6&lAdd: " + ChatColor.GREEN + pet.getKey().getKey()));
 		
 		addInfoSigns();
 		timeBtns = createTimeButtons();

@@ -44,7 +44,7 @@ public class AddictionListener implements Listener{
         if(am.addictionMap().containsKey(p.getUniqueId())){
             Double addLvl = addic.get(p.getUniqueId());
             if(addLvl >= 3){
-                ev.setDeathMessage(m.getPrefix() + p.getDisplayName() + 
+                ev.setDeathMessage("SD " + p.getDisplayName() + 
                 ChatColor.translateAlternateColorCodes('&', " &f&ljust ODed."));
             }
             am.addictionMap().remove(p.getUniqueId());

@@ -27,7 +27,7 @@ public class PlayerJoin implements Listener {
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
                 @Override
                 public void run() {
-                    p.sendMessage(plugin.getMessages().getPrefix() + "§f§lServer is running §5§l§oSIMPLE DRUGS");
+                    p.sendMessage("SD " + "§f§lServer is running §5§l§oSIMPLE DRUGS");
                 }
             }, 40L);
         }

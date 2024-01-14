@@ -3,13 +3,13 @@ package me.Coderforlife.SimpleDrugs;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import me.Coderforlife.SimpleDrugs.Crafting.RecipeManager;
 import me.Coderforlife.SimpleDrugs.Crafting.CraftingComponent.CCManager;
 import me.Coderforlife.SimpleDrugs.Crafting.Recipes.RecipeChecker;
@@ -60,7 +60,6 @@ public class Main extends JavaPlugin {
     private AddictionManager addictionManager;
     private Economy econ;
     private Boolean setupEconomy;
-
     private Map<UUID, SDObjectType> creatingName = new HashMap<>();
 
     @Override
@@ -79,10 +78,8 @@ public class Main extends JavaPlugin {
         settings = new Settings();
         messages = new Messages();
         addictionManager = new AddictionManager();
-
-        sendConsoleMessage(header1);
-        sendConsoleMessage(getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&',
-                "&a&oStarting up &f&o&lSimple-&4&l&oDrugs &a&lVersion: &f" + getDescription().getVersion()));
+        settings.setup();
+       
         for (Player p : Bukkit.getOnlinePlayers()) {
             addictionManager.addictionMap().put(p.getUniqueId(), 0.0);
         }
@@ -102,13 +99,27 @@ public class Main extends JavaPlugin {
          * br.registerRecipe();
          */
 
-        sendConsoleMessage(getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&',
+        sendConsoleMessage("SD " + ChatColor.translateAlternateColorCodes('&',
                 "&f&o&lSimple-&4&l&oDrugs &a&lVersion: &f" + getDescription().getVersion() + " &ahas been enabled!"));
     }
 
     @Override
     public void onDisable() {
         getSettings().save();
+    }
+
+    @Override
+    public void onLoad() {
+        // String prefix = "The Config is alive but it comes out NULL! ";
+        // if(getMessages().getPrefix() == null){
+        //     sendConsoleMessage(header1);
+        //     sendConsoleMessage(prefix + ChatColor.translateAlternateColorCodes('&',
+        //             "&a&oStarting up &f&o&lSimple-&4&l&oDrugs &a&lVersion: &f" + getDescription().getVersion()));
+        // }else{
+        //     sendConsoleMessage(header1);
+        //     sendConsoleMessage(ChatColor.translateAlternateColorCodes('&',
+        //             "&a&oStarting up &f&o&lSimple-&4&l&oDrugs &a&lVersion: &f" + getDescription().getVersion()));
+        // }
     }
 
     private void sendConsoleMessage(String message) {
@@ -210,6 +221,7 @@ public class Main extends JavaPlugin {
     public Boolean isEcoSetUp() {
         return setupEconomy;
     }
+
     private void setEcoBoolean(Boolean b) {
         setupEconomy = b;
     }
@@ -239,14 +251,14 @@ public class Main extends JavaPlugin {
                     .getRegistration(Economy.class);
             if (rsp != null)
                 econ = rsp.getProvider();
-            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aVault has been found.");
-            sendConsoleMessage(plugin.getMessages().getPrefix() + "§aHooked into Vault.");
+            sendConsoleMessage("§aVault has been found.");
+            sendConsoleMessage("§aHooked into Vault.");
             setEcoBoolean(true);
 
             return;
         }
         sendConsoleMessage(
-                plugin.getMessages().getPrefix() + "§cVault.jar was not found or you don't have an Economy Plugin");
-        sendConsoleMessage(plugin.getMessages().getPrefix() + "§cDisabling all Vault elements");
+                "§cVault.jar was not found or you don't have an Economy Plugin");
+        sendConsoleMessage("§cDisabling all Vault elements");
     }
 }

@@ -119,7 +119,7 @@ public class BagOfDrugsGUI implements Listener {
                 im.setLore(lores);
                 for (DrugEffect de : d.getEffects()) {
                     lores.add(ChatColor.translateAlternateColorCodes('&',
-                            "&7- &6&o" + de.getEffect().getName()));
+                            "&7- &6&o" + de.getEffect().getKey().getKey()));
                 }
                 drug.setAmount(1);
                 im.setLore(lores);
@@ -127,7 +127,7 @@ public class BagOfDrugsGUI implements Listener {
                 p.getInventory().addItem(drug);
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, (float) 1.0, (float) 1.0);
                 p.sendMessage(
-                        plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&',
+                        "SD" + ChatColor.translateAlternateColorCodes('&',
                                 "&oYou've been given " + d.getDisplayName()));
 
             } else if (ev.getClick() == ClickType.SHIFT_LEFT) {
@@ -139,7 +139,7 @@ public class BagOfDrugsGUI implements Listener {
                 im.setLore(lores);
                 for (DrugEffect de : d.getEffects()) {
                     lores.add(ChatColor.translateAlternateColorCodes('&',
-                            "&7- &6&o" + de.getEffect().getName()));
+                            "&7- &6&o" + de.getEffect().getKey().getKey()));
 
                 }
                 d64.setAmount(64);
@@ -300,7 +300,7 @@ public class BagOfDrugsGUI implements Listener {
         if (inv.getResult().getType() == Material.BEACON) {
             if (mat[4].getItemMeta().getDisplayName().contentEquals(bagName)) {
                 p.sendMessage(
-                        plugin.getMessages().getPrefix() + "§c§oCan " + "not use " + bagName + " §c§oto craft a " + "§b"
+                        "SD" + "§c§oCan " + "not use " + bagName + " §c§oto craft a " + "§b"
                                 + inv.getResult().getType());
                 e.setCancelled(true);
             }

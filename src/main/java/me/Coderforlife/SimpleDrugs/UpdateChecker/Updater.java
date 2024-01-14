@@ -6,10 +6,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.util.Consumer;
+import java.util.function.Consumer;
 
 import java.io.InputStream;
-import java.net.URL;
+import java.net.URI;
 import java.util.Scanner;
 
 public class Updater implements Listener {
@@ -41,18 +41,18 @@ public class Updater implements Listener {
             int spigotVersionINT = Integer.parseInt(sVersion);
             int currVersionINT = Integer.parseInt(cVersion);
             if(spigotVersionINT == currVersionINT) {
-                Bukkit.getConsoleSender().sendMessage(plugin.getMessages().getPrefix() + "Running the most current build " + currVersion);
+                Bukkit.getConsoleSender().sendMessage("SD " + "Running the most current build " + currVersion);
             } else {
                 if(currVersionINT > spigotVersionINT) {
                     isdev = true;
-                    Bukkit.getConsoleSender().sendMessage(plugin.getMessages().getPrefix() + "You are running a Development build.");
-                    Bukkit.getConsoleSender().sendMessage(plugin.getMessages().getPrefix() + "GitHub: https://github.com/xxCoderforlife/Simple-Drugs");
+                    Bukkit.getConsoleSender().sendMessage("SD " + "You are running a Development build.");
+                    Bukkit.getConsoleSender().sendMessage("SD " + "GitHub: https://github.com/xxCoderforlife/Simple-Drugs");
 
                 } else {
                     isnew = true;
-                    Bukkit.getConsoleSender().sendMessage(plugin.getMessages().getPrefix() + "§c§oYou are running an " + "outdated version.");
-                    Bukkit.getConsoleSender().sendMessage(plugin.getMessages().getPrefix() + "§dDownload the newest " + "version here:");
-                    Bukkit.getConsoleSender().sendMessage(plugin.getMessages().getPrefix() + "§e§nhttps://www.spigotmc" + ".org/resources/simple-drugs-gui.9684/");
+                    Bukkit.getConsoleSender().sendMessage("SD " + "§c§oYou are running an " + "outdated version.");
+                    Bukkit.getConsoleSender().sendMessage("SD " + "§dDownload the newest " + "version here:");
+                    Bukkit.getConsoleSender().sendMessage("SD " + "§e§nhttps://www.spigotmc" + ".org/resources/simple-drugs-gui.9684/");
                 }
             }
         }, 20L);
@@ -66,9 +66,9 @@ public class Updater implements Listener {
                 @Override
                 public void run() {
                     if(p.hasPermission("drugs.updater")) {
-                        p.sendMessage(plugin.getMessages().getPrefix() + "§bThere is a new update!" + spigotVersion);
-                        p.sendMessage(plugin.getMessages().getPrefix() + "§6§lDownload the new version!");
-                        p.sendMessage(plugin.getMessages().getPrefix() + "https://www.spigotmc.org/resources/simple-drugs-gui.9684/");
+                        p.sendMessage("SD " + "§bThere is a new update!" + spigotVersion);
+                        p.sendMessage("SD " + "§6§lDownload the new version!");
+                        p.sendMessage("SD " + "https://www.spigotmc.org/resources/simple-drugs-gui.9684/");
                     }
                 }
             }, 60L);
@@ -77,10 +77,10 @@ public class Updater implements Listener {
                 @Override
                 public void run() {
                     if(p.hasPermission("drugs.updater")) {
-                        p.sendMessage(plugin.getMessages().getPrefix() + "§eYou are running Dev Build : " + currVersion);
-                        p.sendMessage(plugin.getMessages().getPrefix() + "§cIf you find any bugs create a ticket on " + "GitHub");
-                        p.sendMessage(plugin.getMessages().getPrefix() + "https://github.com/xxCoderforlife/Simple-Drugs/issues/new");
-                        p.sendMessage(plugin.getMessages().getPrefix() + "§eProvide screenshots if you can");
+                        p.sendMessage("SD " + "§eYou are running Dev Build : " + currVersion);
+                        p.sendMessage("SD " + "§cIf you find any bugs create a ticket on " + "GitHub");
+                        p.sendMessage("SD " + "https://github.com/xxCoderforlife/Simple-Drugs/issues/new");
+                        p.sendMessage("SD " + "§eProvide screenshots if you can");
                     }
                 }
             }, 60L);
@@ -88,7 +88,8 @@ public class Updater implements Listener {
     }
 
     private void getLatestVersion(final Consumer<String> consumer) {
-        try(InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + resourceID).openStream(); Scanner scanner = new Scanner(inputStream)) {
+        try(InputStream inputStream = new URI("https://api.spigotmc.org/legacy/update.php?resource=" + resourceID).toURL().openStream(); 
+        Scanner scanner = new Scanner(inputStream)) {
             if(scanner.hasNext()) {
                 consumer.accept(scanner.next());
             }

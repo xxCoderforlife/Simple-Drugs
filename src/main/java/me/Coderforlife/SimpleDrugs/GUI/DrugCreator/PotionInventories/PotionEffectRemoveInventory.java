@@ -22,7 +22,7 @@ public class PotionEffectRemoveInventory extends InventoryUI {
 		for(InventoryPotionEffect ipe : ((PotionEffectInventoryUtil)asdci.getAddons().getOptionValues().get("DrugEffects")).getPotionEffects()) {
 			ItemStack item = new ItemStack(Material.POTION);
 			PotionMeta pm = (PotionMeta)item.getItemMeta();
-			pm.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&b&l" + ipe.getType().getName()));
+			pm.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&b&l" + ipe.getType().getKey().getKey()));
 			pm.addCustomEffect(new PotionEffect(ipe.getType(), 0, 1), true);
 			item.setItemMeta(pm);
 			

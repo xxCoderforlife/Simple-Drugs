@@ -116,7 +116,7 @@ public class Drug implements SDCraftableItem {
     	if(effects.size() > 0) {
     		lore.add("§a§lEffects:");
     		for(DrugEffect de : effects) {
-    			lore.add("§7- §6" + de.getEffect().getName().toUpperCase(Locale.ROOT));
+    			lore.add("§7- §6" + de.getEffect().getKey().getKey().toUpperCase(Locale.ROOT));
     		}
     	}
     	lore.add(ChatColor.translateAlternateColorCodes('&', 

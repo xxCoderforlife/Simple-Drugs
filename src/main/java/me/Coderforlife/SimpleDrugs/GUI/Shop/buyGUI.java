@@ -30,7 +30,7 @@ public class buyGUI implements Listener {
 
     private final int maxdrugs = 45;
     private final String invName = new String(ChatColor.translateAlternateColorCodes('&', "&a&lDrug Shop"));
-    private final String prefix = Main.plugin.getMessages().getPrefix();
+    private final String prefix = "SD";
     private ArrayList<ItemStack> pInv = new ArrayList<>();
 
     @EventHandler
@@ -54,7 +54,7 @@ public class buyGUI implements Listener {
                             im.setLore(lores);
                             for (DrugEffect de : d.getEffects()) {
                                 lores.add(ChatColor.translateAlternateColorCodes('&',
-                                        "&7- &6&o" + de.getEffect().getName()));
+                                        "&7- &6&o" + de.getEffect().getKey().getKey()));
                             }
                             drug.setAmount(1);
                             im.setLore(lores);

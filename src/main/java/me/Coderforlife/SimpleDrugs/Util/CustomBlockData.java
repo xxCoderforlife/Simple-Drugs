@@ -154,4 +154,16 @@ public class CustomBlockData implements PersistentDataContainer {
     public PersistentDataAdapterContext getAdapterContext() {
         return pdc.getAdapterContext();
     }
+
+    @Override
+    public void copyTo(PersistentDataContainer arg0, boolean arg1) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'copyTo'");
+    }
+
+    @Override
+    public boolean has(NamespacedKey arg0) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'has'");
+    }
 }

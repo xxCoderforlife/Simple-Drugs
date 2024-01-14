@@ -129,7 +129,7 @@ public class InventoryAddons {
 			lore.add("No Effects");
 		} else {
 			for(InventoryPotionEffect ipe : ((PotionEffectInventoryUtil)optionValues.get("DrugEffects")).getPotionEffects()) {
-				lore.add(ChatColor.translateAlternateColorCodes('&', "&b&o" + ipe.getType().getName().toLowerCase().replaceAll("_", " ") + " Time: " + "&c&o" + String.valueOf(ipe.getTime()) + " &b&oIntensity: " + "&c&o" + String.valueOf(ipe.getIntensity())));
+				lore.add(ChatColor.translateAlternateColorCodes('&', "&b&o" + ipe.getType().getKey().getKey().toLowerCase().replaceAll("_", " ") + " Time: " + "&c&o" + String.valueOf(ipe.getTime()) + " &b&oIntensity: " + "&c&o" + String.valueOf(ipe.getIntensity())));
 			}
 		}
 		im.setLore(lore);

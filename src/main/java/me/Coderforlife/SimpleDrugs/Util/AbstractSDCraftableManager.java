@@ -116,7 +116,7 @@ public abstract class AbstractSDCraftableManager<E extends SDCraftableItem> {
     	for(E e : getItems().values()) {
     		enabled.add(CCMaterialConverter.createUpperCase(e.getName()));
     	}
-    	if(enabled.length() > 0) sendConsoleMessage(plugin.getMessages().getPrefix() + ChatColor.translateAlternateColorCodes('&', 
+    	if(enabled.length() > 0) sendConsoleMessage(ChatColor.translateAlternateColorCodes('&', 
 		"&6Enabled: &a" + enabled.toString().trim().toLowerCase()));
 	}
 	

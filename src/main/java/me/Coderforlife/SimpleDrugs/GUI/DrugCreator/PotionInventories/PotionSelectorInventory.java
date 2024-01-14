@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Material;
+import org.bukkit.Registry;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -22,8 +23,9 @@ public class PotionSelectorInventory extends InventoryUI {
 		super(36, ChatColor.translateAlternateColorCodes('&', "&7&lSelect Potion Type"));
 		
 		List<PotionEffectType> allPotionEffects = new ArrayList<>();
+		Registry<PotionEffectType> effects = Registry.EFFECT;
 		
-		for(PotionEffectType pe : PotionEffectType.values()) {
+		for(PotionEffectType pe : effects) {
 			allPotionEffects.add(pe);
 		}
 		
@@ -31,7 +33,7 @@ public class PotionSelectorInventory extends InventoryUI {
 			PotionEffectType pet = allPotionEffects.get(i);
 			ItemStack item = new ItemStack(Material.POTION);
 			PotionMeta pm = (PotionMeta)item.getItemMeta();
-			pm.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&b&l" + allPotionEffects.get(i).getName()));
+			pm.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&b&l" + allPotionEffects.get(i).getKey().getKey()));
 			pm.addCustomEffect(new PotionEffect(allPotionEffects.get(i), 0, 1), true);
 			item.setItemMeta(pm);
 			addButton(new InventoryButton(item) {
