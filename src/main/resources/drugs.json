@@ -4,7 +4,7 @@
       "displayname":"&2&lWeed",
       "effects":[
          {
-            "type":"SLOW",
+            "type":"HUNGER",
             "time":90,
             "intensity":1
          },
@@ -41,7 +41,7 @@
             "intensity":1
          },
          {
-            "type":"SLOW",
+            "type":"HUNGER",
             "time":90,
             "intensity":1
          },
@@ -137,7 +137,7 @@
             "intensity":1
          },
          {
-            "type":"SLOW",
+            "type":"HUNGER",
             "time":90,
             "intensity":1
          },
@@ -334,7 +334,7 @@
             "intensity":1
          },
          {
-            "type":"SLOW",
+            "type":"HUNGER",
             "time":90,
             "intensity":1
          },
@@ -553,7 +553,7 @@
       "displayname":"&2&lXANAX",
       "effects":[
          {
-            "type":"SLOW",
+            "type":"HUNGER",
             "time":90,
             "intensity":1
          },
