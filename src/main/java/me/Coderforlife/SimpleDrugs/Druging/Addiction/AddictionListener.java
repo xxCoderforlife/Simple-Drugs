@@ -12,7 +12,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import me.Coderforlife.SimpleDrugs.Main;
-import me.Coderforlife.SimpleDrugs.Util.Messages;
 import net.md_5.bungee.api.ChatColor;
 
 public class AddictionListener implements Listener{
@@ -20,7 +19,6 @@ public class AddictionListener implements Listener{
     private Main plugin = Main.plugin;
     private AddictionManager am = plugin.getAddictionManager();
     private HashMap<UUID,Double> addic = am.addictionMap();
-    private Messages m = plugin.getMessages();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent ev){

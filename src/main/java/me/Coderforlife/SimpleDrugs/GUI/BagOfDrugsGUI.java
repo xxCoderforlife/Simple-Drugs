@@ -112,7 +112,7 @@ public class BagOfDrugsGUI implements Listener {
         if (plugin.getDrugManager().isDrugItem(clickedItem)) {
             Drug d = plugin.getDrugManager().matchDrug(clickedItem);
             if (ev.getClick() == ClickType.LEFT) {
-                ItemStack drug = d.getItem();
+               ItemStack drug = d.getItem();
                 ItemMeta im = drug.getItemMeta();
                 List<String> lores = new ArrayList<>();
                 lores.clear();
@@ -171,7 +171,7 @@ public class BagOfDrugsGUI implements Listener {
             ItemStack drug = d.getItem();
             stack.add(drug);
         }
-        while (stack.size() % 9 != 0) {
+        while (stack.size() % 9 != 0) { 
             stack.add(new ItemStack(Material.AIR));
         }
 

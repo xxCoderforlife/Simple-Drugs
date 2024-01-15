@@ -51,6 +51,7 @@ public class RecipeManager {
 	public void addAllRecipes() {
 		for(SDRecipe recipe : recipes) {
 			recipe.createRecipe();
+			System.out.println("Added recipe: " + recipe.getResult().toString());
 		}
 	}
 	

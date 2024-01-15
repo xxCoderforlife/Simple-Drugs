@@ -1,7 +1,6 @@
 package me.Coderforlife.SimpleDrugs.Events;
 
 import me.Coderforlife.SimpleDrugs.Druging.Drug;
-import me.Coderforlife.SimpleDrugs.Util.TranslationFile;
 import me.Coderforlife.SimpleDrugs.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -22,7 +21,7 @@ public class CraftingEvent implements Listener {
                 if(e.getInventory().getResult().equals(drugs.getItem())) {
                     if(!p.hasPermission(drugs.getCraftingPermission())) {
                         e.setCancelled(true);
-                        p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&oYou can't craft this drug."));
 //                        p.sendMessage("SD " + ChatColor.RED + "You don't have the permissions to use this command");
                         p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: " + ChatColor.RED + "drugs.craft." + drugs.getName());
                     }  

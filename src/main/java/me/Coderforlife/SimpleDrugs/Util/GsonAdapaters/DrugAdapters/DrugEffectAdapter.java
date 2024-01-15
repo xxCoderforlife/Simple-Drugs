@@ -3,8 +3,6 @@ package me.Coderforlife.SimpleDrugs.Util.GsonAdapaters.DrugAdapters;
 import java.lang.reflect.Type;
 import java.util.logging.Logger;
 
-import javax.naming.Name;
-
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.potion.PotionEffectType;
@@ -21,10 +19,11 @@ import me.Coderforlife.SimpleDrugs.Druging.Util.DrugEffect;
 
 public class DrugEffectAdapter implements JsonSerializer<DrugEffect>, JsonDeserializer<DrugEffect> {
 
-	//PotionEffectType peType = Registry.EFFECT.match(type.toLowerCase());
+	// PotionEffectType peType = Registry.EFFECT.match(type.toLowerCase());
 	private Logger logger = Logger.getLogger("Minecraft");
 	private Registry<PotionEffectType> potionReg = Registry.EFFECT;
 	private NamespacedKey peKey;
+
 	@Override
 	public DrugEffect deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
@@ -32,7 +31,7 @@ public class DrugEffectAdapter implements JsonSerializer<DrugEffect>, JsonDeseri
 		String type = jo.get("type").getAsString().toLowerCase();
 		try {
 			potionReg.forEach((k) -> {
-				if(k.getKey().getKey().equalsIgnoreCase(type)){
+				if (k.getKey().getKey().equalsIgnoreCase(type)) {
 					peKey = k.getKey();
 				}
 			});

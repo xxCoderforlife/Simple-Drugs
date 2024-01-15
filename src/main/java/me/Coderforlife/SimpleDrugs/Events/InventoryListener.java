@@ -2,7 +2,6 @@ package me.Coderforlife.SimpleDrugs.Events;
 
 import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
-import me.Coderforlife.SimpleDrugs.Util.TranslationFile;
 import net.md_5.bungee.api.ChatColor;
 
 import org.bukkit.event.EventHandler;
@@ -18,7 +17,7 @@ public class InventoryListener implements Listener {
     public void InventoryClick(InventoryClickEvent event) {
         String name = event.getView().getTitle();
 
-        if(name.equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', TranslationFile.Name_Settings_GUI))) {
+        if(name.equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', "&4&o&lSimple&f&o&l-&4&o&lDrugs &6&o&lSettings"))) {
         	SettingsGUI.handleClick(event);
         	return;
         }

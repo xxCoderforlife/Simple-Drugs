@@ -21,7 +21,6 @@ import me.Coderforlife.SimpleDrugs.GUI.BagOfDrugsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.SDRecipeInventory;
 import me.Coderforlife.SimpleDrugs.GUI.SettingsGUI;
 import me.Coderforlife.SimpleDrugs.GUI.DrugCreator.DrugMainMenu;
-import me.Coderforlife.SimpleDrugs.Util.TranslationFile;
 //import me.Coderforlife.SimpleDrugs.GUI.Shop.buyGUI;
 import net.milkbowl.vault.economy.Economy;
 
@@ -65,7 +64,7 @@ public class Commands implements CommandExecutor {
                             SettingsGUI g = new SettingsGUI();
                             p.openInventory(g.create());
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + "§cYou don't have permission to use that command.");
                             p.sendMessage("SD " + "§4Permission: §fdrugs.use.settings");
                         }
@@ -80,7 +79,7 @@ public class Commands implements CommandExecutor {
                                     ChatColor.translateAlternateColorCodes('&',
                                             "            &f&oUse &a&o/drugs &f&ofor more information."));
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.help");
@@ -101,7 +100,7 @@ public class Commands implements CommandExecutor {
                                 p.sendTitle("§c§lYOU ARE SOBER", "§f§oYou need some drugs", 10, 4 * 20, 10);
                             }
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.soberup");
@@ -113,7 +112,7 @@ public class Commands implements CommandExecutor {
                                 p.sendMessage(dash + drug.getDisplayName());
                             }
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.list");
@@ -129,7 +128,7 @@ public class Commands implements CommandExecutor {
                                         "SD " + ChatColor.RED + "You already have the bag");
                             }
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.command.bagofdrugs");
@@ -144,7 +143,7 @@ public class Commands implements CommandExecutor {
                                         "SD " + ChatColor.RED + "Error Reloading Config");
                             }
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.DARK_GRAY + "drugs.reload");
@@ -171,7 +170,7 @@ public class Commands implements CommandExecutor {
                             }
 
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.sell");
@@ -182,7 +181,7 @@ public class Commands implements CommandExecutor {
                             p.sendMessage("SD " + "§4§oYou are running version:§f "
                                     + Main.plugin.getDescription().getVersion());
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.version");
@@ -192,7 +191,7 @@ public class Commands implements CommandExecutor {
                             p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&',
                                     "&f&oUse &a&o/drugs give &c&o<drug>"));
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.give");
@@ -202,7 +201,7 @@ public class Commands implements CommandExecutor {
                             p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&',
                                     "&f&lUse &a&o/drugs recipe &c&o<drug>"));
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.recipe");
@@ -214,7 +213,7 @@ public class Commands implements CommandExecutor {
                                     ChatColor.translateAlternateColorCodes('&', "&3Addiction Level:&r&l ")
                                     + Double.toString(addLvl));
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.addiction");
@@ -224,7 +223,7 @@ public class Commands implements CommandExecutor {
                             DrugMainMenu sde = new DrugMainMenu();
                             sde.open(p);
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.editor");
@@ -234,7 +233,7 @@ public class Commands implements CommandExecutor {
                             p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&',
                                     "&f&oUse &a&o/drugs give &c&o<drug>"));
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.give.seed");
@@ -264,13 +263,13 @@ public class Commands implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("recipe")) {
                         Drug drug = Main.plugin.getDrugManager().getItem(args[1].toUpperCase());
                         if (drug == null) {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.sanitize(TranslationFile.Error_Drug_Does_Not_Exist, args[1])));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&oThat drug does not exist."));
 //                            p.sendMessage("SD " + "§e" + args[1] + " §cdoes not exist.");
                             return true;
                         }
 
                         if (drug.getRecipe() == null) {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.sanitize(TranslationFile.Error_Recipe_Does_Not_Exist, args[1])));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&oThat drug does not exist."));
 //                            p.sendMessage("SD " + "§e" + args[1] + " §cdoes not have a recipe.");
                             return true;
                         }
@@ -289,16 +288,16 @@ public class Commands implements CommandExecutor {
                                             players.sendMessage("SD " + ChatColor.GRAY + p.getDisplayName() + " Sent you a " + bd.getBagName());
                                         }
                                     } else {
-                                    	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Player_Not_Online));
+                                    	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&oPlayer is not online"));
 //                                        p.sendMessage("SD " + ChatColor.GRAY + "That player is not online.");
                                     }
                                 } else {
-                                	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Player_Does_Not_Exist));
+                                	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&oThat is not a player"));
 //                                    p.sendMessage("SD " + ChatColor.GRAY + "That player doesn't exsit.");
                                 }
                             }
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: " + ChatColor.WHITE + "drugs.command.bagofdrugs.others");
                         }
@@ -319,16 +318,16 @@ public class Commands implements CommandExecutor {
                                             p.sendMessage("SD " + ChatColor.GRAY + players.getDisplayName() + " is already Sober");
                                         }
                                     } else {
-                                    	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Player_Not_Online));
+                                    	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&oPlayer is not online"));
 //                                        p.sendMessage("SD " + ChatColor.GRAY + "That player isn't online.");
                                     }
                                 } else {
-                                	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Player_Does_Not_Exist));
+                                	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&oThat is not a player"));
 //                                    p.sendMessage("SD " + ChatColor.GRAY + "That player doesn't exsit.");
                                 }
                             }
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.soberup.others");
@@ -342,10 +341,10 @@ public class Commands implements CommandExecutor {
                                     return true;
                                 }
                             }
-                            p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.sanitize(TranslationFile.Error_Drug_Does_Not_Exist, args[1])));
+                            p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&o" + args[1] + "&f is not a drug "));
 //                            p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&o" + args[1] + "&f is not a drug"));
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.give");
@@ -361,11 +360,11 @@ public class Commands implements CommandExecutor {
                                         Double.toString(addLvl));
                                 return true;
                             }
-                            p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Player_Does_Not_Exist));
+                            p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&o" + args[1] + "&r is not a player"));
 //                            p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&',"&c&o" + args[1] + "&r is not a player"));
                             return true;
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.addiction.others");
@@ -381,10 +380,10 @@ public class Commands implements CommandExecutor {
                                     return true;
                                 }
                             }
-                            p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.sanitize(TranslationFile.Error_Drug_Does_Not_Exist, args[1])));
+                            p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&o" + args[1] + "&f is not a drug "));
 //                            p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&o" + args[1] + "&ris not a drug"));
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.give.seed");
@@ -395,7 +394,7 @@ public class Commands implements CommandExecutor {
                                 BagOfDrugsGUI bGUI = new BagOfDrugsGUI();
                                 p.openInventory(bGUI.create());
                             }else{
-                            	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                            	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                                p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                                 p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                         + ChatColor.WHITE + "drugs.gui");
@@ -420,15 +419,15 @@ public class Commands implements CommandExecutor {
                                             return true;
                                         }
                                     }
-                                    p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Player_Does_Not_Exist));
+                                    p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&o" + args[2] + "&f is not a player"));
 //                                    p.sendMessage("SD " + args[2] + " §cis not a " + "player");
                                     return true;
                                 }
                             }
-                            p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.sanitize(TranslationFile.Error_Drug_Does_Not_Exist, args[1])));
+                            p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&o" + args[1] + "&f is not a drug "));
 //                            p.sendMessage("SD " + "§c§o" + args[1] + "§f is not a " + "drug");
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.give.others");
@@ -449,15 +448,15 @@ public class Commands implements CommandExecutor {
                                             return true;
                                         }
                                     }
-                                    p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Player_Does_Not_Exist));
+                                    p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&o" + args[2] + "&f is not a player"));
 //                                    p.sendMessage("SD " + args[2] + " §cis not a " + "player");
                                     return true;
                                 }
                             }
-                            p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.sanitize(TranslationFile.Error_Drug_Does_Not_Exist, args[1])));
+                            p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&c&o" + args[1] + "&f is not a drug "));
 //                            p.sendMessage("SD " + "§c§o" + args[1] + "§f is not a " + "drug");
                         } else {
-                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+                        	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                            p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                             p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: "
                                     + ChatColor.WHITE + "drugs.give.seed.others");
@@ -467,7 +466,7 @@ public class Commands implements CommandExecutor {
                     p.sendMessage("SD " + "Don't use " + Arrays.toString(args));
                 }
             } else {
-            	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', TranslationFile.Error_Cant_Use_Command));
+            	p.sendMessage("SD " + ChatColor.translateAlternateColorCodes('&', "&4&oYou don't have permission to use that command."));
 //                p.sendMessage("SD " + ChatColor.RED + "You don't have permission to use that command.");
                 p.sendMessage("SD " + ChatColor.DARK_RED + "Permission: " + ChatColor.WHITE
                         + "drugs.main");
