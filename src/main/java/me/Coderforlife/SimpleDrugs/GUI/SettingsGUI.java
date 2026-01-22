@@ -2,6 +2,8 @@ package me.Coderforlife.SimpleDrugs.GUI;
 
 import me.Coderforlife.SimpleDrugs.Main;
 import me.Coderforlife.SimpleDrugs.Settings;
+import net.kyori.adventure.text.Component;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -20,7 +22,7 @@ import java.util.List;
 public class SettingsGUI {
 
     public Inventory create() {
-        Inventory inventory = Bukkit.createInventory(null, (9 * 5), "§6§lDrugs Settings");
+        Inventory inventory = Bukkit.createInventory(null, (9 * 5), Component.text("Simple Drugs Settings"));
 
         ArrayList<ItemStack> items = new ArrayList<>();
 
@@ -166,7 +168,7 @@ public class SettingsGUI {
         meta.setLore(lore);
         stack.setItemMeta(meta);
         if(ench)
-            stack.addUnsafeEnchantment(Enchantment.ARROW_FIRE, 1);
+            stack.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 1);
         return stack;
     }
 

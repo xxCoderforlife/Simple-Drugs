@@ -6,9 +6,9 @@
       "WHEAT",
       "DIAMOND",
       "WHEAT",
-      "AIR",
+      " ",
       "DIAMOND",
-      "AIR",
+      " ",
       "WHEAT",
       "WHEAT",
       "WHEAT"
@@ -166,12 +166,12 @@
       "DIRT",
       "RED_MUSHROOM",
       "RED_MUSHROOM",
-      "AIR",
+      " ",
       "DIRT",
       "WOODEN_SWORD",
-      "AIR",
+      " ",
       "DIRT",
-      "AIR"
+      " "
     ],
     "effects": [
       {
@@ -248,9 +248,9 @@
     "name": "Ciggy",
     "displayname": "&6&lCIGGY",
     "recipe": [
-      "AIR",
+      " ",
       "GUNPOWDER",
-      "AIR",
+      " ",
       "PAPER",
       "STICK",
       "PAPER",
@@ -292,11 +292,11 @@
       "DIRT",
       "DIRT",
       "STICK",
-      "AIR",
+      " ",
       "STICK",
-      "AIR",
+      " ",
       "BROWN_MUSHROOM",
-      "AIR"
+      " "
     ],
     "effects": [
       {
@@ -328,14 +328,14 @@
     "name": "Salvia",
     "displayname": "&2&lSALVIA",
     "recipe": [
-      "AIR",
+      " ",
       "GREEN_BED",
-      "AIR",
+      " ",
       "GREEN_CANDLE",
       "GREEN_CANDLE",
       "GREEN_CANDLE",
       "GREEN_DYE",
-      "AIR",
+      " ",
       "GREEN_DYE"
     ],
     "effects": [
@@ -443,9 +443,9 @@
     "name": "Alcohol",
     "displayname": "&6&lALCOHOL",
     "recipe": [
-      "AIR",
+      " ",
       "PAPER",
-      "AIR",
+      " ",
       "GUNPOWDER",
       "GUNPOWDER",
       "GUNPOWDER",
@@ -483,14 +483,14 @@
     "name": "Flakka",
     "displayname": "&e&lFLAKKA",
     "recipe": [
-      "AIR",
+      " ",
       "BIRCH_DOOR",
-      "AIR",
+      " ",
       "SWEET_BERRIES",
       "SWEET_BERRIES",
       "SWEET_BERRIES",
       "WATER_BUCKET",
-      "AIR",
+      " ",
       "WATER_BUCKET"
     ],
     "effects": [
@@ -523,15 +523,15 @@
     "name": "Meth",
     "displayname": "&b&lMETH",
     "recipe": [
-      "AIR",
+      " ",
       "DIRT",
-      "AIR",
-      "AIR",
+      " ",
+      " ",
       "PAPER",
-      "AIR",
-      "AIR",
+      " ",
+      " ",
       "GUNPOWDER",
-      "AIR"
+      " "
     ],
     "effects": [
       {
@@ -612,11 +612,11 @@
       "WHITE_WOOL",
       "WHITE_WOOL",
       "WATER_BUCKET",
-      "AIR",
+      " ",
       "WATER_BUCKET",
-      "AIR",
+      " ",
       "LAVA_BUCKET",
-      "AIR"
+      " "
     ],
     "effects": [
       {
@@ -649,10 +649,10 @@
     "displayname": "&5&lTUSSIN",
     "recipe": [
       "WATER_BUCKET",
-      "AIR",
+      " ",
       "WATER_BUCKET",
       "GLASS_BOTTLE",
-      "AIR",
+      " ",
       "GLASS_BOTTLE",
       "WATER_BUCKET",
       "GLASS_BOTTLE",
@@ -688,15 +688,15 @@
     "name": "Xannx",
     "displayname": "&2&lXANAX",
     "recipe": [
-      "AIR",
+      " ",
       "GREEN_BED",
-      "AIR",
+      " ",
       "WHITE_TULIP",
-      "AIR",
+      " ",
       "WHITE_TULIP",
-      "AIR",
+      " ",
       "GUNPOWDER",
-      "AIR"
+      " "
     ],
     "effects": [
       {

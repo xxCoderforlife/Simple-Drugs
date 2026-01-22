@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.Coderforlife.SimpleDrugs.Main;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -79,15 +80,15 @@ public class Drug {
                 ItemMeta meta = result.getItemMeta();
                 meta.setDisplayName(displayname);
                 meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
-                ArrayList<String> lore = new ArrayList<>();
+                ArrayList<String> lore = new ArrayList<String>();
                 lore.add("§a§lEffects:");
                 for(DrugEffect effect : effectsList) {
                     lore.add("§7- §6" + effect.getEffect().getName().toUpperCase(Locale.ROOT));
                 }
                 lore.add("§7Click to Use");
-                meta.setLore(lore);
+                meta.lore(lore.stream().map(Component::text).toList());
                 result.setItemMeta(meta);
-                result.addUnsafeEnchantment(Enchantment.ARROW_FIRE, 1);
+                result.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 1);
 
                 /* Generate the Recipe */
                 JsonArray recipe = drug.getAsJsonArray("recipe");
@@ -184,6 +185,9 @@ public class Drug {
     }
 
     private Material MaterialFromArray(JsonArray obj, int i) {
+        if(obj.get(i).getAsString().equals(" ")){
+            Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "[INFO] Empty Recipe Slot Detected, Replacing with AIR");
+        }
         Material mat = Material.getMaterial(obj.get(i).getAsString().toUpperCase());
         if(mat == null) {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Could not find Material: " + ChatColor.DARK_GRAY + obj.get(i).getAsString());
@@ -195,6 +199,9 @@ public class Drug {
     }
 
     private Material MaterialFromObject(JsonObject obj, String key) {
+        if(key == " "){
+            Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE + "[INFO] Empty Recipe Slot Detected, Replacing with AIR");
+        }
         Material mat = Material.getMaterial(obj.get(key).getAsString().toUpperCase());
         if(mat == null) {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "[ERROR] Could not find Material: " + ChatColor.DARK_GRAY + obj.get(key).getAsString());
